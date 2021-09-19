@@ -1,0 +1,108 @@
+[
+    {
+        "file": "data/kapitel-1-1.json",
+        "title": "Kapitel 1 Teil 1"
+    },
+    {
+        "file": "data/kapitel-1-2.json",
+        "title": "Kapitel 1 Teil 2"
+    },
+    {
+        "file": "data/kapitel-2-1.json",
+        "title": "Kapitel 2 Teil 1"
+    },
+    {
+        "file": "data/kapitel-2-2.json",
+        "title": "Kapitel 2 Teil 2"
+    },
+    {
+        "file": "data/kapitel-3-1.json",
+        "title": "Kapitel 3 Teil 1"
+    },
+    {
+        "file": "data/kapitel-3-2.json",
+        "title": "Kapitel 3 Teil 2"
+    },
+    {
+        "file": "data/kapitel-3-3.json",
+        "title": "Kapitel 3 Teil 3"
+    },
+    {
+        "file": "data/kapitel-4-1.json",
+        "title": "Kapitel 4 Teil 1"
+    },
+    {
+        "file": "data/kapitel-4-2.json",
+        "title": "Kapitel 4 Teil 2"
+    },
+    {
+        "file": "data/kapitel-4-3.json",
+        "title": "Kapitel 4 Teil 3"
+    },
+    {
+        "file": "data/kapitel-4-4.json",
+        "title": "Kapitel 4 Teil 4"
+    },
+    {
+        "file": "data/kapitel-5-1.json",
+        "title": "Kapitel 5 Teil 1"
+    },
+    {
+        "file": "data/kapitel-5-2.json",
+        "title": "Kapitel 5 Teil 2"
+    },
+    {
+        "file": "data/kapitel-5-3.json",
+        "title": "Kapitel 5 Teil 3"
+    },
+    {
+        "file": "data/kapitel-5-4.json",
+        "title": "Kapitel 5 Teil 4"
+    },
+    {
+        "file": "data/dates.json",
+        "title": "Datum",
+        "desc": "Wochentage, Jahreszeigen, usw."
+    },
+    {
+        "file": "data/numbers.json",
+        "title": "Zahlen",
+        "desc": "Zahlen: 0-20, 30-90, 100, 200"
+    },
+    {
+        "file": "data/0-200.json",
+        "title": "Zahlen",
+        "desc": "Zahlen: 0-200"
+    },
+    {
+        "file": "data/gram-mein-dein.json",
+        "title": "Übung - Mein - Dein",
+        "desc": "Übung zu Pronomen und zum Genus."
+    },
+    {
+        "file": "data/assignment.json",
+        "title": "Aufgaben"
+    },
+    {
+        "file": "data/adage.json",
+        "title": "Sprichworte"
+    },
+    {
+        "file": "data/verben-1.json",
+        "title": "Verben 1 (Liste)",
+        "desc": "Konjugieren: wohnen, sprechen, arbeiten, wissen / kennen, machen / tun"
+    },
+    {
+        "file": "data/gram-genitiv.json",
+        "title": "Grammatik - Genitiv"
+    },
+    {
+        "file": "data/gram-praepositiv.json",
+        "title": "Grammatik - Präpositiv"
+    },
+    {
+        "file": "data/misc.json",
+        "title": "Sonstiges - Test",
+        "desc": "Dies ist meine Beschreibung!"
+    }
+]
