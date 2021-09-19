@@ -1,109 +1,73 @@
-*Psst — looking for a more complete solution? Check out [SvelteKit](https://kit.svelte.dev), the official framework for building web applications of all sizes, with a beautiful development experience and flexible filesystem-based routing.*
+# S-Cards-Dev
 
-*Looking for a shareable component template instead? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+The development project for s-cards.
 
----
+# Setup s-cards-dev
 
-# svelte app
+## Setup the svelte project
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+Get the svelte template, remove the typescript and update the dependencies.
 
 ```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
+npx degit sveltejs/template s-cards-dev
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+cd s-cards-dev
 
+rm scripts/setupTypeScript.js
 
-## Get started
-
-Install the dependencies...
-
-```bash
-cd svelte-app
 npm install
 ```
 
-...then start [Rollup](https://rollupjs.org):
+## Add configuration for the js formatter.
+
+Create the a javascript formatter file: `prettier.config.js` (see: https://prettier.io/docs/en/configuration.html for details).
 
 ```bash
-npm run dev
+module.exports = {
+ singleQuote: true,
+};
 ```
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+## Deploy to github pages
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
+Adding a task to deploy the deploy artifacts to github pages. Create a github project `s-cards` and configure
+github pages for the root path.
 
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
-
-## Building and running in production mode
-
-To create an optimised version of the app:
+Install `gh-pages` (see: https://blog.stranianelli.com/svelte-et-github-english/ for details).
 
 ```bash
-npm run build
+npm install gh-pages --save-dev
 ```
 
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+Change all links in the `public/index.html` to relative links.
 
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
+Add the deploy task to the `package.json` file.
 
 ```js
-"start": "sirv public --single"
+    "deploy": "node ./gh-pages.js"
 ```
 
-## Using TypeScript
+Create a deploy script.
 
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
+```js
+var ghpages = require('gh-pages');
 
-```bash
-node scripts/setupTypeScript.js
+ghpages.publish(
+  'public',
+  {
+    branch: 'main',
+    repo: 'https://github.com/dead-end/s-cards.git',
+  },
+  () => {
+    console.log('Deploy Complete!');
+  }
+);
 ```
 
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-If you want to use `baseUrl` or `path` aliases within your `tsconfig`, you need to set up `@rollup/plugin-alias` to tell Rollup to resolve the aliases. For more info, see [this StackOverflow question](https://stackoverflow.com/questions/63427935/setup-tsconfig-path-in-svelte).
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
+## Usage
 
 ```bash
 npm run build
-surge public my-project.surge.sh
+
+npm run deploy
 ```
