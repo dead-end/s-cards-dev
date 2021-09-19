@@ -1,63 +1,465 @@
-html, body {
-	position: relative;
-	width: 100%;
-	height: 100%;
+/******************************************************************************
+ * Basic definitions
+ *****************************************************************************/
+:root {
+  --color-text: #3d3d3d;
+  --color-background: #fff;
+
+  --color-primary-bg: hsl(0, 0%, 98%);
+  --color-primary-0: hsl(0, 0%, 90%);
+  --color-primary-1: hsl(0, 0%, 85%);
+  --color-primary-2: hsl(0, 0%, 80%);
+
+  --color-info-bg: hsl(240, 100%, 98%);
+  --color-info-0: hsl(240, 100%, 95%);
+  --color-info-1: hsl(240, 100%, 90%);
+  --color-info-2: hsl(240, 100%, 85%);
+
+  --color-success-fg: hsl(120, 61%, 40%);
+  --color-success-bg: hsl(120, 61%, 88%);
+  --color-success-0: hsl(120, 61%, 85%);
+  --color-success-1: hsl(120, 61%, 80%);
+  --color-success-2: hsl(120, 61%, 75%);
+
+  --color-danger-fg: hsl(0, 100%, 40%);
+  --color-danger-bg: hsl(0, 100%, 88%);
+  --color-danger-0: hsl(0, 100%, 85%);
+  --color-danger-1: hsl(0, 100%, 80%);
+  --color-danger-2: hsl(0, 100%, 75%);
+
+  --color-md-u: rgb(200, 0, 0);
+  --color-md-i: rgb(0, 0, 77);
+
+  --color-focus: #888;
+  --color-border: #ccc;
+
+  --font-weight-bold: 600;
+
+  --margin-y: 1em;
+  --margin-y-sm: 0.5em;
+
+  --box-shadow: 0.5rem 0.5rem 0.5rem #ccc;
+
+  --border-radius: 0.3rem;
+  --border-size: 1px;
+  --border: var(--border-size) solid var(--color-border);
+
+  --grid-gap: 1rem;
+
+  --break-point-sm: 320px;
+  --break-point-md: 640px;
+  --break-point-lg: 960px;
+  --break-point-xl: 1280px;
 }
+
+/******************************************************************************
+ * Body definitions
+ *****************************************************************************/
 
 body {
-	color: #333;
-	margin: 0;
-	padding: 8px;
-	box-sizing: border-box;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', sans-serif;
+  font-size: 0.9rem;
+  text-rendering: optimizeLegibility;
 }
 
-a {
-	color: rgb(0,100,200);
-	text-decoration: none;
+/******************************************************************************
+ * Defintion of the header tags
+ *****************************************************************************/
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  line-height: 1.2;
+  margin: 0rem 0rem var(--margin-y) 0rem;
+  font-weight: var(--font-weight-bold);
 }
 
-a:hover {
-	text-decoration: underline;
+h1,
+.h1 {
+  font-size: 2rem;
 }
 
-a:visited {
-	color: rgb(0,80,160);
+h2,
+.h2 {
+  font-size: 1.6rem;
 }
 
-label {
-	display: block;
+h3,
+.h3 {
+  font-size: 1.4rem;
 }
 
-input, button, select, textarea {
-	font-family: inherit;
-	font-size: inherit;
-	-webkit-padding: 0.4em 0;
-	padding: 0.4em;
-	margin: 0 0 0.5em 0;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
+h4,
+.h4 {
+  font-size: 1.2rem;
 }
 
-input:disabled {
-	color: #ccc;
+h5,
+.h5 {
+  font-size: 1rem;
 }
 
-button {
-	color: #333;
-	background-color: #f4f4f4;
-	outline: none;
+h6,
+.h6 {
+  font-size: 0.8rem;
 }
 
-button:disabled {
-	color: #999;
+/******************************************************************************
+ * Misc ??
+ *****************************************************************************/
+
+hr {
+  border-top: var(--border-size) solid var(--color-border);
+  border-bottom: 0px;
 }
 
-button:not(:disabled):active {
-	background-color: #ddd;
+label,
+select {
+  display: block;
 }
 
-button:focus {
-	border-color: #666;
+/******************************************************************************
+ * Style for the table. We use a padding-right to separate the cells. This has
+ * to be removed on the last cell of a row.
+ *****************************************************************************/
+
+table {
+  border-top: var(--border);
+}
+
+td,
+th {
+  padding: 0.5rem 1rem 0.5rem 0rem;
+  border-bottom: var(--border);
+}
+
+td:last-child,
+th:last-child {
+  padding-right: 0;
+}
+
+/******************************************************************************
+ * Definition of the container and the grid
+ *****************************************************************************/
+
+.container {
+  max-width: var(--break-point-xl);
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-gap: var(--grid-gap) var(--grid-gap);
+}
+
+.grid-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid-4 {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+@media (max-width: 1280px) {
+  .container {
+    max-width: var(--break-point-lg);
+  }
+
+  .grid-4 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .hide-xl {
+    display: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .container {
+    max-width: var(--break-point-md);
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-4 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hide-lg,
+  .hide-xl {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    max-width: var(--break-point-sm);
+  }
+
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .hide-md,
+  .hide-lg,
+  .hide-xl {
+    display: none;
+  }
+}
+
+/******************************************************************************
+ *
+ *****************************************************************************/
+
+input,
+textarea {
+  border: var(--border-size) solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: 0.8rem;
+}
+
+input:focus,
+textarea:focus {
+  border: var(--border-size) solid var(--color-focus);
+  outline: 0px;
+}
+
+.button,
+select {
+  background-color: var(--color-primary-0);
+  border: var(--border-size) solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: 0.3rem 1rem;
+}
+
+.button:hover,
+select:hover {
+  background-color: var(--color-primary-1);
+}
+
+.button:active,
+select:active {
+  background-color: var(--color-primary-2);
+}
+
+.button.is-info {
+  background-color: var(--color-info-0);
+}
+
+.button:hover.is-info {
+  background-color: var(--color-info-1);
+}
+
+.button:active.is-info {
+  background-color: var(--color-info-2);
+}
+
+.button.is-success {
+  background-color: var(--color-success-0);
+}
+
+.button:hover.is-success {
+  background-color: var(--color-success-1);
+}
+
+.button:active.is-success {
+  background-color: var(--color-success-2);
+}
+
+.button.is-danger {
+  background-color: var(--color-danger-0);
+}
+
+.button:hover.is-danger {
+  background-color: var(--color-danger-1);
+}
+
+.button:active.is-danger {
+  background-color: var(--color-danger-2);
+}
+
+.button:focus,
+select:focus {
+  border: var(--border-size) solid var(--color-focus);
+  outline: 0px;
+}
+
+input[disabled],
+textarea[disabled],
+select[disabled],
+.disabled {
+  opacity: 0.6;
+}
+
+/******************************************************************************
+ * Color definition.
+ *****************************************************************************/
+
+.is-primary {
+  background: var(--color-primary-bg);
+}
+
+.is-info {
+  background: var(--color-info-bg);
+}
+
+.is-success {
+  background-color: var(--color-success-bg);
+}
+
+.is-danger {
+  background-color: var(--color-danger-bg);
+}
+
+.is-text-success {
+  color: var(--color-success-fg);
+}
+
+.is-text-danger {
+  color: var(--color-danger-fg);
+}
+
+/******************************************************************************
+ * Definition of a button group. On Safari the flex gap does not work, so I 
+ * added an inner margin.
+ *****************************************************************************/
+
+.buttons {
+  display: flex;
+}
+
+.buttons > button,
+.buttons > .button {
+  margin-right: var(--margin-y-sm);
+}
+
+.buttons > button:last-child,
+.buttons > .button:last-child {
+  margin-right: 0;
+}
+
+/******************************************************************************
+ * Definition of the margins
+ *****************************************************************************/
+
+p,
+label,
+table,
+.block,
+.buttons,
+.grid-2,
+.grid-4 {
+  margin: 0rem 0rem var(--margin-y) 0rem;
+}
+
+.content > :first-child {
+  margin-top: var(--margin-y);
+}
+
+#title {
+  margin-top: var(--margin-y);
+}
+
+/******************************************************************************
+ * Utility classes
+ *****************************************************************************/
+
+.is-full {
+  width: 100%;
+}
+
+.is-block {
+  display: block;
+}
+
+/******************************************************************************
+ * Classes to align texts
+ *****************************************************************************/
+
+.is-text-right {
+  text-align: right;
+}
+
+.is-text-left {
+  text-align: left;
+}
+
+.is-text-center {
+  text-align: center;
+}
+
+/******************************************************************************
+ * Classes for texts
+ *****************************************************************************/
+
+.is-small {
+  font-size: 0.8rem;
+}
+
+.is-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+/******************************************************************************
+ * Classes is used for floating
+ *****************************************************************************/
+
+.is-flex-spread {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/******************************************************************************
+ * Definition of cards
+ *****************************************************************************/
+
+.card {
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 0rem 1rem;
+}
+
+.card-shadow {
+  box-shadow: var(--box-shadow);
+}
+
+/******************************************************************************
+ * Definition of markdown
+ *****************************************************************************/
+
+u {
+  color: var(--color-md-u);
+  text-decoration: none;
+}
+
+i {
+  color: var(--color-md-i);
+}
+
+b {
+  font-weight: 550;
+}
+
+ul {
+  padding: 0em;
+  list-style: none;
+}
+
+ul li:before {
+  content: '\2023 \0020';
 }
