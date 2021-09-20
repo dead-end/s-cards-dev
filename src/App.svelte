@@ -1,20 +1,20 @@
 <script>
   import { onMount } from 'svelte';
-  import { RegistryStore } from './stores/registryStore';
+  import { TopicStore } from './stores/topicStore';
 
   import Header from './components/Header.svelte';
   import Footer from './components/Footer.svelte';
-  import Registry from './components/Registration.svelte';
+  import Topic from './components/Topic.svelte';
 
-  onMount(RegistryStore.load);
+  onMount(TopicStore.load);
 </script>
 
 <div class="container">
   <Header />
 
   <main>
-    {#each $RegistryStore as registration}
-      <Registry {registration} />
+    {#each $TopicStore as topic}
+      <Topic {topic} />
     {/each}
   </main>
 
