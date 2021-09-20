@@ -7,7 +7,7 @@ function createTopicStore() {
     subscribe,
 
     load: async () => {
-      const response = await fetch('data/registry.json');
+      const response = await fetch('data/topics.json');
       const topics = await response.json();
       set(topics);
     },
