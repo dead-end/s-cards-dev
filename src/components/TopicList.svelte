@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
-  import { TopicStore } from './stores/topicStore';
-  import Topic from './components/Topic.svelte';
+  import { TopicStore } from '../stores/topicStore';
+  import Topic from './Topic.svelte';
 
   onMount(TopicStore.load);
 </script>
