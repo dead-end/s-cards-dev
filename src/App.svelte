@@ -12,11 +12,13 @@
 <div class="container">
   <Header />
 
-  <main>
-    {#each $TopicStore as topic}
-      <Topic {topic} />
-    {/each}
-  </main>
+  <div id="main" class="block">
+    <div class="grid grid-4" id="pool-list-body">
+      {#each $TopicStore as topic}
+        <Topic {topic} />
+      {/each}
+    </div>
+  </div>
 
   <Footer />
 </div>
