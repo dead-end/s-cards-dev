@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-function createRegistryStore() {
+function createTopicStore() {
   const { subscribe, set, update } = writable([]);
 
   return {
@@ -8,10 +8,10 @@ function createRegistryStore() {
 
     load: async () => {
       const response = await fetch('data/registry.json');
-      const registrations = await response.json();
-      set(registrations);
+      const topics = await response.json();
+      set(topics);
     },
   };
 }
 
-export const RegistryStore = createRegistryStore();
+export const TopicStore = createTopicStore();
