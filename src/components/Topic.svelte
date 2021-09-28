@@ -1,5 +1,13 @@
 <script>
+  import ViewStore from '../stores/viewStore';
+
+  import TopicShow from './TopicShow.svelte';
+
   export let topic;
+
+  const onClick = (file) => {
+    ViewStore.set({ component: TopicShow, props: { file: file } });
+  };
 </script>
 
 <div class="card card-shadow content">
@@ -18,6 +26,6 @@
     <p>{topic.desc}</p>
   {/if}
   <div class="buttons">
-    <button class="button">Show</button>
+    <button class="button" on:click={() => onClick(topic.file)}>Show</button>
   </div>
 </div>
