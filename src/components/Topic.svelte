@@ -1,12 +1,12 @@
 <script>
-  import ViewStore from '../stores/viewStore';
+  import { viewStore } from '../stores/viewStore';
 
   import TopicShow from './TopicShow.svelte';
 
   export let topic;
 
   const onClick = (file) => {
-    ViewStore.set({ component: TopicShow, props: { file: file } });
+    viewStore.set({ component: TopicShow, props: { file: file } });
   };
 </script>
 
