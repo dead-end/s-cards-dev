@@ -1,15 +1,15 @@
 <script>
   import { onMount } from 'svelte';
 
-  import { TopicStore } from '../stores/topicStore';
+  import { topicStore } from '../stores/topicStore';
 
   import Topic from './Topic.svelte';
 
-  onMount(TopicStore.load);
+  onMount(topicStore.load);
 </script>
 
 <div class="grid grid-4" id="pool-list-body">
-  {#each $TopicStore as topic}
+  {#each $topicStore as topic}
     <Topic {topic} />
   {/each}
 </div>

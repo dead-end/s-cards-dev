@@ -14,4 +14,4 @@ function createTopicStore() {
   };
 }
 
-export const TopicStore = createTopicStore();
+export const topicStore = createTopicStore();
