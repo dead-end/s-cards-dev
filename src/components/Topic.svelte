@@ -5,8 +5,8 @@
 
   export let topic;
 
-  const onClick = (file) => {
-    viewStore.set({ component: TopicShow, props: { file: file } });
+  const onClick = (topic) => {
+    viewStore.set({ component: TopicShow, props: { topic: topic } });
   };
 </script>
 
@@ -26,6 +26,6 @@
     <p>{topic.desc}</p>
   {/if}
   <div class="buttons">
-    <button class="button" on:click={() => onClick(topic.file)}>Show</button>
+    <button class="button" on:click={() => onClick(topic)}>Show</button>
   </div>
 </div>
