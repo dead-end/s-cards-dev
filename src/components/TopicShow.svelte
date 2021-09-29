@@ -4,6 +4,10 @@
   import TopicList from './TopicList.svelte';
 
   export let topic;
+
+  const onBack = () => {
+    viewStore.set({ component: TopicList });
+  };
 </script>
 
 <div class="card card-shadow content">
@@ -42,10 +46,7 @@
   </div>
 
   <div class="buttons">
-    <button
-      class="button"
-      on:click={() => viewStore.set({ component: TopicList })}>Back</button
-    >
+    <button class="button" on:click={onBack}>Back</button>
     <button class="button">Listing</button>
     <button class="button">Start</button>
   </div>
