@@ -1,12 +1,10 @@
 <script>
   import { viewStore } from '../stores/viewStore';
 
-  import TopicShow from './TopicShow.svelte';
-
   export let topic;
 
   const onClick = (topic) => {
-    viewStore.set({ component: TopicShow, props: { topic: topic } });
+    viewStore.setView('TopicShow', { topic: topic });
   };
 </script>
 

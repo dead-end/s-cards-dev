@@ -1,12 +1,16 @@
 <script>
   import { viewStore } from '../stores/viewStore';
 
-  import TopicList from './TopicList.svelte';
+  import { loadQuestions } from '../js/persist';
+
+  import { onMount } from 'svelte';
 
   export let topic;
 
+  onMount(() => loadQuestions(topic.file));
+
   const onBack = () => {
-    viewStore.set({ component: TopicList });
+    viewStore.setView('TopicList');
   };
 </script>
 

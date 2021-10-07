@@ -3,12 +3,25 @@
 
   import { viewStore } from './stores/viewStore';
 
+  import { initDB } from './js/persist';
+
   import Header from './components/Header.svelte';
   import Footer from './components/Footer.svelte';
   import TopicList from './components/TopicList.svelte';
+  import TopicShow from './components/TopicShow.svelte';
 
   onMount(() => {
-    viewStore.set({ component: TopicList });
+    initDB();
+
+    viewStore.views = {
+      TopicList: {
+        component: TopicList,
+      },
+      TopicShow: {
+        component: TopicShow,
+      },
+    };
+    viewStore.setView('TopicList');
   });
 </script>
 
