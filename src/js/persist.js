@@ -1,5 +1,5 @@
-import { hashArr, hashStr } from './hash';
-import { fetchJson } from './fetch';
+import { fetchJson, fetchLastModified } from './fetch';
+import { arrGetProps, arrToMap } from './utils';
 
 let db;
 
@@ -31,8 +31,9 @@ const storeAdd = (store, obj) => {
  * @param {*} key
  */
 const storeDelete = (store, key) => {
+  console.log('Deleted: ', key, ' from: ', store.name);
   store.delete(key).onsuccess = (e) => {
-    console.log('Deleted: ' + key + ' from: ' + store.name);
+    console.log('Deleted: ', key, ' from: ', store.name);
   };
 };
 
@@ -51,7 +52,6 @@ const onUpgradeNeeded = (e) => {
     const storeTopics = db.createObjectStore('topics', {
       keyPath: 'file',
     });
-    storeTopics.createIndex('hash', 'hash', { unique: false });
 
     //
     // Create questions store
@@ -60,7 +60,6 @@ const onUpgradeNeeded = (e) => {
       keyPath: 'id',
     });
     storeQuest.createIndex('file', 'file', { unique: false });
-    storeQuest.createIndex('hash', 'hash', { unique: false });
 
     //
     // Create progress store
@@ -114,12 +113,6 @@ const syncJsonDb = (store, storeKeys, jsonArr, getId) => {
  */
 const syncTopics = (topicsJson) => {
   console.log(topicsJson);
-  //
-  // Add the hash to the topics.
-  //
-  topicsJson.forEach((topic) => {
-    topic.hash = hashTopic(topic);
-  });
 
   const topicStore = db
     .transaction(['topics'], 'readwrite')
@@ -127,19 +120,34 @@ const syncTopics = (topicsJson) => {
 
   topicStore.getAll().onsuccess = (e) => {
     const topicsStore = e.target.result;
-    const keysStore = arrGetProps(topicsStore, 'file');
-    const keysJson = arrGetProps(topicsJson, 'file');
 
-    topicsJson.forEach((jsonItem) => {
-      if (!keysStore.includes(jsonItem.file)) {
-        storeAdd(topicStore, jsonItem);
+    const storeMap = arrToMap(topicsStore, 'file');
+    //const keysStore = storeMap.keys();
+
+    const jsonKeys = arrGetProps(topicsJson, 'file');
+    console.log('keysJson', jsonKeys);
+
+    storeMap.forEach((storeValue, storeKey) => {
+      console.log(storeKey);
+      if (!jsonKeys.includes(storeKey)) {
+        topicStore.delete(storeKey).onsuccess = (e) => {
+          console.log('Store: ', topicStore.name, ' deleted: ', storeKey);
+        };
       }
     });
 
-    topicsStore.forEach((storeKey) => {
-      if (!keysJson.includes(storeKey)) {
-        storeDelete(topicStore, storeKey);
+    topicsJson.forEach((jsonItem) => {
+      //
+      // Copy last modified if present.
+      //
+      const storeItem = storeMap.get(jsonItem.file);
+      if (storeItem && storeItem.lastModified) {
+        jsonItem.lastModified = storeItem.lastModified;
       }
+
+      topicStore.put(jsonItem).onsuccess = (e) => {
+        console.log('Store: ', topicStore.name, ' update: ', e.target.result);
+      };
     });
   };
 };
@@ -184,48 +192,6 @@ const syncQuestProgress = (questsJson, file) => {
       return item.hash;
     });
   };
-};
-
-/**
- *
- * @param {*} quest
- * @returns
- */
-const hashQuest = (quest) => {
-  let hash = 0;
-
-  hash = hashStr(quest.file, hash);
-  hash = hashArr(quest.quest, hash);
-  hash = hashArr(quest.answer, hash);
-
-  return hash;
-};
-
-/**
- *
- * @param {*} topic
- * @returns
- */
-const hashTopic = (topic) => {
-  let hash = 0;
-
-  hash = hashStr(topic.file, hash);
-  hash = hashStr(topic.title, hash);
-  hash = hashStr(topic.desc, hash);
-
-  return hash;
-};
-
-/**
- *
- * @param {*} arr
- * @param {*} prop
- * @returns
- */
-const arrGetProps = (arr, prop) => {
-  return arr.map((a) => {
-    return a[prop];
-  });
 };
 
 /**
@@ -275,13 +241,29 @@ const topicsLastModifiedStore = () => {
       .transaction(['config'], 'readonly')
       .objectStore('config')
       .get('topics-last-modified').onsuccess = (e) => {
-      resolve(e.target.result.value);
+      const prop = e.target.result;
+      if (prop) {
+        resolve(prop.value);
+      } else {
+        resolve();
+      }
+    };
+  });
+};
+
+const storeSetTopicsLM = (lm) => {
+  return new Promise((resolve, reject) => {
+    db
+      .transaction(['config'], 'readwrite')
+      .objectStore('config')
+      .put({ key: 'topics-last-modified', value: lm }).onsuccess = () => {
+      console.log('update: topics-last-modified with: ', lm);
+      resolve();
     };
   });
 };
 
 const setTopicsLastModified = (lm) => {
-  console.log('jjooooo');
   db
     .transaction(['config'], 'readwrite')
     .objectStore('config')
@@ -292,23 +274,18 @@ const setTopicsLastModified = (lm) => {
 
 const updateTopics = async () => {
   const tlmStore = topicsLastModifiedStore();
-  const tlmHead = fetch('data/topics.json', { method: 'HEAD' }).then(
-    (r) => new Date(r.headers.get('Last-Modified'))
-  );
+  const tlmHead = fetchLastModified('data/topics.json');
 
-  const values = await Promise.all([tlmStore, tlmHead]);
-  const storeLm = values[0];
-  const headLm = values[1];
+  const [storeLm, headLm] = await Promise.all([tlmStore, tlmHead]);
 
   console.log('store', storeLm);
   console.log('head', headLm);
 
   if (!storeLm || storeLm < headLm) {
-    fetch('data/topics.json')
-      .then((response) => response.json())
-      .then((json) => {
-        syncTopics(json);
-        setTopicsLastModified(headLm);
-      });
+    fetchJson('data/topics.json', (json) => {
+      syncTopics(json);
+      // storeSetTopicsLM(headLm);
+      setTopicsLastModified(headLm);
+    });
   }
 };

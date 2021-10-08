@@ -31,3 +31,33 @@ export const hashArr = (arr, hash) => {
 
   return hash;
 };
+
+/**
+ *
+ * @param {*} quest
+ * @returns
+ */
+const hashQuest = (quest) => {
+  let hash = 0;
+
+  hash = hashStr(quest.file, hash);
+  hash = hashArr(quest.quest, hash);
+  hash = hashArr(quest.answer, hash);
+
+  return hash;
+};
+
+/**
+ *
+ * @param {*} topic
+ * @returns
+ */
+const hashTopic = (topic) => {
+  let hash = 0;
+
+  hash = hashStr(topic.file, hash);
+  hash = hashStr(topic.title, hash);
+  hash = hashStr(topic.desc, hash);
+
+  return hash;
+};
