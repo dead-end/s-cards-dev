@@ -1,3 +1,5 @@
+// TODO: not in use.
+
 /**
  * The function computes the hash value over a string with a given hash value.
  *
@@ -5,7 +7,7 @@
  * @param {*} hash The old hash value.
  * @returns The function returns the new hash value.
  */
-export const hashStr = (str, hash) => {
+const hashStr = (str, hash) => {
   if (!str || str.length == 0) return hash;
 
   for (let i = 0; i < str.length; i++) {
@@ -24,7 +26,7 @@ export const hashStr = (str, hash) => {
  * @param {*} hash The old hash value.
  * @returns The function returns the new hash value.
  */
-export const hashArr = (arr, hash) => {
+const hashArr = (arr, hash) => {
   arr.forEach((a) => {
     hash = hashStr(a, hash);
   });

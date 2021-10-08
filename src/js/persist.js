@@ -122,19 +122,18 @@ const syncTopics = (topicsJson) => {
     const topicsStore = e.target.result;
 
     const storeMap = arrToMap(topicsStore, 'file');
-    //const keysStore = storeMap.keys();
 
     const jsonKeys = arrGetProps(topicsJson, 'file');
     console.log('keysJson', jsonKeys);
 
-    storeMap.forEach((storeValue, storeKey) => {
+    for (let storeKey in storeMap) {
       console.log(storeKey);
       if (!jsonKeys.includes(storeKey)) {
         topicStore.delete(storeKey).onsuccess = (e) => {
           console.log('Store: ', topicStore.name, ' deleted: ', storeKey);
         };
       }
-    });
+    }
 
     topicsJson.forEach((jsonItem) => {
       //
