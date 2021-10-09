@@ -21,6 +21,7 @@ export const fetchLastModified = (url) => {
   return fetch(url, { method: 'HEAD' })
     .then((response) => {
       const header = response.headers.get('Last-Modified');
+      console.log(header);
       if (header) {
         return new Date(header);
       }
@@ -28,6 +29,6 @@ export const fetchLastModified = (url) => {
     .catch((e) => console.log(e));
 };
 
-export const fetchJson2 = (url) => {
-  fetch(url).then((response) => response.json());
+export const fetchQuestJson2 = (file) => {
+  return fetch(file).then((response) => response.json());
 };

@@ -1,4 +1,4 @@
-import { fetchJson, fetchLastModified } from './fetch';
+import { fetchJson, fetchLastModified, fetchQuestJson2 } from './fetch';
 import { arrGetProps, arrToMap } from './utils';
 
 let db;
@@ -156,11 +156,40 @@ const syncTopics = (topicsJson) => {
  * @param {*} questsJson
  * @param {*} file
  */
+const syncQuestProgress2 = (questsJson, file) => {
+  const tx = db.transaction(['topics', 'questions', 'progress'], 'readwrite');
+
+  const promDelQuest = storeDeleteIndex(tx, 'questions', 'file', file);
+  const promDelProgress = storeDeleteIndex(tx, 'progress', 'file', file);
+
+  Promise.all();
+
+  //
+  // Create a syntetic progess array with default values.
+  //
+  const progressJson = questsJson.map((q) => {
+    return {
+      hash: q.hash,
+      file: q.file,
+    };
+  });
+
+  //
+  // Sync the procress store with the json.
+  //
+  const progressStore = tx.objectStore('progress');
+  progressStore.index('file').getAllKeys(file).onsuccess = (e) => {
+    syncJsonDb(progressStore, e.target.result, progressJson, (item) => {
+      return item.hash;
+    });
+  };
+};
+
 const syncQuestProgress = (questsJson, file) => {
   //
   // Get a transaction for the quest and progress store.
   //
-  const tx = db.transaction(['questions', 'progress'], 'readwrite');
+  const tx = db.transaction(['topics', 'questions', 'progress'], 'readwrite');
 
   //
   // Sync the quest store with the json.
@@ -212,27 +241,149 @@ export const initDB = () => {
   };
 };
 
+/*
+const fetchQuestJson = (file) => {
+  return fetch(file)
+    .then((response) => response.json())
+    .then((json) => {
+      json.forEach((quest) => {
+        // TODO: later ????
+        quest.file = file;
+      });
+      return json;
+    });
+};
+*/
+const storeDeleteIndex = (tx, storeName, indexName, indexValue) => {
+  return new Promise((resolve, reject) => {
+    const store = tx.objectStore(storeName);
+
+    store.index(indexName).getAllKeys(indexValue).onsuccess = (e) => {
+      const keys = e.target.result;
+      keys.forEach((key) => {
+        store.delete(key).onsuccess = (e) => {
+          console.log('Store: ', store.name, ' deleted: ', key);
+        };
+      });
+      resolve();
+    };
+  });
+};
+
+/*
+const storeAddQuest = (tx, arr, file) => {
+  return new Promise((resolve, reject) => {
+    const store = tx.objectStore('questions');
+
+    arr.forEach((json) => {
+      json.file = file;
+      store.add(json).onsuccess = (e) => {
+        console.log('Store: ', store.name, '  added: ', json);
+      };
+    });
+  });
+};
+*/
+const storeAddAll = (tx, storeName, arr) => {
+  return new Promise((resolve, reject) => {
+    const store = tx.objectStore(storeName);
+
+    arr.forEach((item) => {
+      store.add(item).onsuccess = (e) => {
+        console.log('Store: ', store.name, '  added: ', item);
+      };
+    });
+  });
+};
+
+const storeTopicGetLastModified = (file) => {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(['topics'], 'readonly');
+    const store = tx.objectStore('topics');
+
+    store.get(file).onsuccess = (e) => {
+      const prop = e.target.result;
+      console.log('getLastModified', prop);
+      if (prop && prop.lastModified) {
+        resolve(prop.lastModified);
+      } else {
+        resolve();
+      }
+    };
+  });
+};
+
+const storeGetLastModified = (storeName, id) => {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction([storeName], 'readonly');
+    const store = tx.objectStore(storeName);
+
+    store.get(id).onsuccess = (e) => {
+      const prop = e.target.result;
+      console.log('storeGetLastModified', prop);
+      if (prop && prop.lastModified) {
+        resolve(prop.lastModified);
+      } else {
+        resolve();
+      }
+    };
+  });
+};
+
+const storeTopicSetLastModified = (tx, file, lm) => {
+  const store = tx.objectStore('topics');
+
+  store.get(file).onsuccess = (e) => {
+    const prop = e.target.result;
+    prop.lastModified = lm;
+
+    store.put(prop).onsuccess = () => {
+      console.log('Store: ', store.name, ' setLastModified: ', prop);
+    };
+  };
+};
+
 /**
  *
  * @param {*} file
  */
-export const loadQuestions = (file) => {
+export const loadQuestions = async (file) => {
   console.log(file);
-  fetchJson(
-    file,
 
-    (json) => {
-      json.forEach((quest) => {
-        quest.file = file;
-        quest.hash = hashQuest(quest);
-      });
+  const storeLm = storeGetLastModified('topics', file);
+  const jsonLm = fetchLastModified(file);
 
-      syncQuestProgress(json, file);
-    }
-  );
+  const [lmStore, lmJson] = await Promise.all([storeLm, jsonLm]);
+
+  console.log('lmStore', lmStore, 'lmJson', lmJson);
+  if (lmStore && lmStore >= lmJson) {
+    return;
+  }
+
+  const jsonPromise = await fetchQuestJson2(file);
+
+  const tx = db.transaction(['topics', 'questions', 'progress'], 'readwrite');
+
+  const promDelQuest = storeDeleteIndex(tx, 'questions', 'file', file);
+  const promDelProgress = storeDeleteIndex(tx, 'progress', 'file', file);
+
+  const [json] = await Promise.all([
+    jsonPromise,
+    promDelQuest,
+    promDelProgress,
+  ]);
+
+  console.log(json);
+
+  json.forEach((j) => (j.file = file));
+
+  storeAddAll(tx, 'questions', json);
+  storeTopicSetLastModified(tx, file, lmJson);
 };
 
 // -----------------------------
+
+// Replace by:
 
 const topicsLastModifiedStore = () => {
   return new Promise((resolve, reject) => {
@@ -273,6 +424,7 @@ const setTopicsLastModified = (lm) => {
 
 const updateTopics = async () => {
   const tlmStore = topicsLastModifiedStore();
+
   const tlmHead = fetchLastModified('data/topics.json');
 
   const [storeLm, headLm] = await Promise.all([tlmStore, tlmHead]);
