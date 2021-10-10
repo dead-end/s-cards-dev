@@ -3,7 +3,7 @@
 
   import { viewStore } from './stores/viewStore';
 
-  import { initDB } from './js/persist';
+  import { initApp } from './js/persist';
 
   import Header from './components/Header.svelte';
   import Footer from './components/Footer.svelte';
@@ -11,7 +11,7 @@
   import TopicShow from './components/TopicShow.svelte';
 
   onMount(() => {
-    initDB();
+    initApp();
 
     viewStore.views = {
       TopicList: {
