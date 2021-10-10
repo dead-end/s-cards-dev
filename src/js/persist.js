@@ -1,133 +1,8 @@
 import { fetchLastModified, fetchJson } from './fetch';
 import { arrGetProps, arrToMap } from './utils';
+import { storeDeleteIndex, storeAddAll } from './store';
 
 let db;
-
-/**
- * Simple error callback function.
- *
- * @param {*} event
- */
-const onError = (e) => {
-  console.error(e.target.error);
-};
-
-/**
- * The function create the object stores and indices.
- *
- * @param {*} e
- */
-const onUpgradeNeeded = (e) => {
-  if (e.oldVersion < 1) {
-    db = e.target.result;
-
-    //
-    // Create topics store
-    //
-    const storeTopics = db.createObjectStore('topics', {
-      keyPath: 'file',
-    });
-
-    //
-    // Create questions store
-    //
-    const storeQuest = db.createObjectStore('questions', {
-      keyPath: 'id',
-    });
-    storeQuest.createIndex('file', 'file', { unique: false });
-
-    //
-    // Create progress store
-    //
-    const storeProgress = db.createObjectStore('progress', {
-      keyPath: 'id',
-    });
-    storeProgress.createIndex('file', 'file', { unique: false });
-
-    //
-    // Create config store
-    //
-    const storeConfig = db.createObjectStore('config', {
-      keyPath: 'key',
-    });
-
-    storeConfig.transaction.oncomplete = (e) => {
-      console.log('Upgrade completed!');
-    };
-  }
-};
-
-/**
- *
- * @param {*} topicsJson
- */
-const syncTopics = (topicsJson) => {
-  console.log(topicsJson);
-
-  const topicStore = db
-    .transaction(['topics'], 'readwrite')
-    .objectStore('topics');
-
-  topicStore.getAll().onsuccess = (e) => {
-    const topicsStore = e.target.result;
-
-    const storeMap = arrToMap(topicsStore, 'file');
-
-    const jsonKeys = arrGetProps(topicsJson, 'file');
-    console.log('keysJson', jsonKeys);
-
-    for (let storeKey in storeMap) {
-      console.log(storeKey);
-      if (!jsonKeys.includes(storeKey)) {
-        topicStore.delete(storeKey).onsuccess = (e) => {
-          console.log('Store: ', topicStore.name, ' deleted: ', storeKey);
-        };
-      }
-    }
-
-    topicsJson.forEach((jsonItem) => {
-      //
-      // Copy last modified if present.
-      //
-      const storeItem = storeMap.get(jsonItem.file);
-      if (storeItem && storeItem.lastModified) {
-        jsonItem.lastModified = storeItem.lastModified;
-      }
-
-      topicStore.put(jsonItem).onsuccess = (e) => {
-        console.log('Store: ', topicStore.name, ' update: ', e.target.result);
-      };
-    });
-  };
-};
-
-const storeDeleteIndex = (tx, storeName, indexName, indexValue) => {
-  return new Promise((resolve, reject) => {
-    const store = tx.objectStore(storeName);
-
-    store.index(indexName).getAllKeys(indexValue).onsuccess = (e) => {
-      const keys = e.target.result;
-      keys.forEach((key) => {
-        store.delete(key).onsuccess = (e) => {
-          console.log('Store: ', store.name, ' deleted: ', key);
-        };
-      });
-      resolve();
-    };
-  });
-};
-
-const storeAddAll = (tx, storeName, arr) => {
-  return new Promise((resolve, reject) => {
-    const store = tx.objectStore(storeName);
-
-    arr.forEach((item) => {
-      store.add(item).onsuccess = (e) => {
-        console.log('Store: ', store.name, '  added: ', item);
-      };
-    });
-  });
-};
 
 const storeGetLastModified = (storeName, id) => {
   return new Promise((resolve, reject) => {
@@ -218,18 +93,6 @@ const topicsLastModifiedStore = () => {
   });
 };
 
-const storeSetTopicsLM = (lm) => {
-  return new Promise((resolve, reject) => {
-    db
-      .transaction(['config'], 'readwrite')
-      .objectStore('config')
-      .put({ key: 'topics-last-modified', value: lm }).onsuccess = () => {
-      console.log('update: topics-last-modified with: ', lm);
-      resolve();
-    };
-  });
-};
-
 const setTopicsLastModified = (lm) => {
   db
     .transaction(['config'], 'readwrite')
@@ -251,7 +114,7 @@ const initApp = async () => {
 
   if (!storeLm || storeLm < headLm) {
     fetchJson('data/topics.json').then((json) => {
-      syncTopics(json);
+      topicsSync(json);
       // storeSetTopicsLM(headLm);
       setTopicsLastModified(headLm);
     });
@@ -259,6 +122,112 @@ const initApp = async () => {
 };
 
 // ------------------------------------
+
+/**
+ * The function is called with a json array that contains the topics. It
+ * deletes all topics from the store, that are not contained in the json and
+ * updates the rest.
+ *
+ * @param {Array} json
+ */
+const topicsSync = (json) => {
+  const store = db.transaction(['topics'], 'readwrite').objectStore('topics');
+
+  store.getAll().onsuccess = (e) => {
+    //
+    // Create a map with the topics and the file as the key.
+    //
+    const storeMap = arrToMap(e.target.result, 'file');
+
+    //
+    // Get an array with the files from the json array. The file is the key for
+    // the topics in the store and has to be unique.
+    //
+    const jsonKeys = arrGetProps(json, 'file');
+
+    //
+    // Delete the topics from the store that are not in the json array.
+    //
+    for (let storeKey in storeMap) {
+      if (!jsonKeys.includes(storeKey)) {
+        store.delete(storeKey).onsuccess = () => {
+          console.log('Store: ', store.name, ' deleted: ', storeKey);
+        };
+      }
+    }
+
+    //
+    // Update the topics in the store.
+    //
+    json.forEach((jsonItem) => {
+      //
+      // Copy last modified if present.
+      //
+      const storeItem = storeMap.get(jsonItem.file);
+      if (storeItem && storeItem.lastModified) {
+        jsonItem.lastModified = storeItem.lastModified;
+      }
+
+      store.put(jsonItem).onsuccess = (e) => {
+        console.log('Store: ', store.name, ' update: ', e.target.result);
+      };
+    });
+  };
+};
+
+/**
+ * Simple error callback function.
+ *
+ * @param {*} event
+ */
+const onError = (e) => {
+  console.error(e.target.error);
+};
+
+/**
+ * The function create the object stores and indices.
+ *
+ * @param {IDBVersionChangeEvent} e
+ */
+const onUpgradeNeeded = (e) => {
+  if (e.oldVersion < 1) {
+    db = e.target.result;
+
+    //
+    // Create topics store
+    //
+    const storeTopics = db.createObjectStore('topics', {
+      keyPath: 'file',
+    });
+
+    //
+    // Create questions store
+    //
+    const storeQuest = db.createObjectStore('questions', {
+      keyPath: 'id',
+    });
+    storeQuest.createIndex('file', 'file', { unique: false });
+
+    //
+    // Create progress store
+    //
+    const storeProgress = db.createObjectStore('progress', {
+      keyPath: 'id',
+    });
+    storeProgress.createIndex('file', 'file', { unique: false });
+
+    //
+    // Create config store
+    //
+    const storeConfig = db.createObjectStore('config', {
+      keyPath: 'key',
+    });
+
+    storeConfig.transaction.oncomplete = () => {
+      console.log('Upgrade completed!');
+    };
+  }
+};
 
 /**
  * The function iniitalizes the indexed db.
