@@ -1,34 +1,38 @@
 /**
- * The function fetches a url with json data and calls the callback function on
- * the result.
+ * The function fetches an url with json data and returns a Promise for that
+ * json data.
  *
- * @param {*} url
- * @param {*} func
+ * @param {String} url
+ * @returns A promise for the json data.
  */
-export const fetchJson = (url, func) => {
-  fetch(url)
+export const fetchJson = (url) => {
+  return fetch(url)
     .then((response) => response.json())
-    .then(func)
-    .catch((e) => console.log(e));
+    .catch((e) => console.error(e));
 };
 
 /**
+ * The funciton call an url with a HEAD request an returns the last modified
+ * value as a Date instance.
  *
- * @param {*} url
- * @returns
+ * @param {String} url
+ * @returns A promise for the last modified Date
  */
 export const fetchLastModified = (url) => {
   return fetch(url, { method: 'HEAD' })
     .then((response) => {
-      const header = response.headers.get('Last-Modified');
-      console.log(header);
-      if (header) {
-        return new Date(header);
+      //
+      // Get the last modified from the response.
+      //
+      const lastModified = response.headers.get('Last-Modified');
+      console.log('url: ', url, ' header: ', lastModified);
+
+      //
+      // Ensure that the header exists.
+      //
+      if (lastModified) {
+        return new Date(lastModified);
       }
     })
-    .catch((e) => console.log(e));
-};
-
-export const fetchQuestJson2 = (file) => {
-  return fetch(file).then((response) => response.json());
+    .catch((e) => console.error(e));
 };
