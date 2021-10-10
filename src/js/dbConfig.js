@@ -1,3 +1,5 @@
+import { db } from './db';
+
 /**
  * The function gets the last modified date of the topics file from the config
  * store.
@@ -5,7 +7,7 @@
  * @param {IDBDatabase} db The Database.
  * @returns A Promise for the last modified date.
  */
-export const dbcGetLastModified = (db) => {
+export const dbcGetLastModified = () => {
   return new Promise((resolve, reject) => {
     db
       .transaction(['config'], 'readonly')
@@ -29,10 +31,9 @@ export const dbcGetLastModified = (db) => {
  * The function stores the last modified date for the topics file in the config
  * store.
  *
- * @param {IDBDatabase} db The Database.
  * @param {Date} lastModified The last modified date of the topics file.
  */
-export const dbcSetLastModified = (db, lastModified) => {
+export const dbcSetLastModified = (lastModified) => {
   const data = { key: 'topics-last-modified', value: lastModified };
   const store = db.transaction(['config'], 'readwrite').objectStore('config');
 

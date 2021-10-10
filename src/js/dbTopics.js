@@ -1,14 +1,14 @@
+import { db } from './db';
 import { arrGetProps, arrToMap } from './utils';
 
 /**
  * The function reads the last modified date from the topics store for a given
  * file.
  *
- * @param {IDBDatabase} db The Database.
  * @param {String} file Name of the file, which is the id.
  * @returns A Promise.
  */
-export const dbtGetLastModified = (db, file) => {
+export const dbtGetLastModified = (file) => {
   return new Promise((resolve, reject) => {
     //
     // Create a transaction for the topics store.
@@ -58,13 +58,12 @@ export const dbtSetLastModified = (tx, file, lastModified) => {
  * deletes all topics from the store, that are not contained in the json and
  * updates the rest.
  *
- * @param {IDBDatabase} db The Database.
  * @param {Array} json
  */
 
 // TODO: Wrong plast!! If file was removed, then the Question and process stores have to be also removed.
 
-export const dbtSync = (db, json) => {
+export const dbtSync = (json) => {
   const store = db.transaction(['topics'], 'readwrite').objectStore('topics');
 
   store.getAll().onsuccess = (e) => {
@@ -108,3 +107,6 @@ export const dbtSync = (db, json) => {
     });
   };
 };
+
+// TODO: replace the topicstore with this:
+export const dbtGetAll = () => {};
