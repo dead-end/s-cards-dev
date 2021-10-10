@@ -101,25 +101,6 @@ const syncTopics = (topicsJson) => {
   };
 };
 
-/**
- *
- */
-export const initDB = () => {
-  const request = indexedDB.open('s-card', 1);
-
-  request.onupgradeneeded = onUpgradeNeeded;
-
-  request.onerror = onError;
-
-  request.onsuccess = (e) => {
-    db = e.target.result;
-    db.onerror = onError;
-    console.log('db init success!');
-
-    updateTopics();
-  };
-};
-
 const storeDeleteIndex = (tx, storeName, indexName, indexValue) => {
   return new Promise((resolve, reject) => {
     const store = tx.objectStore(storeName);
@@ -258,7 +239,7 @@ const setTopicsLastModified = (lm) => {
   };
 };
 
-const updateTopics = async () => {
+const initApp = async () => {
   const tlmStore = topicsLastModifiedStore();
 
   const tlmHead = fetchLastModified('data/topics.json');
@@ -275,4 +256,44 @@ const updateTopics = async () => {
       setTopicsLastModified(headLm);
     });
   }
+};
+
+// ------------------------------------
+
+/**
+ * The function iniitalizes the indexed db.
+ */
+export const initDB = () => {
+  //
+  // Open db request for version 1.
+  //
+  const request = indexedDB.open('s-card', 1);
+
+  //
+  // Callback function for creating or upgrading the db.
+  //
+  request.onupgradeneeded = onUpgradeNeeded;
+
+  //
+  // Error handling callback function for the opening request.
+  //
+  request.onerror = onError;
+
+  request.onsuccess = (e) => {
+    //
+    //
+    //
+    db = e.target.result;
+
+    //
+    // Centeralized error handling callback function.
+    //
+    db.onerror = onError;
+    console.log('db init success!');
+
+    //
+    // Initialize the application.
+    //
+    initApp();
+  };
 };
