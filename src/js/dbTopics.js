@@ -61,6 +61,9 @@ export const dbtSetLastModified = (tx, file, lastModified) => {
  * @param {IDBDatabase} db The Database.
  * @param {Array} json
  */
+
+// TODO: Wrong plast!! If file was removed, then the Question and process stores have to be also removed.
+
 export const dbtSync = (db, json) => {
   const store = db.transaction(['topics'], 'readwrite').objectStore('topics');
 
