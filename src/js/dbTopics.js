@@ -108,5 +108,17 @@ export const dbtSync = (json) => {
   };
 };
 
-// TODO: replace the topicstore with this:
-export const dbtGetAll = () => {};
+/**
+ * The function gets all topics from the store.
+ *
+ * @returns A Promise for the array with the topics.
+ */
+export const dbtGetAll = () => {
+  return new Promise((resolve, reject) => {
+    const store = db.transaction(['topics'], 'readonly').objectStore('topics');
+
+    store.getAll().onsuccess = (e) => {
+      resolve(e.target.result);
+    };
+  });
+};
