@@ -1,15 +1,21 @@
 <script>
   import { onMount } from 'svelte';
 
-  import { topicStore } from '../stores/topicStore';
+  import { dbtGetAll } from '../js/dbTopics';
 
   import Topic from './Topic.svelte';
 
-  onMount(topicStore.load);
+  let topics = [];
+
+  onMount(() => {
+    dbtGetAll().then((t) => {
+      topics = t;
+    });
+  });
 </script>
 
 <div class="grid grid-4" id="pool-list-body">
-  {#each $topicStore as topic}
+  {#each topics as topic}
     <Topic {topic} />
   {/each}
 </div>
