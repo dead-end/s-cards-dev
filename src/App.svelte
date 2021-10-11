@@ -11,8 +11,6 @@
   import TopicShow from './components/TopicShow.svelte';
 
   onMount(() => {
-    initApp();
-
     viewStore.views = {
       TopicList: {
         component: TopicList,
@@ -21,7 +19,12 @@
         component: TopicShow,
       },
     };
-    viewStore.setView('TopicList');
+    //
+    // Set the view if the initialization of the app finished.
+    //
+    initApp().then(() => {
+      viewStore.setView('TopicList');
+    });
   });
 </script>
 
