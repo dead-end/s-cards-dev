@@ -45,6 +45,9 @@ export const loadQuestions = async (file) => {
 // -----------------------------
 
 export const initApp = async () => {
+  //
+  // Ensure that the database is initialized before we go on.
+  //
   await dbInit();
 
   const storeLmPromise = dbcGetLastModified();
@@ -57,7 +60,11 @@ export const initApp = async () => {
   console.log('last modified head:', headLm);
 
   if (!storeLm || storeLm < headLm) {
-    fetchJson('data/topics.json').then((json) => {
+    //
+    // TODO: comment => TopicList.svelte has to wait for the sync to finish
+    // We have to wait for the sync before view can read from the store
+    //
+    await fetchJson('data/topics.json').then((json) => {
       dbtSync(json);
       dbcSetLastModified(headLm);
     });
