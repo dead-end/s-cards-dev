@@ -9,6 +9,7 @@
   import Footer from './components/Footer.svelte';
   import TopicList from './components/TopicList.svelte';
   import TopicShow from './components/TopicShow.svelte';
+  import QuestList from './components/QuestList.svelte';
 
   onMount(() => {
     viewStore.views = {
@@ -17,6 +18,9 @@
       },
       TopicShow: {
         component: TopicShow,
+      },
+      QuestList: {
+        component: QuestList,
       },
     };
     //
