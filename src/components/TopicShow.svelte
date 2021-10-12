@@ -2,6 +2,7 @@
   import { viewStore } from '../stores/viewStore';
 
   import { loadQuestions } from '../js/persist';
+  import { fmtDate } from '../js/utils';
 
   import { onMount } from 'svelte';
 
@@ -20,16 +21,20 @@
   <div class="grid grid-4">
     <table class="is-text-left">
       <tr>
+        <td>File</td>
+        <td>{topic.file}</td>
+      </tr>
+      <tr>
         <td>Modified</td>
-        <td />
+        <td>{fmtDate(topic.lastModified)}</td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td>{topic.desc}</td>
       </tr>
       <tr>
         <td>Status</td>
         <td />
-      </tr>
-      <tr>
-        <td>File</td>
-        <td>{topic.file}</td>
       </tr>
       <tr>
         <td>Size</td>
