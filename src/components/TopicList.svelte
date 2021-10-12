@@ -3,7 +3,7 @@
 
   import { dbtGetAll } from '../js/dbTopics';
 
-  import Topic from './Topic.svelte';
+  import TopicCard from './TopicCard.svelte';
 
   let topics = [];
 
@@ -16,6 +16,6 @@
 
 <div class="grid grid-4" id="pool-list-body">
   {#each topics as topic}
-    <Topic {topic} />
+    <TopicCard {topic} />
   {/each}
 </div>
