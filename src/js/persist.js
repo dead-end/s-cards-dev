@@ -20,7 +20,7 @@ export const loadQuestions = async (file) => {
   if (lmStore && lmStore >= lmJson) {
     return;
   }
-
+// TODO
   const jsonPromise = await fetchJson(file);
 
   const tx = db.transaction(['topics', 'questions', 'progress'], 'readwrite');
