@@ -84,7 +84,6 @@ export const dbInit = () => {
       // Centeralized error handling callback function.
       //
       db.onerror = onError;
-
       console.log('db init success!');
       resolve();
     };
