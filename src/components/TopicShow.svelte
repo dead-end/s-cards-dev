@@ -13,6 +13,10 @@
   const onBack = () => {
     viewStore.setView('TopicList');
   };
+
+  const onListing = (topic) => {
+    viewStore.setView('QuestList', { topic: topic });
+  };
 </script>
 
 <div class="card card-shadow content">
@@ -56,7 +60,7 @@
 
   <div class="buttons">
     <button class="button" on:click={onBack}>Back</button>
-    <button class="button">Listing</button>
+    <button class="button" on:click={() => onListing(topic)}>Listing</button>
     <button class="button">Start</button>
   </div>
 </div>
