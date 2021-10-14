@@ -34,14 +34,6 @@ const onUpgradeNeeded = (e) => {
     storeQuest.createIndex('file', 'file', { unique: false });
 
     //
-    // Create progress store
-    //
-    const storeProgress = db.createObjectStore('progress', {
-      keyPath: 'id',
-    });
-    storeProgress.createIndex('file', 'file', { unique: false });
-
-    //
     // Create config store
     //
     const storeConfig = db.createObjectStore('config', {

@@ -29,27 +29,27 @@ export const loadQuestions = async (file) => {
     return;
   }
 
+  const json = await fetchJson(file);
+  json.forEach((quest) => {
+    quest.file = file;
+    quest.total = 0;
+    quest.failed = 0;
+    quest.ratio = 0.0;
+    quest.current = 0;
+  });
+  console.log(json);
+
   //
   // At this point we know that we have to update the questions for the topic.
   //
-  const tx = db.transaction(['topics', 'questions', 'progress'], 'readwrite');
+  const tx = db.transaction(['topics', 'questions'], 'readwrite');
 
-  const delQuestsPromise = storeDeleteIndex(tx, 'questions', 'file', file);
-  const delProgressPromise = storeDeleteIndex(tx, 'progress', 'file', file);
-  const jsonPromise = fetchJson(file);
-
-  //
-  // All three things can be done in parallel. Only the json promise returns
-  // something.
-  //
-  const [json] = await Promise.all([
-    jsonPromise,
-    delQuestsPromise,
-    delProgressPromise,
-  ]);
-
-  json.forEach((j) => (j.file = file));
-  console.log(json);
+  const delQuestsPromise = await storeDeleteIndex(
+    tx,
+    'questions',
+    'file',
+    file
+  );
 
   storeAddAll(tx, 'questions', json);
 

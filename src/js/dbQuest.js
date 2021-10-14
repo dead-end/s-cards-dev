@@ -16,3 +16,30 @@ export const dbqGetAll = (topic) => {
     };
   });
 };
+
+export const dbqSetCurrent = (file, value) => {
+  const store = db
+    .transaction(['questions'], 'readwrite')
+    .objectStore('questions');
+
+  store.index('file').getAll(file).onsuccess = (e) => {
+    const quests = e.target.result;
+    quests.forEach((elem) => {
+      elem.current = value;
+      store.put(elem);
+    });
+  };
+};
+
+export const dbqGetStats = (file, value) => {
+  return new Promise((resolve, reject) => {
+    const store = db
+      .transaction(['questions'], 'readwrite')
+      .objectStore('questions');
+
+    store.index('file').getAll(file).onsuccess = (e) => {
+      const quests = e.target.result;
+      resolve(quests.map((q) => q.current));
+    };
+  });
+};
