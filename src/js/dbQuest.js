@@ -17,29 +17,80 @@ export const dbqGetAll = (topic) => {
   });
 };
 
+/**
+ * The function sets all 'current' properties from questions from a given file
+ * to a given value.
+ *
+ * @param {String} file The file name for the questions.
+ * @param {Number} value The new value.
+ */
 export const dbqSetCurrent = (file, value) => {
+  //
+  // We are only interested in questions from a given file.
+  //
+  const range = IDBKeyRange.only(file);
+
   const store = db
     .transaction(['questions'], 'readwrite')
     .objectStore('questions');
 
-  store.index('file').getAll(file).onsuccess = (e) => {
-    const quests = e.target.result;
-    quests.forEach((elem) => {
-      elem.current = value;
-      store.put(elem);
-    });
+  store.index('file').openCursor(range).onsuccess = (e) => {
+    const cursor = e.target.result;
+    if (cursor) {
+      const elem = cursor.value;
+      //
+      // Ensure that we need to update the value in the store.
+      //
+      if (elem.current !== value) {
+        elem.current = value;
+        store.put(elem);
+        console.log('Store:', store.name, ' update:', elem.id);
+      }
+
+      cursor.continue();
+    }
+    //
+    // The cursor has finished.
+    //
+    else {
+      console.log('Store:', store.name, ' set current done:', value);
+    }
   };
 };
 
-export const dbqGetStats = (file, value) => {
+/**
+ * The function collects the 'current' property from questions that are from a
+ * given file.
+ *
+ * @param {String} file The name of the file.
+ * @returns An array with the 'current' values.
+ */
+export const dbqGetStats = (file) => {
   return new Promise((resolve, reject) => {
+    const result = [];
+
+    //
+    // We are only interested in questions from a given file.
+    //
+    const range = IDBKeyRange.only(file);
+
     const store = db
       .transaction(['questions'], 'readwrite')
       .objectStore('questions');
 
-    store.index('file').getAll(file).onsuccess = (e) => {
-      const quests = e.target.result;
-      resolve(quests.map((q) => q.current));
+    store.index('file').openCursor(range).onsuccess = (e) => {
+      const cursor = e.target.result;
+      if (cursor) {
+        result.push(cursor.value.current);
+        cursor.continue();
+      }
+      //
+      // The cursor has finished.
+      //
+      else {
+        console.log('Store:', store.name, ' current values:', result);
+        resolve(result);
+      }
     };
   });
 };

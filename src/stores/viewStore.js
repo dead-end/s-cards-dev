@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-function createViewStore() {
+const createViewStore = () => {
   const { subscribe, set, update } = writable({});
 
   return {
@@ -13,6 +13,6 @@ function createViewStore() {
       set(view);
     },
   };
-}
+};
 
 export const viewStore = createViewStore();

@@ -15,7 +15,7 @@
   let size = 0;
 
   const updateStatus = () => {
-    dbqGetStats().then((arr) => {
+    dbqGetStats(topic.file).then((arr) => {
       status = arrPercentage(arr, 3);
       startDisabled = arrAll(arr, 3);
       size = arr.length;
