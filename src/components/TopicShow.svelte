@@ -1,19 +1,24 @@
 <script>
-  import { viewStore } from '../stores/viewStore';
-
+  import { fmtDate, arrPercentage, arrAll } from '../js/utils';
   import { loadQuestions } from '../js/persist';
   import { dbqSetCurrent, dbqGetStats } from '../js/dbQuest';
-  import { fmtDate, arrPercentage, arrAll } from '../js/utils';
 
+  import { viewStore } from '../stores/viewStore';
   import { onMount } from 'svelte';
 
   export let topic;
-  // TODO: comments
 
+  //
+  // Properties for the view.
+  //
   let status = '';
   let startDisabled = true;
   let size = 0;
 
+  /**
+   * The function gets the values for 'status' and 'startDisabled' and the
+   * number of questions.
+   */
   const updateStatus = () => {
     dbqGetStats(topic.file).then((arr) => {
       status = arrPercentage(arr, 3);
@@ -22,19 +27,33 @@
     });
   };
 
+  /**
+   * On mount we load the questions for the topic and then we update the
+   * properties for this view.
+   */
   onMount(() => {
-    loadQuestions(topic.file);
-    updateStatus();
+    loadQuestions(topic.file).then(() => updateStatus());
   });
 
+  /**
+   * Callback function for the back button.
+   */
   const onBack = () => {
     viewStore.setView('TopicList');
   };
 
-  const onListing = (topic) => {
+  /**
+   * Callback function for the listing button.
+   */
+  const onListing = () => {
     viewStore.setView('QuestList', { topic: topic });
   };
 
+  /**
+   * Callback function for the select box.
+   *
+   * @param {Event} e
+   */
   const onSelect = (e) => {
     console.log('index', e.target.selectedIndex);
     //
@@ -92,7 +111,7 @@
 
   <div class="buttons">
     <button class="button" on:click={onBack}>Back</button>
-    <button class="button" on:click={() => onListing(topic)}>Listing</button>
+    <button class="button" on:click={onListing}>Listing</button>
     <button class="button" disabled={startDisabled}>Start</button>
   </div>
 </div>
