@@ -52,16 +52,14 @@ export const arrGetProps = (arr, prop) => {
   });
 };
 
-// ----------------------
-
 /**
  * The function is called with an array of integers. Each can have a max value.
  * The function computes a percentage string from the values. 100% means that
  * all entries have the max value.
  *
- * @param {Array} arr
- * @param {int} max
- * @returns
+ * @param {Array} arr An array of integers.
+ * @param {Number} max The integer value that is 100%.
+ * @returns The function returns a string with the percent value.
  */
 export const arrPercentage = (arr, max) => {
   let sum = 0;
@@ -73,6 +71,14 @@ export const arrPercentage = (arr, max) => {
   return result.toFixed(0) + '%';
 };
 
+/**
+ * The function is called with an array and a value. The function checks if all
+ * of the array values have the given value.
+ *
+ * @param {Array} arr The array with values.
+ * @param {Number} val The expected value.
+ * @returns True or false.
+ */
 export const arrAll = (arr, val) => {
   for (let i in arr) {
     if (arr[i] !== val) {
