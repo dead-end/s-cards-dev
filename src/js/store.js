@@ -16,8 +16,15 @@ export const storeDeleteIndex = (tx, storeName, idxName, idxValue) => {
     //
     const store = tx.objectStore(storeName);
 
+    //
+    // Get an array with the keys of the matching objects,
+    //
     store.index(idxName).getAllKeys(idxValue).onsuccess = (e) => {
       const keys = e.target.result;
+
+      //
+      // Delete all objects with their keys,
+      //
       keys.forEach((key) => {
         store.delete(key).onsuccess = (e) => {
           console.log('Store: ', store.name, ' deleted: ', key);
@@ -36,10 +43,10 @@ export const storeDeleteIndex = (tx, storeName, idxName, idxValue) => {
  * The function is called with a transaction for a store with a given name and
  * an array of objects. All elements of the array are added to the store.
  *
- * @param {IDBTransaction} tx
- * @param {String} storeName
- * @param {Array} arr
- * @returns
+ * @param {IDBTransaction} tx Transaction
+ * @param {String} storeName Name of the store.
+ * @param {Array} arr Array with the objects.
+ * @returns The function returns a Promise.
  */
 export const storeAddAll = (tx, storeName, arr) => {
   return new Promise((resolve, reject) => {
