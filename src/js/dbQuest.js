@@ -1,4 +1,9 @@
+// TODO: nename file => questModel.js
+// function questPersist, questGetAll,
+// questOnAnswer
+
 import { db } from './db';
+import { percentage } from './utils';
 
 /**
  * The function gets all questions for a topic from the store.
@@ -21,8 +26,8 @@ export const dbqGetAll = (topic) => {
  * The function sets all 'current' properties from questions from a given file
  * to a given value.
  *
- * @param {String} file The file name for the questions.
- * @param {Number} value The new value.
+ * @param {string} file The file name for the questions.
+ * @param {number} value The new value.
  */
 export const dbqSetCurrent = (file, value) => {
   //
@@ -62,7 +67,7 @@ export const dbqSetCurrent = (file, value) => {
  * The function collects the 'current' property from questions that are from a
  * given file.
  *
- * @param {String} file The name of the file.
+ * @param {string} file The name of the file.
  * @returns An array with the 'current' values.
  */
 export const dbqGetStats = (file) => {
@@ -93,4 +98,33 @@ export const dbqGetStats = (file) => {
       }
     };
   });
+};
+
+// TODO: function name questPersist
+export const dbqUpdate = (quest) => {
+  // TODO: not correct
+  // quest.ratio = percentage(quest.failed, quest.total);
+
+  return new Promise((resolve, reject) => {
+    const store = db
+      .transaction(['questions'], 'readwrite')
+      .objectStore('questions');
+
+    store.put(quest).onsuccess = (e) => {
+      console.log('Store:', store.name, ' update:', quest);
+      resolve();
+    };
+  });
+};
+
+export const questOnAnswer = (quest, isCorrect) => {
+  if (isCorrect) {
+    quest.current++;
+  } else {
+    quest.current = 0;
+    quest.failed++;
+  }
+
+  quest.total++;
+  quest.ratio = percentage(quest.failed, quest.total);
 };
