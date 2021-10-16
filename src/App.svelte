@@ -10,6 +10,7 @@
   import TopicList from './components/TopicList.svelte';
   import TopicShow from './components/TopicShow.svelte';
   import QuestList from './components/QuestList.svelte';
+  import QuestShow from './components/QuestShow.svelte';
 
   onMount(() => {
     viewStore.views = {
@@ -21,6 +22,9 @@
       },
       QuestList: {
         component: QuestList,
+      },
+      QuestShow: {
+        component: QuestShow,
       },
     };
     //
