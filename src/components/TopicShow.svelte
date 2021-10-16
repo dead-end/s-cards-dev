@@ -50,6 +50,13 @@
   };
 
   /**
+   * Callback function for the start button.
+   */
+  const onStart = () => {
+    viewStore.setView('QuestShow', { topic: topic });
+  };
+
+  /**
    * Callback function for the select box.
    *
    * @param {Event} e
@@ -112,6 +119,8 @@
   <div class="buttons">
     <button class="button" on:click={onBack}>Back</button>
     <button class="button" on:click={onListing}>Listing</button>
-    <button class="button" disabled={startDisabled}>Start</button>
+    <button class="button" disabled={startDisabled} on:click={onStart}
+      >Start</button
+    >
   </div>
 </div>
