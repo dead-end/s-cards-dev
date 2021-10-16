@@ -57,12 +57,10 @@
    */
   onMount(() => {
     dbqGetAll(topic).then((arr) => {
-      console.log(arr);
       quests = arr;
       unlearned = quests.filter((q) => q.current < 3);
       shuffleArr(unlearned);
       updateStatistic(quests);
-      console.log('unlearned', unlearned);
       next();
     });
   });
