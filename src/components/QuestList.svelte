@@ -1,7 +1,6 @@
 <script>
-  import { viewStore } from '../stores/viewStore';
   import { onMount } from 'svelte';
-
+  import { viewStore } from '../stores/viewStore';
   import { dbqGetAll } from '../js/dbQuest';
   import { createRepeatToggle } from '../js/utils';
 
@@ -9,13 +8,20 @@
 
   let questions = [];
 
+  /**
+   * On mounting the component the questions for the topic is loaded.
+   */
   onMount(() => {
-    dbqGetAll(topic).then((t) => {
-      questions = t;
-      console.log(questions);
+    dbqGetAll(topic).then((topicQuests) => {
+      questions = topicQuests;
     });
   });
 
+  /**
+   * Change the view.
+   *
+   * @param topic The topic for the next view.
+   */
   const onClick = (topic) => {
     viewStore.setView('TopicShow', { topic: topic });
   };
