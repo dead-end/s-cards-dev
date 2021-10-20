@@ -143,3 +143,20 @@ export function shuffleArr(arr) {
     arr[j] = tmp;
   }
 }
+
+/**
+ * The function creates a toogling function, which toogles two string values 
+ * after 'repeat' calls.
+ * 
+ * @param {number} repeat Return the same then toogle.
+ * @param {string} first The first value.
+ * @param {string} second The second value.
+ * @returns The toogled value.
+ */
+export const createRepeatToggle = (repeat, first, second) => {
+  let count = 0;
+
+  return () => {
+    return (count++ % (2 * repeat) < repeat) ? first : second;
+  }
+};

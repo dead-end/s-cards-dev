@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
 
   import { dbqGetAll } from '../js/dbQuest';
+  import { createRepeatToggle } from '../js/utils';
 
   export let topic;
 
@@ -19,30 +20,22 @@
     viewStore.setView('TopicShow', { topic: topic });
   };
 
-  let clazz = 'is-info';
-
-  // TODO: does not work correct
-  const toggleClazz = () => {
-    if (clazz === 'is-primary') {
-      clazz = 'is-info';
-    } else {
-      clazz = 'is-primary';
-    }
-
-    return clazz;
-  };
+  //
+  // The function toogles the values after 2 calls.
+  //
+  const repeatToggle = createRepeatToggle(2, 'is-primary', 'is-info');
 </script>
 
 <div class="card card-shadow content">
   <h4>{topic.title}</h4>
   <div class="grid grid-2">
     {#each questions as question}
-      <div class="card listing-column {toggleClazz()}">
+      <div class="card listing-column {repeatToggle()}">
         <div class="content">
           <p class="listing-quest">{question.quest}</p>
         </div>
       </div>
-      <div class="card listing-column {clazz}">
+      <div class="card listing-column {repeatToggle()}">
         <div class="content">
           <p class="listing-answer">{question.answer}</p>
         </div>
