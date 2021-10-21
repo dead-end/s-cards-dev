@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { viewStore } from '../stores/viewStore';
-  import { dbqGetAll } from '../js/dbQuest';
+  import { questGetAll } from '../js/dbQuest';
   import { createRepeatToggle } from '../js/utils';
 
   export let topic;
@@ -12,7 +12,7 @@
    * On mounting the component the questions for the topic is loaded.
    */
   onMount(() => {
-    dbqGetAll(topic).then((topicQuests) => {
+    questGetAll(topic).then((topicQuests) => {
       questions = topicQuests;
     });
   });
