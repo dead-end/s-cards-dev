@@ -1,3 +1,4 @@
+// TODO: rename file
 import { fetchLastModified, fetchJson } from './fetch';
 import { storeDeleteIndex, storeAddAll } from './store';
 import { dbtGetLastModified, dbtSetLastModified, dbtSync } from './dbTopics';
@@ -30,6 +31,7 @@ export const loadQuestions = async (file) => {
   }
 
   const json = await fetchJson(file);
+  // TODO: move function to questModel
   json.forEach((quest) => {
     quest.file = file;
     quest.total = 0;
