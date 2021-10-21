@@ -6,23 +6,6 @@ import { db } from './db';
 import { percentage } from './utils';
 
 /**
- * The function gets all questions for a topic from the store.
- *
- * @returns A Promise for the array with the questions.
- */
-export const dbqGetAll = (topic) => {
-  return new Promise((resolve, reject) => {
-    const store = db
-      .transaction(['questions'], 'readonly')
-      .objectStore('questions');
-
-    store.index('file').getAll(topic.file).onsuccess = (e) => {
-      resolve(e.target.result);
-    };
-  });
-};
-
-/**
  * The function sets all 'current' properties from questions from a given file
  * to a given value.
  *
@@ -100,12 +83,53 @@ export const dbqGetStats = (file) => {
   });
 };
 
-// TODO: function name questPersist
-export const dbqUpdate = (quest) => {
-  // TODO: not correct
-  // quest.ratio = percentage(quest.failed, quest.total);
+/**
+ * The function is called with an array of questions and counts the number of 
+ * correct answers for each question.
+ * 
+ * @param {Array<any>} quests The array of questions that are processed.
+ * @returns An array of integers.
+ */
+export const questGetStatistics = (quests) => {
+  const statistic = [0, 0, 0, 0];
+
+  quests.forEach((a) => {
+    statistic[a.current]++;
+  });
+
+  return statistic;
+};
+
+/**
+ * The function is called with a question and a boolean value indicating if the
+ * answer was correct.
+ * 
+ * @param {Object} quest The current question.
+ * @param {boolean} isCorrect True if the answer was corrent.
+ */
+export const questOnAnswer = (quest, isCorrect) => {
+
+  if (isCorrect) {
+    quest.current++;
+  } else {
+    quest.current = 0;
+    quest.failed++;
+  }
+
+  quest.total++;
+  quest.ratio = percentage(quest.failed, quest.total);
+};
+
+/**
+ * The function is called with a quest, which should be persisted.
+ * 
+ * @param {Object} quest 
+ * @returns A Promise
+ */
+export const questPersist = (quest) => {
 
   return new Promise((resolve, reject) => {
+
     const store = db
       .transaction(['questions'], 'readwrite')
       .objectStore('questions');
@@ -117,14 +141,21 @@ export const dbqUpdate = (quest) => {
   });
 };
 
-export const questOnAnswer = (quest, isCorrect) => {
-  if (isCorrect) {
-    quest.current++;
-  } else {
-    quest.current = 0;
-    quest.failed++;
-  }
+/**
+ * The function gets all questions for a topic from the store.
+ *
+ * @returns A Promise for the array with the questions.
+ */
+export const questGetAll = (topic) => {
 
-  quest.total++;
-  quest.ratio = percentage(quest.failed, quest.total);
+  return new Promise((resolve, reject) => {
+
+    const store = db
+      .transaction(['questions'], 'readonly')
+      .objectStore('questions');
+
+    store.index('file').getAll(topic.file).onsuccess = (e) => {
+      resolve(e.target.result);
+    };
+  });
 };
