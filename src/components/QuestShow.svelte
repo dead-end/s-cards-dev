@@ -1,9 +1,13 @@
 <script>
   import { onMount } from 'svelte';
-
   import { viewStore } from '../stores/viewStore';
-
-  import { dbqGetAll, dbqUpdate, questOnAnswer } from '../js/dbQuest';
+  import QuestStatistic from './QuestStatistic.svelte';
+  import {
+    questGetAll,
+    questPersist,
+    questOnAnswer,
+    questGetStatistics,
+  } from '../js/dbQuest';
   import { shuffleArr } from '../js/utils';
 
   export let topic;
@@ -21,7 +25,7 @@
   const handleAnswer = (isCorrect) => {
     questOnAnswer(quest, isCorrect);
 
-    dbqUpdate(quest).then(() => {
+    questPersist(quest).then(() => {
       if (quest.current < 3) {
         unlearned.push(quest);
       }
@@ -30,21 +34,10 @@
         onStop();
       }
 
-      updateStatistic(quests);
+      statistic = questGetStatistics(quests);
       next();
       hideAnswer = !hideAnswer;
     });
-  };
-
-  /**
-   *
-   */
-  const updateStatistic = (arr) => {
-    const s = [0, 0, 0, 0];
-    arr.forEach((a) => {
-      s[a.current]++;
-    });
-    statistic = s;
   };
 
   const next = () => {
@@ -56,11 +49,11 @@
    * Callback function for the mount event.
    */
   onMount(() => {
-    dbqGetAll(topic).then((arr) => {
+    questGetAll(topic).then((arr) => {
       quests = arr;
       unlearned = quests.filter((q) => q.current < 3);
       shuffleArr(unlearned);
-      updateStatistic(quests);
+      statistic = questGetStatistics(quests);
       next();
     });
   });
@@ -71,6 +64,7 @@
   const onStop = () => {
     viewStore.setView('TopicList');
   };
+
   /**
    * Callback function for the show button.
    */
@@ -90,26 +84,7 @@
 <div class="card card-shadow content" id="cont-qa">
   <h4>{topic.title}</h4>
 
-  <!-- Questions -->
-  <table class="table hide-md">
-    <tr>
-      <td>No correct Answers</td>
-      <td>{statistic[0]}</td>
-    </tr>
-    <tr>
-      <td>One correct Answer</td>
-      <td>{statistic[1]}</td>
-    </tr>
-    <tr>
-      <td>Two correct Answers</td>
-      <td>{statistic[2]}</td>
-    </tr>
-    <tr>
-      <td>Learned</td>
-      <td>{statistic[3]}</td>
-    </tr>
-  </table>
-
+  <QuestStatistic {statistic} />
   <div class="grid grid-2">
     <div>
       <div class="is-flex-spread">
