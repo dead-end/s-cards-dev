@@ -90,9 +90,10 @@
       <div class="is-flex-spread">
         <h5>Question <span id="qa-no" /></h5>
         <span class="h6">
-          (<span class="is-text-success">Total: {quest.total}</span> /
-          <span class="is-text-danger">Failed: {quest.failed}</span>
-          <span>{quest.ratio}</span>)
+          (Progress: <span class="is-text-success">{quest.current}</span> /
+          <span class="is-text-danger">{quest.failed}</span>
+          Total: <span class="is-text-success">{quest.total}</span> /
+          <span class="is-text-danger">{quest.ratio}</span>)
         </span>
       </div>
 
