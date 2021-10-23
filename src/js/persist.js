@@ -31,14 +31,8 @@ export const loadQuestions = async (file) => {
   }
 
   const json = await fetchJson(file);
-  // TODO: move function to questModel
-  json.forEach((quest) => {
-    quest.file = file;
-    quest.total = 0;
-    quest.failed = 0;
-    quest.ratio = 0.0;
-    quest.progress = 0;
-  });
+
+  json.forEach(quest => questInit(quest, file));
   console.log(json);
 
   //

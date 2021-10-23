@@ -160,3 +160,17 @@ export const questGetAll = (topic) => {
     };
   });
 };
+
+/**
+ * The function initializes a quest that was loaded from a topic file.
+ * 
+ * @param {Object} quest The question to be initialized.
+ * @param {string} file The name of the topic file.
+ */
+export const questInit = (quest, file) => {
+  quest.file = file;
+  quest.total = 0;
+  quest.failed = 0;
+  quest.ratio = 0.0;
+  quest.progress = 0;
+}
