@@ -1,7 +1,7 @@
 <script>
   import { fmtDate, arrPercentage, arrAll } from '../js/utils';
   import { loadQuestions } from '../js/persist';
-  import { questSetCurrent, questGetStats } from '../js/questModelst';
+  import { questSetCurrent, questGetStats } from '../js/questModel';
 
   import { viewStore } from '../stores/viewStore';
   import { onMount } from 'svelte';
