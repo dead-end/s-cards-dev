@@ -8,22 +8,24 @@ import { db } from './db';
  * @returns A Promise for the last modified date.
  */
 export const dbcGetLastModified = () => {
+
   return new Promise((resolve, reject) => {
     db
       .transaction(['config'], 'readonly')
       .objectStore('config')
       .get('topics-last-modified').onsuccess = (e) => {
-      const prop = e.target.result;
 
-      //
-      // It is possible that no date exists in the store.
-      //
-      if (prop) {
-        resolve(prop.value);
-      } else {
-        resolve();
-      }
-    };
+        const prop = e.target.result;
+
+        //
+        // It is possible that no date exists in the store.
+        //
+        if (prop) {
+          resolve(prop.value);
+        } else {
+          resolve();
+        }
+      };
   });
 };
 
@@ -34,6 +36,7 @@ export const dbcGetLastModified = () => {
  * @param {Date} lastModified The last modified date of the topics file.
  */
 export const dbcSetLastModified = (lastModified) => {
+
   const data = { key: 'topics-last-modified', value: lastModified };
   const store = db.transaction(['config'], 'readwrite').objectStore('config');
 
