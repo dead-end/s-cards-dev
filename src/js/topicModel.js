@@ -54,6 +54,21 @@ export const topicSetLastModified = (tx, file, lastModified) => {
 };
 
 /**
+ * The function gets all topics from the store.
+ *
+ * @returns A Promise for the array with the topics.
+ */
+export const topicGetAll = () => {
+  return new Promise((resolve, reject) => {
+    const store = db.transaction(['topics'], 'readonly').objectStore('topics');
+
+    store.getAll().onsuccess = (e) => {
+      resolve(e.target.result);
+    };
+  });
+};
+
+/**
  * The function is called with a json array that contains the topics. It
  * deletes all topics from the store, that are not contained in the json and
  * updates the rest.
@@ -61,7 +76,7 @@ export const topicSetLastModified = (tx, file, lastModified) => {
  * @param {Array} json
  */
 
-// TODO: Wrong plast!! If file was removed, then the Question and process stores have to be also removed.
+// TODO: Wrong place!! If file was removed, then the Question and process stores have to be also removed.
 
 export const topicSync = (json) => {
   const store = db.transaction(['topics'], 'readwrite').objectStore('topics');
@@ -106,19 +121,4 @@ export const topicSync = (json) => {
       };
     });
   };
-};
-
-/**
- * The function gets all topics from the store.
- *
- * @returns A Promise for the array with the topics.
- */
-export const topicGetAll = () => {
-  return new Promise((resolve, reject) => {
-    const store = db.transaction(['topics'], 'readonly').objectStore('topics');
-
-    store.getAll().onsuccess = (e) => {
-      resolve(e.target.result);
-    };
-  });
 };
