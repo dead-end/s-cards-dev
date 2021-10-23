@@ -1,5 +1,5 @@
 import { db } from './db';
-import { arrGetProps, arrToMap } from './utils';
+import { arrToMap } from './utils';
 
 /**
  * The function reads the last modified date from the topics store for a given
@@ -76,7 +76,7 @@ export const dbtSync = (json) => {
     // Get an array with the files from the json array. The file is the key for
     // the topics in the store and has to be unique.
     //
-    const jsonKeys = arrGetProps(json, 'file');
+    const jsonKeys = json.map((item) => item['file']);
 
     //
     // Delete the topics from the store that are not in the json array.

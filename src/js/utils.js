@@ -42,22 +42,6 @@ export const arrToMap = (arr, prop) => {
 };
 
 /**
- * The function is called with an array of objects. Each object should have
- * the property 'prop'. The funtion returns an array with that property.
- *
- * @param {Array<Object>} arr Array of objects.
- * @param {string} prop The name of a unique property of the objects.
- * @returns An array with the properties.
- */
-// TODO: necessary??
-// arr.map((a) => a[prop])
-export const arrGetProps = (arr, prop) => {
-  return arr.map((a) => {
-    return a[prop];
-  });
-};
-
-/**
  * The function is called with an array and a value. The function checks if all
  * of the array values have the given value.
  *
