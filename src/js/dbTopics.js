@@ -8,7 +8,7 @@ import { arrToMap } from './utils';
  * @param {String} file Name of the file, which is the id.
  * @returns A Promise.
  */
-export const dbtGetLastModified = (file) => {
+export const topicGetLastModified = (file) => {
   return new Promise((resolve, reject) => {
     //
     // Create a transaction for the topics store.
@@ -35,7 +35,7 @@ export const dbtGetLastModified = (file) => {
  * @param {String} file
  * @param {Date} lastModified
  */
-export const dbtSetLastModified = (tx, file, lastModified) => {
+export const topicSetLastModified = (tx, file, lastModified) => {
   const store = tx.objectStore('topics');
   store.get(file).onsuccess = (e) => {
     //
@@ -63,7 +63,7 @@ export const dbtSetLastModified = (tx, file, lastModified) => {
 
 // TODO: Wrong plast!! If file was removed, then the Question and process stores have to be also removed.
 
-export const dbtSync = (json) => {
+export const topicSync = (json) => {
   const store = db.transaction(['topics'], 'readwrite').objectStore('topics');
 
   store.getAll().onsuccess = (e) => {
@@ -113,7 +113,7 @@ export const dbtSync = (json) => {
  *
  * @returns A Promise for the array with the topics.
  */
-export const dbtGetAll = () => {
+export const topicGetAll = () => {
   return new Promise((resolve, reject) => {
     const store = db.transaction(['topics'], 'readonly').objectStore('topics');
 

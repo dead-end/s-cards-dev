@@ -1,7 +1,7 @@
 // TODO: rename file
 import { fetchLastModified, fetchJson } from './fetch';
 import { storeDeleteIndex, storeAddAll } from './store';
-import { dbtGetLastModified, dbtSetLastModified, dbtSync } from './dbTopics';
+import { topicGetLastModified, topicSetLastModified, topicSync } from './dbTopics';
 import { dbcGetLastModified, dbcSetLastModified } from './dbConfig.js';
 import { db, dbInit } from './db';
 
@@ -20,7 +20,7 @@ export const loadQuestions = async (file) => {
   // modified date of the file on the server, to decide if an update is
   // necessary.
   //
-  const storeLm = dbtGetLastModified(file);
+  const storeLm = topicGetLastModified(file);
   const jsonLm = fetchLastModified(file);
 
   const [lmStore, lmJson] = await Promise.all([storeLm, jsonLm]);
@@ -52,7 +52,7 @@ export const loadQuestions = async (file) => {
   //
   // The last step is to update the last modified value for the topic file.
   //
-  dbtSetLastModified(tx, file, lmJson);
+  topicSetLastModified(tx, file, lmJson);
 };
 
 // -----------------------------
@@ -78,7 +78,7 @@ export const initApp = async () => {
     // We have to wait for the sync before view can read from the store
     //
     await fetchJson('data/topics.json').then((json) => {
-      dbtSync(json);
+      topicSync(json);
       dbcSetLastModified(headLm);
     });
   }

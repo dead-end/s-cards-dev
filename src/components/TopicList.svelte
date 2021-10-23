@@ -1,14 +1,14 @@
 <script>
   import { onMount } from 'svelte';
 
-  import { dbtGetAll } from '../js/dbTopics';
+  import { topicGetAll } from '../js/dbTopics';
 
   import TopicCard from './TopicCard.svelte';
 
   let topics = [];
 
   onMount(() => {
-    dbtGetAll().then((t) => {
+    topicGetAll().then((t) => {
       topics = t;
     });
   });
