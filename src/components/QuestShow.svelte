@@ -7,7 +7,7 @@
     questPersist,
     questOnAnswer,
     questGetStatistics,
-  } from '../js/dbQuest';
+  } from '../js/questModel';
   import { shuffleArr } from '../js/utils';
 
   export let topic;

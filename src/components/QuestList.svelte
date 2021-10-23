@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { viewStore } from '../stores/viewStore';
-  import { questGetAll } from '../js/dbQuest';
+  import { questGetAll } from '../js/questModel';
   import { createRepeatToggle } from '../js/utils';
 
   export let topic;
