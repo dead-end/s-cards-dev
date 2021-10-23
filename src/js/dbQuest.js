@@ -12,7 +12,7 @@ import { percentage } from './utils';
  * @param {string} file The file name for the questions.
  * @param {number} value The new value.
  */
-export const dbqSetCurrent = (file, value) => {
+export const questSetCurrent = (file, value) => {
   //
   // We are only interested in questions from a given file.
   //
@@ -53,7 +53,7 @@ export const dbqSetCurrent = (file, value) => {
  * @param {string} file The name of the file.
  * @returns An array with the 'current' values.
  */
-export const dbqGetStats = (file) => {
+export const questGetStats = (file) => {
   return new Promise((resolve, reject) => {
     const result = [];
 

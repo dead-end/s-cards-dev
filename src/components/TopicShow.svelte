@@ -1,7 +1,7 @@
 <script>
   import { fmtDate, arrPercentage, arrAll } from '../js/utils';
   import { loadQuestions } from '../js/persist';
-  import { dbqSetCurrent, dbqGetStats } from '../js/dbQuest';
+  import { questSetCurrent, questGetStats } from '../js/dbQuest';
 
   import { viewStore } from '../stores/viewStore';
   import { onMount } from 'svelte';
@@ -20,7 +20,7 @@
    * number of questions.
    */
   const updateStatus = () => {
-    dbqGetStats(topic.file).then((arr) => {
+    questGetStats(topic.file).then((arr) => {
       status = arrPercentage(arr, 3);
       startDisabled = arrAll(arr, 3);
       size = arr.length;
@@ -66,7 +66,7 @@
     //
     // Set the number of correct answers.
     //
-    dbqSetCurrent(topic.file, e.target.selectedIndex - 1);
+    questSetCurrent(topic.file, e.target.selectedIndex - 1);
 
     //
     // Set the index to 0 to restore the orignal state.
