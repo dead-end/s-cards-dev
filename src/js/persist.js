@@ -1,7 +1,7 @@
 // TODO: rename file
 import { fetchLastModified, fetchJson } from './fetch';
 import { storeDeleteIndex, storeAddAll } from './store';
-import { topicGetLastModified, topicSetLastModified, topicSync } from './dbTopics';
+import { topicGetLastModified, topicSetLastModified, topicSync } from './topicModel';
 import { dbcGetLastModified, dbcSetLastModified } from './dbConfig.js';
 import { db, dbInit } from './db';
 

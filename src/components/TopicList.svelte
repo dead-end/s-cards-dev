@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
 
-  import { topicGetAll } from '../js/dbTopics';
+  import { topicGetAll } from '../js/topicModel';
 
   import TopicCard from './TopicCard.svelte';
 
