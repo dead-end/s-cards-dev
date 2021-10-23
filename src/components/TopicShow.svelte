@@ -1,7 +1,7 @@
 <script>
   import { fmtDate, arrPercentage, arrAll } from '../js/utils';
   import { loadQuestions } from '../js/persist';
-  import { questSetCurrent, questGetStats } from '../js/questModel';
+  import { questSetProgress, questGetStats } from '../js/questModel';
 
   import { viewStore } from '../stores/viewStore';
   import { onMount } from 'svelte';
@@ -66,7 +66,7 @@
     //
     // Set the number of correct answers.
     //
-    questSetCurrent(topic.file, e.target.selectedIndex - 1);
+    questSetProgress(topic.file, e.target.selectedIndex - 1);
 
     //
     // Set the index to 0 to restore the orignal state.

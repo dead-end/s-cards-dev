@@ -37,7 +37,7 @@ export const loadQuestions = async (file) => {
     quest.total = 0;
     quest.failed = 0;
     quest.ratio = 0.0;
-    quest.current = 0;
+    quest.progress = 0;
   });
   console.log(json);
 

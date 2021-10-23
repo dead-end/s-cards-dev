@@ -26,7 +26,7 @@
     questOnAnswer(quest, isCorrect);
 
     questPersist(quest).then(() => {
-      if (quest.current < 3) {
+      if (quest.progress < 3) {
         unlearned.push(quest);
       }
 
@@ -51,7 +51,7 @@
   onMount(() => {
     questGetAll(topic).then((arr) => {
       quests = arr;
-      unlearned = quests.filter((q) => q.current < 3);
+      unlearned = quests.filter((q) => q.progress < 3);
       shuffleArr(unlearned);
       statistic = questGetStatistics(quests);
       next();
@@ -90,7 +90,7 @@
       <div class="is-flex-spread">
         <h5>Question <span id="qa-no" /></h5>
         <span class="h6">
-          (Progress: <span class="is-text-success">{quest.current}</span> /
+          (Progress: <span class="is-text-success">{quest.progress}</span> /
           <span class="is-text-danger">{quest.failed}</span>
           Total: <span class="is-text-success">{quest.total}</span> /
           <span class="is-text-danger">{quest.ratio}</span>)

@@ -12,7 +12,7 @@ import { percentage } from './utils';
  * @param {string} file The file name for the questions.
  * @param {number} value The new value.
  */
-export const questSetCurrent = (file, value) => {
+export const questSetProgress = (file, value) => {
   //
   // We are only interested in questions from a given file.
   //
@@ -29,8 +29,8 @@ export const questSetCurrent = (file, value) => {
       //
       // Ensure that we need to update the value in the store.
       //
-      if (elem.current !== value) {
-        elem.current = value;
+      if (elem.progress !== value) {
+        elem.progress = value;
         elem.failed = 0;
         store.put(elem);
         console.log('Store:', store.name, ' update:', elem.id);
@@ -42,17 +42,17 @@ export const questSetCurrent = (file, value) => {
     // The cursor has finished.
     //
     else {
-      console.log('Store:', store.name, ' set current done:', value);
+      console.log('Store:', store.name, ' set progress done:', value);
     }
   };
 };
 
 /**
- * The function collects the 'current' property from questions that are from a
+ * The function collects the 'progress' property from questions that are from a
  * given file.
  *
  * @param {string} file The name of the file.
- * @returns An array with the 'current' values.
+ * @returns An array with the 'progress' values.
  */
 export const questGetStats = (file) => {
   return new Promise((resolve, reject) => {
@@ -70,14 +70,14 @@ export const questGetStats = (file) => {
     store.index('file').openCursor(range).onsuccess = (e) => {
       const cursor = e.target.result;
       if (cursor) {
-        result.push(cursor.value.current);
+        result.push(cursor.value.progress);
         cursor.continue();
       }
       //
       // The cursor has finished.
       //
       else {
-        console.log('Store:', store.name, ' current values:', result);
+        console.log('Store:', store.name, ' progress values:', result);
         resolve(result);
       }
     };
@@ -95,7 +95,7 @@ export const questGetStatistics = (quests) => {
   const statistic = [0, 0, 0, 0];
 
   quests.forEach((a) => {
-    statistic[a.current]++;
+    statistic[a.progress]++;
   });
 
   return statistic;
@@ -111,9 +111,9 @@ export const questGetStatistics = (quests) => {
 export const questOnAnswer = (quest, isCorrect) => {
 
   if (isCorrect) {
-    quest.current++;
+    quest.progress++;
   } else {
-    quest.current = 0;
+    quest.progress = 0;
     quest.failed++;
   }
 
