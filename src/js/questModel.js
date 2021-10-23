@@ -31,6 +31,7 @@ export const questSetCurrent = (file, value) => {
       //
       if (elem.current !== value) {
         elem.current = value;
+        elem.failed = 0;
         store.put(elem);
         console.log('Store:', store.name, ' update:', elem.id);
       }
