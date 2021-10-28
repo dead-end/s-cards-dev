@@ -4,6 +4,7 @@
   import { viewStore } from './stores/viewStore';
 
   import { initApp } from './js/persist';
+  import { pwaSerivceWorkerRegister } from './js/pwa';
 
   import Header from './components/Header.svelte';
   import Footer from './components/Footer.svelte';
@@ -13,6 +14,8 @@
   import QuestShow from './components/QuestShow.svelte';
 
   onMount(() => {
+    pwaSerivceWorkerRegister();
+
     viewStore.views = {
       TopicList: {
         component: TopicList,
