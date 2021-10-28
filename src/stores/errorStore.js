@@ -21,6 +21,8 @@ const createErrorStore = () => {
      * @param {string} error 
      */
     addError: (error) => {
+      console.log('Added error:', error);
+
       update(errors => {
         errors.push(error)
         return errors;
