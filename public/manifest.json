@@ -1,7 +1,7 @@
 {
     "name": "Cards",
     "short_name": "Cards",
-    "theme_color": "#ff000",
+    "theme_color": "#ff0000",
     "background_color": "#0000ff",
     "display": "standalone",
     "scope": "/",
