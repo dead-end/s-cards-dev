@@ -1,0 +1,39 @@
+import { writable } from 'svelte/store';
+
+/**
+ * The function creates a store object for errors. The errors are maintained in
+ * an array.
+ * 
+ * @returns The store object.
+ */
+const createErrorStore = () => {
+  //
+  // Initialize the store with an empty array.
+  //
+  const { subscribe, set, update } = writable([]);
+
+  return {
+    subscribe,
+
+    /**
+     * Add a new error to the error array.
+     * 
+     * @param {string} error 
+     */
+    addError: (error) => {
+      update(errors => {
+        errors.push(error)
+        return errors;
+      });
+    },
+
+    /**
+     * Reset the store with an empty array.
+     */
+    resetErrors: () => {
+      set([]);
+    },
+  };
+};
+
+export const errorStore = createErrorStore();
