@@ -4,6 +4,7 @@
   import { questSetProgress, questGetStats } from '../js/questModel';
 
   import { viewStore } from '../stores/viewStore';
+  import { errorStore } from '../stores/errorStore';
   import { onMount } from 'svelte';
 
   export let topic;
@@ -32,7 +33,11 @@
    * properties for this view.
    */
   onMount(() => {
-    loadQuestions(topic.file).then(() => updateStatus());
+    loadQuestions(topic.file)
+      .then(() => updateStatus())
+      .catch((error) => {
+        errorStore.addError(error.message);
+      });
   });
 
   /**
