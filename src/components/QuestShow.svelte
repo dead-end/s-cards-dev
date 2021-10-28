@@ -88,8 +88,8 @@
 
   <div class="grid grid-2">
     <div>
-      <div class="is-flex-spread">
-        <h5>Question</h5>
+      <div class="is-flex-spread block">
+        <div class="h5">Question</div>
         <span class="h6">
           (Progress: <span class="is-text-success">{quest.progress}</span> /
           <span class="is-text-danger">{quest.failed}</span>
