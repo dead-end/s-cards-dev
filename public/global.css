@@ -82,8 +82,17 @@ h5,
 h6,
 .h6 {
   line-height: 1.2;
-  margin: 0rem 0rem var(--margin-y) 0rem;
   font-weight: var(--font-weight-bold);
+}
+
+/* TODO: The margin is not a correct solution */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0rem 0rem var(--margin-y) 0rem;
 }
 
 h1,
