@@ -1,12 +1,14 @@
 export let db;
 
+import { errorStore } from '../stores/errorStore';
+
 /**
  * Simple error callback function.
  *
  * @param {*} event
  */
 const onError = (e) => {
-  console.error(e.target.error);
+  errorStore.addError(e.target.error)
 };
 
 /**
