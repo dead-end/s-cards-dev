@@ -14,7 +14,7 @@
   });
 </script>
 
-<div class="grid grid-4" id="pool-list-body">
+<div class="grid grid-4">
   {#each topics as topic}
     <TopicCard {topic} />
   {/each}

@@ -81,14 +81,15 @@
   };
 </script>
 
-<div class="card card-shadow content" id="cont-qa">
+<div class="card card-shadow content">
   <h4>{topic.title}</h4>
 
   <QuestStatistic {statistic} />
+
   <div class="grid grid-2">
     <div>
       <div class="is-flex-spread">
-        <h5>Question <span id="qa-no" /></h5>
+        <h5>Question</h5>
         <span class="h6">
           (Progress: <span class="is-text-success">{quest.progress}</span> /
           <span class="is-text-danger">{quest.failed}</span>

@@ -1,1 +1,1 @@
-<h2 id="title">Cards</h2>
+<h2>Cards</h2>
