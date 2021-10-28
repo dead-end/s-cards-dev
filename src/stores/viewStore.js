@@ -1,6 +1,9 @@
 import { writable } from 'svelte/store';
 
 const createViewStore = () => {
+  //
+  // Initialize the store with an empty object.
+  //
   const { subscribe, set, update } = writable({});
 
   return {
