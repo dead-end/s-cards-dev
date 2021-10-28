@@ -2,6 +2,7 @@
 import { fetchLastModified, fetchJson } from './fetch';
 import { storeDeleteIndex, storeAddAll } from './store';
 import { topicGetLastModified, topicSetLastModified, topicSync } from './topicModel';
+import { questInit } from './questModel'
 import { dbcGetLastModified, dbcSetLastModified } from './dbConfig.js';
 import { db, dbInit } from './db';
 
