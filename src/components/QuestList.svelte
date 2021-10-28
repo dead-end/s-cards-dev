@@ -1,4 +1,6 @@
 <script>
+  // TODO: listing-column, isting-quest, isting-answer does not exist.
+
   import { onMount } from 'svelte';
   import { viewStore } from '../stores/viewStore';
   import { questGetAll } from '../js/questModel';
@@ -36,14 +38,24 @@
   <h4>{topic.title}</h4>
   <div class="grid grid-2">
     {#each questions as question}
-      <div class="card listing-column {repeatToggle()}">
+      <div class="is-flex-spread grid-full">
+        <div class="h5">{question.id}</div>
+        {#if question.total != 0}
+          <span class="h6">
+            ( Total: <span class="is-text-success">{question.total}</span> /
+            <span class="is-text-danger">{question.ratio}</span>)
+          </span>
+        {/if}
+      </div>
+
+      <div class="card {repeatToggle()}">
         <div class="content">
-          <p class="listing-quest">{question.quest}</p>
+          <p>{question.quest}</p>
         </div>
       </div>
-      <div class="card listing-column {repeatToggle()}">
+      <div class="card {repeatToggle()}">
         <div class="content">
-          <p class="listing-answer">{question.answer}</p>
+          <p>{question.answer}</p>
         </div>
       </div>
     {/each}
