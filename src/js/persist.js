@@ -31,6 +31,7 @@ export const loadQuestions = async (file) => {
     return;
   }
 
+  // TODO: error handling
   const json = await fetchJson(file);
 
   json.forEach(quest => questInit(quest, file));
@@ -78,7 +79,8 @@ export const initApp = async () => {
     // TODO: comment => TopicList.svelte has to wait for the sync to finish
     // We have to wait for the sync before view can read from the store
     //
-    await fetchJson('data/topics.json').then((json) => {
+    // TODO: error handling
+    await ('data/topics.json').then((json) => {
       topicSync(json);
       dbcSetLastModified(headLm);
     });
