@@ -5,17 +5,22 @@
 const staticCacheName = 'site-static-v1';
 
 /**
+ * The prefix differs for development: '' and production: '/s-cards'
+ */
+const prefix = '/s-cards'
+
+/**
  * An array of assets the should be cached.
  */
 const assets = [
     // TODO: Removed from cache to make dev easier.
     /*
-    '/s-cards/',
-    '/s-cards/index.html',
-    '/s-cards/favicon.ico',
-    '/s-cards/global.css',
-    '/s-cards/build/bundle.css',
-    '/s-cards/build/bundle.js',
+    prefix + '/',
+    prefix + '/index.html',
+    prefix + '/favicon.ico',
+    prefix + '/global.css',
+    prefix + '/build/bundle.css',
+    prefix + '/build/bundle.js',
     */
     'https://unpkg.com/sanitize.css@12.0.1/sanitize.css',
     'https://unpkg.com/sanitize.css/forms.css'
