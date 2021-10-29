@@ -1,3 +1,5 @@
+// TODO: remove catch from Promise and use try / catch on calling the functions.
+
 /**
  * The function fetches an url with json data and returns a Promise for that
  * json data.
