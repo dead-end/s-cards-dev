@@ -48,6 +48,11 @@
 <div class="container">
   <Header />
 
+  <!-- 
+    Calling a view can cause an error, so if you hide the view until you
+    confirmed the error and the show the view again, you repeat the error and
+    you end up in a loop.
+  -->
   {#if $errorStore.length !== 0}
     <ErrorShow />
   {/if}
