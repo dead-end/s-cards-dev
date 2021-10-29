@@ -4,9 +4,9 @@
  * with the value.
  *
  * @param {IDBTransaction} tx Transaction
- * @param {String} storeName Name of the store.
- * @param {String} idxName Name of the index.
- * @param {String} idxValue Value of the index.
+ * @param {string} storeName Name of the store.
+ * @param {string} idxName Name of the index.
+ * @param {string} idxValue Value of the index.
  * @returns A Promise.
  */
 export const storeDeleteIndex = (tx, storeName, idxName, idxValue) => {
@@ -44,8 +44,8 @@ export const storeDeleteIndex = (tx, storeName, idxName, idxValue) => {
  * an array of objects. All elements of the array are added to the store.
  *
  * @param {IDBTransaction} tx Transaction
- * @param {String} storeName Name of the store.
- * @param {Array} arr Array with the objects.
+ * @param {string} storeName Name of the store.
+ * @param {array} arr Array with the objects.
  * @returns The function returns a Promise.
  */
 export const storeAddAll = (tx, storeName, arr) => {
