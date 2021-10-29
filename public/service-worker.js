@@ -10,12 +10,12 @@ const staticCacheName = 'site-static-v1';
 const assets = [
     // TODO: Removed from cache to make dev easier.
     /*
-    '/',
-    '/index.html',
-    '/favicon.ico',
-    '/global.css',
-    '/build/bundle.css',
-    '/build/bundle.js',
+    '/s-cards/',
+    '/s-cards/index.html',
+    '/s-cards/favicon.ico',
+    '/s-cards/global.css',
+    '/s-cards/build/bundle.css',
+    '/s-cards/build/bundle.js',
     */
     'https://unpkg.com/sanitize.css@12.0.1/sanitize.css',
     'https://unpkg.com/sanitize.css/forms.css'
