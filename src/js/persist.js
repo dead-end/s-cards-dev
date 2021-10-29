@@ -80,7 +80,7 @@ export const initApp = async () => {
     // We have to wait for the sync before view can read from the store
     //
     // TODO: error handling
-    await ('data/topics.json').then((json) => {
+    await fetchJson('data/topics.json').then((json) => {
       topicSync(json);
       dbcSetLastModified(headLm);
     });
