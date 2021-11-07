@@ -2,25 +2,31 @@ import { db } from './db';
 import { arrToMap } from './utils';
 
 /**
+ * The interface defines a topic persisted in the database.
+ */
+export interface Topic {
+  file: string,
+  title: string,
+  desc: string,
+  lastModified?: Date
+}
+
+/**
  * The function reads the last modified date from the topics store for a given
  * file.
- *
- * @param {String} file Name of the file, which is the id.
- * @returns A Promise.
  */
-export const topicGetLastModified = (file) => {
-  return new Promise((resolve, reject) => {
-    //
-    // Create a transaction for the topics store.
-    //
-    const store = db.transaction(['topics'], 'readonly').objectStore('topics');
+export const topicGetLastModified = (file: string) => {
+  return new Promise<Date>((resolve, reject) => {
 
-    store.get(file).onsuccess = (e) => {
+    const store = db.transaction(['topics'], 'readonly').objectStore('topics');
+    const request = store.get(file);
+
+    request.onsuccess = (e) => {
       //
       // Get the topic object from the store. It is possible that the value is
       // undefined.
       //
-      const lastModified = e.target.result.lastModified;
+      const lastModified = request.result.lastModified as Date;
       console.log('Store:', store.name, ' get lastModified:', lastModified);
       resolve(lastModified);
     };
@@ -30,18 +36,17 @@ export const topicGetLastModified = (file) => {
 /**
  * The function stores the last modified date of a topic file in the topic
  * store.
- *
- * @param {IDBTransaction} tx
- * @param {String} file
- * @param {Date} lastModified
  */
-export const topicSetLastModified = (tx, file, lastModified) => {
+export const topicSetLastModified = (tx: IDBTransaction, file: string, lastModified: Date) => {
+
   const store = tx.objectStore('topics');
+  const request = store.get(file);
+
   store.get(file).onsuccess = (e) => {
     //
     // Get the topic from the store and set the last modified date.
     //
-    const topic = e.target.result;
+    const topic = request.result as Topic;
     topic.lastModified = lastModified;
 
     //
@@ -59,11 +64,11 @@ export const topicSetLastModified = (tx, file, lastModified) => {
  * @returns A Promise for the array with the topics.
  */
 export const topicGetAll = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise<Array<Topic>>((resolve, reject) => {
     const store = db.transaction(['topics'], 'readonly').objectStore('topics');
-
-    store.getAll().onsuccess = (e) => {
-      resolve(e.target.result);
+    const request = store.getAll();
+    request.onsuccess = (e) => {
+      resolve(request.result);
     };
   });
 };
@@ -78,14 +83,14 @@ export const topicGetAll = () => {
 
 // TODO: Wrong place!! If file was removed, then the Question and process stores have to be also removed.
 
-export const topicSync = (json) => {
+export const topicSync = (json: Array<Topic>) => {
   const store = db.transaction(['topics'], 'readwrite').objectStore('topics');
-
-  store.getAll().onsuccess = (e) => {
+  const request = store.getAll();
+  request.onsuccess = (e) => {
     //
     // Create a map with the topics and the file as the key.
     //
-    const storeMap = arrToMap(e.target.result, 'file');
+    const storeMap = arrToMap(request.result, 'file');
 
     //
     // Get an array with the files from the json array. The file is the key for
@@ -117,7 +122,7 @@ export const topicSync = (json) => {
       }
 
       store.put(jsonItem).onsuccess = (e) => {
-        console.log('Store:', store.name, ' update:', e.target.result);
+        console.log('Store:', store.name, ' update:', request.result);
       };
     });
   };
