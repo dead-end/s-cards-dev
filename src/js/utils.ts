@@ -1,11 +1,8 @@
 /**
  * The function returns a formated date value or an empty string if the date is
  * not defined.
- *
- * @param {Date} date The date to be formatted.
- * @returns A string with the formatted date.
  */
-export function fmtDate(date) {
+export function fmtDate(date: number) {
   //
   // Handle empty dates.
   //
@@ -28,14 +25,15 @@ export function fmtDate(date) {
  * The function is called with an array of objects. Each object should have
  * property named 'prop'. The function returns a map of the objects and the
  * key is the property.
- *
- * @param {Array} arr Array of objects.
- * @param {string} prop The name of a unique property of the objects.
- * @returns A map of objects with the key 'prop'.
  */
-export const arrToMap = (arr, prop) => {
+export const arrToMap = (arr: Array<Object>, prop: string) => {
   const map = new Map();
   arr.forEach((elem) => {
+
+    if (!elem.hasOwnProperty(prop)) {
+      throw new Error(`Object has no property: ${prop}`)
+    }
+
     map.set(elem[prop], elem);
   });
   return map;
@@ -44,12 +42,8 @@ export const arrToMap = (arr, prop) => {
 /**
  * The function is called with an array and a value. The function checks if all
  * of the array values have the given value.
- *
- * @param {Array<number>} arr The array with values.
- * @param {number} val The expected value.
- * @returns True or false.
  */
-export const arrAll = (arr, val) => {
+export const arrAll = (arr: Array<number>, val: number) => {
   for (let i in arr) {
     if (arr[i] !== val) {
       return false;
@@ -62,12 +56,8 @@ export const arrAll = (arr, val) => {
  * The function is called with an array of integers. Each can have a max value.
  * The function computes a percentage string from the values. 100% means that
  * all entries have the max value.
- *
- * @param {Array<number>} arr An array of integers.
- * @param {number} max The integer value that is 100%.
- * @returns The function returns a string with the percent value.
  */
-export const arrPercentage = (arr, max) => {
+export const arrPercentage = (arr: Array<number>, max: number) => {
   let sum = 0;
   for (let i = 0; i < arr.length; i++) {
     sum += arr[i];
@@ -78,12 +68,8 @@ export const arrPercentage = (arr, max) => {
 
 /**
  * The function returns a percentage for a fraction of a total value.
- *
- * @param {number} num The fraction of the total value.
- * @param {number} total The integer value that is 100%.
- * @returns The function returns a string with the percent value.
  */
-export const percentage = (num, total) => {
+export const percentage = (num: number, total: number) => {
   const result = (num * 100) / total;
   return result.toFixed(0) + '%';
 };
@@ -91,21 +77,15 @@ export const percentage = (num, total) => {
 /**
  * The function returns a random number between min and max. Both are included
  * and it is assumed that both parameters are integers.
- *
- * @param {number} min The minimum value, included.
- * @param {number} max The maximum value,  included.
- * @returns a random number
  */
-function getRandomIntInclusive(min, max) {
+function getRandomIntInclusive(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 /**
  * The function shuffles an array in place.
- *
- * @param {Array<any>} arr The array to shuffle.
  */
-export function shuffleArr(arr) {
+export function shuffleArr(arr: Array<any>) {
   for (let i = 0; i < arr.length; i++) {
     //
     // Get a random index of the array
@@ -131,13 +111,8 @@ export function shuffleArr(arr) {
 /**
  * The function creates a toogling function, which toogles two string values 
  * after 'repeat' calls.
- * 
- * @param {number} repeat Return the same then toogle.
- * @param {string} first The first value.
- * @param {string} second The second value.
- * @returns The toogled value.
  */
-export const createRepeatToggle = (repeat, first, second) => {
+export const createRepeatToggle = (repeat: number, first: string, second: string) => {
   let count = 0;
 
   return () => {
