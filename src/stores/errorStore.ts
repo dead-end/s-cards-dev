@@ -3,8 +3,6 @@ import { writable } from 'svelte/store';
 /**
  * The function creates a store object for errors. The errors are maintained in
  * an array.
- * 
- * @returns The store object.
  */
 const createErrorStore = () => {
   //
@@ -17,10 +15,8 @@ const createErrorStore = () => {
 
     /**
      * Add a new error to the error array.
-     * 
-     * @param {string} error 
      */
-    addError: (error) => {
+    addError: (error: string) => {
       console.log('Added error:', error);
 
       update(errors => {
