@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   export let statistic = [0, 0, 0, 0];
 </script>
 

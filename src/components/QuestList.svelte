@@ -1,4 +1,5 @@
 <script>
+  // TODO:  lang="ts"
   // TODO: listing-column, isting-quest, isting-answer does not exist.
 
   import { onMount } from 'svelte';

@@ -1,9 +1,10 @@
-<script>
+<script lang="ts">
   import { viewStore } from '../stores/viewStore';
+  import type { Topic } from '../js/topicModel';
 
-  export let topic;
+  export let topic: Topic;
 
-  const onClick = (topic) => {
+  const onClick = (topic: Topic) => {
     viewStore.setView('TopicShow', { topic: topic });
   };
 </script>

@@ -1,4 +1,5 @@
 <script>
+  // TODO:  lang="ts"
   import { onMount } from 'svelte';
   import { viewStore } from '../stores/viewStore';
   import QuestStatistic from './QuestStatistic.svelte';

@@ -1,11 +1,12 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
 
   import { topicGetAll } from '../js/topicModel';
+  import type { Topic } from '../js/topicModel';
 
   import TopicCard from './TopicCard.svelte';
 
-  let topics = [];
+  let topics: Array<Topic> = [];
 
   onMount(() => {
     topicGetAll().then((t) => {
