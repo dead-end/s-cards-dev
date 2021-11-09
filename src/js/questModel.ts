@@ -1,3 +1,4 @@
+// TODO: support typescript => Interface
 // TODO: nename file => questModel.js
 // function questPersist, questGetAll,
 // questOnAnswer
@@ -22,8 +23,9 @@ export const questSetProgress = (file, value) => {
     .transaction(['questions'], 'readwrite')
     .objectStore('questions');
 
-  store.index('file').openCursor(range).onsuccess = (e) => {
-    const cursor = e.target.result;
+  const request = store.index('file').openCursor(range);
+  request.onsuccess = (e) => {
+    const cursor = request.result;
     if (cursor) {
       const elem = cursor.value;
       //
@@ -67,8 +69,10 @@ export const questGetStats = (file) => {
       .transaction(['questions'], 'readwrite')
       .objectStore('questions');
 
-    store.index('file').openCursor(range).onsuccess = (e) => {
-      const cursor = e.target.result;
+    const request = store.index('file').openCursor(range);
+
+    request.onsuccess = (e) => {
+      const cursor = request.result;
       if (cursor) {
         result.push(cursor.value.progress);
         cursor.continue();
@@ -129,7 +133,7 @@ export const questOnAnswer = (quest, isCorrect) => {
  */
 export const questPersist = (quest) => {
 
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
 
     const store = db
       .transaction(['questions'], 'readwrite')
@@ -155,8 +159,10 @@ export const questGetAll = (topic) => {
       .transaction(['questions'], 'readonly')
       .objectStore('questions');
 
-    store.index('file').getAll(topic.file).onsuccess = (e) => {
-      resolve(e.target.result);
+    const request = store.index('file').getAll(topic.file);
+
+    request.onsuccess = (e) => {
+      resolve(request.result);
     };
   });
 };
