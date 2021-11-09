@@ -26,7 +26,7 @@ export const topicGetLastModified = (file: string) => {
       // Get the topic object from the store. It is possible that the value is
       // undefined.
       //
-      const lastModified = request.result.lastModified as Date;
+      const lastModified: Date = request.result.lastModified;
       console.log('Store:', store.name, ' get lastModified:', lastModified);
       resolve(lastModified);
     };
@@ -46,7 +46,7 @@ export const topicSetLastModified = (tx: IDBTransaction, file: string, lastModif
     //
     // Get the topic from the store and set the last modified date.
     //
-    const topic = request.result as Topic;
+    const topic: Topic = request.result;
     topic.lastModified = lastModified;
 
     //

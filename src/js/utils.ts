@@ -1,8 +1,10 @@
+// TODO: TS OK => remove TODO
+
 /**
  * The function returns a formated date value or an empty string if the date is
  * not defined.
  */
-export function fmtDate(date: number) {
+export const fmtDate = (date: number) => {
   //
   // Handle empty dates.
   //
@@ -28,6 +30,7 @@ export function fmtDate(date: number) {
  */
 export const arrToMap = (arr: Array<Object>, prop: string) => {
   const map = new Map();
+
   arr.forEach((elem) => {
 
     if (!elem.hasOwnProperty(prop)) {
@@ -44,6 +47,7 @@ export const arrToMap = (arr: Array<Object>, prop: string) => {
  * of the array values have the given value.
  */
 export const arrAll = (arr: Array<number>, val: number) => {
+
   for (let i in arr) {
     if (arr[i] !== val) {
       return false;
@@ -59,6 +63,7 @@ export const arrAll = (arr: Array<number>, val: number) => {
  */
 export const arrPercentage = (arr: Array<number>, max: number) => {
   let sum = 0;
+
   for (let i = 0; i < arr.length; i++) {
     sum += arr[i];
   }
@@ -78,14 +83,15 @@ export const percentage = (num: number, total: number) => {
  * The function returns a random number between min and max. Both are included
  * and it is assumed that both parameters are integers.
  */
-function getRandomIntInclusive(min: number, max: number) {
+const getRandomIntInclusive = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 /**
  * The function shuffles an array in place.
  */
-export function shuffleArr(arr: Array<any>) {
+export const shuffleArr = (arr: Array<any>) => {
+
   for (let i = 0; i < arr.length; i++) {
     //
     // Get a random index of the array

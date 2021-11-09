@@ -1,4 +1,13 @@
+// TODO: TS OK => remove TODO
 import { db } from './db';
+
+/**
+ * The config collection contains key value pairs.
+ */
+interface Config {
+  key: string,
+  value: any
+}
 
 /**
  * The function gets the last modified date of the topics file from the config
@@ -16,7 +25,7 @@ export const dbcGetLastModified = () => {
       //
       // Get the value from the store
       //
-      const prop = request.result;
+      const prop: Config = request.result;
 
       //
       // It is possible that no date exists in the store.
@@ -36,7 +45,7 @@ export const dbcGetLastModified = () => {
  */
 export const dbcSetLastModified = (lastModified: Date) => {
 
-  const data = { key: 'topics-last-modified', value: lastModified };
+  const data: Config = { key: 'topics-last-modified', value: lastModified };
   const store = db.transaction(['config'], 'readwrite').objectStore('config');
 
   store.put(data).onsuccess = () => {

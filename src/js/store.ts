@@ -1,3 +1,4 @@
+// TODO: TS OK => remove TODO
 /**
  * The function is called with a transaction for a store, that has an index
  * with a given name. It deletes all elements from the store that have an index

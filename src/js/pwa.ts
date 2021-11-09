@@ -1,3 +1,4 @@
+// TODO: TS OK => remove TODO
 
 /**
  * PWA service worker registration.
