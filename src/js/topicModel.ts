@@ -1,4 +1,5 @@
 import { db } from './db';
+import { questRemoveFile } from './questModel';
 import { arrToMap } from './utils';
 
 /**
@@ -101,10 +102,12 @@ export const topicSync = (json: Array<Topic>) => {
     //
     // Delete the topics from the store that are not in the json array.
     //
-    for (let storeKey in storeMap) {
+    for (let storeKey of storeMap.keys()) {
+
       if (!jsonKeys.includes(storeKey)) {
         store.delete(storeKey).onsuccess = () => {
           console.log('Store:', store.name, ' deleted:', storeKey);
+          questRemoveFile(storeKey);
         };
       }
     }
