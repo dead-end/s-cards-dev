@@ -76,7 +76,7 @@ export const arrPercentage = (arr: Array<number>, max: number) => {
  */
 export const percentage = (num: number, total: number) => {
   const result = (num * 100) / total;
-  return result.toFixed(0) + '%';
+  return Math.round(result * 100) / 100;
 };
 
 /**
