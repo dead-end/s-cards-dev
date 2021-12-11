@@ -12,7 +12,7 @@ import { storeDeleteIndex } from './store';
  * The interface defines a question persisted in the database.
  */
 export interface Question {
-  id: string,
+  id: number,
   file: string,
   quest: string[],
   answer: string[],

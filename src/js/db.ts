@@ -29,7 +29,7 @@ const nullToOne = (event: IDBVersionChangeEvent) => {
   // Create questions store
   //
   const storeQuest = db.createObjectStore('questions', {
-    keyPath: 'id',
+    keyPath: 'id', autoIncrement: true
   });
   storeQuest.createIndex('file', 'file', { unique: false });
 
