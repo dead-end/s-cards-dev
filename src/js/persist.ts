@@ -62,13 +62,11 @@ export const loadQuestions = async (file: string) => {
 // -----------------------------
 
 export const initApp = async () => {
+
   //
   // Ensure that the database is initialized before we go on.
   //
-
   await dbInit();
-
-
 
   const storeLmPromise = dbcGetLastModified();
 
