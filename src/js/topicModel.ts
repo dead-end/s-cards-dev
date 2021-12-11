@@ -85,7 +85,8 @@ export const topicGetAll = () => {
 // TODO: Wrong place!! If file was removed, then the Question and process stores have to be also removed.
 
 export const topicSync = (json: Array<Topic>) => {
-  const store = db.transaction(['topics'], 'readwrite').objectStore('topics');
+  const tx = db.transaction(['topics', 'questions'], 'readwrite');
+  const store = tx.objectStore('topics');
   const request = store.getAll();
   request.onsuccess = (e) => {
     //
@@ -107,7 +108,7 @@ export const topicSync = (json: Array<Topic>) => {
       if (!jsonKeys.includes(storeKey)) {
         store.delete(storeKey).onsuccess = () => {
           console.log('Store:', store.name, ' deleted:', storeKey);
-          questRemoveFile(storeKey);
+          questRemoveFile(tx, storeKey);
         };
       }
     }

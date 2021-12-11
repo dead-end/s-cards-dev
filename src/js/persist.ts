@@ -1,8 +1,8 @@
 // TODO: rename file
 import { fetchLastModified, fetchJson } from './fetch';
-import { storeDeleteIndex, storeAddAll } from './store';
+import { storeAddAll } from './store';
 import { Topic, topicGetLastModified, topicSetLastModified, topicSync } from './topicModel';
-import { questInit } from './questModel'
+import { questInit, questRemoveFile } from './questModel'
 import { dbcGetLastModified, dbcSetLastModified } from './dbConfig';
 import { db, dbInit } from './db';
 
@@ -44,19 +44,16 @@ export const loadQuestions = async (file: string) => {
   //
   const tx = db.transaction(['topics', 'questions'], 'readwrite');
 
-  const delQuestsPromise = await storeDeleteIndex(
-    tx,
-    'questions',
-    'file',
-    file
-  );
+  questRemoveFile(tx, file).then(() => {
 
-  storeAddAll(tx, 'questions', json);
+    storeAddAll(tx, 'questions', json).then(() => {
 
-  //
-  // The last step is to update the last modified value for the topic file.
-  //
-  topicSetLastModified(tx, file, lmJson);
+      //
+      // The last step is to update the last modified value for the topic file.
+      //
+      topicSetLastModified(tx, file, lmJson);
+    });
+  });
 };
 
 // -----------------------------

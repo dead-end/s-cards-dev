@@ -180,17 +180,13 @@ export const questSetProgress = (file: string, value: number) => {
   };
 };
 
+// BELOW OK----
+
 /**
  * The function removes all questions from a given file from the store. It 
  * returns a promise.
  */
-// TODO: not sure if this is desired. Maybe we use an external transaction.
-export const questRemoveFile = (file: string) => {
-
-  //
-  // Create a transaction for the deletion.
-  //
-  const tx = db.transaction(['questions'], 'readwrite')
+export const questRemoveFile = (tx: IDBTransaction, file: string) => {
 
   return storeDeleteIndex(
     tx,
