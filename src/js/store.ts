@@ -27,7 +27,7 @@ export const storeDeleteIndex = (tx: IDBTransaction, storeName: string, idxName:
       //
       keys.forEach((key) => {
         store.delete(key).onsuccess = (e) => {
-          console.log('Store: ', store.name, ' deleted: ', key);
+          console.log('Store:', store.name, 'deleted:', key);
         };
       });
 
@@ -52,7 +52,7 @@ export const storeAddAll = (tx: IDBTransaction, storeName: string, arr: Array<Ob
 
     arr.forEach((item) => {
       store.add(item).onsuccess = (e) => {
-        console.log('Store: ', store.name, '  added: ', item);
+        console.log('Store:', store.name, 'added:', item);
       };
     });
 
