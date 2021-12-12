@@ -1,8 +1,12 @@
-<script>
+<script lang="ts">
   // TODO:  lang="ts"
   import { onMount } from 'svelte';
+
   import { viewStore } from '../stores/viewStore';
+
   import QuestStatistic from './QuestStatistic.svelte';
+  import QuestProgress from './QuestProgress.svelte';
+
   import {
     questGetAll,
     questPersist,
@@ -11,19 +15,22 @@
   } from '../js/questModel';
   import { shuffleArr } from '../js/utils';
 
-  export let topic;
+  import type { Topic } from '../js/topicModel';
+  import type { Question } from '../js/questModel';
 
-  let statistic = [];
+  export let topic: Topic;
+
+  let statistic: number[];
 
   let hideAnswer = true;
 
-  let quests = [];
+  let quests: Question[];
 
-  let unlearned = [];
+  let unlearned: Question[];
 
-  let quest = {};
+  let quest: Question;
 
-  const handleAnswer = (isCorrect) => {
+  const handleAnswer = (isCorrect: boolean) => {
     questOnAnswer(quest, isCorrect);
 
     questPersist(quest).then(() => {
@@ -82,45 +89,43 @@
   };
 </script>
 
-<div class="card card-shadow content">
-  <h4>{topic.title}</h4>
+{#if quest}
+  <div class="card card-shadow content">
+    <h4>{topic.title}</h4>
 
-  <QuestStatistic {statistic} />
+    <QuestStatistic {statistic} />
 
-  <div class="grid grid-2">
-    <div>
-      <div class="is-flex-spread block">
-        <div class="h5">Question</div>
-        <span class="h6">
-          (Progress: <span class="is-text-success">{quest.progress}</span> /
-          <span class="is-text-danger">{quest.failed}</span>
-          Total: <span class="is-text-success">{quest.total}</span> /
-          <span class="is-text-danger">{quest.ratio}%</span>)
-        </span>
+    <div class="grid grid-2">
+      <div>
+        <div class="is-flex-spread block">
+          <div class="h5">Question</div>
+          <QuestProgress showProgress={true} {quest} />
+        </div>
+
+        <div class="card content is-primary">
+          <p>{quest.quest}</p>
+        </div>
       </div>
 
-      <div class="card content is-primary">
-        <p>{quest.quest}</p>
-      </div>
-    </div>
-
-    <div hidden={hideAnswer}>
-      <h5>Answer</h5>
-      <div class="card content is-info">
-        <p>{quest.answer}</p>
+      <div hidden={hideAnswer}>
+        <h5>Answer</h5>
+        <div class="card content is-info">
+          <p>{quest.answer}</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Buttons related to questions and answers -->
-  <div class="buttons">
-    <button class="button" hidden={!hideAnswer} on:click={onShow}>Show</button>
-    <button class="button is-success" hidden={hideAnswer} on:click={onCorrect}
-      >Correct</button
-    >
-    <button class="button is-danger" hidden={hideAnswer} on:click={onWrong}
-      >Wrong</button
-    >
-    <button class="button" on:click={onStop}>Stop</button>
+    <!-- Buttons related to questions and answers -->
+    <div class="buttons">
+      <button class="button" hidden={!hideAnswer} on:click={onShow}>Show</button
+      >
+      <button class="button is-success" hidden={hideAnswer} on:click={onCorrect}
+        >Correct</button
+      >
+      <button class="button is-danger" hidden={hideAnswer} on:click={onWrong}
+        >Wrong</button
+      >
+      <button class="button" on:click={onStop}>Stop</button>
+    </div>
   </div>
-</div>
+{/if}

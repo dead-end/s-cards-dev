@@ -1,15 +1,21 @@
-<script>
-  // TODO:  lang="ts"
+<script lang="ts">
   // TODO: listing-column, isting-quest, isting-answer does not exist.
 
   import { onMount } from 'svelte';
+
+  import QuestProgress from './QuestProgress.svelte';
+
   import { viewStore } from '../stores/viewStore';
+
   import { questGetAll } from '../js/questModel';
   import { createRepeatToggle } from '../js/utils';
 
-  export let topic;
+  import type { Topic } from '../js/topicModel';
+  import type { Question } from '../js/questModel';
 
-  let questions = [];
+  export let topic: Topic;
+
+  let questions: Question[] = [];
 
   /**
    * On mounting the component the questions for the topic is loaded.
@@ -25,7 +31,7 @@
    *
    * @param topic The topic for the next view.
    */
-  const onClick = (topic) => {
+  const onClick = (topic: Topic) => {
     viewStore.setView('TopicShow', { topic: topic });
   };
 
@@ -41,12 +47,7 @@
     {#each questions as question}
       <div class="is-flex-spread grid-full">
         <div class="h5">{question.id}</div>
-        {#if question.total != 0}
-          <span class="h6">
-            ( Total: <span class="is-text-success">{question.total}</span> /
-            <span class="is-text-danger">{question.ratio}</span>)
-          </span>
-        {/if}
+        <QuestProgress showProgress={false} quest={question} />
       </div>
 
       <div class="card {repeatToggle()}">

@@ -1,0 +1,19 @@
+<script lang="ts">
+  import type { Question } from '../js/questModel';
+
+  export let quest: Question;
+  export let showProgress: boolean;
+</script>
+
+{#if quest.total != 0}
+  <span class="h6">
+    {#if showProgress}
+      Progress: <span class="is-text-success">{quest.progress}</span>
+    {/if}
+
+    (Total: <span class="is-text-success">{quest.total}</span> / Wrong:
+    <span class="is-text-danger">{quest.failed}</span>
+    /
+    <span>{quest.ratio}%</span>)
+  </span>
+{/if}
