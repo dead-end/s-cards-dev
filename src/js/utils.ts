@@ -75,6 +75,12 @@ export const arrPercentage = (arr: Array<number>, max: number) => {
  * The function returns a percentage for a fraction of a total value.
  */
 export const percentage = (num: number, total: number) => {
+  //
+  // Prevent NaN
+  //
+  if (!total) {
+    return 0;
+  }
   const result = (num * 100) / total;
   return Math.round(result * 100) / 100;
 };

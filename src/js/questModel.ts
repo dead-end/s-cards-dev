@@ -16,6 +16,9 @@ export interface Question {
   answer: string[],
   total: number;
   failed: number;
+  //
+  // The ratio can be computed in the componente, but we need it for selections.
+  //
   ratio: number;
   progress: number;
 }
