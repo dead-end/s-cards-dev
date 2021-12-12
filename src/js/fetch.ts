@@ -21,7 +21,7 @@ export const fetchLastModified = (url: string) => {
       // Get the last modified from the response.
       //
       const lastModified = response.headers.get('Last-Modified');
-      console.log('url: ', url, ' header: ', lastModified);
+      console.log('url: ', url, 'header:', lastModified);
 
       //
       // Ensure that the header exists.

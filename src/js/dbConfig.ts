@@ -16,6 +16,7 @@ interface Config {
 export const dbcGetLastModified = () => {
 
   return new Promise<void | Date>((resolve, reject) => {
+
     const request = db
       .transaction(['config'], 'readonly')
       .objectStore('config')
@@ -26,7 +27,6 @@ export const dbcGetLastModified = () => {
       // Get the value from the store
       //
       const prop: Config = request.result;
-
       //
       // It is possible that no date exists in the store.
       //
