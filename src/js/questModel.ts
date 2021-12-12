@@ -1,15 +1,13 @@
-// TODO: support typescript => Interface
-// TODO: nename file => questModel.js
-// function questPersist, questGetAll,
-// questOnAnswer
+// BELOW OK----
 
-import { db } from './db';
 import type { Topic } from './topicModel';
+import { db } from './db';
 import { percentage } from './utils';
 import { storeDeleteIndex } from './store';
 
 /**
- * The interface defines a question persisted in the database.
+ * The interface defines a question persisted in the database. The id is auto 
+ * generated, by the database.
  */
 export interface Question {
   id: number,
@@ -23,7 +21,9 @@ export interface Question {
 }
 
 /**
- * The function initializes a question that was loaded from a topic file.
+ * The function initializes a question that was loaded from a topic file. The
+ * input is not a question. It is the data from the json. The added properties
+ * are missing.
  */
 export const questInit = (quest: Question, file: string) => {
   quest.file = file;
@@ -34,24 +34,48 @@ export const questInit = (quest: Question, file: string) => {
 }
 
 /**
- * The function gets all questions for a topic from the store.
- *
- * @returns A Promise for the array with the questions.
+ * The function is called with an array of questions and counts the number of 
+ * correct answers for each question. It returns an array with integers. 
  */
-export const questGetAll = (topic: Topic) => {
+export const questGetStatistics = (quests: Question[]) => {
+  const statistic = [0, 0, 0, 0];
 
-  return new Promise((resolve, reject) => {
-
-    const store = db
-      .transaction(['questions'], 'readonly')
-      .objectStore('questions');
-
-    const request = store.index('file').getAll(topic.file);
-
-    request.onsuccess = (e) => {
-      resolve(request.result);
-    };
+  quests.forEach((a) => {
+    statistic[a.progress]++;
   });
+
+  return statistic;
+};
+
+/**
+ * The function is called with a question and a boolean value indicating if the
+ * answer was correct. It updates the question, which then has to be persisted.
+ */
+export const questOnAnswer = (quest: Question, isCorrect: boolean) => {
+
+  if (isCorrect) {
+    quest.progress++;
+  } else {
+    quest.progress = 0;
+    quest.failed++;
+  }
+
+  quest.total++;
+  quest.ratio = percentage(quest.failed, quest.total);
+};
+
+/**
+ * The function removes all questions from a given file from the store. It 
+ * returns a promise.
+ */
+export const questRemoveFile = (tx: IDBTransaction, file: string) => {
+
+  return storeDeleteIndex(
+    tx,
+    'questions',
+    'file',
+    file
+  );
 };
 
 /**
@@ -74,34 +98,23 @@ export const questPersist = (quest: Question) => {
 };
 
 /**
- * The function is called with a question and a boolean value indicating if the
- * answer was correct.
+ * The function gets all questions for a topic from the store. It returns a 
+ * promise with an array of questions.
  */
-export const questOnAnswer = (quest: Question, isCorrect: boolean) => {
+export const questGetAll = (topic: Topic) => {
 
-  if (isCorrect) {
-    quest.progress++;
-  } else {
-    quest.progress = 0;
-    quest.failed++;
-  }
+  return new Promise<Question[]>((resolve, reject) => {
 
-  quest.total++;
-  quest.ratio = percentage(quest.failed, quest.total);
-};
+    const store = db
+      .transaction(['questions'], 'readonly')
+      .objectStore('questions');
 
-/**
- * The function is called with an array of questions and counts the number of 
- * correct answers for each question. It returns an array with integers. 
- */
-export const questGetStatistics = (quests: Question[]) => {
-  const statistic = [0, 0, 0, 0];
+    const request = store.index('file').getAll(topic.file);
 
-  quests.forEach((a) => {
-    statistic[a.progress]++;
+    request.onsuccess = (e) => {
+      resolve(request.result);
+    };
   });
-
-  return statistic;
 };
 
 /**
@@ -109,9 +122,10 @@ export const questGetStatistics = (quests: Question[]) => {
  * given file. It returns an array with the 'progress' values.
  */
 export const questGetStats = (file: string) => {
-  return new Promise((resolve, reject) => {
-    const result = [];
 
+  return new Promise<number[]>((resolve, reject) => {
+
+    const result: number[] = [];
     //
     // We are only interested in questions from a given file.
     //
@@ -124,16 +138,23 @@ export const questGetStats = (file: string) => {
     const request = store.index('file').openCursor(range);
 
     request.onsuccess = (e) => {
+      //
+      // The result coontains the cursor.
+      //
       const cursor = request.result;
       if (cursor) {
-        result.push(cursor.value.progress);
+        //
+        // The cursor value is our question.
+        //
+        const quest: Question = cursor.value;
+        result.push(quest.progress);
         cursor.continue();
       }
       //
       // The cursor has finished.
       //
       else {
-        console.log('Store:', store.name, ' progress values:', result);
+        console.log('Store:', store.name, 'progress values:', result);
         resolve(result);
       }
     };
@@ -155,18 +176,24 @@ export const questSetProgress = (file: string, value: number) => {
     .objectStore('questions');
 
   const request = store.index('file').openCursor(range);
+
   request.onsuccess = (e) => {
+    //
+    // The result coontains the cursor.
+    //
     const cursor = request.result;
     if (cursor) {
-      const elem = cursor.value;
+      //
+      // The cursor value is our question.
+      //
+      const quest: Question = cursor.value;
       //
       // Ensure that we need to update the value in the store.
       //
-      if (elem.progress !== value) {
-        elem.progress = value;
-        elem.failed = 0;
-        store.put(elem);
-        console.log('Store:', store.name, ' update:', elem.id);
+      if (quest.progress !== value) {
+        quest.progress = value;
+        store.put(quest);
+        console.log('Store:', store.name, ' update:', quest.id);
       }
 
       cursor.continue();
@@ -179,19 +206,3 @@ export const questSetProgress = (file: string, value: number) => {
     }
   };
 };
-
-// BELOW OK----
-
-/**
- * The function removes all questions from a given file from the store. It 
- * returns a promise.
- */
-export const questRemoveFile = (tx: IDBTransaction, file: string) => {
-
-  return storeDeleteIndex(
-    tx,
-    'questions',
-    'file',
-    file
-  );
-}
