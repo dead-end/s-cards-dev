@@ -49,6 +49,6 @@ export const dbcSetLastModified = (lastModified: Date) => {
   const store = db.transaction(['config'], 'readwrite').objectStore('config');
 
   store.put(data).onsuccess = () => {
-    console.log('Store:', store.name, ' set lastModified:', data);
+    console.log('Store:', store.name, 'set lastModified:', data);
   };
 };
