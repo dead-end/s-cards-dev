@@ -4,16 +4,13 @@
  * The function returns a formated date value or an empty string if the date is
  * not defined.
  */
-export const fmtDate = (date: number) => {
+export const fmtDate = (d: Date) => {
   //
   // Handle empty dates.
   //
-  if (!date) {
+  if (!d) {
     return '';
   }
-
-  const d = new Date();
-  d.setTime(date);
 
   const day = d.getDate() > 9 ? d.getDate() : '0' + d.getDate();
   const month = d.getMonth() > 9 ? d.getMonth() : '0' + d.getMonth();
