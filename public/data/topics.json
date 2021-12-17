@@ -1,5 +1,21 @@
 [
     {
+        "file": "data/book/kapitel-6-1.json",
+        "title": "Kapitel 6 Teil 1"
+    },
+    {
+        "file": "data/book/kapitel-6-2.json",
+        "title": "Kapitel 6 Teil 2"
+    },
+    {
+        "file": "data/book/kapitel-6-3.json",
+        "title": "Kapitel 6 Teil 3"
+    },
+    {
+        "file": "data/book/kapitel-6-4.json",
+        "title": "Kapitel 6 Teil 4"
+    },
+    {
         "file": "data/kapitel-1-1.json",
         "title": "Kapitel 1 Teil 1"
     },
