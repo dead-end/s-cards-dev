@@ -11,9 +11,9 @@
       Progress: <span class="is-text-success">{quest.progress}</span>
     {/if}
 
-    (Total: <span class="is-text-success">{quest.total}</span> / Wrong:
+    (Total: <span class="is-text-success">{quest.total}</span> /
     <span class="is-text-danger">{quest.failed}</span>
-    /
+    / Wrong:
     <span>{quest.ratio}%</span>)
   </span>
 {/if}
