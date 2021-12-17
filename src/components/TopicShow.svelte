@@ -1,18 +1,19 @@
-<script>
-  import { fmtDate, arrPercentage, arrAll } from '../js/utils';
+<script lang="ts">
   import { loadQuestions } from '../js/persist';
+  import { arrPercentage, arrAll } from '../js/utils';
   import { questSetProgress, questGetStats } from '../js/questModel';
-
   import { viewStore } from '../stores/viewStore';
   import { errorStore } from '../stores/errorStore';
   import { onMount } from 'svelte';
+  import TopicInfo from './TopicInfo.svelte';
+  import type { Topic } from '../js/topicModel';
 
-  export let topic;
+  export let topic: Topic;
 
   //
   // Properties for the view.
   //
-  let status = '';
+  let status = 0;
   let startDisabled = true;
   let size = 0;
 
@@ -63,51 +64,28 @@
 
   /**
    * Callback function for the select box.
-   *
-   * @param {Event} e
    */
-  const onSelect = (e) => {
-    console.log('index', e.target.selectedIndex);
+  const onSelect = (e: Event) => {
+    const target = e.target as HTMLSelectElement;
     //
     // Set the number of correct answers.
     //
-    questSetProgress(topic.file, e.target.selectedIndex - 1);
+    questSetProgress(topic.file, target.selectedIndex - 1);
 
     //
     // Set the index to 0 to restore the orignal state.
     //
-    e.target.selectedIndex = 0;
+    target.selectedIndex = 0;
 
     updateStatus();
   };
 </script>
 
 <div class="card card-shadow content">
-  <h4>{topic.title}</h4>
-
   <div class="grid grid-4">
-    <table class="is-text-left">
-      <tr>
-        <td>File</td>
-        <td>{topic.file}</td>
-      </tr>
-      <tr>
-        <td>Modified</td>
-        <td>{fmtDate(topic.lastModified)}</td>
-      </tr>
-      <tr>
-        <td>Description</td>
-        <td>{topic.desc}</td>
-      </tr>
-      <tr>
-        <td>Status</td>
-        <td>{status}</td>
-      </tr>
-      <tr>
-        <td>Size</td>
-        <td>{size}</td>
-      </tr>
-    </table>
+    <div class="is-text-left">
+      <TopicInfo {topic} {status} {size} />
+    </div>
 
     <div>
       <label for="sf-set">Number of correct answers</label>
