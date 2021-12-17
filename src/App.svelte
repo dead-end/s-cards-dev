@@ -7,8 +7,6 @@
   import { initApp } from './js/persist';
   import { pwaSerivceWorkerRegister } from './js/pwa';
 
-  import Header from './components/Header.svelte';
-  import Footer from './components/Footer.svelte';
   import ErrorShow from './components/ErrorShow.svelte';
   import TopicList from './components/TopicList.svelte';
   import TopicShow from './components/TopicShow.svelte';
@@ -46,7 +44,7 @@
 </script>
 
 <div class="container">
-  <Header />
+  <h2>Cards</h2>
 
   <!-- 
     Calling a view can cause an error, so if you hide the view until you
@@ -61,5 +59,7 @@
     <svelte:component this={$viewStore.component} {...$viewStore.props} />
   </div>
 
-  <Footer />
+  <div class="block">
+    <div class="is-text-right">by Volker Senkel 2021</div>
+  </div>
 </div>
