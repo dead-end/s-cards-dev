@@ -4,6 +4,7 @@
   import QuestStatistic from './QuestStatistic.svelte';
   import QuestProgress from './QuestProgress.svelte';
   import { shuffleArr } from '../js/utils';
+  import Markdown from '../js/Markdown';
   import {
     questGetAll,
     questPersist,
@@ -15,6 +16,8 @@
   import type { Question } from '../js/questModel';
 
   export let topic: Topic;
+
+  const md = new Markdown();
 
   let statistic: number[];
 
@@ -99,14 +102,14 @@
         </div>
 
         <div class="card content is-primary">
-          <p>{quest.quest}</p>
+          <p>{@html md.toHtml(quest.quest)}</p>
         </div>
       </div>
 
       <div hidden={hideAnswer}>
         <h5>Answer</h5>
         <div class="card content is-info">
-          <p>{quest.answer}</p>
+          <p>{@html md.toHtml(quest.answer)}</p>
         </div>
       </div>
     </div>

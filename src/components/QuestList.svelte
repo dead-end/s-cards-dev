@@ -7,9 +7,12 @@
   import type { Topic } from '../js/topicModel';
   import type { Question } from '../js/questModel';
 
+  import Markdown from '../js/Markdown';
   export let topic: Topic;
 
   let questions: Question[] = [];
+
+  const md = new Markdown();
 
   /**
    * On mounting the component the questions for the topic is loaded.
@@ -38,18 +41,18 @@
   <div class="grid grid-2">
     {#each questions as question}
       <div class="is-flex-spread grid-full">
-        <div class="h5">{question.id}</div>
+        <div class="h6">Id: {question.id}</div>
         <QuestProgress showProgress={false} quest={question} />
       </div>
 
       <div class="card {repeatToggle()}">
         <div class="content">
-          <p>{question.quest}</p>
+          <p>{@html md.toHtml(question.quest)}</p>
         </div>
       </div>
       <div class="card {repeatToggle()}">
         <div class="content">
-          <p>{question.answer}</p>
+          <p>{@html md.toHtml(question.answer)}</p>
         </div>
       </div>
     {/each}
