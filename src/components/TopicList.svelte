@@ -1,13 +1,14 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-
   import { topicGetAll } from '../js/topicModel';
-  import type { Topic } from '../js/topicModel';
-
   import TopicCard from './TopicCard.svelte';
+  import type { Topic } from '../js/topicModel';
 
   let topics: Array<Topic> = [];
 
+  /**
+   * On mount, get all the topics from the store.
+   */
   onMount(() => {
     topicGetAll().then((t) => {
       topics = t;

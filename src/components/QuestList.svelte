@@ -1,15 +1,9 @@
 <script lang="ts">
-  // TODO: listing-column, isting-quest, isting-answer does not exist.
-
   import { onMount } from 'svelte';
-
   import QuestProgress from './QuestProgress.svelte';
-
   import { viewStore } from '../stores/viewStore';
-
   import { questGetAll } from '../js/questModel';
   import { createRepeatToggle } from '../js/utils';
-
   import type { Topic } from '../js/topicModel';
   import type { Question } from '../js/questModel';
 
@@ -27,9 +21,7 @@
   });
 
   /**
-   * Change the view.
-   *
-   * @param topic The topic for the next view.
+   * Change the view. The topic for the next view.
    */
   const onClick = (topic: Topic) => {
     viewStore.setView('TopicShow', { topic: topic });

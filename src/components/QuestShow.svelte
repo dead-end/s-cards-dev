@@ -1,19 +1,15 @@
 <script lang="ts">
-  // TODO:  lang="ts"
   import { onMount } from 'svelte';
-
   import { viewStore } from '../stores/viewStore';
-
   import QuestStatistic from './QuestStatistic.svelte';
   import QuestProgress from './QuestProgress.svelte';
-
+  import { shuffleArr } from '../js/utils';
   import {
     questGetAll,
     questPersist,
     questOnAnswer,
     questGetStatistics,
   } from '../js/questModel';
-  import { shuffleArr } from '../js/utils';
 
   import type { Topic } from '../js/topicModel';
   import type { Question } from '../js/questModel';
