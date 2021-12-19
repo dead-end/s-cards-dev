@@ -29,7 +29,17 @@
 
   let quest: Question;
 
-  const handleAnswer = (isCorrect: boolean) => {
+  const handleAnswer = (isCorrect?: boolean) => {
+    //
+    // On skip, we do not update the statistik and go to the next.
+    //
+    if (typeof isCorrect === 'undefined') {
+      unlearned.push(quest);
+      next();
+      hideAnswer = !hideAnswer;
+      return;
+    }
+
     questOnAnswer(quest, isCorrect);
 
     questPersist(quest).then(() => {
@@ -82,9 +92,11 @@
   const onCorrect = () => {
     handleAnswer(true);
   };
-
   const onWrong = () => {
     handleAnswer(false);
+  };
+  const onSkip = () => {
+    handleAnswer();
   };
 </script>
 
@@ -123,6 +135,9 @@
       >
       <button class="button is-danger" hidden={hideAnswer} on:click={onWrong}
         >Wrong</button
+      >
+      <button class="button is-info" hidden={hideAnswer} on:click={onSkip}
+        >Skip</button
       >
       <button class="button" on:click={onStop}>Stop</button>
     </div>
