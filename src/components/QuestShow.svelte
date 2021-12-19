@@ -36,7 +36,6 @@
     if (typeof isCorrect === 'undefined') {
       unlearned.push(quest);
       next();
-      hideAnswer = !hideAnswer;
       return;
     }
 
@@ -51,15 +50,15 @@
         onStop();
       }
 
-      statistic = questGetStatistics(quests);
       next();
-      hideAnswer = !hideAnswer;
     });
   };
 
   const next = () => {
     quest = unlearned.shift();
     console.log('next', quest);
+    statistic = questGetStatistics(quests);
+    hideAnswer = true;
   };
 
   /**
@@ -70,7 +69,6 @@
       quests = arr;
       unlearned = quests.filter((q) => q.progress < 3);
       shuffleArr(unlearned);
-      statistic = questGetStatistics(quests);
       next();
     });
   });
@@ -80,23 +78,6 @@
    */
   const onStop = () => {
     viewStore.setView('TopicList');
-  };
-
-  /**
-   * Callback function for the show button.
-   */
-  const onShow = () => {
-    hideAnswer = !hideAnswer;
-  };
-
-  const onCorrect = () => {
-    handleAnswer(true);
-  };
-  const onWrong = () => {
-    handleAnswer(false);
-  };
-  const onSkip = () => {
-    handleAnswer();
   };
 </script>
 
@@ -128,16 +109,25 @@
 
     <!-- Buttons related to questions and answers -->
     <div class="buttons">
-      <button class="button" hidden={!hideAnswer} on:click={onShow}>Show</button
+      <button
+        class="button"
+        hidden={!hideAnswer}
+        on:click={() => (hideAnswer = false)}>Show</button
       >
-      <button class="button is-success" hidden={hideAnswer} on:click={onCorrect}
-        >Correct</button
+      <button
+        class="button is-success"
+        hidden={hideAnswer}
+        on:click={() => handleAnswer(true)}>Correct</button
       >
-      <button class="button is-danger" hidden={hideAnswer} on:click={onWrong}
-        >Wrong</button
+      <button
+        class="button is-danger"
+        hidden={hideAnswer}
+        on:click={() => handleAnswer(false)}>Wrong</button
       >
-      <button class="button is-info" hidden={hideAnswer} on:click={onSkip}
-        >Skip</button
+      <button
+        class="button is-info"
+        hidden={hideAnswer}
+        on:click={() => handleAnswer()}>Skip</button
       >
       <button class="button" on:click={onStop}>Stop</button>
     </div>
