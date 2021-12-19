@@ -42,7 +42,7 @@
     {#each questions as question}
       <div class="is-flex-spread grid-full">
         <div class="h6">Id: {question.id}</div>
-        <QuestProgress showProgress={false} quest={question} />
+        <QuestProgress quest={question} />
       </div>
 
       <div class="card {repeatToggle()}">

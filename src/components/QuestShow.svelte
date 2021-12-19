@@ -98,7 +98,7 @@
       <div>
         <div class="is-flex-spread block">
           <div class="h5">Question</div>
-          <QuestProgress showProgress={true} {quest} />
+          <QuestProgress {quest} />
         </div>
 
         <div class="card content is-primary">
