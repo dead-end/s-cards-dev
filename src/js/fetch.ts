@@ -1,4 +1,5 @@
 // TODO: remove catch from Promise and use try / catch on calling the functions.
+import { errorStore } from '../stores/errorStore';
 
 /**
  * The function fetches an url with json data and returns a Promise for that
@@ -6,8 +7,17 @@
  */
 export const fetchJson = (url: string) => {
   return fetch(url)
-    .then((response) => response.json())
-    .catch((e) => console.error(e));
+    .then((response) => {
+
+      //
+      // Ensure that the request is ok.
+      //
+      if (!response.ok) {
+        throw Error(`Unable to get JSON: ${url} - ${response.statusText}`);
+      }
+
+      return response.json();
+    }).catch((e) => errorStore.addError(e));
 };
 
 /**
@@ -17,6 +27,14 @@ export const fetchJson = (url: string) => {
 export const fetchLastModified = (url: string) => {
   return fetch(url, { method: 'HEAD' })
     .then((response) => {
+
+      //
+      // Ensure that the request is ok.
+      //
+      if (!response.ok) {
+        throw Error(`Unable to last modified for: ${url} - ${response.statusText}`);
+      }
+
       //
       // Get the last modified from the response.
       //
@@ -29,6 +47,5 @@ export const fetchLastModified = (url: string) => {
       if (lastModified) {
         return new Date(lastModified);
       }
-    })
-    .catch((e) => console.error(e));
+    }).catch((e) => errorStore.addError(e));
 };
