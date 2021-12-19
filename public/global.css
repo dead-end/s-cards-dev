@@ -21,6 +21,12 @@
   --color-success-1: hsl(120, 61%, 80%);
   --color-success-2: hsl(120, 61%, 75%);
 
+  --color-warning-fg: hsl(33, 100%, 40%);
+  --color-warning-bg: hsl(33, 100%, 88%);
+  --color-warning-0: hsl(33, 100%, 85%);
+  --color-warning-1: hsl(33, 100%, 80%);
+  --color-warning-2: hsl(33, 100%, 75%);
+
   --color-danger-fg: hsl(0, 100%, 40%);
   --color-danger-bg: hsl(0, 100%, 88%);
   --color-danger-0: hsl(0, 100%, 85%);
@@ -289,6 +295,7 @@ select:active {
   background-color: var(--color-info-2);
 }
 
+/* success */
 .button.is-success {
   background-color: var(--color-success-0);
 }
@@ -300,7 +307,20 @@ select:active {
 .button:active.is-success {
   background-color: var(--color-success-2);
 }
+/* warning */
+.button.is-warning {
+  background-color: var(--color-warning-0);
+}
 
+.button:hover.is-warning {
+  background-color: var(--color-warning-1);
+}
+
+.button:active.is-warning {
+  background-color: var(--color-warning-2);
+}
+
+/* danger */
 .button.is-danger {
   background-color: var(--color-danger-0);
 }
@@ -342,12 +362,21 @@ select[disabled],
   background-color: var(--color-success-bg);
 }
 
+.is-warning {
+  background-color: var(--color-warning-bg);
+}
+
 .is-danger {
   background-color: var(--color-danger-bg);
 }
 
+/* text */
 .is-text-success {
   color: var(--color-success-fg);
+}
+
+.is-text-warning {
+  color: var(--color-warning-fg);
 }
 
 .is-text-danger {

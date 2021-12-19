@@ -125,7 +125,7 @@
         on:click={() => handleAnswer(false)}>Wrong</button
       >
       <button
-        class="button is-info"
+        class="button is-warning"
         hidden={hideAnswer}
         on:click={() => handleAnswer()}>Skip</button
       >
