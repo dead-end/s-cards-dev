@@ -197,6 +197,11 @@ th:last-child {
   .hide-xl {
     display: none;
   }
+
+  .show-sl,
+  .show-md {
+    display: none;
+  }
 }
 
 @media (max-width: 960px) {
@@ -214,6 +219,10 @@ th:last-child {
 
   .hide-lg,
   .hide-xl {
+    display: none;
+  }
+
+  .show-sl {
     display: none;
   }
 }
