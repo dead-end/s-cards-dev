@@ -160,7 +160,12 @@ th:last-child {
 }
 
 /******************************************************************************
- * Definition of the container and the grid
+ * Definition of the container and the grid.
+ * 
+ * The definition contains hide-xx classes. The component is shown if the 
+ * display is lager. Example:
+ *
+ * hide-md - hide: sm,md show: lg,xl
  *****************************************************************************/
 
 .container {
@@ -185,6 +190,7 @@ th:last-child {
   grid-column: 1 / -1;
 }
 
+/* large: lg */
 @media (max-width: 1280px) {
   .container {
     max-width: var(--break-point-lg);
@@ -194,16 +200,12 @@ th:last-child {
     grid-template-columns: 1fr 1fr 1fr;
   }
 
-  .hide-xl {
-    display: none;
-  }
-
-  .show-sl,
-  .show-md {
+  .hide-lg {
     display: none;
   }
 }
 
+/* medium: md */
 @media (max-width: 960px) {
   .container {
     max-width: var(--break-point-md);
@@ -217,16 +219,13 @@ th:last-child {
     grid-template-columns: 1fr 1fr;
   }
 
-  .hide-lg,
-  .hide-xl {
-    display: none;
-  }
-
-  .show-sl {
+  .hide-md,
+  .hide-lg {
     display: none;
   }
 }
 
+/* small: sl */
 @media (max-width: 640px) {
   .container {
     max-width: var(--break-point-sm);
@@ -236,9 +235,9 @@ th:last-child {
     grid-template-columns: 1fr;
   }
 
+  .hide-sm,
   .hide-md,
-  .hide-lg,
-  .hide-xl {
+  .hide-lg {
     display: none;
   }
 }
