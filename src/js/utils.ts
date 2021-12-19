@@ -79,7 +79,7 @@ export const percentage = (num: number, total: number) => {
     return 0;
   }
   const result = (num * 100) / total;
-  return Math.round(result * 100) / 100;
+  return Math.round(result);
 };
 
 /**
