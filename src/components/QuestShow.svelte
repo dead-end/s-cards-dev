@@ -90,7 +90,7 @@
     <div class="grid grid-2">
       <div>
         <div class="is-flex-spread block">
-          <div class="h5">Question</div>
+          <div class="h5">Question: {quest.id}</div>
           <QuestProgress {quest} />
         </div>
 
