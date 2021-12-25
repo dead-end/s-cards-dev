@@ -396,6 +396,11 @@ select[disabled],
 .buttons > button,
 .buttons > .button {
   margin-right: var(--margin-y-sm);
+  /*
+   * Each button has a bottom margin, which is used after line wrapping or as 
+   * the bottom margin of the .buttons class.
+   */
+  margin-bottom: var(--margin-y);
 }
 
 .buttons > button:last-child,
@@ -404,14 +409,13 @@ select[disabled],
 }
 
 /******************************************************************************
- * Definition of the margins
+ * Definition of the margins. The .buttons class is handled above.
  *****************************************************************************/
 
 p,
 label,
 table,
 .block,
-.buttons,
 .grid-2,
 .grid-4 {
   margin: 0rem 0rem var(--margin-y) 0rem;
