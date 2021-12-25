@@ -390,6 +390,7 @@ select[disabled],
 
 .buttons {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .buttons > button,
