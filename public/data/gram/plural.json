@@ -1,0 +1,307 @@
+[
+  {
+    "quest": [
+      "die Tomate",
+      "die Tomaten"
+    ],
+    "answer": [
+      "помид_о_р",
+      "помидоры"
+    ]
+  },
+  {
+    "quest": [
+      "das Bonbon",
+      "die Bonbons"
+    ],
+    "answer": [
+      "конф_е_та ",
+      "конфеты"
+    ]
+  },
+  {
+    "quest": [
+      "das Getränk",
+      "die Getränke"
+    ],
+    "answer": [
+      "нап_и_ток",
+      "напитки",
+      "~Vokalausfall~"
+    ]
+  },
+  {
+    "quest": [
+      "die Birne",
+      "die Birnen"
+    ],
+    "answer": [
+      "гр_у_ша",
+      "груши"
+    ]
+  },
+  {
+    "quest": [
+      "das Würstchen",
+      "die Würstchen"
+    ],
+    "answer": [
+      "сос_и_ска",
+      "сосиски"
+    ]
+  },
+  {
+    "quest": [
+      "die Frucht",
+      "die Früchte"
+    ],
+    "answer": [
+      "фрукт",
+      "фрукты"
+    ]
+  },
+  {
+    "quest": [
+      "die Zitrone",
+      "die Zitronen"
+    ],
+    "answer": [
+      "лим_о_н",
+      "лимоны"
+    ]
+  },
+  {
+    "quest": [
+      "der Salat",
+      "die Salate"
+    ],
+    "answer": [
+      "сал_а_т",
+      "салаты"
+    ]
+  },
+  {
+    "quest": [
+      "die Banane",
+      "die Bananen"
+    ],
+    "answer": [
+      "бан_а_н",
+      "бананы"
+    ]
+  },
+  {
+    "quest": [
+      "das Produkt",
+      "die Produkte"
+    ],
+    "answer": [
+      "прод_у_кт",
+      "продукты"
+    ]
+  },
+  {
+    "quest": [
+      "der Kuchen",
+      "die Kuchen"
+    ],
+    "answer": [
+      "пир_о_г",
+      "пироги"
+    ]
+  },
+  {
+    "quest": [
+      "das Brötchen",
+      "die Brötchen"
+    ],
+    "answer": [
+      "б_у_лочка",
+      "булочки"
+    ]
+  },
+  {
+    "quest": [
+      "die Ananas",
+      "die Ananassen :o)"
+    ],
+    "answer": [
+      "анан_а_с",
+      "ананасы"
+    ]
+  },
+  {
+    "quest": [
+      "die Lehrerin",
+      "die Lehrerinnen"
+    ],
+    "answer": [
+      "уч_и_тельница",
+      "учительницы"
+    ]
+  },
+  {
+    "quest": [
+      "das Ei",
+      "die Eier"
+    ],
+    "answer": [
+      "яйц_о_",
+      "яйца"
+    ]
+  },
+  {
+    "quest": [
+      "das Meer",
+      "die Meere"
+    ],
+    "answer": [
+      "м_о_ре",
+      "моря"
+    ]
+  },
+  {
+    "quest": [
+      "der Platz",
+      "die Plätze"
+    ],
+    "answer": [
+      "м_е_сто",
+      "места"
+    ]
+  },
+  {
+    "quest": [
+      "das Gericht / die Speise",
+      "die Gerichte / die Speisen"
+    ],
+    "answer": [
+      "бл_ю_до",
+      "блюда"
+    ]
+  },
+  {
+    "quest": [
+      "die Marmelade",
+      "die Marmeladen"
+    ],
+    "answer": [
+      "вар_е_нье",
+      "варенья"
+    ]
+  },
+  {
+    "quest": [
+      "der Apfel",
+      "die Äpfel"
+    ],
+    "answer": [
+      "_я_блоко",
+      "яблоки",
+      "~Neutrum: Ausnahme~"
+    ]
+  },
+  {
+    "quest": [
+      "die Kirche",
+      "die Kirchen"
+    ],
+    "answer": [
+      "церковь",
+      "церкви"
+    ]
+  },
+  {
+    "quest": [
+      "die Unterschrift",
+      "die Unterschriften"
+    ],
+    "answer": [
+      "п_о_дпись",
+      "подписи"
+    ]
+  },
+  {
+    "quest": [
+      "die Nazionalität",
+      "die Nazionalitäten"
+    ],
+    "answer": [
+      "национальность",
+      "национальности"
+    ]
+  },
+  {
+    "quest": [
+      "das Kloster",
+      "die Klöster"
+    ],
+    "answer": [
+      "монаст_ы_рь",
+      "монастыри"
+    ]
+  },
+  {
+    "quest": [
+      "der Sekretär",
+      "die Sekretäre"
+    ],
+    "answer": [
+      "секрет_а_рь",
+      "секретари"
+    ]
+  },
+  {
+    "quest": [
+      "der Rubel",
+      "die Rubel"
+    ],
+    "answer": [
+      "рубль",
+      "рубли"
+    ]
+  },
+  {
+    "quest": [
+      "der Käufer",
+      "die Käufer"
+    ],
+    "answer": [
+      "покуп_а_тель",
+      "покупатели"
+    ]
+  },
+  {
+    "quest": [
+      "der Lehrer",
+      "die Lehrer"
+    ],
+    "answer": [
+      "учитель",
+      "учителя",
+      "~Maskulinum: Ausnamhe ???~"
+    ]
+  },
+  {
+    "quest": [
+      "die Gurke",
+      "die Gurken"
+    ],
+    "answer": [
+      "огур_е_ц",
+      "огурцы",
+      "~Vokalausfall~"
+    ]
+  },
+  {
+    "quest": [
+      "der Markt",
+      "die Märkte"
+    ],
+    "answer": [
+      "р_ы_нок",
+      "рынки",
+      "~Vokalausfall~"
+    ]
+  }
+]

@@ -68,6 +68,7 @@ export interface Topic {
   file: string,
   title: string,
   desc: string,
+  details?: string[],
   lastModified?: Date
 }
 
@@ -93,6 +94,16 @@ const topicNeedUpdate = (json: Topic, store: Topic) => {
   // and the json topic does not have a 'lastmodified' property.
   //
   if (json.title !== store.title || json.desc !== store.desc) {
+    return true;
+  }
+
+  //
+  // Compare the details arrays, which may not exist.
+  //
+  const jsonDetails = json.details ? json.details : [];
+  const storeDetails = store.details ? store.details : [];
+
+  if (jsonDetails.toString() !== storeDetails.toString()) {
     return true;
   }
 

@@ -20,6 +20,29 @@
         "title": "Kapitel 6 Teil 5"
     },
     {
+        "file": "data/gram/plural.json",
+        "title": "Grammatik Plural",
+        "details": [
+            "~Maskulinum / Femininum~",
+            "- г, к, х, ш, щ, ч ~=>~ и",
+            "- ~default:~ ы",
+            "~Maskulinum / Femininum:~",
+            "- ь ~=>~ и",
+            "~Neutrum:~",
+            "- o ~=>~ а",
+            "- е ~=>~ я"
+        ]
+    },
+    {
+        "file": "data/gram/mein-dein.json",
+        "title": "Grammatik Mein-Dein",
+        "details": [
+            "~Maskulinum: endungslos, Konsonanten,~ -й, -ь",
+            "~Femininum:~ -а / -я, -ия, -ь",
+            "~Neutrum:~ -о / -е, -ие -мя"
+        ]
+    },
+    {
         "file": "data/misc.json",
         "title": "Sonstiges - Test",
         "desc": "Dies ist meine Beschreibung!"

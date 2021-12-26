@@ -6,9 +6,12 @@
   import { errorStore } from '../stores/errorStore';
   import { onMount } from 'svelte';
   import TopicInfo from './TopicInfo.svelte';
+  import Markdown from '../js/Markdown';
   import type { Topic } from '../js/topicModel';
 
   export let topic: Topic;
+
+  const md = new Markdown();
 
   //
   // Properties for the view.
@@ -97,6 +100,15 @@
         <option value="3">Set 3</option>
       </select>
     </div>
+
+    {#if topic.details}
+      <div>
+        <h5>Details</h5>
+        <div class="card content is-info">
+          <p>{@html md.toHtml(topic.details)}</p>
+        </div>
+      </div>
+    {/if}
   </div>
 
   <div class="buttons">

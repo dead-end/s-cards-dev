@@ -103,6 +103,9 @@
         <h5>Answer</h5>
         <div class="card content is-info">
           <p>{@html md.toHtml(quest.answer)}</p>
+          {#if topic.details}
+            <p>{@html md.toHtml(topic.details)}</p>
+          {/if}
         </div>
       </div>
     </div>
