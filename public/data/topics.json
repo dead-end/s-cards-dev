@@ -43,6 +43,26 @@
         ]
     },
     {
+        "file": "data/gram/akk.json",
+        "title": "Grammatik Akkusativ",
+        "details": [
+            "~Maskulinum Singular:~",
+            "- ~unbelebt =>~ -",
+            "- ~belebt =>~ а",
+            "~Neutrum Singular:~",
+            "- о ~=>~ -",
+            "- е ~=>~ -",
+            "~Femininum Singular:~",
+            "- а ~=>~у",
+            "- я ~=>~ ю",
+            "- ь ~=>~ -",
+            "~Plural:~",
+            "- ~belebt Maskulinum:~ - ~=>~ ов",
+            "- ~belebt:~ ь ~=>~ ей",
+            "- ~unbelebt:~ -"
+        ]
+    },
+    {
         "file": "data/misc.json",
         "title": "Sonstiges - Test",
         "desc": "Dies ist meine Beschreibung!"

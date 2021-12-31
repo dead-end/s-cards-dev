@@ -1,0 +1,403 @@
+[
+  {
+    "quest": [
+      "Wir schauen Fernsehen."
+    ],
+    "answer": [
+      "Мы смотрим телевизор."
+    ]
+  },
+  {
+    "quest": [
+      "Schauen Sie den Film?"
+    ],
+    "answer": [
+      "Вы смотрите фильм?"
+    ]
+  },
+  {
+    "quest": [
+      "Der Lehrer macht Salat."
+    ],
+    "answer": [
+      "Учитель готовит салат."
+    ]
+  },
+  {
+    "quest": [
+      "Das Kind trinkt Tee."
+    ],
+    "answer": [
+      "Ребенок пьет чай."
+    ]
+  },
+  {
+    "quest": [
+      "Wir machen einen Kuchen."
+    ],
+    "answer": [
+      "Мы делаем пирог."
+    ]
+  },
+  {
+    "quest": [
+      "Ich kenne den Übersetzer."
+    ],
+    "answer": [
+      "Я знаю переводчика."
+    ]
+  },
+  {
+    "quest": [
+      "Die Hausfrau liebt den Arzt."
+    ],
+    "answer": [
+      "Домохозяйка любит врача."
+    ]
+  },
+  {
+    "quest": [
+      "Bruder und Schwester lieben den Vater."
+    ],
+    "answer": [
+      "Брат и сестра любят отца."
+    ]
+  },
+  {
+    "quest": [
+      "Oma hört den Enkel."
+    ],
+    "answer": [
+      "Бабушка слушает внука."
+    ]
+  },
+  {
+    "quest": [
+      "Der Mann schaut das Meer an."
+    ],
+    "answer": [
+      "Мужчина смотрит на море."
+    ]
+  },
+  {
+    "quest": [
+      "Das Schülerin hört die Aufgabe."
+    ],
+    "answer": [
+      "Школьница слушает задание."
+    ]
+  },
+  {
+    "quest": [
+      "Unsere Schwester isst Marmelade."
+    ],
+    "answer": [
+      "Наша сестра ест варенье."
+    ]
+  },
+  {
+    "quest": [
+      "Sie kennt den Platz."
+    ],
+    "answer": [
+      "Она знает это место."
+    ]
+  },
+  {
+    "quest": [
+      "Wir trinken Bier."
+    ],
+    "answer": [
+      "Мы пьем пиво."
+    ]
+  },
+  {
+    "quest": [
+      "Die Eltern lesen das Buch."
+    ],
+    "answer": [
+      "Родители читают книгу."
+    ]
+  },
+  {
+    "quest": [
+      "Sie hassen die Familie."
+    ],
+    "answer": [
+      "Они ненабидят семью."
+    ]
+  },
+  {
+    "quest": [
+      "Die Mönche lieben die Kirche."
+    ],
+    "answer": [
+      "Монахи любят церковь."
+    ]
+  },
+  {
+    "quest": [
+      "Gib mir die Fotografie."
+    ],
+    "answer": [
+      "Дай мне фотографию."
+    ]
+  },
+  {
+    "quest": [
+      "Mein Bruder liebt die russische Küche."
+    ],
+    "answer": [
+      "Мой брат любит русскую кухню."
+    ]
+  },
+  {
+    "quest": [
+      "Wir lesen Zeitung."
+    ],
+    "answer": [
+      "Мы читаем газету."
+    ]
+  },
+  {
+    "quest": [
+      "Der Vater kocht Brei."
+    ],
+    "answer": [
+      "Отец готовит кашу."
+    ]
+  },
+  {
+    "quest": [
+      "Der Mitarbeiter kennt die Kirche in der Stadt."
+    ],
+    "answer": [
+      "Сотрудник знает церковь в городе. "
+    ]
+  },
+  {
+    "quest": [
+      "Die Verkäuferin liesst die Unterschrift."
+    ],
+    "answer": [
+      "Продавщица читает подпись."
+    ]
+  },
+  {
+    "quest": [
+      "Der Arbeiter hasst die Direktoren."
+    ],
+    "answer": [
+      "Рабочий ненавидит директоров."
+    ]
+  },
+  {
+    "quest": [
+      "Omas lieben Enkel."
+    ],
+    "answer": [
+      "Бабушки любят внуков."
+    ]
+  },
+  {
+    "quest": [
+      "Der Käufer liebt die Verkäufer."
+    ],
+    "answer": [
+      "Покупатель любит продавцов."
+    ]
+  },
+  {
+    "quest": [
+      "Ich kenne die Mönche."
+    ],
+    "answer": [
+      "Я знаю монахов."
+    ]
+  },
+  {
+    "quest": [
+      "Wir lieben unsere Töchter."
+    ],
+    "answer": [
+      "Мы любим своих дочерей."
+    ]
+  },
+  {
+    "quest": [
+      "Wir hören die Mütter."
+    ],
+    "answer": [
+      "Мы слушаем матерей."
+    ]
+  },
+  {
+    "quest": [
+      "Der Direktor kennt die Sekretäre."
+    ],
+    "answer": [
+      "Директор знает секретарей."
+    ]
+  },
+  {
+    "quest": [
+      "Er hasst die Lehrer."
+    ],
+    "answer": [
+      "Он ненавидит учителей."
+    ]
+  },
+  {
+    "quest": [
+      "Die Frau kocht Tomaten."
+    ],
+    "answer": [
+      "Женщина готовит помидоры."
+    ]
+  },
+  {
+    "quest": [
+      "Der Student liest Bücher."
+    ],
+    "answer": [
+      "Студент читает книги."
+    ]
+  },
+  {
+    "quest": [
+      "Der Mann isst Bonbons."
+    ],
+    "answer": [
+      "Мужчина ест конфеты."
+    ]
+  },
+  {
+    "quest": [
+      "Die Familie hasst Plätze."
+    ],
+    "answer": [
+      "Семья ненавидит места."
+    ]
+  },
+  {
+    "quest": [
+      "Sie lesen Zeitschriften."
+    ],
+    "answer": [
+      "Они читают журналы."
+    ]
+  },
+  {
+    "quest": [
+      "Der Händler verkauft Zeitungen und Magazine."
+    ],
+    "answer": [
+      "Дилер продает газеты и журналы."
+    ]
+  },
+  {
+    "quest": [
+      "Unser Freund verkauft das Auto."
+    ],
+    "answer": [
+      "Наш друг продаёт машину."
+    ]
+  },
+  {
+    "quest": [
+      "Die Mitarbeiterin verkauft Wurst, Würstchen, Milch und Eier auf dem Markt."
+    ],
+    "answer": [
+      "Сотрудница продаёт на рынке колбасу, сосиски, молоко и яйца."
+    ]
+  },
+  {
+    "quest": [
+      "Die Familie kauft Fisch, Käse, Tomaten und Marmelade im Supermarkt."
+    ],
+    "answer": [
+      "Семья покупает в супермаркете рыбу, сыр, помидоры и варенье."
+    ]
+  },
+  {
+    "quest": [
+      "Der Freund kauft das Auto im Autosalon."
+    ],
+    "answer": [
+      "Друг покупает машину в автосалоне."
+    ]
+  },
+  {
+    "quest": [
+      "Die Freunde kaufen Kuchen im Kirchen Laden."
+    ],
+    "answer": [
+      "Друзья покупают пирог в церковной лавке."
+    ]
+  },
+  {
+    "quest": [
+      "Ich schreibe den Vornamen und Namen."
+    ],
+    "answer": [
+      "Я пишу имя и фамилию."
+    ]
+  },
+  {
+    "quest": [
+      "Die Studentin schreibt den Dialog."
+    ],
+    "answer": [
+      "Студентка пишет диалог."
+    ]
+  },
+  {
+    "quest": [
+      "Vater und Mutter kaufen eine Katze und einen Hund."
+    ],
+    "answer": [
+      "Отец и мать покупают кошку и собаку."
+    ]
+  },
+  {
+    "quest": [
+      "Ich schaue den Stuard an."
+    ],
+    "answer": [
+      "Я смотрю на стюарда."
+    ]
+  },
+  {
+    "quest": [
+      "Der Käufer liesst die Garantie."
+    ],
+    "answer": [
+      "Покупатель читает гарантию."
+    ]
+  },
+  {
+    "quest": [
+      "Geben Sie mir Bonbons, eine Schachtel."
+    ],
+    "answer": [
+      "Дайте мне конфету, одну коробку."
+    ]
+  },
+  {
+    "quest": [
+      "Ich liebe Bier. Geben Sie mir drei Flaschen."
+    ],
+    "answer": [
+      "Я люблю пиво. Дайте мне три бутылки. "
+    ]
+  },
+  {
+    "quest": [
+      "Ich und meine Frau kennen die Schauspieler und Schauspielerinnen."
+    ],
+    "answer": [
+      "Я и моя жена знаем актёров и актрис.",
+      "~Ausnahme Akkusativ Plural:~ актрис "
+    ]
+  }
+]
