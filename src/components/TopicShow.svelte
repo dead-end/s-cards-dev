@@ -48,7 +48,7 @@
    * Callback function for the back button.
    */
   const onBack = () => {
-    viewStore.setView('TopicList');
+    viewStore.setView('TopicList', { id: topic.file });
   };
 
   /**

@@ -29,7 +29,7 @@
   });
 </script>
 
-<div class="card card-shadow content">
+<div class="card card-shadow content" id={topic.file}>
   <TopicInfo {topic} {status} {size} />
   <div class="buttons">
     <button class="button" on:click={() => onClick(topic)}>Show</button>
