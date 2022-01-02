@@ -1,0 +1,260 @@
+[
+  {
+    "quest": [
+      "Geschäft",
+      "Laden"
+    ],
+    "answer": [
+      "магаз_и_н"
+    ]
+  },
+  {
+    "quest": [
+      "Brot"
+    ],
+    "answer": [
+      "хлеб"
+    ]
+  },
+  {
+    "quest": [
+      "Brötchen"
+    ],
+    "answer": [
+      "б_у_лочка"
+    ]
+  },
+  {
+    "quest": [
+      "Butter",
+      "Öl"
+    ],
+    "answer": [
+      "м_а_сло"
+    ]
+  },
+  {
+    "quest": [
+      "Käse"
+    ],
+    "answer": [
+      "сыр"
+    ]
+  },
+  {
+    "quest": [
+      "Wurst"
+    ],
+    "answer": [
+      "колбас_а_"
+    ]
+  },
+  {
+    "quest": [
+      "Schinken"
+    ],
+    "answer": [
+      "ветчин_а_"
+    ]
+  },
+  {
+    "quest": [
+      "Ei"
+    ],
+    "answer": [
+      "- яйц_о_",
+      "- _я_йца ~- Nominativ Plural~"
+    ]
+  },
+  {
+    "quest": [
+      "Joghurt"
+    ],
+    "answer": [
+      "й_о_гурт"
+    ]
+  },
+  {
+    "quest": [
+      "Honig"
+    ],
+    "answer": [
+      "мёд"
+    ]
+  },
+  {
+    "quest": [
+      "Kaffee"
+    ],
+    "answer": [
+      "к_о_фе",
+      "~Maskulinum / indeklinabel",
+      "Achtung: das Cafe~"
+    ]
+  },
+  {
+    "quest": [
+      "Marmelade",
+      "Konfitüre"
+    ],
+    "answer": [
+      "вар_е_нье"
+    ]
+  },
+  {
+    "quest": [
+      "Milch"
+    ],
+    "answer": [
+      "молок_о_"
+    ]
+  },
+  {
+    "quest": [
+      "Saft"
+    ],
+    "answer": [
+      "сок"
+    ]
+  },
+  {
+    "quest": [
+      "Wein"
+    ],
+    "answer": [
+      "вин_о_"
+    ]
+  },
+  {
+    "quest": [
+      "Apfel"
+    ],
+    "answer": [
+      "_я_блоко"
+    ]
+  },
+  {
+    "quest": [
+      "Banane"
+    ],
+    "answer": [
+      "бан_а_н"
+    ]
+  },
+  {
+    "quest": [
+      "Tomate"
+    ],
+    "answer": [
+      "помид_о_р"
+    ]
+  },
+  {
+    "quest": [
+      "hier: Lebensmittel",
+      "Nahrungsmittel"
+    ],
+    "answer": [
+      "прод_у_кты",
+      "~Plural~"
+    ]
+  },
+  {
+    "quest": [
+      "Mineralwasser"
+    ],
+    "answer": [
+      "минер_а_льная вод_а_"
+    ]
+  },
+  {
+    "quest": [
+      "Kaviar"
+    ],
+    "answer": [
+      "икр_а_"
+    ]
+  },
+  {
+    "quest": [
+      "Bier"
+    ],
+    "answer": [
+      "п_и_во"
+    ]
+  },
+  {
+    "quest": [
+      "Mehl"
+    ],
+    "answer": [
+      "мук_а_"
+    ]
+  },
+  {
+    "quest": [
+      "Kartoffel"
+    ],
+    "answer": [
+      "карт_о_фель",
+      "~Maskulinum / nur Singular~"
+    ]
+  },
+  {
+    "quest": [
+      "Kohl"
+    ],
+    "answer": [
+      "кап_у_ста"
+    ]
+  },
+  {
+    "quest": [
+      "Möhre"
+    ],
+    "answer": [
+      "морк_о_вь",
+      "~Femininum - Endung: ь~"
+    ]
+  },
+  {
+    "quest": [
+      "Zwiebel"
+    ],
+    "answer": [
+      "лук"
+    ]
+  },
+  {
+    "quest": [
+      "Wasser"
+    ],
+    "answer": [
+      "вод_а_"
+    ]
+  },
+  {
+    "quest": [
+      "Milchprodukte"
+    ],
+    "answer": [
+      "мол_о_чные прод_у_кты"
+    ]
+  },
+  {
+    "quest": [
+      "Fleisch"
+    ],
+    "answer": [
+      "м_я_со"
+    ]
+  },
+  {
+    "quest": [
+      "Fisch"
+    ],
+    "answer": [
+      "р_ы_ба"
+    ]
+  }
+]

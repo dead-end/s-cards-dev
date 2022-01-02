@@ -1,0 +1,259 @@
+[
+  {
+    "quest": [
+      "Stück"
+    ],
+    "answer": [
+      "шт_у_кa"
+    ]
+  },
+  {
+    "quest": [
+      "Kann ich Ihnen helfen?"
+    ],
+    "answer": [
+      "Вам пом_о_чь?"
+    ]
+  },
+  {
+    "quest": [
+      "Das macht ... Rubel für Sie."
+    ],
+    "answer": [
+      "С вас ... рубль.",
+      "С вас ... рубл_е_й."
+    ]
+  },
+  {
+    "quest": [
+      "Geld"
+    ],
+    "answer": [
+      "д_е_ньги",
+      "~Plural~"
+    ]
+  },
+  {
+    "quest": [
+      "Was noch?"
+    ],
+    "answer": [
+      "Что ещё?"
+    ]
+  },
+  {
+    "quest": [
+      "Das wäre alles."
+    ],
+    "answer": [
+      "_Э_то всё."
+    ]
+  },
+  {
+    "quest": [
+      "mit"
+    ],
+    "answer": [
+      "с"
+    ]
+  },
+  {
+    "quest": [
+      "Picknick"
+    ],
+    "answer": [
+      "пикн_и_к"
+    ]
+  },
+  {
+    "quest": [
+      "Abendbrot",
+      "Abendessen"
+    ],
+    "answer": [
+      "_у_жин"
+    ]
+  },
+  {
+    "quest": [
+      "Käufer"
+    ],
+    "answer": [
+      "покуп_а_тель",
+      "~Maskulinum - Endung: ь~"
+    ]
+  },
+  {
+    "quest": [
+      "Bürotechnik"
+    ],
+    "answer": [
+      "_о_фисная т_е_хника"
+    ]
+  },
+  {
+    "quest": [
+      "Kopierer"
+    ],
+    "answer": [
+      "кс_е_рокс"
+    ]
+  },
+  {
+    "quest": [
+      "Drucker"
+    ],
+    "answer": [
+      "пр_и_нтер"
+    ]
+  },
+  {
+    "quest": [
+      "Faxgerät"
+    ],
+    "answer": [
+      "факс"
+    ]
+  },
+  {
+    "quest": [
+      "Scanner"
+    ],
+    "answer": [
+      "ск_а_нер"
+    ]
+  },
+  {
+    "quest": [
+      "Installation"
+    ],
+    "answer": [
+      "устан_о_вка"
+    ]
+  },
+  {
+    "quest": [
+      "Garantie"
+    ],
+    "answer": [
+      "гар_а_нтия"
+    ]
+  },
+  {
+    "quest": [
+      "Service"
+    ],
+    "answer": [
+      "с_е_рвис"
+    ]
+  },
+  {
+    "quest": [
+      "hier: Süßwarenprodu­zent"
+    ],
+    "answer": [
+      "конд_и_тер"
+    ]
+  },
+  {
+    "quest": [
+      "anbieten",
+      "vorschla­gen"
+    ],
+    "answer": [
+      "предлаг_а_ть"
+    ]
+  },
+  {
+    "quest": [
+      "Schokolade"
+    ],
+    "answer": [
+      "шокол_а_д"
+    ]
+  },
+  {
+    "quest": [
+      "Biskuit"
+    ],
+    "answer": [
+      "бискв_и_т"
+    ]
+  },
+  {
+    "quest": [
+      "Torte"
+    ],
+    "answer": [
+      "т_о_рт"
+    ]
+  },
+  {
+    "quest": [
+      "Cracker ~(Gebäcksorte)~"
+    ],
+    "answer": [
+      "кр_е_кер"
+    ]
+  },
+  {
+    "quest": [
+      "Karamell"
+    ],
+    "answer": [
+      "карам_е_ль",
+      "~Femininum - Endung: ь~"
+    ]
+  },
+  {
+    "quest": [
+      "Autohaus"
+    ],
+    "answer": [
+      "автосал_о_н"
+    ]
+  },
+  {
+    "quest": [
+      "offiziell",
+      "zuge­lassen"
+    ],
+    "answer": [
+      "офици_а_льный"
+    ]
+  },
+  {
+    "quest": [
+      "Händler"
+    ],
+    "answer": [
+      "д_и_лер"
+    ]
+  },
+  {
+    "quest": [
+      "Auto",
+      "Auto­mobil"
+    ],
+    "answer": [
+      "автомобиль",
+      "~Maskulinum - Endung: ь~"
+    ]
+  },
+  {
+    "quest": [
+      "Dialog"
+    ],
+    "answer": [
+      "диал_о_г"
+    ]
+  },
+  {
+    "quest": [
+      "Werbung"
+    ],
+    "answer": [
+      "рекл_а_мa"
+    ]
+  }
+]

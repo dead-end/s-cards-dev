@@ -1,0 +1,198 @@
+[
+  {
+    "quest": [
+      "wissen",
+      "kennen",
+      "~konjugieren~"
+    ],
+    "answer": [
+      "зн_а_ть",
+      "- я зн_а_ю",
+      "- ты зн_а_ешь",
+      "- он, она, оно зн_а_ет",
+      "- мы зн_а_ем",
+      "- вы зн_а_ете",
+      "- они зн_а_ют"
+    ]
+  },
+  {
+    "quest": [
+      "Sekretär",
+      "Sekretärin"
+    ],
+    "answer": [
+      "секрет_а_рь",
+      "~Maskulinum - Endung: ь~"
+    ]
+  },
+  {
+    "quest": "Büro ",
+    "answer": "_о_фис"
+  },
+  {
+    "quest": "Hausfrau",
+    "answer": "домохоз_я_йка"
+  },
+  {
+    "quest": [
+      "Fotograf",
+      "Fotografin"
+    ],
+    "answer": "фот_о_граф"
+  },
+  {
+    "quest": "oft",
+    "answer": "ч_а_сто"
+  },
+  {
+    "quest": "Dienstreise",
+    "answer": "командир_о_вка"
+  },
+  {
+    "quest": "deshalb",
+    "answer": "по_э_тому"
+  },
+  {
+    "quest": "zu Hause",
+    "answer": "д_о_ма"
+  },
+  {
+    "quest": "wissen Sie was",
+    "answer": "зн_а_ете что ..."
+  },
+  {
+    "quest": [
+      "Lasst uns gehen! / Gehen wir!",
+      "Lassen Sie uns gehen!"
+    ],
+    "answer": [
+      "пойдём",
+      "пойдёмте"
+    ]
+  },
+  {
+    "quest": [
+      "Café",
+      "Kaffeehaus"
+    ],
+    "answer": [
+      "каф_е_",
+      "~Neutrum - indeklinabel~"
+    ]
+  },
+  {
+    "quest": [
+      "Lasst uns miteinander reden!",
+      "Lassen Sie uns miteinander reden!"
+    ],
+    "answer": "поговор_и_м"
+  },
+  {
+    "quest": [
+      "gerne",
+      "mit Vergnügen"
+    ],
+    "answer": "с удов_о_льствием"
+  },
+  {
+    "quest": "warum  ",
+    "answer": "почем_у_"
+  },
+  {
+    "quest": "wie viel ",
+    "answer": "ск_о_лько"
+  },
+  {
+    "quest": "Student",
+    "answer": "студ_е_нт"
+  },
+  {
+    "quest": [
+      "Rechtsanwalt",
+      "Rechtsanwältin"
+    ],
+    "answer": "адвок_а_т"
+  },
+  {
+    "quest": "Schauspielerin",
+    "answer": "актр_и_са"
+  },
+  {
+    "quest": "Flugbegleiterin",
+    "answer": "стюард_е_сса"
+  },
+  {
+    "quest": [
+      "Fremdenführer",
+      "Fremdenführerin"
+    ],
+    "answer": "гид"
+  },
+  {
+    "quest": "Schauspieler ",
+    "answer": "актёр"
+  },
+  {
+    "quest": "promovierte Lehrkraft",
+    "answer": [
+      "доц_е_нт",
+      "~Maskulinum~"
+    ]
+  },
+  {
+    "quest": "Journalist",
+    "answer": "журнал_и_ст"
+  },
+  {
+    "quest": "Schüler",
+    "answer": "шк_о_льник"
+  },
+  {
+    "quest": [
+      "Ökonom",
+      "Ökonomin"
+    ],
+    "answer": "эконом_и_ст"
+  },
+  {
+    "quest": "Flugbegleiter",
+    "answer": "ст_ю_ард"
+  },
+  {
+    "quest": "Rentnerin",
+    "answer": "пенсион_е_рка"
+  },
+  {
+    "quest": "Verkäufer",
+    "answer": [
+      "продав_е_ц",
+      "продавц_а_ ~- Genitiv Singular~"
+    ]
+  },
+  {
+    "quest": "Schülerin",
+    "answer": "шк_о_льница"
+  },
+  {
+    "quest": "Lehrerin",
+    "answer": "уч_и_тельница"
+  },
+  {
+    "quest": "Verkäuferin",
+    "answer": "продавщ_и_ца"
+  },
+  {
+    "quest": [
+      "Diplomat",
+      "Diplomatin"
+    ],
+    "answer": "диплом_а_т"
+  },
+  {
+    "quest": "Lehrer",
+    "answer": [
+      "уч_и_тель",
+      "~Maskulinum - Endung: ь~"
+    ]
+  }
+]

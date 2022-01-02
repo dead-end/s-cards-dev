@@ -1,0 +1,206 @@
+[
+  {
+    "quest": [
+      "zusammen"
+    ],
+    "answer": [
+      "вм_е_сте"
+    ]
+  },
+  {
+    "quest": [
+      "euer",
+      "eure",
+      "ihr",
+      "ihre"
+    ],
+    "answer": [
+      "ваш",
+      "в_а_ша",
+      "в_а_ши"
+    ]
+  },
+  {
+    "quest": [
+      "du hast ..."
+    ],
+    "answer": [
+      "у теб_я_ есть ..."
+    ]
+  },
+  {
+    "quest": [
+      "schon lange (zeitlich)"
+    ],
+    "answer": [
+      "уж_е_ давн_о_"
+    ]
+  },
+  {
+    "quest": [
+      "von Beruf",
+      "beruflich"
+    ],
+    "answer": "по проф_е_ссии"
+  },
+  {
+    "quest": "Beruf",
+    "answer": "проф_е_ссия"
+  },
+  {
+    "quest": "Buchhalter",
+    "answer": "Бухг_а_лтер"
+  },
+  {
+    "quest": "Journalistin",
+    "answer": "журнал_и_стка"
+  },
+  {
+    "quest": "wir haben ...",
+    "answer": "у нас есть ..."
+  },
+  {
+    "quest": "zwei Kinder",
+    "answer": "дв_о_е дет_е_й"
+  },
+  {
+    "quest": [
+      "Arzt",
+      "Ärztin"
+    ],
+    "answer": "врач"
+  },
+  {
+    "quest": "er hat ...",
+    "answer": "у нег_о_ есть ..."
+  },
+  {
+    "quest": "eine eigene Familie",
+    "answer": "сво_я_ семь_я_"
+  },
+  {
+    "quest": "wir haben keine / keinen",
+    "answer": "у нас нет ... ~+ Genitiv~"
+  },
+  {
+    "quest": "nun",
+    "answer": "теп_е_рь"
+  },
+  {
+    "quest": "ich habe ...",
+    "answer": "У мен_я_ есть ..."
+  },
+  {
+    "quest": "Jurist",
+    "answer": "юр_и_ст"
+  },
+  {
+    "quest": "weit (weg) von",
+    "answer": "далек_о_ от ... ~+ Genitiv~"
+  },
+  {
+    "quest": "ich habe kein / keine / keinen ...",
+    "answer": "у мен_я_ нет ... ~+ Genitiv~"
+  },
+  {
+    "quest": "Katze",
+    "answer": "к_о_шка"
+  },
+  {
+    "quest": "Liebling (weiblich)",
+    "answer": "люб_и_мица"
+  },
+  {
+    "quest": "Vatersnamen",
+    "answer": "_о_тчество"
+  },
+  {
+    "quest": [
+      "längst",
+      "vor langer Zeit"
+    ],
+    "answer": "давн_о_"
+  },
+  {
+    "quest": [
+      "weit",
+      "fern"
+    ],
+    "answer": "далек_о_"
+  },
+  {
+    "quest": [
+      "das bedeutet",
+      "das heißt"
+    ],
+    "answer": "(это) зн_а_чит"
+  },
+  {
+    "quest": "Ingenieur / -in",
+    "answer": "инжен_е_р"
+  },
+  {
+    "quest": "Programmierer / -in",
+    "answer": "программ_и_ст"
+  },
+  {
+    "quest": "drei Kinder",
+    "answer": "тр_о_е дет_е_й"
+  },
+  {
+    "quest": [
+      "arbeiten",
+      "~konjugieren~"
+    ],
+    "answer": [
+      "раб_о_тать",
+      "- я раб_о_таю",
+      "- ты раб_о_таешь",
+      "- он раб_о_тает",
+      "- мы раб_о_таем",
+      "- вы раб_о_таете",
+      "- они раб_о_тают"
+    ]
+  },
+  {
+    "quest": [
+      "wörtl.: Wie viele Sommer, wie viele Winter! ",
+      "(Ausruf, wenn man jmdn. lange nicht gesehen hat)"
+    ],
+    "answer": " Ск_о_лько лет, ск_о_лько зим!"
+  },
+  {
+    "quest": [
+      "machen",
+      "tun ",
+      "~konjugieren~"
+    ],
+    "answer": [
+      "д_е_лать",
+      "- я д_е_лаю",
+      "- ты д_е_лаешь",
+      "- он д_е_лает",
+      "- мы д_е_лаем",
+      "- вы д_е_лаете",
+      "- они д_е_лают"
+    ]
+  },
+  {
+    "quest": [
+      "geschäftlich",
+      "dienstlich"
+    ],
+    "answer": "по дел_а_м"
+  },
+  {
+    "quest": [
+      "Ach so!",
+      "Sieh mal einer an!"
+    ],
+    "answer": "Вот как!"
+  },
+  {
+    "quest": "Rentner ",
+    "answer": "пенсион_е_р"
+  }
+]

@@ -1,0 +1,260 @@
+[
+  {
+    "quest": [
+      "Gemüse"
+    ],
+    "answer": [
+      "_о_вощи",
+      "~Plural~"
+    ]
+  },
+  {
+    "quest": [
+      "Getränk"
+    ],
+    "answer": [
+      "нап_и_ток",
+      "нап_и_тка ~- Genitiv Singular~"
+    ]
+  },
+  {
+    "quest": [
+      "Praline",
+      "Bonbon"
+    ],
+    "answer": [
+      "конф_е_та"
+    ]
+  },
+  {
+    "quest": [
+      "Birne"
+    ],
+    "answer": [
+      "гр_у_ша"
+    ]
+  },
+  {
+    "quest": [
+      "(Wiener) Würstchen"
+    ],
+    "answer": [
+      "сос_и_ска"
+    ]
+  },
+  {
+    "quest": [
+      "Kuchen"
+    ],
+    "answer": [
+      "пир_о_г"
+    ]
+  },
+  {
+    "quest": [
+      "Salat"
+    ],
+    "answer": [
+      "сaл_а_т"
+    ]
+  },
+  {
+    "quest": [
+      "Ananas"
+    ],
+    "answer": [
+      "анан_а_с"
+    ]
+  },
+  {
+    "quest": [
+      "Gurke"
+    ],
+    "answer": [
+      "огур_е_ц",
+      "огурц_а_ ~- Gennitiv Singular~"
+    ]
+  },
+  {
+    "quest": [
+      "Kühlschrank"
+    ],
+    "answer": [
+      "холод_и_льник"
+    ]
+  },
+  {
+    "quest": [
+      "saure Sahne"
+    ],
+    "answer": [
+      "смет_а_на"
+    ]
+  },
+  {
+    "quest": [
+      "Quark"
+    ],
+    "answer": [
+      "тв_о_рог"
+    ]
+  },
+  {
+    "quest": [
+      "Salz"
+    ],
+    "answer": [
+      "соль",
+      "~Femininum - Endung: ь~"
+    ]
+  },
+  {
+    "quest": [
+      "Zucker"
+    ],
+    "answer": [
+      "с_а_хар"
+    ]
+  },
+  {
+    "quest": [
+      "Plus"
+    ],
+    "answer": [
+      "плюс"
+    ]
+  },
+  {
+    "quest": [
+      "Minus"
+    ],
+    "answer": [
+      "м_и_нус"
+    ]
+  },
+  {
+    "quest": [
+      "Wie viel kostet ...?"
+    ],
+    "answer": [
+      "Ск_о_лько ст_о_ит ...?"
+    ]
+  },
+  {
+    "quest": [
+      "Rubel"
+    ],
+    "answer": [
+      "рубль",
+      "~Maskulinum - Endung: ь~"
+    ]
+  },
+  {
+    "quest": [
+      "Euro"
+    ],
+    "answer": [
+      "_е_вро",
+      "~Maskulinum - Ausnahme~"
+    ]
+  },
+  {
+    "quest": [
+      "Butter"
+    ],
+    "answer": [
+      "сл_и_вочное м_а_сло"
+    ]
+  },
+  {
+    "quest": [
+      "Schachtel"
+    ],
+    "answer": [
+      "кор_о_бка"
+    ]
+  },
+  {
+    "quest": [
+      "Gewicht"
+    ],
+    "answer": [
+      "вес"
+    ]
+  },
+  {
+    "quest": [
+      "Packung"
+    ],
+    "answer": [
+      "упак_о_вка"
+    ]
+  },
+  {
+    "quest": [
+      "Preis"
+    ],
+    "answer": [
+      "цен_а_"
+    ]
+  },
+  {
+    "quest": [
+      "Gramm"
+    ],
+    "answer": [
+      "грамм"
+    ]
+  },
+  {
+    "quest": [
+      "Päckchen"
+    ],
+    "answer": [
+      "п_а_чка"
+    ]
+  },
+  {
+    "quest": [
+      "Kilogramm"
+    ],
+    "answer": [
+      "килогр_а_мм"
+    ]
+  },
+  {
+    "quest": [
+      "Tüte",
+      "Beutel"
+    ],
+    "answer": [
+      "пак_е_т"
+    ]
+  },
+  {
+    "quest": [
+      "Liter"
+    ],
+    "answer": [
+      "литр"
+    ]
+  },
+  {
+    "quest": [
+      "Flasche"
+    ],
+    "answer": [
+      "бут_ы_лка"
+    ]
+  },
+  {
+    "quest": [
+      "Gib ...",
+      "Geben Sie ..."
+    ],
+    "answer": [
+      "Дай ...",
+      "Дайте ..."
+    ]
+  }
+]

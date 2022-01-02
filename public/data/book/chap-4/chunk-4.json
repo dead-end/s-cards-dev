@@ -1,0 +1,199 @@
+[
+  {
+    "quest": "Supermarkt",
+    "answer": "суперм_а_ркет"
+  },
+  {
+    "quest": "Bank",
+    "answer": "б_а_нк"
+  },
+  {
+    "quest": [
+      "Werk ",
+      "Fabrik"
+    ],
+    "answer": "зав_о_д"
+  },
+  {
+    "quest": " Botschaft",
+    "answer": "пос_о_льство"
+  },
+  {
+    "quest": "Schule",
+    "answer": "шк_о_ла"
+  },
+  {
+    "quest": "Redaktion",
+    "answer": "ред_а_кция"
+  },
+  {
+    "quest": [
+      "Unternehmen",
+      "Firma"
+    ],
+    "answer": "комп_а_ния"
+  },
+  {
+    "quest": "Kino",
+    "answer": [
+      "кин_о_",
+      "~indeklinabel~"
+    ]
+  },
+  {
+    "quest": [
+      "Kollege",
+      "Kollegin"
+    ],
+    "answer": [
+      "колл_е_га",
+      "~Maskulinum / Femininum~"
+    ]
+  },
+  {
+    "quest": [
+      "Manager",
+      "Managerin"
+    ],
+    "answer": "м_е_неджер"
+  },
+  {
+    "quest": [
+      "Partner",
+      "Partnerin "
+    ],
+    "answer": "партнёр"
+  },
+  {
+    "quest": "Ich freue mich sehr, Sie (dich, euch) kennenzulernen.",
+    "answer": "_О_чень рад познак_о_миться."
+  },
+  {
+    "quest": "froh ",
+    "answer": [
+      "рад",
+      "р_а_да",
+      "р_а_ды"
+    ]
+  },
+  {
+    "quest": [
+      "Ich freue mich, Sie zu sehen.",
+      "Ich freue mich, euch zu sehen."
+    ],
+    "answer": "Рад вас в_и_деть."
+  },
+  {
+    "quest": "Projekt",
+    "answer": "про_е_кт"
+  },
+  {
+    "quest": "Es geht gut (voran).",
+    "answer": "Дел_а_ ид_у_т хорош_о_."
+  },
+  {
+    "quest": "Mitarbeiterin",
+    "answer": "сотр_у_дница"
+  },
+  {
+    "quest": "Danke für das Kompliment!",
+    "answer": "Спас_и_бо за комплим_е_нт!"
+  },
+  {
+    "quest": [
+      "Direktor",
+      "Direktorin"
+    ],
+    "answer": "дир_е_ктор"
+  },
+  {
+    "quest": [
+      "Übersetzerin",
+      "Dolmetscherin"
+    ],
+    "answer": "перев_о_дчица"
+  },
+  {
+    "quest": "Mitarbeiter",
+    "answer": "сотр_у_дник"
+  },
+  {
+    "quest": [
+      "Übersetzer",
+      "Dometscher"
+    ],
+    "answer": "перев_о_дчик"
+  },
+  {
+    "quest": [
+      "Techniker",
+      "Technikerin"
+    ],
+    "answer": "т_е_хник"
+  },
+  {
+    "quest": [
+      "Agent",
+      "Agentin",
+      "Vertreter",
+      "Vertreterin"
+    ],
+    "answer": "аг_е_нт"
+  },
+  {
+    "quest": [
+      "Finanzfachmann",
+      "Finanzfachfrau"
+    ],
+    "answer": "финанс_и_ст"
+  },
+  {
+    "quest": [
+      "schön",
+      "wunderschön",
+      "wunderbar"
+    ],
+    "answer": "прекр_а_сно"
+  },
+  {
+    "quest": "(kleine) Stadt",
+    "answer": [
+      "город_о_к",
+      "городк_а_ ~- Genitiv Singular~"
+    ]
+  },
+  {
+    "quest": "Universität für Luft und Weltraumfahrt",
+    "answer": "Аэрокосм_и_ческий университ_е_т"
+  },
+  {
+    "quest": "Flugzeugfabrik",
+    "answer": "авиаци_о_нный зав_о_д"
+  },
+  {
+    "quest": "Automobilwerk",
+    "answer": "автомоб_и_льный зав_о_д"
+  },
+  {
+    "quest": "Opern und Balletttheater",
+    "answer": "те_а_тр _о_перы и бал_е_та"
+  },
+  {
+    "quest": "Frauenkloster",
+    "answer": [
+      "ж_е_нский монаст_ы_рь",
+      "~Maskulinum - Endung: ь~"
+    ]
+  },
+  {
+    "quest": "Synagoge",
+    "answer": "синаг_о_га"
+  },
+  {
+    "quest": "Gruschin Festival",
+    "answer": [
+      "Гр_у_шинский фестив_а_ль",
+      "~Maskulinum - Endung: ь~"
+    ]
+  }
+]

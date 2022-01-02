@@ -1,0 +1,288 @@
+[
+  {
+    "quest": [
+      "Familie"
+    ],
+    "answer": [
+      "семь_я_"
+    ]
+  },
+  {
+    "quest": [
+      "Vater",
+      "Vati"
+    ],
+    "answer": [
+      "п_а_па",
+      "~Ausnahme: Maskulinum~"
+    ]
+  },
+  {
+    "quest": [
+      "Vater"
+    ],
+    "answer": [
+      "от_е_ц",
+      "отц_а_ ~- Genitiv Singular~"
+    ]
+  },
+  {
+    "quest": [
+      "Mutter",
+      "Mutti"
+    ],
+    "answer": [
+      "м_а_ма"
+    ]
+  },
+  {
+    "quest": [
+      "Mutter"
+    ],
+    "answer": [
+      "мать",
+      "~Femininum - Endung: ь~"
+    ]
+  },
+  {
+    "quest": [
+      "Eltern"
+    ],
+    "answer": [
+      "род_и_тели",
+      "~Plural~"
+    ]
+  },
+  {
+    "quest": [
+      "Ehemann"
+    ],
+    "answer": [
+      "муж"
+    ]
+  },
+  {
+    "quest": [
+      "Ehefrau"
+    ],
+    "answer": [
+      "жен_а_"
+    ]
+  },
+  {
+    "quest": [
+      "Sohn"
+    ],
+    "answer": [
+      "сын"
+    ]
+  },
+  {
+    "quest": [
+      "Tochter"
+    ],
+    "answer": [
+      "дочь",
+      "Femininum - Endung: ь"
+    ]
+  },
+  {
+    "quest": [
+      "(kleine) Tochter"
+    ],
+    "answer": [
+      "д_о_чка"
+    ]
+  },
+  {
+    "quest": [
+      "Kinder"
+    ],
+    "answer": [
+      "д_е_ти",
+      "~Plural~"
+    ]
+  },
+  {
+    "quest": [
+      "Bruder"
+    ],
+    "answer": [
+      "брат"
+    ]
+  },
+  {
+    "quest": [
+      "Schwester"
+    ],
+    "answer": [
+      "сестр_а_"
+    ]
+  },
+  {
+    "quest": [
+      "Großvater",
+      "Opa"
+    ],
+    "answer": [
+      "д_е_душка",
+      "~Ausnahme: Maskulinum~"
+    ]
+  },
+  {
+    "quest": [
+      "Großmutter",
+      "Oma"
+    ],
+    "answer": [
+      "б_а_бушка"
+    ]
+  },
+  {
+    "quest": [
+      "Enkel"
+    ],
+    "answer": [
+      "внук"
+    ]
+  },
+  {
+    "quest": [
+      "Enkelin"
+    ],
+    "answer": [
+      "вн_у_чка"
+    ]
+  },
+  {
+    "quest": [
+      "Freund"
+    ],
+    "answer": [
+      "друг"
+    ]
+  },
+  {
+    "quest": [
+      "Freundin"
+    ],
+    "answer": [
+      "подр_у_га"
+    ]
+  },
+  {
+    "quest": [
+      "Freunde"
+    ],
+    "answer": [
+      "друзь_я_",
+      "~Plural~"
+    ]
+  },
+  {
+    "quest": [
+      "einträchtig",
+      "einmütig"
+    ],
+    "answer": [
+      "др_у_жная"
+    ]
+  },
+  {
+    "quest": [
+      "Moskauerin"
+    ],
+    "answer": [
+      "москв_и_чка"
+    ]
+  },
+  {
+    "quest": [
+      "nicht weit von"
+    ],
+    "answer": [
+      "недалек_о_ от ~+ Genitiv~"
+    ]
+  },
+  {
+    "quest": [
+      "U-Bahn-Station"
+    ],
+    "answer": [
+      "ст_а_нция метр_о_"
+    ]
+  },
+  {
+    "quest": [
+      "er heißt..."
+    ],
+    "answer": [
+      "ег_о_ зов_у_т"
+    ]
+  },
+  {
+    "quest": [
+      "unser",
+      "unsere"
+    ],
+    "answer": [
+      "н_а_ш",
+      "н_а_ша",
+      "н_а_ши"
+    ]
+  },
+  {
+    "quest": [
+      "Studentin"
+    ],
+    "answer": [
+      "студ_е_нтка"
+    ]
+  },
+  {
+    "quest": [
+      "mein",
+      "meine"
+    ],
+    "answer": [
+      "мой",
+      "мо_я_",
+      "мо_и_"
+    ]
+  },
+  {
+    "quest": [
+      "alle zusammen"
+    ],
+    "answer": [
+      "всё вм_е_сте"
+    ]
+  },
+  {
+    "quest": [
+      "sie heißen ...",
+      "~mehrere Personen~"
+    ],
+    "answer": [
+      "их зов_у_т ..."
+    ]
+  },
+  {
+    "quest": [
+      "sie heißt ...",
+      "~eine weibliche Person~"
+    ],
+    "answer": "её зов_у_т ..."
+  },
+  {
+    "quest": [
+      "dein",
+      "deine"
+    ],
+    "answer": [
+      "твой",
+      "тво_я_",
+      "тво_и_"
+    ]
+  }
+]

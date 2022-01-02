@@ -1,22 +1,38 @@
 [
     {
-        "file": "data/book/kapitel-6-1.json",
-        "title": "Kapitel 6 Teil 1"
+        "file": "data/book/chap-5/chunk-1.json",
+        "title": "Kapitel 5 Teil 1"
     },
     {
-        "file": "data/book/kapitel-6-2.json",
+        "file": "data/book/chap-5/chunk-2.json",
+        "title": "Kapitel 5 Teil 2"
+    },
+    {
+        "file": "data/book/chap-5/chunk-3.json",
+        "title": "Kapitel 5 Teil 3"
+    },
+    {
+        "file": "data/book/chap-5/chunk-4.json",
+        "title": "Kapitel 5 Teil 4"
+    },
+    {
+        "file": "data/book/chap-6/chunk-1.json",
+        "title": "Kapitel 5 Teil 1"
+    },
+    {
+        "file": "data/book/chap-6/chunk-2.json",
         "title": "Kapitel 6 Teil 2"
     },
     {
-        "file": "data/book/kapitel-6-3.json",
+        "file": "data/book/chap-6/chunk-3.json",
         "title": "Kapitel 6 Teil 3"
     },
     {
-        "file": "data/book/kapitel-6-4.json",
+        "file": "data/book/chap-6/chunk-4.json",
         "title": "Kapitel 6 Teil 4"
     },
     {
-        "file": "data/book/kapitel-6-5.json",
+        "file": "data/book/chap-6/chunk-5.json",
         "title": "Kapitel 6 Teil 5"
     },
     {
