@@ -175,3 +175,29 @@ export const topicSetLastModified = (tx: IDBTransaction, file: string, lastModif
     };
   };
 };
+
+/**
+ * The function returns a sorted array of unique tags.
+ */
+export const topicsGetTags = (topics: Topic[]) => {
+
+  const tags: string[] = [];
+  //
+  // Iterate over the topics, which contain an array of tags.
+  //
+  topics.forEach((topic) => {
+    //
+    // Iterate over the tags of the topic.
+    //
+    topic.tags.forEach((tag) => {
+      //
+      // Check if our tags array contains this tag
+      //
+      if (!tags.includes(tag)) {
+        tags.push(tag);
+      }
+    });
+  });
+
+  return tags.sort();
+} 
