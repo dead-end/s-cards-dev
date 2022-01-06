@@ -40,6 +40,19 @@ export const arrToMap = (arr: Array<Object>, prop: string) => {
 };
 
 /**
+ * The function checks if two arrays of strings are equal.
+ */
+export const arrIsEqual = (arr1: string[], arr2: string[]) => {
+  //
+  // Ensure that both exist.
+  //
+  const a1 = arr1 ? arr1 : [];
+  const a2 = arr2 ? arr2 : [];
+
+  return a1.toString() !== a2.toString();
+}
+
+/**
  * The function is called with an array and a value. The function checks if all
  * of the array values have the given value.
  */

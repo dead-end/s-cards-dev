@@ -1,6 +1,6 @@
 import { db } from './db';
 import { questRemoveFile } from './questModel';
-import { arrToMap } from './utils';
+import { arrToMap, arrIsEqual } from './utils';
 
 /**
  * The function is called with a json array that contains the topics. It
@@ -99,12 +99,16 @@ const topicNeedUpdate = (json: Topic, store: Topic) => {
   }
 
   //
+  // Compare the tags arrays.
+  //
+  if (!arrIsEqual(json.tags, store.tags)) {
+    return true;
+  }
+
+  //
   // Compare the details arrays, which may not exist.
   //
-  const jsonDetails = json.details ? json.details : [];
-  const storeDetails = store.details ? store.details : [];
-
-  if (jsonDetails.toString() !== storeDetails.toString()) {
+  if (!arrIsEqual(json.details, store.details)) {
     return true;
   }
 
