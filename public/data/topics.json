@@ -1,47 +1,90 @@
 [
     {
         "file": "data/book/chap-5/chunk-1.json",
-        "title": "Kapitel 5 Teil 1"
+        "title": "Kapitel 5 Teil 1",
+        "tags": [
+            "Buch",
+            "Kapitel-5"
+        ]
     },
     {
         "file": "data/book/chap-5/chunk-2.json",
-        "title": "Kapitel 5 Teil 2"
+        "title": "Kapitel 5 Teil 2",
+        "tags": [
+            "Buch",
+            "Kapitel-5"
+        ]
     },
     {
         "file": "data/book/chap-5/chunk-3.json",
-        "title": "Kapitel 5 Teil 3"
+        "title": "Kapitel 5 Teil 3",
+        "tags": [
+            "Buch",
+            "Kapitel-5"
+        ]
     },
     {
         "file": "data/book/chap-5/chunk-4.json",
-        "title": "Kapitel 5 Teil 4"
+        "title": "Kapitel 5 Teil 4",
+        "tags": [
+            "Buch",
+            "Kapitel-5"
+        ]
     },
     {
         "file": "data/book/chap-6/chunk-1.json",
-        "title": "Kapitel 5 Teil 1"
+        "title": "Kapitel 5 Teil 1",
+        "tags": [
+            "Buch",
+            "Kapitel-5"
+        ]
     },
     {
         "file": "data/book/chap-6/chunk-1.json",
-        "title": "Kapitel 6 Teil 1"
+        "title": "Kapitel 6 Teil 1",
+        "tags": [
+            "Buch",
+            "Kapitel-6"
+        ]
     },
     {
         "file": "data/book/chap-6/chunk-2.json",
-        "title": "Kapitel 6 Teil 2"
+        "title": "Kapitel 6 Teil 2",
+        "tags": [
+            "Buch",
+            "Kapitel-6"
+        ]
     },
     {
         "file": "data/book/chap-6/chunk-3.json",
-        "title": "Kapitel 6 Teil 3"
+        "title": "Kapitel 6 Teil 3",
+        "tags": [
+            "Buch",
+            "Kapitel-6"
+        ]
     },
     {
         "file": "data/book/chap-6/chunk-4.json",
-        "title": "Kapitel 6 Teil 4"
+        "title": "Kapitel 6 Teil 4",
+        "tags": [
+            "Buch",
+            "Kapitel-6"
+        ]
     },
     {
         "file": "data/book/chap-6/chunk-5.json",
-        "title": "Kapitel 6 Teil 5"
+        "title": "Kapitel 6 Teil 5",
+        "tags": [
+            "Buch",
+            "Kapitel-6"
+        ]
     },
     {
         "file": "data/gram/plural.json",
         "title": "Grammatik Plural",
+        "tags": [
+            "Grammatik"
+        ],
         "details": [
             "~Maskulinum / Femininum~",
             "- г, к, х, ш, щ, ч ~=>~ и",
@@ -56,6 +99,9 @@
     {
         "file": "data/gram/mein-dein.json",
         "title": "Grammatik Mein-Dein",
+        "tags": [
+            "Grammatik"
+        ],
         "details": [
             "~Maskulinum: endungslos, Konsonanten,~ -й, -ь",
             "~Femininum:~ -а / -я, -ия, -ь",
@@ -65,6 +111,9 @@
     {
         "file": "data/gram/akk.json",
         "title": "Grammatik Akkusativ",
+        "tags": [
+            "Grammatik"
+        ],
         "details": [
             "~Maskulinum Singular:~",
             "- ~unbelebt =>~ -",
@@ -85,6 +134,9 @@
     {
         "file": "data/misc.json",
         "title": "Sonstiges - Test",
-        "desc": "Dies ist meine Beschreibung!"
+        "tags": [
+            "Sonstiges"
+        ],
+        "desc": "Dies ist meine Beschreibung!!!"
     }
 ]

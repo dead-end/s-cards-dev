@@ -21,6 +21,10 @@
     <td>Size</td>
     <td>{size}</td>
   </tr>
+  <tr>
+    <td>Tags</td>
+    <td>{topic.tags.join(', ')}</td>
+  </tr>
 </table>
 {#if topic.desc}
   <p>{topic.desc}</p>

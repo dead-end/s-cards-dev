@@ -67,6 +67,7 @@ export const topicSync = (json: Array<Topic>) => {
 export interface Topic {
   file: string,
   title: string,
+  tags: string[],
   desc: string,
   details?: string[],
   lastModified?: Date
