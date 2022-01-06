@@ -1,5 +1,45 @@
 [
     {
+        "file": "data/book/chap-4/chunk-1.json",
+        "title": "Kapitel 4 Teil 1",
+        "tags": [
+            "Buch",
+            "Kapitel-4"
+        ]
+    },
+    {
+        "file": "data/book/chap-4/chunk-2.json",
+        "title": "Kapitel 4 Teil 2",
+        "tags": [
+            "Buch",
+            "Kapitel-4"
+        ]
+    },
+    {
+        "file": "data/book/chap-4/chunk-3.json",
+        "title": "Kapitel 4 Teil 3",
+        "tags": [
+            "Buch",
+            "Kapitel-4"
+        ]
+    },
+    {
+        "file": "data/book/chap-4/chunk-4.json",
+        "title": "Kapitel 4 Teil 4",
+        "tags": [
+            "Buch",
+            "Kapitel-4"
+        ]
+    },
+    {
+        "file": "data/book/chap-4/gram.json",
+        "title": "Kapitel 4 Grammatik",
+        "tags": [
+            "Buch",
+            "Kapitel-4"
+        ]
+    },
+    {
         "file": "data/book/chap-5/chunk-1.json",
         "title": "Kapitel 5 Teil 1",
         "tags": [
