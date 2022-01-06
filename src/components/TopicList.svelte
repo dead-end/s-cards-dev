@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, afterUpdate } from 'svelte';
-  import { topicGetAll } from '../js/topicModel';
+  import { topicGetAll, topicsGetTags } from '../js/topicModel';
   import TopicCard from './TopicCard.svelte';
   import type { Topic } from '../js/topicModel';
 
@@ -11,12 +11,31 @@
 
   let topics: Array<Topic> = [];
 
+  let filtered: Array<Topic> = [];
+
+  let tags: String[];
+
+  let filter: string;
+
+  /**
+   * Filter the topics with a tag.
+   */
+  const doFilter = () => {
+    if (!filter) {
+      filtered = topics;
+    } else {
+      filtered = topics.filter((t) => t.tags.includes(filter));
+    }
+  };
+
   /**
    * On mount, get all the topics from the store.
    */
   onMount(() => {
     topicGetAll().then((t) => {
       topics = t;
+      filtered = t;
+      tags = topicsGetTags(topics);
     });
   });
 
@@ -28,14 +47,25 @@
       const elem = document.getElementById(id);
       if (elem) {
         elem.scrollIntoView();
-        console.log('scroll to: ' + id);
       }
     }
   });
 </script>
 
+{#if tags}
+  <div class="block">
+    <label for="tag-select">Tag Filter</label>
+    <select id="tag-select" bind:value={filter} on:change={doFilter}>
+      <option value="">-- Select --</option>
+      {#each tags as tag}
+        <option value={tag}>{tag}</option>
+      {/each}
+    </select>
+  </div>
+{/if}
+
 <div class="grid grid-4">
-  {#each topics as topic}
+  {#each filtered as topic}
     <TopicCard {topic} />
   {/each}
 </div>
