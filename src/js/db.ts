@@ -32,6 +32,7 @@ const nullToOne = (event: IDBVersionChangeEvent) => {
     keyPath: 'id', autoIncrement: true
   });
   storeQuest.createIndex('file', 'file', { unique: false });
+  storeQuest.createIndex('ratio', 'ratio', { unique: false });
 
   //
   // Create config store
