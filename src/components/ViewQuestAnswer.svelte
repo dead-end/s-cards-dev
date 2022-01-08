@@ -2,7 +2,6 @@
   import { onMount } from 'svelte';
   import { viewStore } from '../stores/viewStore';
   import QuestStatistic from './QuestStatistic.svelte';
-  import QuestProgress from './QuestProgress.svelte';
   import { shuffleArr } from '../js/utils';
   import Markdown from '../js/Markdown';
   import {
@@ -14,6 +13,7 @@
 
   import type { Topic } from '../js/topicModel';
   import type { Question } from '../js/questModel';
+  import QuestAnswer from './QuestAnswer.svelte';
 
   export let topic: Topic;
 
@@ -87,28 +87,7 @@
 
     <QuestStatistic {statistic} />
 
-    <div class="grid grid-2">
-      <div>
-        <div class="is-flex-spread block">
-          <div class="h5">Question: {quest.id}</div>
-          <QuestProgress {quest} />
-        </div>
-
-        <div class="card content is-primary">
-          <p>{@html md.toHtml(quest.quest)}</p>
-        </div>
-      </div>
-
-      <div hidden={hideAnswer}>
-        <h5>Answer</h5>
-        <div class="card content is-info">
-          <p>{@html md.toHtml(quest.answer)}</p>
-          {#if topic.details}
-            <p>{@html md.toHtml(topic.details)}</p>
-          {/if}
-        </div>
-      </div>
-    </div>
+    <QuestAnswer {topic} {quest} {hideAnswer} />
 
     <!-- Buttons related to questions and answers -->
     <div class="buttons">
