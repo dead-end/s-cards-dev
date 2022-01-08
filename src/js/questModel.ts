@@ -102,15 +102,26 @@ export const questPersist = (quest: Question) => {
 
 /**
  * The function gets all questions for a topic from the store. It returns a 
- * promise with an array of questions.
+ * promise with an array of questions. It is a wrapper, that gets a store and
+ * calls the function below.
  */
 export const questGetAll = (topic: Topic) => {
 
-  return new Promise<Question[]>((resolve, reject) => {
+  const store = db
+    .transaction(['questions'], 'readonly')
+    .objectStore('questions');
 
-    const store = db
-      .transaction(['questions'], 'readonly')
-      .objectStore('questions');
+  return questGetAllTx(store, topic);
+};
+
+/**
+ * The function gets all questions for a topic from the store. It returns a 
+ * promise with an array of questions.
+ */
+
+const questGetAllTx = (store: IDBObjectStore, topic: Topic) => {
+
+  return new Promise<Question[]>((resolve, reject) => {
 
     const request = store.index('file').getAll(topic.file);
 
@@ -205,7 +216,50 @@ export const questSetProgress = (file: string, value: number) => {
     // The cursor has finished.
     //
     else {
-      console.log('Store:', store.name, ' set progress done:', value);
+      console.log('Store:', store.name, 'set progress done:', value);
     }
   };
 };
+
+/**
+ * The function is called with an array of topics. It reads all questions from 
+ * the topics, sorts them by the ration and returns a Promise for an array with
+ * max elements with the highest ratios.
+ */
+export const questGetTag = async (topics: Topic[], max: number) => {
+  //
+  // We use one transaction / store for all topics
+  //
+  const store = db
+    .transaction(['questions'], 'readonly')
+    .objectStore('questions');
+
+  let promises: Promise<Question[]>[] = [];
+  //
+  // Get a promise for the questions for each topic.
+  //
+  topics.forEach(t => {
+    promises.push(questGetAllTx(store, t))
+  })
+  //
+  // When we got the question array from all topics, we aggregate and sort them
+  // and return a slice. 
+  //
+  return Promise.all(promises).then(arrOfArr => {
+    //
+    // Each promise returns an array of questions and we have to concatinate 
+    // them all.
+    //
+    let all: Question[] = [].concat(...arrOfArr);
+    //
+    // Sort the array with the highest ratio first.
+    //
+    all.sort((a: Question, b: Question) => {
+      return b.ratio - a.ratio;
+    });
+    //
+    // Return an array with up to max members.
+    //
+    return all.splice(0, max);
+  });
+}
