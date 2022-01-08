@@ -10,8 +10,10 @@
   import ErrorShow from './components/ErrorShow.svelte';
   import TopicList from './components/TopicList.svelte';
   import TopicShow from './components/TopicShow.svelte';
-  import QuestList from './components/QuestList.svelte';
+  import QuestArrTopic from './components/QuestArrTopic.svelte';
+  import QuestArrTag from './components/QuestArrTag.svelte';
   import QuestShow from './components/QuestShow.svelte';
+  import TagShow from './components/TagShow.svelte';
 
   onMount(() => {
     try {
@@ -27,11 +29,17 @@
       TopicShow: {
         component: TopicShow,
       },
-      QuestList: {
-        component: QuestList,
+      QuestArrTopic: {
+        component: QuestArrTopic,
+      },
+      QuestArrTag: {
+        component: QuestArrTag,
       },
       QuestShow: {
         component: QuestShow,
+      },
+      TagShow: {
+        component: TagShow,
       },
     };
     //

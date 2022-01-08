@@ -55,7 +55,7 @@
    * Callback function for the listing button.
    */
   const onListing = () => {
-    viewStore.setView('QuestList', { topic: topic });
+    viewStore.setView('QuestArrTopic', { topic: topic });
   };
 
   /**

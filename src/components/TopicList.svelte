@@ -3,6 +3,7 @@
   import { topicGetAll, topicsGetTags } from '../js/topicModel';
   import TopicCard from './TopicCard.svelte';
   import type { Topic } from '../js/topicModel';
+  import { viewStore } from '../stores/viewStore';
 
   //
   // Id to scroll the view to.
@@ -61,6 +62,15 @@
         <option value={tag}>{tag}</option>
       {/each}
     </select>
+
+    {#if filter}
+      <button
+        class="button"
+        on:click={() =>
+          viewStore.setView('TagShow', { tag: filter, topics: filtered })}
+        >Show</button
+      >
+    {/if}
   </div>
 {/if}
 
