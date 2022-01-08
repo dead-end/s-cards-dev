@@ -35,13 +35,13 @@
     <button
       class="button"
       on:click={() => {
-        viewStore.setView('TopicList');
+        viewStore.setView('ViewTopicList');
       }}>Back</button
     >
     <button
       class="button"
       on:click={() =>
-        viewStore.setView('QuestArrTag', { tag: tag, topics: topics })}
+        viewStore.setView('ViewTagQuests', { tag: tag, topics: topics })}
       >Listing</button
     >
   </div>

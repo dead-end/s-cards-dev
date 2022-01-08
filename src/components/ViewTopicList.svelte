@@ -67,7 +67,7 @@
       <button
         class="button"
         on:click={() =>
-          viewStore.setView('TagShow', { tag: filter, topics: filtered })}
+          viewStore.setView('ViewTagInfo', { tag: filter, topics: filtered })}
         >Show</button
       >
     {/if}

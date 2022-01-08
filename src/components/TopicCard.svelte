@@ -15,7 +15,7 @@
    * Show the topic.
    */
   const onClick = (topic: Topic) => {
-    viewStore.setView('TopicShow', { topic: topic });
+    viewStore.setView('ViewTopicInfo', { topic: topic });
   };
 
   /**

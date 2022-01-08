@@ -25,7 +25,7 @@
    * Change the view. The topic for the next view.
    */
   const onClick = () => {
-    viewStore.setView('TagShow', { tag: tag, topics: topics });
+    viewStore.setView('ViewTagInfo', { tag: tag, topics: topics });
   };
 </script>
 

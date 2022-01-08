@@ -77,7 +77,7 @@
    * Callback function for the stop button.
    */
   const onStop = () => {
-    viewStore.setView('TopicList', { id: topic.file });
+    viewStore.setView('ViewTopicList', { id: topic.file });
   };
 </script>
 

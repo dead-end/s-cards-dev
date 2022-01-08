@@ -48,21 +48,21 @@
    * Callback function for the back button.
    */
   const onBack = () => {
-    viewStore.setView('TopicList', { id: topic.file });
+    viewStore.setView('ViewTopicList', { id: topic.file });
   };
 
   /**
    * Callback function for the listing button.
    */
   const onListing = () => {
-    viewStore.setView('QuestArrTopic', { topic: topic });
+    viewStore.setView('ViewTopicQuests', { topic: topic });
   };
 
   /**
    * Callback function for the start button.
    */
   const onStart = () => {
-    viewStore.setView('QuestShow', { topic: topic });
+    viewStore.setView('ViewQuestAnswer', { topic: topic });
   };
 
   /**

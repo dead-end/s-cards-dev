@@ -8,12 +8,13 @@
   import { pwaSerivceWorkerRegister } from './js/pwa';
 
   import ErrorShow from './components/ErrorShow.svelte';
-  import TopicList from './components/TopicList.svelte';
-  import TopicShow from './components/TopicShow.svelte';
-  import QuestArrTopic from './components/QuestArrTopic.svelte';
-  import QuestArrTag from './components/QuestArrTag.svelte';
-  import QuestShow from './components/QuestShow.svelte';
-  import TagShow from './components/TagShow.svelte';
+
+  import ViewTopicList from './components/ViewTopicList.svelte';
+  import ViewTopicInfo from './components/ViewTopicInfo.svelte';
+  import ViewTopicQuests from './components/ViewTopicQuests.svelte';
+  import ViewTagInfo from './components/ViewTagInfo.svelte';
+  import ViewTagQuests from './components/ViewTagQuests.svelte';
+  import ViewQuestAnswer from './components/ViewQuestAnswer.svelte';
 
   onMount(() => {
     try {
@@ -22,31 +23,34 @@
       errorStore.addError(error);
     }
 
+    //
+    // Register the views
+    //
     viewStore.views = {
-      TopicList: {
-        component: TopicList,
+      ViewTopicList: {
+        component: ViewTopicList,
       },
-      TopicShow: {
-        component: TopicShow,
+      ViewTopicInfo: {
+        component: ViewTopicInfo,
       },
-      QuestArrTopic: {
-        component: QuestArrTopic,
+      ViewTopicQuests: {
+        component: ViewTopicQuests,
       },
-      QuestArrTag: {
-        component: QuestArrTag,
+      ViewTagInfo: {
+        component: ViewTagInfo,
       },
-      QuestShow: {
-        component: QuestShow,
+      ViewTagQuests: {
+        component: ViewTagQuests,
       },
-      TagShow: {
-        component: TagShow,
+      ViewQuestAnswer: {
+        component: ViewQuestAnswer,
       },
     };
     //
     // Set the view if the initialization of the app finished.
     //
     initApp().then(() => {
-      viewStore.setView('TopicList');
+      viewStore.setView('ViewTopicList');
     });
   });
 </script>
