@@ -1,7 +1,7 @@
 [
     {
         "quest": [
-            "Guten Tag!!!"
+            "Guten Tag!"
         ],
         "answer": [
             "Добрый день"
@@ -9,7 +9,7 @@
     },
     {
         "quest": [
-            "Guten Abend"
+            "Guten Abend!"
         ],
         "answer": [
             "Добрый вечер"
