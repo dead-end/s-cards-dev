@@ -13,7 +13,8 @@ export const fmtDate = (d: Date) => {
   }
 
   const day = d.getDate() > 9 ? d.getDate() : '0' + d.getDate();
-  const month = d.getMonth() > 9 ? d.getMonth() : '0' + d.getMonth();
+  const m = d.getMonth() + 1
+  const month = m > 9 ? m : '0' + m;
   const hour = d.getHours() > 9 ? d.getHours() : '0' + d.getHours();
   const minute = d.getMinutes() > 9 ? d.getMinutes() : '0' + d.getMinutes();
 
