@@ -20,7 +20,7 @@
     try {
       pwaSerivceWorkerRegister();
     } catch (error) {
-      errorStore.addError(error);
+      errorStore.addError('App onMount(): ' + error);
     }
 
     //
