@@ -135,6 +135,8 @@ const questGetAllTx = (store: IDBObjectStore, topic: Topic) => {
  * The function collects the 'progress' property from questions that are from a
  * given file. It returns an array with the 'progress' values.
  */
+// TODO: This is reading questions and mapping them to progress. This can be 
+// done simpler with questGetAll().map()
 export const questGetStats = (file: string) => {
 
   return new Promise<number[]>((resolve, reject) => {
