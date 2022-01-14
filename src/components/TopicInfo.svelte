@@ -5,13 +5,23 @@
   export let topic: Topic;
   export let status = 0;
   export let size = 0;
+
+  // TODO: status is expencive. do not show it on lists.
 </script>
 
 <h4>{topic.title}</h4>
 <table>
   <tr>
-    <td>Modified</td>
-    <td>{fmtDate(topic.lastModified)}</td>
+    <td>Last loaded</td>
+    <td>{fmtDate(topic.lastLoaded)}</td>
+  </tr>
+  <tr>
+    <td>Last learned</td>
+    <td>{fmtDate(topic.lastLearned)}</td>
+  </tr>
+  <tr>
+    <td>Hash</td>
+    <td>{topic.hash ? topic.hash : ''}</td>
   </tr>
   <tr>
     <td>Status</td>
