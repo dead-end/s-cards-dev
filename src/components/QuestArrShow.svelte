@@ -17,7 +17,10 @@
 <div class="grid grid-2">
   {#each questions as question}
     <div class="is-flex-spread grid-full">
-      <div class="h6">Id: {question.id}</div>
+      <div>
+        <span class="h6">Id: {question.id}</span>
+        <span class="hide-sm">{question.file}</span>
+      </div>
       <QuestProgress quest={question} />
     </div>
 
