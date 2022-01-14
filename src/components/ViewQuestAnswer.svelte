@@ -14,6 +14,7 @@
   import type { Topic } from '../js/topicModel';
   import type { Question } from '../js/questModel';
   import QuestAnswer from './QuestAnswer.svelte';
+  import { topicUpdateLastLearned } from '../js/topicModel';
 
   export let topic: Topic;
 
@@ -77,6 +78,7 @@
    * Callback function for the stop button.
    */
   const onStop = () => {
+    topicUpdateLastLearned(topic.file);
     viewStore.setView('ViewTopicList', { id: topic.file });
   };
 </script>
