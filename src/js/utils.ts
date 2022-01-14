@@ -50,7 +50,7 @@ export const arrIsEqual = (arr1: string[], arr2: string[]) => {
   const a1 = arr1 ? arr1 : [];
   const a2 = arr2 ? arr2 : [];
 
-  return a1.toString() !== a2.toString();
+  return a1.toString() === a2.toString();
 }
 
 /**
