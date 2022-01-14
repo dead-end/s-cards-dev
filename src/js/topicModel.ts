@@ -176,7 +176,7 @@ export const topicSetHash = (tx: IDBTransaction, file: string, hash: string) => 
  */
 export const topicUpdateLastLearned = (file: string) => {
 
-  const tx = db.transaction(['topics', 'questions'], 'readwrite');
+  const tx = db.transaction(['topics'], 'readwrite');
 
   const store = tx.objectStore('topics');
   const request = store.get(file);
@@ -195,8 +195,6 @@ export const topicUpdateLastLearned = (file: string) => {
     };
   };
 };
-
-// --------------------------
 
 /**
  * The function is called with a json array that contains the topics. It
