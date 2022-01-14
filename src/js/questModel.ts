@@ -224,6 +224,29 @@ export const questSetProgress = (file: string, value: number) => {
 };
 
 /**
+ * The functions is called with an array of questions (from tags). The progress
+ * of each question is set to a given number (0-2).
+ */
+export const questSetProgressArr = async (quests: Question[], value: number) => {
+
+  const store = db
+    .transaction(['questions'], 'readwrite')
+    .objectStore('questions');
+
+  const promises: Promise<void>[] = quests.map(quest => {
+    quest.progress = value;
+
+    return new Promise<void>((resolve, reject) => {
+      store.put(quest).onsuccess = (e) => {
+        resolve();
+      };
+    });
+  });
+
+  await Promise.all(promises);
+};
+
+/**
  * The function is called with an array of topics. It reads all questions from 
  * the topics, sorts them by the ration and returns a Promise for an array with
  * max elements with the highest ratios.

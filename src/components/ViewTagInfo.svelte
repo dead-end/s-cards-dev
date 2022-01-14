@@ -3,7 +3,7 @@
   import type { Topic } from '../js/topicModel';
   import { viewStore } from '../stores/viewStore';
   import { onMount } from 'svelte';
-  import { questGetTag } from '../js/questModel';
+  import { questGetTag, questSetProgressArr } from '../js/questModel';
   import { loadQuestions } from '../js/persist';
   import { errorStore } from '../stores/errorStore';
 
@@ -29,6 +29,25 @@
    */
   const onBack = () => {
     viewStore.setView('ViewTopicList');
+  };
+
+  const onSelect = (e: Event) => {
+    //
+    // Ensure that we have questions.
+    //
+    if (!questions) {
+      return;
+    }
+    const target = e.target as HTMLSelectElement;
+    //
+    // Set the number of correct answers.
+    //
+    questSetProgressArr(questions, target.selectedIndex - 1);
+
+    //
+    // Set the index to 0 to restore the orignal state.
+    //
+    target.selectedIndex = 0;
   };
 
   /**
@@ -58,8 +77,6 @@
       errorStore.addError('ViewTagInfo: ' + error.message);
     }
   });
-
-  // TODO: select callback
 </script>
 
 <div class="card card-shadow content">
@@ -77,7 +94,7 @@
 
   <div>
     <label for="sf-set">Number of correct answers</label>
-    <select id="sf-set" bind:value={correct}>
+    <select id="sf-set" bind:value={correct} on:change={onSelect}>
       <option value="-1">-- Select --</option>
       <option value="0">Set 0</option>
       <option value="1">Set 1</option>
