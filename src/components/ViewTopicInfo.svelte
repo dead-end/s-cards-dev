@@ -1,15 +1,21 @@
 <script lang="ts">
   import { loadQuestions } from '../js/persist';
   import { arrPercentage, arrAll } from '../js/utils';
-  import { questSetProgress, questGetStats } from '../js/questModel';
   import { viewStore } from '../stores/viewStore';
   import { errorStore } from '../stores/errorStore';
   import { onMount } from 'svelte';
   import TopicInfo from './TopicInfo.svelte';
   import Markdown from '../js/Markdown';
   import type { Topic } from '../js/topicModel';
+  import type { Question } from '../js/questModel';
+  import {
+    questGetAll,
+    questSetProgress,
+    questGetStats,
+  } from '../js/questModel';
 
   export let topic: Topic;
+  export let questions: Question[] | void = null;
 
   const md = new Markdown();
 
@@ -21,27 +27,38 @@
   let size = 0;
 
   /**
-   * The function gets the values for 'status' and 'startDisabled' and the
-   * number of questions.
+   * The function updates the status of the questions.
    */
   const updateStatus = () => {
-    questGetStats(topic.file).then((arr) => {
-      status = arrPercentage(arr, 3);
-      startDisabled = arrAll(arr, 3);
-      size = arr.length;
-    });
+    //
+    // If we do not have questions,
+    //
+    if (!questions) {
+      return;
+    }
+    const arr = questions.map((q) => q.progress);
+    status = arrPercentage(arr, 3);
+    startDisabled = arrAll(arr, 3);
+    size = arr.length;
   };
 
   /**
    * On mount we load the questions for the topic and then we update the
    * properties for this view.
    */
-  onMount(() => {
-    loadQuestions(topic.file)
-      .then(() => updateStatus())
-      .catch((error) => {
-        errorStore.addError(error.message);
-      });
+  onMount(async () => {
+    try {
+      if (!questions) {
+        await loadQuestions(topic.file);
+
+        console.log('Loading questions for topics');
+        questions = await questGetAll(topic);
+
+        updateStatus();
+      }
+    } catch (error) {
+      errorStore.addError('ViewTopicInfo: ' + error.message);
+    }
   });
 
   /**
