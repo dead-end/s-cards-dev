@@ -1,7 +1,7 @@
 // TODO: rename file
-import { fetchLastModified, fetchJson } from './fetch';
+import { fetchHash, fetchJson, fetchLastModified } from './fetch';
 import { storeAddAll } from './store';
-import { Topic, topicGetLastModified, topicSetLastModified, topicSync } from './topicModel';
+import { Topic, topicGetHash, topicSetHash, topicSync } from './topicModel';
 import { questInit, questRemoveFile } from './questModel'
 import { dbcGetLastModified, dbcSetLastModified } from './dbConfig';
 import { db, dbInit } from './db';
@@ -15,21 +15,20 @@ export const loadQuestions = async (file: string) => {
   console.log(file);
 
   //
-  // Compare the last modified date of the stored topic file, with the last
-  // modified date of the file on the server, to decide if an update is
-  // necessary.
+  // Compare the hash of the stored topic file, with the hash of the file on
+  // the server, to decide if an update is necessary.
   //
-  const storeLm = topicGetLastModified(file);
-  const jsonLm = fetchLastModified(file);
+  const storeHashPromise = topicGetHash(file);
+  const jsonHashPromise = fetchHash(file);
 
-  const [lmStore, lmJson] = await Promise.all([storeLm, jsonLm]);
-  console.log('lmStore', lmStore, 'lmJson', lmJson);
+  const [storeHash, jsonHash] = await Promise.all([storeHashPromise, jsonHashPromise]);
+  console.log('lmStore', storeHash, 'lmJson', jsonHash);
 
-  if (!lmJson) {
+  if (!jsonHash) {
     return;
   }
 
-  if (lmStore && lmStore >= lmJson) {
+  if (storeHash && storeHash === jsonHash) {
     return;
   }
 
@@ -51,13 +50,14 @@ export const loadQuestions = async (file: string) => {
       //
       // The last step is to update the last modified value for the topic file.
       //
-      topicSetLastModified(tx, file, lmJson);
+      topicSetHash(tx, file, jsonHash);
     });
   });
 };
 
-// -----------------------------
-
+/**
+ * 
+ */
 export const initApp = async () => {
 
   //
@@ -71,9 +71,8 @@ export const initApp = async () => {
 
   const [storeLm, headLm] = await Promise.all([storeLmPromise, headLmPromise]);
 
-  // TODO: move to dbcGetLastModified / fetchLastModified
-  console.log('last modified store:', storeLm);
-  console.log('last modified head:', headLm);
+  console.log('hash store:', storeLm);
+  console.log('hash head:', headLm);
 
   //
   // Explicite check for typescript
