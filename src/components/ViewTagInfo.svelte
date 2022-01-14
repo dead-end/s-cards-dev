@@ -4,6 +4,8 @@
   import { viewStore } from '../stores/viewStore';
   import { onMount } from 'svelte';
   import { questGetTag } from '../js/questModel';
+  import { loadQuestions } from '../js/persist';
+  import { errorStore } from '../stores/errorStore';
 
   export let tag: string;
   export let topics: Topic[];
@@ -11,6 +13,9 @@
 
   let correct: -1;
 
+  /**
+   * The callback funciton to show the listing view.
+   */
   const onListing = () => {
     viewStore.setView('ViewTagQuests', {
       tag: tag,
@@ -19,6 +24,9 @@
     });
   };
 
+  /**
+   * The callback functoin to go back.
+   */
   const onBack = () => {
     viewStore.setView('ViewTopicList');
   };
@@ -27,11 +35,31 @@
    * Callback function for the mount event.
    */
   onMount(async () => {
-    if (!questions) {
-      console.log('Loading questions for topics');
-      questions = await questGetTag(topics, 30);
+    try {
+      //
+      // Loading the questions for a tag can be expensive, so we do it only if
+      // it is necessary.
+      //
+      if (!questions) {
+        //
+        // We load the questions for each file async.
+        //
+        const promises: Promise<void>[] = [];
+        topics.forEach((t) => {
+          promises.push(loadQuestions(t.file));
+        });
+
+        await Promise.all(promises);
+
+        console.log('Loading questions for topics');
+        questions = await questGetTag(topics, 30);
+      }
+    } catch (error) {
+      errorStore.addError('ViewTagInfo: ' + error.message);
     }
   });
+
+  // TODO: select callback
 </script>
 
 <div class="card card-shadow content">
