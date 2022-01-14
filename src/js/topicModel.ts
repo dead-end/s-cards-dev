@@ -52,16 +52,16 @@ const topicNeedUpdate = (json: Topic, store: Topic) => {
     return true;
   }
   //
-  // If the topic in the store has a last loaded date, we want to preserve it.
+  // Preserve last loaded, last learned and hash.
   //
   if (store.lastLoaded) {
     json.lastLoaded = store.lastLoaded;
   }
-  //
-  // If the topic in the store has a last learned date, we want to preserve it.
-  //
   if (store.lastLearned) {
     json.lastLearned = store.lastLearned;
+  }
+  if (store.hash) {
+    json.hash = store.hash;
   }
   //
   // Compare the topic values that came from the topics file.
