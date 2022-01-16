@@ -153,9 +153,9 @@ export const topicGetHash = (file: string) => {
 export const topicSetHash = (tx: IDBTransaction, file: string, hash: string) => {
 
   const store = tx.objectStore('topics');
-  const request = store.get(file);
 
-  store.get(file).onsuccess = (e) => {
+  const request = store.get(file);
+  request.onsuccess = (e) => {
     //
     // Get the topic from the store and set the last modified date.
     //
@@ -181,7 +181,7 @@ export const topicUpdateLastLearned = (file: string) => {
   const store = tx.objectStore('topics');
   const request = store.get(file);
 
-  store.get(file).onsuccess = (e) => {
+  request.onsuccess = (e) => {
     //
     // Get the topic from the store and set the last modified date.
     //
