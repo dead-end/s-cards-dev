@@ -1,10 +1,11 @@
 // TODO: rename file
-import { fetchHash, fetchJson, fetchLastModified } from './fetch';
+import { fetchHash, fetchJson } from './fetch';
 import { storeAddAll } from './store';
 import { Topic, topicGetHash, topicSetHash, topicSync } from './topicModel';
 import { questInit, questRemoveFile } from './questModel'
-import { dbcGetLastModified, dbcSetLastModified } from './dbConfig';
+import { dbcSetConfig, dbcGetConfig } from './dbConfig';
 import { db, dbInit } from './db';
+import type { Config } from './dbConfig';
 
 /**
  * The function is called with the file name of a topic. It checks if an update
@@ -65,31 +66,36 @@ export const initApp = async () => {
   //
   await dbInit();
 
-  const storeLmPromise = dbcGetLastModified();
+  const storeConfigPromise = dbcGetConfig('topics-hash');
 
-  const headLmPromise = fetchLastModified('data/topics.json');
+  const headHashPromise = fetchHash('data/topics.json');
 
-  const [storeLm, headLm] = await Promise.all([storeLmPromise, headLmPromise]);
+  const [storeConfig, headHash] = await Promise.all([storeConfigPromise, headHashPromise]);
 
-  console.log('hash store:', storeLm);
-  console.log('hash head:', headLm);
+  console.log('hash store:', storeConfig);
+  console.log('hash head:', headHash);
 
   //
   // Explicite check for typescript
   //
-  if (!headLm) {
+  if (!headHash) {
     return;
   }
 
-  if (storeLm !== null || storeLm < headLm) {
-    //
-    // TODO: comment => TopicList.svelte has to wait for the sync to finish
-    // We have to wait for the sync before view can read from the store
-    //
-    // TODO: error handling
-    await fetchJson('data/topics.json').then((json) => {
-      topicSync(json as Array<Topic>);
-      dbcSetLastModified(headLm);
-    });
+  const storeHash = storeConfig ? storeConfig.value as string : ''
+
+  if (storeHash === headHash) {
+    return;
   }
+
+  //
+  // TODO: comment => TopicList.svelte has to wait for the sync to finish
+  // We have to wait for the sync before view can read from the store
+  //
+  // TODO: error handling
+  await fetchJson('data/topics.json').then((json) => {
+    topicSync(json as Array<Topic>);
+    dbcSetConfig({ key: 'topics-hash', value: headHash } as Config)
+  });
+
 };
