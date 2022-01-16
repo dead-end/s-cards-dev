@@ -1,7 +1,7 @@
 // TODO: rename file
 import { fetchHash, fetchJson } from './fetch';
 import { storeAddAll } from './store';
-import { Topic, topicGetHash, topicSetHash, topicSync } from './topicModel';
+import { Topic, topicGet, topicUpdateTx, topicSync } from './topicModel';
 import { questInit, questRemoveFile } from './questModel'
 import { dbcSetConfig, dbcGetConfig } from './dbConfig';
 import { db, dbInit } from './db';
@@ -13,24 +13,19 @@ import type { Config } from './dbConfig';
  * update.
  */
 export const loadQuestions = async (file: string) => {
-  console.log(file);
-
   //
-  // Compare the hash of the stored topic file, with the hash of the file on
-  // the server, to decide if an update is necessary.
+  // Get the hash value from the server and the topic from the store.
   //
-  const storeHashPromise = topicGetHash(file);
+  const topicPromise = topicGet(file);
   const headHashPromise = fetchHash(file);
-
-  const [storeHash, headHash] = await Promise.all([storeHashPromise, headHashPromise]);
-  console.log('lmStore', storeHash, 'lmJson', headHash);
+  const [topic, headHash] = await Promise.all([topicPromise, headHashPromise]);
 
   if (!headHash) {
     return;
   }
 
-  if (storeHash && storeHash === headHash) {
-    console.log('Hashes are the same for:', file, storeHash, headHash)
+  if (topic.hash && topic.hash === headHash) {
+    console.log('Hashes are the same for:', file, topic.hash, headHash)
     return;
   }
 
@@ -39,7 +34,6 @@ export const loadQuestions = async (file: string) => {
 
   json.forEach(quest => questInit(quest, file));
   console.log(json);
-
   //
   // At this point we know that we have to update the questions for the topic.
   //
@@ -48,11 +42,11 @@ export const loadQuestions = async (file: string) => {
   questRemoveFile(tx, file).then(() => {
 
     storeAddAll(tx, 'questions', json).then(() => {
-
       //
-      // The last step is to update the last modified value for the topic file.
+      // The last step is to update the hash for the topic.
       //
-      topicSetHash(tx, file, headHash);
+      topic.hash = headHash;
+      topicUpdateTx(tx, topic);
     });
   });
 };
