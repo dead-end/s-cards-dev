@@ -20,16 +20,17 @@ export const loadQuestions = async (file: string) => {
   // the server, to decide if an update is necessary.
   //
   const storeHashPromise = topicGetHash(file);
-  const jsonHashPromise = fetchHash(file);
+  const headHashPromise = fetchHash(file);
 
-  const [storeHash, jsonHash] = await Promise.all([storeHashPromise, jsonHashPromise]);
-  console.log('lmStore', storeHash, 'lmJson', jsonHash);
+  const [storeHash, headHash] = await Promise.all([storeHashPromise, headHashPromise]);
+  console.log('lmStore', storeHash, 'lmJson', headHash);
 
-  if (!jsonHash) {
+  if (!headHash) {
     return;
   }
 
-  if (storeHash && storeHash === jsonHash) {
+  if (storeHash && storeHash === headHash) {
+    console.log('Hashes are the same for:', file, storeHash, headHash)
     return;
   }
 
@@ -51,7 +52,7 @@ export const loadQuestions = async (file: string) => {
       //
       // The last step is to update the last modified value for the topic file.
       //
-      topicSetHash(tx, file, jsonHash);
+      topicSetHash(tx, file, headHash);
     });
   });
 };
@@ -82,6 +83,7 @@ export const initApp = async () => {
   //
   const storeHash = storeConfig ? storeConfig.value : ''
   if (storeHash === headHash) {
+    console.log('Hashes are the same for:', 'data/topics.json', storeHash, headHash)
     return;
   }
 
