@@ -26,7 +26,12 @@ export const dbcGetConfig = <T>(key: string) => {
       // the store.
       //
       const config: Config<T> = request.result
-      console.log('Store:', store.name, 'get config key:', config.key, 'value:', config.value);
+      if (config) {
+        console.log('Store:', store.name, 'get config key:', config.key, 'value:', config.value);
+      } else {
+        console.log('Store:', store.name, 'get config key:', key, 'not defined:');
+      }
+
       resolve(config);
     };
   });
