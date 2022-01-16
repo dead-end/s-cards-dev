@@ -21,39 +21,6 @@ export const fetchJson = (url: string) => {
 };
 
 /**
- * The function calls an url with a HEAD request and returns the last modified
- * value as a Date instance.
- * 
- * The lastmodified value seam to change on every commit to the repository.
- */
-// TODO: maybe use fetchHash and store lastloaded
-export const fetchLastModified = (url: string) => {
-  return fetch(url, { method: 'HEAD' })
-    .then((response) => {
-
-      //
-      // Ensure that the request is ok.
-      //
-      if (!response.ok) {
-        throw Error(`Unable to last modified for: ${url} - ${response.statusText}`);
-      }
-
-      //
-      // Get the last modified from the response.
-      //
-      const lastModified = response.headers.get('Last-Modified');
-      console.log('url: ', url, 'header:', lastModified);
-
-      //
-      // Ensure that the header exists.
-      //
-      if (lastModified) {
-        return new Date(lastModified);
-      }
-    }).catch((e) => errorStore.addError('fetchLastModified: ' + e));
-};
-
-/**
  * The function sends a HEAD request to the server and returns a hash value, in
  * this case simply the size of the file. If the hash has changed, the file has
  * to be reloaded.
