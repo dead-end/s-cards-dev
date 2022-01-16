@@ -60,30 +60,27 @@ export const loadQuestions = async (file: string) => {
  * 
  */
 export const initApp = async () => {
-
   //
   // Ensure that the database is initialized before we go on.
   //
   await dbInit();
-
-  const storeConfigPromise = dbcGetConfig('topics-hash');
-
+  //
+  // Get the hash value from the server and the store.
+  //
+  const storeConfigPromise = dbcGetConfig<string>('topics-hash');
   const headHashPromise = fetchHash('data/topics.json');
-
   const [storeConfig, headHash] = await Promise.all([storeConfigPromise, headHashPromise]);
-
-  console.log('hash store:', storeConfig);
-  console.log('hash head:', headHash);
-
   //
   // Explicite check for typescript
   //
   if (!headHash) {
     return;
   }
-
-  const storeHash = storeConfig ? storeConfig.value as string : ''
-
+  //
+  // If there is a hash in the store and it does not change, there is nothing
+  // to do.
+  //
+  const storeHash = storeConfig ? storeConfig.value : ''
   if (storeHash === headHash) {
     return;
   }
@@ -95,7 +92,10 @@ export const initApp = async () => {
   // TODO: error handling
   await fetchJson('data/topics.json').then((json) => {
     topicSync(json as Array<Topic>);
-    dbcSetConfig({ key: 'topics-hash', value: headHash } as Config)
+    //
+    // Persist the new hash value.
+    //
+    const config: Config<string> = { key: 'topics-hash', value: headHash }
+    dbcSetConfig(config)
   });
-
 };
