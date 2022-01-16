@@ -77,23 +77,6 @@ const topicNeedUpdate = (json: Topic, store: Topic) => {
 }
 
 /**
- * The function gets all topics from the store. It returns a promise with an
- * array of topics.
- */
-export const topicGetAll = () => {
-
-  return new Promise<Array<Topic>>((resolve, reject) => {
-    const store = db.transaction(['topics'], 'readonly').objectStore('topics');
-
-    const request = store.getAll();
-
-    request.onsuccess = (e) => {
-      resolve(request.result);
-    };
-  });
-};
-
-/**
  * The function returns a sorted array of unique tags.
  */
 export const topicsGetTags = (topics: Topic[]) => {
@@ -118,83 +101,6 @@ export const topicsGetTags = (topics: Topic[]) => {
 
   return tags.sort();
 }
-
-/**
- * The function gets the hash value assosiated with the topic file from the
- * database.
- */
-// TODO: maybe it is simpler to read the topic (getTopic()) and then use the
-// property.
-export const topicGetHash = (file: string) => {
-
-  return new Promise<string>((resolve, reject) => {
-    const store = db.transaction(['topics'], 'readonly').objectStore('topics');
-
-    const request = store.get(file);
-
-    request.onsuccess = (e) => {
-      //
-      // Get the topic object from the store. It is possible that the value is
-      // undefined.
-      //
-      const hash: string = request.result.hash;
-      console.log('Store:', store.name, 'get hash:', hash);
-
-      resolve(hash);
-    };
-  });
-};
-
-/**
- * The function writes the hash value assosiated with the topic to the
- * database. If the hash changed, then the file was loaded, so the last loaded
- * value has to be set to the current time.
- */
-export const topicSetHash = (tx: IDBTransaction, file: string, hash: string) => {
-
-  const store = tx.objectStore('topics');
-
-  const request = store.get(file);
-  request.onsuccess = (e) => {
-    //
-    // Get the topic from the store and set the last modified date.
-    //
-    const topic: Topic = request.result;
-    topic.hash = hash;
-    topic.lastLoaded = new Date();
-    //
-    // Write the updated tpic to the store.
-    //
-    store.put(topic).onsuccess = () => {
-      console.log('Store:', store.name, 'set hash:', topic);
-    };
-  };
-};
-
-/**
- * The function updated the last learned value, which is the current date.
- */
-export const topicUpdateLastLearned = (file: string) => {
-
-  const tx = db.transaction(['topics'], 'readwrite');
-
-  const store = tx.objectStore('topics');
-  const request = store.get(file);
-
-  request.onsuccess = (e) => {
-    //
-    // Get the topic from the store and set the last modified date.
-    //
-    const topic: Topic = request.result;
-    topic.lastLearned = new Date();
-    //
-    // Write the updated tpic to the store.
-    //
-    store.put(topic).onsuccess = () => {
-      console.log('Store:', store.name, 'update lastLearned:', topic);
-    };
-  };
-};
 
 /**
  * The function is called with a json array that contains the topics. It
@@ -249,4 +155,68 @@ export const topicSync = (json: Array<Topic>) => {
       }
     });
   };
+};
+
+/**
+ * The function writes the updated topic to the store.
+ */
+export const topicUpdate = (topic: Topic) => {
+
+  const tx = db.transaction(['topics'], 'readwrite');
+
+  return topicUpdateTx(tx, topic);
+};
+
+/**
+ * The function writes the updated topic to the store.
+ */
+export const topicUpdateTx = (tx: IDBTransaction, topic: Topic) => {
+
+  return new Promise<void>((resolve, reject) => {
+    const store = tx.objectStore('topics');
+
+    // Write the updated tpic to the store.
+    //
+    store.put(topic).onsuccess = () => {
+      console.log('Store:', store.name, 'update topic:', topic);
+
+      resolve();
+    };
+  });
+};
+
+/**
+ * The function reads the topic from the store.
+ */
+export const topicGet = (file: string) => {
+
+  return new Promise<Topic>((resolve, reject) => {
+    const store = db.transaction(['topics'], 'readonly').objectStore('topics');
+
+    const request = store.get(file);
+    request.onsuccess = (e) => {
+
+      const topic: Topic = request.result;
+      console.log('Store:', store.name, 'get topic:', topic);
+
+      resolve(topic);
+    };
+  });
+};
+
+/**
+ * The function gets all topics from the store. It returns a promise with an
+ * array of topics.
+ */
+export const topicGetAll = () => {
+
+  return new Promise<Array<Topic>>((resolve, reject) => {
+    const store = db.transaction(['topics'], 'readonly').objectStore('topics');
+
+    const request = store.getAll();
+
+    request.onsuccess = (e) => {
+      resolve(request.result);
+    };
+  });
 };
