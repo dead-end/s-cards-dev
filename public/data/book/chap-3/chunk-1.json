@@ -1,0 +1,139 @@
+[
+  {
+    "quest": "leben",
+    "answer": [
+      "жить",
+      "- я жив_у_",
+      "- ты живёшь",
+      "- он, она, оно живёт",
+      "- мы живём",
+      "- вы живёте",
+      "- они жив_у_т"
+    ]
+  },
+  {
+    "quest": "Italien",
+    "answer": "Ит_а_лия"
+  },
+  {
+    "quest": "Türkei",
+    "answer": "Т_у_рция"
+  },
+  {
+    "quest": "Frankreich",
+    "answer": "Фр_а_нция"
+  },
+  {
+    "quest": "Holland",
+    "answer": "Голл_а_ндия"
+  },
+  {
+    "quest": "Spanien",
+    "answer": "Исп_а_ния"
+  },
+  {
+    "quest": "England",
+    "answer": "_А_нглия"
+  },
+  {
+    "quest": "Ukraine",
+    "answer": "Укра_и_на"
+  },
+  {
+    "quest": "Norwegen",
+    "answer": "Норв_е_гия"
+  },
+  {
+    "quest": "Österreich",
+    "answer": "_А_встрия"
+  },
+  {
+    "quest": [
+      "sprechen",
+      "~konjugieren~"
+    ],
+    "answer": [
+      "говор_и_ть",
+      "- я говор_ю_",
+      "- ты говор_и_шь",
+      "- он, она, оно говор_и_т",
+      "- мы говор_и_м",
+      "- вы говор_и_те",
+      "- они говор_я_т"
+    ]
+  },
+  {
+    "quest": "(auf) Russisch",
+    "answer": "по-р_у_сски"
+  },
+  {
+    "quest": "Polen",
+    "answer": "П_о_льша"
+  },
+  {
+    "quest": "Tunesien",
+    "answer": "Тун_и_с"
+  },
+  {
+    "quest": "Japan",
+    "answer": "Яп_о_ния"
+  },
+  {
+    "quest": "Usbekistan",
+    "answer": "Узбекист_а_н"
+  },
+  {
+    "quest": "sie",
+    "answer": "он_и_"
+  },
+  {
+    "quest": "aber",
+    "answer": "но"
+  },
+  {
+    "quest": "(auf) Deutsch",
+    "answer": "по-нем_е_цки"
+  },
+  {
+    "quest": "(auf) Englisch",
+    "answer": "по-англ_и_йски"
+  },
+  {
+    "quest": "leider",
+    "answer": "к сожал_е_нию"
+  },
+  {
+    "quest": "(auf) Spanisch",
+    "answer": "по-исп_а_нски"
+  },
+  {
+    "quest": "ein wenig",
+    "answer": "немн_о_го"
+  },
+  {
+    "quest": "noch",
+    "answer": "ещё"
+  },
+  {
+    "quest": "natürlich",
+    "answer": "кон_е_чно"
+  },
+  {
+    "quest": "Kanada",
+    "answer": "Кан_а_да"
+  },
+  {
+    "quest": "(auf) Französisch",
+    "answer": "по-франц_у_зски"
+  },
+  {
+    "quest": "in / im",
+    "answer": [
+      "в ~+ Präpositiv~"
+    ]
+  },
+  {
+    "quest": "jetzt, gerade",
+    "answer": "сейч_а_с"
+  }
+]

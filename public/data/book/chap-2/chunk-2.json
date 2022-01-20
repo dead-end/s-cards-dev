@@ -1,0 +1,107 @@
+[
+  {
+    "quest": "auch",
+    "answer": "т_о_же"
+  },
+  {
+    "quest": "schlecht",
+    "answer": "пл_о_хо"
+  },
+  {
+    "quest": "woher",
+    "answer": "отк_у_да"
+  },
+  {
+    "quest": "Sag!",
+    "answer": "скаж_и_"
+  },
+  {
+    "quest": "Sagen Sie!",
+    "answer": "скаж_и_те"
+  },
+  {
+    "quest": "wo",
+    "answer": "где"
+  },
+  {
+    "quest": "hier: da, hier (ist, sind)",
+    "answer": "вот"
+  },
+  {
+    "quest": "interessant",
+    "answer": "интер_е_сно"
+  },
+  {
+    "quest": "wahrscheinlich",
+    "answer": "нав_е_рное"
+  },
+  {
+    "quest": "Russe / Russin",
+    "answer": "р_у_сский / р_у_сская"
+  },
+  {
+    "quest": "Deutscher / Deutsche",
+    "answer": "н_е_мец / н_е_мка"
+  },
+  {
+    "quest": "Welche Nationalität hast du / haben Sie?",
+    "answer": "Кто вы (ты) по национ_а_льности?"
+  },
+  {
+    "quest": "Nationalität",
+    "answer": [
+      "национ_а_льность",
+      "~Femininum - Endung: ь~"
+    ]
+  },
+  {
+    "quest": "Entschuldigen Sie! / Enschuldigt!",
+    "answer": "извин_и_те"
+  },
+  {
+    "quest": "dort",
+    "answer": "там"
+  },
+  {
+    "quest": "Deutschland",
+    "answer": "Герм_а_ния"
+  },
+  {
+    "quest": "ja",
+    "answer": "да"
+  },
+  {
+    "quest": "Goldener Ring",
+    "answer": "Золот_о_е кольц_о_"
+  },
+  {
+    "quest": "heute",
+    "answer": "сег_о_дня"
+  },
+  {
+    "quest": "Exkursion",
+    "answer": "экск_у_рсия"
+  },
+  {
+    "quest": "Kloster",
+    "answer": [
+      "монаст_ы_рь",
+      "~Maskulinum - Endung: ь~"
+    ]
+  },
+  {
+    "quest": "Kirche",
+    "answer": [
+      "ц_е_рковь",
+      "~Femininum - Endung: ь~"
+    ]
+  },
+  {
+    "quest": "Dom, Kathedrale",
+    "answer": "соб_о_р"
+  },
+  {
+    "quest": "Fastnachtswoche",
+    "answer": "м_а_сленица"
+  }
+]

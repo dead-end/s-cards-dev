@@ -1,5 +1,61 @@
 [
     {
+        "file": "data/book/chap-1/chunk-1.json",
+        "title": "Kapitel 1 Teil 1",
+        "tags": [
+            "Buch",
+            "Kapitel-1"
+        ]
+    },
+    {
+        "file": "data/book/chap-1/chunk-2.json",
+        "title": "Kapitel 1 Teil 2",
+        "tags": [
+            "Buch",
+            "Kapitel-1"
+        ]
+    },
+    {
+        "file": "data/book/chap-2/chunk-1.json",
+        "title": "Kapitel 2 Teil 1",
+        "tags": [
+            "Buch",
+            "Kapitel-2"
+        ]
+    },
+    {
+        "file": "data/book/chap-2/chunk-2.json",
+        "title": "Kapitel 2 Teil 2",
+        "tags": [
+            "Buch",
+            "Kapitel-2"
+        ]
+    },
+    {
+        "file": "data/book/chap-3/chunk-1.json",
+        "title": "Kapitel 3 Teil 1",
+        "tags": [
+            "Buch",
+            "Kapitel-3"
+        ]
+    },
+    {
+        "file": "data/book/chap-3/chunk-2.json",
+        "title": "Kapitel 3 Teil 2",
+        "tags": [
+            "Buch",
+            "Kapitel-3"
+        ]
+    },
+    {
+        "file": "data/book/chap-3/chunk-3.json",
+        "title": "Kapitel 3 Teil 3",
+        "tags": [
+            "Buch",
+            "Kapitel-3"
+        ]
+    },
+    {
         "file": "data/book/chap-4/chunk-1.json",
         "title": "Kapitel 4 Teil 1",
         "tags": [
@@ -66,14 +122,6 @@
     {
         "file": "data/book/chap-5/chunk-4.json",
         "title": "Kapitel 5 Teil 4",
-        "tags": [
-            "Buch",
-            "Kapitel-5"
-        ]
-    },
-    {
-        "file": "data/book/chap-6/chunk-1.json",
-        "title": "Kapitel 5 Teil 1",
         "tags": [
             "Buch",
             "Kapitel-5"
