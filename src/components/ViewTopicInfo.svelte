@@ -49,6 +49,7 @@
   onMount(async () => {
     try {
       if (!questions) {
+        // TODO: topic.lastLoaded is set inside the function.
         await loadQuestions(topic.file);
 
         console.log('Loading questions for topics');
