@@ -1,128 +1,244 @@
 [
   {
-    "quest": "Überraschung",
-    "answer": "сюрпр_и_з"
+    "quest": [
+      "Überraschung"
+    ],
+    "answer": [
+      "сюрпр_и_з"
+    ]
   },
   {
-    "quest": "Bis bald!",
-    "answer": "до встр_е_чи!"
+    "quest": [
+      "Bis bald!"
+    ],
+    "answer": [
+      "до встр_е_чи!"
+    ]
   },
   {
-    "quest": "Hallo! (am Telefon)",
-    "answer": "Алл_о_!"
+    "quest": [
+      "Hallo! (am Telefon)"
+    ],
+    "answer": [
+      "Алл_о_!"
+    ]
   },
   {
-    "quest": "Das ist aber toll!",
-    "answer": "Вот зд_о_рово!"
+    "quest": [
+      "Das ist aber toll!"
+    ],
+    "answer": [
+      "Вот зд_о_рово!"
+    ]
   },
   {
-    "quest": "Lass uns treffen!",
-    "answer": "дав_а_й встр_е_тимся"
+    "quest": [
+      "Lass uns treffen!"
+    ],
+    "answer": [
+      "дав_а_й встр_е_тимся"
+    ]
   },
   {
-    "quest": "Bahnhof",
-    "answer": "вокз_а_л"
+    "quest": [
+      "Bahnhof"
+    ],
+    "answer": [
+      "вокз_а_л"
+    ]
   },
   {
-    "quest": "Guten Abend!",
-    "answer": "Д_о_брый в_е_чер!"
+    "quest": [
+      "Guten Abend!"
+    ],
+    "answer": [
+      "Д_о_брый в_е_чер!"
+    ]
   },
   {
-    "quest": "Einen Augenblick!",
-    "answer": "Мин_у_точку!"
+    "quest": [
+      "Einen Augenblick!"
+    ],
+    "answer": [
+      "Мин_у_точку!"
+    ]
   },
   {
-    "quest": "ihr, euer",
-    "answer": "ваш"
+    "quest": [
+      "ihr, euer"
+    ],
+    "answer": [
+      "ваш"
+    ]
   },
   {
-    "quest": "Pass, Ausweis",
-    "answer": "п_а_спорт"
+    "quest": [
+      "Pass, Ausweis"
+    ],
+    "answer": [
+      "п_а_спорт"
+    ]
   },
   {
-    "quest": "Hotelzimmer",
-    "answer": "н_о_мер"
+    "quest": [
+      "Hotelzimmer"
+    ],
+    "answer": [
+      "н_о_мер"
+    ]
   },
   {
-    "quest": "Schlüssel",
-    "answer": "ключ"
+    "quest": [
+      "Schlüssel"
+    ],
+    "answer": [
+      "ключ"
+    ]
   },
   {
-    "quest": "Aufzug",
-    "answer": "лифт"
+    "quest": [
+      "Aufzug"
+    ],
+    "answer": [
+      "лифт"
+    ]
   },
   {
-    "quest": "rechts",
-    "answer": "спр_а_ва"
+    "quest": [
+      "rechts"
+    ],
+    "answer": [
+      "спр_а_ва"
+    ]
   },
   {
-    "quest": "links",
-    "answer": "сл_е_ва"
+    "quest": [
+      "links"
+    ],
+    "answer": [
+      "сл_е_ва"
+    ]
   },
   {
-    "quest": "(Hotel-) Formular für Gäste",
-    "answer": "к_а_рта г_о_стя"
+    "quest": [
+      "(Hotel-) Formular für Gäste"
+    ],
+    "answer": [
+      "к_а_рта г_о_стя"
+    ]
   },
   {
-    "quest": "mein Nachname",
-    "answer": "мо_я_ фам_и_лия"
+    "quest": [
+      "mein Nachname"
+    ],
+    "answer": [
+      "мо_я_ фам_и_лия"
+    ]
   },
   {
-    "quest": "mein Vorname",
+    "quest": [
+      "mein Vorname"
+    ],
     "answer": [
       "моё _и_мя",
       "~Ausnahme: Neutrum~"
     ]
   },
   {
-    "quest": "Geburtsdatum",
-    "answer": "д_а_та рожд_е_ния"
+    "quest": [
+      "Geburtsdatum"
+    ],
+    "answer": [
+      "д_а_та рожд_е_ния"
+    ]
   },
   {
-    "quest": "Datum",
-    "answer": "д_а_та"
+    "quest": [
+      "Datum"
+    ],
+    "answer": [
+      "д_а_та"
+    ]
   },
   {
-    "quest": "Land",
-    "answer": "стран_а_"
+    "quest": [
+      "Land"
+    ],
+    "answer": [
+      "стран_а_"
+    ]
   },
   {
-    "quest": "Unterschrift",
+    "quest": [
+      "Unterschrift"
+    ],
     "answer": [
       "п_о_дпись",
       "~Femininum - Endung: ь~"
     ]
   },
   {
-    "quest": "Tee",
-    "answer": "чай"
+    "quest": [
+      "Tee"
+    ],
+    "answer": [
+      "чай"
+    ]
   },
   {
-    "quest": "Hafen",
-    "answer": "порт"
+    "quest": [
+      "Hafen"
+    ],
+    "answer": [
+      "порт"
+    ]
   },
   {
-    "quest": "Jazz",
-    "answer": "джаз"
+    "quest": [
+      "Jazz"
+    ],
+    "answer": [
+      "джаз"
+    ]
   },
   {
-    "quest": "Mönch",
-    "answer": "мон_а_х"
+    "quest": [
+      "Mönch"
+    ],
+    "answer": [
+      "мон_а_х"
+    ]
   },
   {
-    "quest": "Meer",
-    "answer": "м_о_ре"
+    "quest": [
+      "Meer"
+    ],
+    "answer": [
+      "м_о_ре"
+    ]
   },
   {
-    "quest": "Vater",
-    "answer": "от_е_ц"
+    "quest": [
+      "Vater"
+    ],
+    "answer": [
+      "от_е_ц"
+    ]
   },
   {
-    "quest": "Präsident, -in",
-    "answer": "презид_е_нт"
+    "quest": [
+      "Präsident, -in"
+    ],
+    "answer": [
+      "презид_е_нт"
+    ]
   },
   {
-    "quest": "über",
-    "answer": "о ~+ Präpositiv~"
+    "quest": [
+      "über"
+    ],
+    "answer": [
+      "о ~+ Präpositiv~"
+    ]
   }
 ]
