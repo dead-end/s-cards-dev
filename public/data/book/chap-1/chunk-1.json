@@ -1,126 +1,250 @@
 [
   {
-    "quest": "Herzlich willkommen",
-    "answer": "Добр_о_ пож_а_ловать"
+    "quest": [
+      "Herzlich willkommen"
+    ],
+    "answer": [
+      "Добр_о_ пож_а_ловать"
+    ]
   },
   {
-    "quest": "Guten Tag ~- ungeduzt~",
-    "answer": "Здр_а_вствуйте!"
+    "quest": [
+      "Guten Tag ~- ungeduzt~"
+    ],
+    "answer": [
+      "Здр_а_вствуйте!"
+    ]
   },
   {
-    "quest": "ich",
-    "answer": "я"
+    "quest": [
+      "ich"
+    ],
+    "answer": [
+      "я"
+    ]
   },
   {
-    "quest": "und ~- als Gegensatz~",
-    "answer": "а"
+    "quest": [
+      "und ~- als Gegensatz~"
+    ],
+    "answer": [
+      "а"
+    ]
   },
   {
-    "quest": "wer",
-    "answer": "кто"
+    "quest": [
+      "wer"
+    ],
+    "answer": [
+      "кто"
+    ]
   },
   {
-    "quest": "Sie, ihr",
-    "answer": "вы"
+    "quest": [
+      "Sie, ihr"
+    ],
+    "answer": [
+      "вы"
+    ]
   },
   {
-    "quest": "du",
-    "answer": "ты"
+    "quest": [
+      "du"
+    ],
+    "answer": [
+      "ты"
+    ]
   },
   {
-    "quest": "Guten Tag!",
-    "answer": "Д_о_брый день"
+    "quest": [
+      "Guten Tag!"
+    ],
+    "answer": [
+      "Д_о_брый день"
+    ]
   },
   {
-    "quest": "Guten Tag ~- geduzt~",
-    "answer": "Здр_а_вствуй!"
+    "quest": [
+      "Guten Tag ~- geduzt~"
+    ],
+    "answer": [
+      "Здр_а_вствуй!"
+    ]
   },
   {
-    "quest": "Herr ~- Anrede~",
-    "answer": "господ_и_н"
+    "quest": [
+      "Herr ~- Anrede~"
+    ],
+    "answer": [
+      "господ_и_н"
+    ]
   },
   {
-    "quest": "Frau ~- Anrede~",
-    "answer": "госпож_а_"
+    "quest": [
+      "Frau ~- Anrede~"
+    ],
+    "answer": [
+      "госпож_а_"
+    ]
   },
   {
-    "quest": "Hallo",
-    "answer": "Прив_е_т"
+    "quest": [
+      "Hallo"
+    ],
+    "answer": [
+      "Прив_е_т"
+    ]
   },
   {
-    "quest": "das ist / das sind",
-    "answer": "_э_то"
+    "quest": [
+      "das ist / das sind"
+    ],
+    "answer": [
+      "_э_то"
+    ]
   },
   {
-    "quest": "Auf wiedersehen",
-    "answer": "До свид_а_ния"
+    "quest": [
+      "Auf wiedersehen"
+    ],
+    "answer": [
+      "До свид_а_ния"
+    ]
   },
   {
-    "quest": "Tschüss",
-    "answer": "пок_а_"
+    "quest": [
+      "Tschüss"
+    ],
+    "answer": [
+      "пок_а_"
+    ]
   },
   {
-    "quest": "nein",
-    "answer": "нет"
+    "quest": [
+      "nein"
+    ],
+    "answer": [
+      "нет"
+    ]
   },
   {
-    "quest": "was",
-    "answer": "что"
+    "quest": [
+      "was"
+    ],
+    "answer": [
+      "что"
+    ]
   },
   {
-    "quest": "auf dem Foto",
-    "answer": "на фотогр_а_фии"
+    "quest": [
+      "auf dem Foto"
+    ],
+    "answer": [
+      "на фотогр_а_фии"
+    ]
   },
   {
-    "quest": "auf",
-    "answer": "на"
+    "quest": [
+      "auf"
+    ],
+    "answer": [
+      "на"
+    ]
   },
   {
-    "quest": "Foto",
-    "answer": "фотогр_а_фия"
+    "quest": [
+      "Foto"
+    ],
+    "answer": [
+      "фотогр_а_фия"
+    ]
   },
   {
-    "quest": "Firma",
-    "answer": "ф_и_рма"
+    "quest": [
+      "Firma"
+    ],
+    "answer": [
+      "ф_и_рма"
+    ]
   },
   {
-    "quest": "Fabrik",
-    "answer": "ф_а_брика"
+    "quest": [
+      "Fabrik"
+    ],
+    "answer": [
+      "ф_а_брика"
+    ]
   },
   {
-    "quest": "Fontäne",
-    "answer": "фонт_а_н"
+    "quest": [
+      "Fontäne"
+    ],
+    "answer": [
+      "фонт_а_н"
+    ]
   },
   {
-    "quest": "Film",
-    "answer": "Фильм"
+    "quest": [
+      "Film"
+    ],
+    "answer": [
+      "Фильм"
+    ]
   },
   {
-    "quest": "Charakter",
-    "answer": "хар_а_ктер"
+    "quest": [
+      "Charakter"
+    ],
+    "answer": [
+      "хар_а_ктер"
+    ]
   },
   {
-    "quest": "Architektur",
-    "answer": "архитект_у_ра"
+    "quest": [
+      "Architektur"
+    ],
+    "answer": [
+      "архитект_у_ра"
+    ]
   },
   {
-    "quest": "Zirkus",
-    "answer": "цирк"
+    "quest": [
+      "Zirkus"
+    ],
+    "answer": [
+      "цирк"
+    ]
   },
   {
-    "quest": "Zentrum",
-    "answer": "центр"
+    "quest": [
+      "Zentrum"
+    ],
+    "answer": [
+      "центр"
+    ]
   },
   {
-    "quest": "Bühne",
-    "answer": "сц_е_на"
+    "quest": [
+      "Bühne"
+    ],
+    "answer": [
+      "сц_е_на"
+    ]
   },
   {
-    "quest": "Spezialist",
-    "answer": "специал_и_ст"
+    "quest": [
+      "Spezialist"
+    ],
+    "answer": [
+      "специал_и_ст"
+    ]
   },
   {
-    "quest": "Champion",
-    "answer": "чемпи_о_н"
+    "quest": [
+      "Champion"
+    ],
+    "answer": [
+      "чемпи_о_н"
+    ]
   }
 ]
