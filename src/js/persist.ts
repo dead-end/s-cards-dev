@@ -46,6 +46,7 @@ export const loadQuestions = async (file: string) => {
       // The last step is to update the hash for the topic.
       //
       topic.hash = headHash;
+      topic.lastLoaded = new Date();
       topicUpdateTx(tx, topic);
     });
   });
