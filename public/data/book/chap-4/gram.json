@@ -1,5 +1,6 @@
 [
   {
+    "id": "chap4-gram#01",
     "quest": [
       "Woher kommen Sie / kommst du?"
     ],
@@ -8,6 +9,7 @@
     ]
   },
   {
+    "id": "chap4-gram#02",
     "quest": [
       "Ich komme aus Russland."
     ],
@@ -16,6 +18,7 @@
     ]
   },
   {
+    "id": "chap4-gram#03",
     "quest": [
       "Kommen Sie / du aus Deutschland."
     ],
@@ -24,6 +27,7 @@
     ]
   },
   {
+    "id": "chap4-gram#04",
     "quest": [
       "Ich spreche deutsch, englisch und russisch."
     ],
@@ -32,6 +36,7 @@
     ]
   },
   {
+    "id": "chap4-gram#05",
     "quest": [
       "Ich spreche etwas französisch."
     ],
@@ -40,6 +45,7 @@
     ]
   },
   {
+    "id": "chap4-gram#06",
     "quest": [
       "Sprechen Sie russisch?",
       "Sprichst du russisch?"
@@ -50,6 +56,7 @@
     ]
   },
   {
+    "id": "chap4-gram#07",
     "quest": [
       "Wo wohnen Sie?"
     ],
@@ -58,6 +65,7 @@
     ]
   },
   {
+    "id": "chap4-gram#08",
     "quest": [
       "Ich wohne in Moskau."
     ],
@@ -66,6 +74,7 @@
     ]
   },
   {
+    "id": "chap4-gram#09",
     "quest": [
       "Wo wohnst du?"
     ],
@@ -74,6 +83,7 @@
     ]
   },
   {
+    "id": "chap4-gram#10",
     "quest": [
       "Ich wohne in Berlin."
     ],
@@ -82,6 +92,7 @@
     ]
   },
   {
+    "id": "chap4-gram#11",
     "quest": [
       "Wohnen Sie in Russland?"
     ],
@@ -90,6 +101,7 @@
     ]
   },
   {
+    "id": "chap4-gram#12",
     "quest": [
       "Wohnst du in Deutschland?"
     ],
@@ -98,6 +110,7 @@
     ]
   },
   {
+    "id": "chap4-gram#13",
     "quest": [
       "Was ist Ihre Adresse?",
       "Was ist deine Adresse?"
@@ -108,6 +121,7 @@
     ]
   },
   {
+    "id": "chap4-gram#14",
     "quest": [
       "Meine Adresse:",
       "Straße Roderbruch, Haus 44, Wohnung 1"
@@ -118,6 +132,7 @@
     ]
   },
   {
+    "id": "chap4-gram#15",
     "quest": [
       "Wie ist Ihre telefonnummer?",
       "Wie ist deine telefonnummer?"
@@ -128,6 +143,7 @@
     ]
   },
   {
+    "id": "chap4-gram#16",
     "quest": [
       "Russland",
       "aus Russland"
@@ -138,6 +154,7 @@
     ]
   },
   {
+    "id": "chap4-gram#17",
     "quest": [
       "Deutschland",
       "aus Deutschland"
@@ -148,6 +165,7 @@
     ]
   },
   {
+    "id": "chap4-gram#18",
     "quest": [
       "England",
       "aus England"
@@ -158,6 +176,7 @@
     ]
   },
   {
+    "id": "chap4-gram#19",
     "quest": [
       "sprechen",
       "~konjugieren~"
@@ -173,6 +192,7 @@
     ]
   },
   {
+    "id": "chap4-gram#20",
     "quest": [
       "wohnen",
       "~konjugieren~"
@@ -188,6 +208,7 @@
     ]
   },
   {
+    "id": "chap4-gram#21",
     "quest": [
       "in der Stadt"
     ],
@@ -197,6 +218,7 @@
     ]
   },
   {
+    "id": "chap4-gram#22",
     "quest": [
       "im Zentrum"
     ],
@@ -206,6 +228,7 @@
     ]
   },
   {
+    "id": "chap4-gram#23",
     "quest": [
       "am Meer"
     ],
@@ -215,6 +238,7 @@
     ]
   },
   {
+    "id": "chap4-gram#24",
     "quest": [
       "am Platz"
     ],
@@ -224,6 +248,7 @@
     ]
   },
   {
+    "id": "chap4-gram#25",
     "quest": [
       "in Polen"
     ],
@@ -233,6 +258,7 @@
     ]
   },
   {
+    "id": "chap4-gram#26",
     "quest": [
       "in der Straße"
     ],
@@ -242,6 +268,7 @@
     ]
   },
   {
+    "id": "chap4-gram#27",
     "quest": [
       "in Italien"
     ],
@@ -251,6 +278,7 @@
     ]
   },
   {
+    "id": "chap4-gram#28",
     "quest": [
       "in Belgien"
     ],
@@ -260,6 +288,7 @@
     ]
   },
   {
+    "id": "chap4-gram#29",
     "quest": [
       "in der Metro"
     ],
@@ -269,6 +298,7 @@
     ]
   },
   {
+    "id": "chap4-gram#30",
     "quest": [
       "im Kino"
     ],
@@ -278,6 +308,7 @@
     ]
   },
   {
+    "id": "chap4-gram#31",
     "quest": [
       "im Cafe"
     ],

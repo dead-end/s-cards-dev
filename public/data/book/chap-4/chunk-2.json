@@ -1,5 +1,6 @@
 [
   {
+    "id": "chap4-ck2#01",
     "quest": [
       "zusammen"
     ],
@@ -8,6 +9,7 @@
     ]
   },
   {
+    "id": "chap4-ck2#02",
     "quest": [
       "euer",
       "eure",
@@ -21,6 +23,7 @@
     ]
   },
   {
+    "id": "chap4-ck2#03",
     "quest": [
       "du hast ..."
     ],
@@ -29,6 +32,7 @@
     ]
   },
   {
+    "id": "chap4-ck2#04",
     "quest": [
       "schon lange (zeitlich)"
     ],
@@ -37,117 +41,228 @@
     ]
   },
   {
+    "id": "chap4-ck2#05",
     "quest": [
       "von Beruf",
       "beruflich"
     ],
-    "answer": "по проф_е_ссии"
+    "answer": [
+      "по проф_е_ссии"
+    ]
   },
   {
-    "quest": "Beruf",
-    "answer": "проф_е_ссия"
+    "id": "chap4-ck2#06",
+    "quest": [
+      "Beruf"
+    ],
+    "answer": [
+      "проф_е_ссия"
+    ]
   },
   {
-    "quest": "Buchhalter",
-    "answer": "Бухг_а_лтер"
+    "id": "chap4-ck2#07",
+    "quest": [
+      "Buchhalter"
+    ],
+    "answer": [
+      "Бухг_а_лтер"
+    ]
   },
   {
-    "quest": "Journalistin",
-    "answer": "журнал_и_стка"
+    "id": "chap4-ck2#08",
+    "quest": [
+      "Journalistin"
+    ],
+    "answer": [
+      "журнал_и_стка"
+    ]
   },
   {
-    "quest": "wir haben ...",
-    "answer": "у нас есть ..."
+    "id": "chap4-ck2#09",
+    "quest": [
+      "wir haben ..."
+    ],
+    "answer": [
+      "у нас есть ..."
+    ]
   },
   {
-    "quest": "zwei Kinder",
-    "answer": "дв_о_е дет_е_й"
+    "id": "chap4-ck2#10",
+    "quest": [
+      "zwei Kinder"
+    ],
+    "answer": [
+      "дв_о_е дет_е_й"
+    ]
   },
   {
+    "id": "chap4-ck2#11",
     "quest": [
       "Arzt",
       "Ärztin"
     ],
-    "answer": "врач"
+    "answer": [
+      "врач"
+    ]
   },
   {
-    "quest": "er hat ...",
-    "answer": "у нег_о_ есть ..."
+    "id": "chap4-ck2#12",
+    "quest": [
+      "er hat ..."
+    ],
+    "answer": [
+      "у нег_о_ есть ..."
+    ]
   },
   {
-    "quest": "eine eigene Familie",
-    "answer": "сво_я_ семь_я_"
+    "id": "chap4-ck2#13",
+    "quest": [
+      "eine eigene Familie"
+    ],
+    "answer": [
+      "сво_я_ семь_я_"
+    ]
   },
   {
-    "quest": "wir haben keine / keinen",
-    "answer": "у нас нет ... ~+ Genitiv~"
+    "id": "chap4-ck2#14",
+    "quest": [
+      "wir haben keine / keinen"
+    ],
+    "answer": [
+      "у нас нет ... ~+ Genitiv~"
+    ]
   },
   {
-    "quest": "nun",
-    "answer": "теп_е_рь"
+    "id": "chap4-ck2#15",
+    "quest": [
+      "nun"
+    ],
+    "answer": [
+      "теп_е_рь"
+    ]
   },
   {
-    "quest": "ich habe ...",
-    "answer": "У мен_я_ есть ..."
+    "id": "chap4-ck2#16",
+    "quest": [
+      "ich habe ..."
+    ],
+    "answer": [
+      "У мен_я_ есть ..."
+    ]
   },
   {
-    "quest": "Jurist",
-    "answer": "юр_и_ст"
+    "id": "chap4-ck2#17",
+    "quest": [
+      "Jurist"
+    ],
+    "answer": [
+      "юр_и_ст"
+    ]
   },
   {
-    "quest": "weit (weg) von",
-    "answer": "далек_о_ от ... ~+ Genitiv~"
+    "id": "chap4-ck2#18",
+    "quest": [
+      "weit (weg) von"
+    ],
+    "answer": [
+      "далек_о_ от ... ~+ Genitiv~"
+    ]
   },
   {
-    "quest": "ich habe kein / keine / keinen ...",
-    "answer": "у мен_я_ нет ... ~+ Genitiv~"
+    "id": "chap4-ck2#19",
+    "quest": [
+      "ich habe kein / keine / keinen ..."
+    ],
+    "answer": [
+      "у мен_я_ нет ... ~+ Genitiv~"
+    ]
   },
   {
-    "quest": "Katze",
-    "answer": "к_о_шка"
+    "id": "chap4-ck2#20",
+    "quest": [
+      "Katze"
+    ],
+    "answer": [
+      "к_о_шка"
+    ]
   },
   {
-    "quest": "Liebling (weiblich)",
-    "answer": "люб_и_мица"
+    "id": "chap4-ck2#21",
+    "quest": [
+      "Liebling (weiblich)"
+    ],
+    "answer": [
+      "люб_и_мица"
+    ]
   },
   {
-    "quest": "Vatersnamen",
-    "answer": "_о_тчество"
+    "id": "chap4-ck2#22",
+    "quest": [
+      "Vatersnamen"
+    ],
+    "answer": [
+      "_о_тчество"
+    ]
   },
   {
+    "id": "chap4-ck2#23",
     "quest": [
       "längst",
       "vor langer Zeit"
     ],
-    "answer": "давн_о_"
+    "answer": [
+      "давн_о_"
+    ]
   },
   {
+    "id": "chap4-ck2#24",
     "quest": [
       "weit",
       "fern"
     ],
-    "answer": "далек_о_"
+    "answer": [
+      "далек_о_"
+    ]
   },
   {
+    "id": "chap4-ck2#25",
     "quest": [
       "das bedeutet",
       "das heißt"
     ],
-    "answer": "(это) зн_а_чит"
+    "answer": [
+      "(это) зн_а_чит"
+    ]
   },
   {
-    "quest": "Ingenieur / -in",
-    "answer": "инжен_е_р"
+    "id": "chap4-ck2#26",
+    "quest": [
+      "Ingenieur / -in"
+    ],
+    "answer": [
+      "инжен_е_р"
+    ]
   },
   {
-    "quest": "Programmierer / -in",
-    "answer": "программ_и_ст"
+    "id": "chap4-ck2#27",
+    "quest": [
+      "Programmierer / -in"
+    ],
+    "answer": [
+      "программ_и_ст"
+    ]
   },
   {
-    "quest": "drei Kinder",
-    "answer": "тр_о_е дет_е_й"
+    "id": "chap4-ck2#28",
+    "quest": [
+      "drei Kinder"
+    ],
+    "answer": [
+      "тр_о_е дет_е_й"
+    ]
   },
   {
+    "id": "chap4-ck2#29",
     "quest": [
       "arbeiten",
       "~konjugieren~"
@@ -163,13 +278,17 @@
     ]
   },
   {
+    "id": "chap4-ck2#30",
     "quest": [
       "wörtl.: Wie viele Sommer, wie viele Winter! ",
       "(Ausruf, wenn man jmdn. lange nicht gesehen hat)"
     ],
-    "answer": " Ск_о_лько лет, ск_о_лько зим!"
+    "answer": [
+      " Ск_о_лько лет, ск_о_лько зим!"
+    ]
   },
   {
+    "id": "chap4-ck2#31",
     "quest": [
       "machen",
       "tun ",
@@ -186,21 +305,32 @@
     ]
   },
   {
+    "id": "chap4-ck2#32",
     "quest": [
       "geschäftlich",
       "dienstlich"
     ],
-    "answer": "по дел_а_м"
+    "answer": [
+      "по дел_а_м"
+    ]
   },
   {
+    "id": "chap4-ck2#33",
     "quest": [
       "Ach so!",
       "Sieh mal einer an!"
     ],
-    "answer": "Вот как!"
+    "answer": [
+      "Вот как!"
+    ]
   },
   {
-    "quest": "Rentner ",
-    "answer": "пенсион_е_р"
+    "id": "chap4-ck2#34",
+    "quest": [
+      "Rentner "
+    ],
+    "answer": [
+      "пенсион_е_р"
+    ]
   }
 ]

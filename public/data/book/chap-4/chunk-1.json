@@ -1,5 +1,6 @@
 [
   {
+    "id": "chap4-ck1#01",
     "quest": [
       "Familie"
     ],
@@ -8,6 +9,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#02",
     "quest": [
       "Vater",
       "Vati"
@@ -18,6 +20,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#03",
     "quest": [
       "Vater"
     ],
@@ -27,6 +30,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#04",
     "quest": [
       "Mutter",
       "Mutti"
@@ -36,6 +40,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#05",
     "quest": [
       "Mutter"
     ],
@@ -45,6 +50,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#06",
     "quest": [
       "Eltern"
     ],
@@ -54,6 +60,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#07",
     "quest": [
       "Ehemann"
     ],
@@ -62,6 +69,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#08",
     "quest": [
       "Ehefrau"
     ],
@@ -70,6 +78,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#09",
     "quest": [
       "Sohn"
     ],
@@ -78,6 +87,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#10",
     "quest": [
       "Tochter"
     ],
@@ -87,6 +97,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#11",
     "quest": [
       "(kleine) Tochter"
     ],
@@ -95,6 +106,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#12",
     "quest": [
       "Kinder"
     ],
@@ -104,6 +116,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#13",
     "quest": [
       "Bruder"
     ],
@@ -112,6 +125,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#14",
     "quest": [
       "Schwester"
     ],
@@ -120,6 +134,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#15",
     "quest": [
       "Großvater",
       "Opa"
@@ -130,6 +145,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#16",
     "quest": [
       "Großmutter",
       "Oma"
@@ -139,6 +155,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#17",
     "quest": [
       "Enkel"
     ],
@@ -147,6 +164,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#18",
     "quest": [
       "Enkelin"
     ],
@@ -155,6 +173,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#19",
     "quest": [
       "Freund"
     ],
@@ -163,6 +182,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#20",
     "quest": [
       "Freundin"
     ],
@@ -171,6 +191,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#21",
     "quest": [
       "Freunde"
     ],
@@ -180,6 +201,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#22",
     "quest": [
       "einträchtig",
       "einmütig"
@@ -189,6 +211,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#23",
     "quest": [
       "Moskauerin"
     ],
@@ -197,6 +220,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#24",
     "quest": [
       "nicht weit von"
     ],
@@ -205,6 +229,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#25",
     "quest": [
       "U-Bahn-Station"
     ],
@@ -213,6 +238,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#26",
     "quest": [
       "er heißt..."
     ],
@@ -221,6 +247,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#27",
     "quest": [
       "unser",
       "unsere"
@@ -232,6 +259,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#28",
     "quest": [
       "Studentin"
     ],
@@ -240,6 +268,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#29",
     "quest": [
       "mein",
       "meine"
@@ -251,6 +280,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#30",
     "quest": [
       "alle zusammen"
     ],
@@ -261,6 +291,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#31",
     "quest": [
       "sie heißen ...",
       "~mehrere Personen~"
@@ -270,6 +301,7 @@
     ]
   },
   {
+    "id": "chap4-ck1#32",
     "quest": [
       "sie heißt ...",
       "~eine weibliche Person~"
@@ -277,6 +309,7 @@
     "answer": "её зов_у_т ..."
   },
   {
+    "id": "chap4-ck1#33",
     "quest": [
       "dein",
       "deine"
