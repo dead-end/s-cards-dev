@@ -1,6 +1,7 @@
-import { db } from './db';
-import { questRemoveFile } from './questModel';
-import { arrToMap, arrIsEqual } from './utils';
+import { db } from './db'
+import { questRemoveFile } from './questModel'
+import { storePut } from './store'
+import { arrToMap, arrIsEqual } from './utils'
 
 /**
  * The interface defines a topic persisted in the database.
@@ -49,19 +50,19 @@ const topicNeedUpdate = (json: Topic, store: Topic) => {
   // If the topic is not in the store, we have to persist it.
   //
   if (!store) {
-    return true;
+    return true
   }
   //
   // Preserve last loaded, last learned and hash.
   //
   if (store.lastLoaded) {
-    json.lastLoaded = store.lastLoaded;
+    json.lastLoaded = store.lastLoaded
   }
   if (store.lastLearned) {
-    json.lastLearned = store.lastLearned;
+    json.lastLearned = store.lastLearned
   }
   if (store.hash) {
-    json.hash = store.hash;
+    json.hash = store.hash
   }
   //
   // Compare the topic values that came from the topics file.
@@ -70,10 +71,10 @@ const topicNeedUpdate = (json: Topic, store: Topic) => {
     json.desc !== store.desc ||
     !arrIsEqual(json.tags, store.tags) ||
     !arrIsEqual(json.details, store.details)) {
-    return true;
+    return true
   }
 
-  return false;
+  return false
 }
 
 /**
@@ -81,7 +82,7 @@ const topicNeedUpdate = (json: Topic, store: Topic) => {
  */
 export const topicsGetTags = (topics: Topic[]) => {
 
-  const tags: string[] = [];
+  const tags: string[] = []
   //
   // Iterate over the topics, which contain an array of tags.
   //
@@ -94,12 +95,12 @@ export const topicsGetTags = (topics: Topic[]) => {
       // Check if our tags array contains this tag
       //
       if (!tags.includes(tag)) {
-        tags.push(tag);
+        tags.push(tag)
       }
-    });
-  });
+    })
+  })
 
-  return tags.sort();
+  return tags.sort()
 }
 
 /**
@@ -109,21 +110,21 @@ export const topicsGetTags = (topics: Topic[]) => {
  */
 // TODO: Wrong place!! If file was removed, then the Question and process stores have to be also removed.
 export const topicSync = (json: Array<Topic>) => {
-  const tx = db.transaction(['topics', 'questions'], 'readwrite');
-  const store = tx.objectStore('topics');
+  const tx = db.transaction(['topics', 'questions'], 'readwrite')
+  const store = tx.objectStore('topics')
 
-  const request = store.getAll();
+  const request = store.getAll()
 
   request.onsuccess = (e) => {
     //
     // Create a map with the topics and the file as the key.
     //
-    const storeMap = arrToMap(request.result, 'file');
+    const storeMap = arrToMap<Topic>(request.result, 'file')
     //
     // Get an array with the files from the json array. The file is the key for
     // the topics in the store and has to be unique.
     //
-    const jsonKeys = json.map((item) => item['file']);
+    const jsonKeys = json.map((item) => item['file'])
     //
     // Delete the topics from the store that are not in the json array.
     //
@@ -131,12 +132,12 @@ export const topicSync = (json: Array<Topic>) => {
 
       if (!jsonKeys.includes(storeKey)) {
         store.delete(storeKey).onsuccess = () => {
-          console.log('Store:', store.name, 'deleted:', storeKey);
+          console.log('Store:', store.name, 'deleted:', storeKey)
           //
           // Remove the questions for the file.
           //
-          questRemoveFile(tx, storeKey);
-        };
+          questRemoveFile(tx, storeKey)
+        }
       }
     }
 
@@ -149,23 +150,21 @@ export const topicSync = (json: Array<Topic>) => {
       // update the store. 
       //
       if (topicNeedUpdate(jsonItem, storeMap.get(jsonItem.file))) {
-        store.put(jsonItem).onsuccess = (e) => {
-          console.log('Store:', store.name, 'update:', jsonItem.file);
-        };
+        storePut(store, jsonItem)
       }
-    });
-  };
-};
+    })
+  }
+}
 
 /**
  * The function writes the updated topic to the store.
  */
 export const topicUpdate = (topic: Topic) => {
 
-  const tx = db.transaction(['topics'], 'readwrite');
+  const tx = db.transaction(['topics'], 'readwrite')
 
-  return topicUpdateTx(tx, topic);
-};
+  return topicUpdateTx(tx, topic)
+}
 
 /**
  * The function writes the updated topic to the store.
@@ -173,17 +172,18 @@ export const topicUpdate = (topic: Topic) => {
 export const topicUpdateTx = (tx: IDBTransaction, topic: Topic) => {
 
   return new Promise<void>((resolve, reject) => {
-    const store = tx.objectStore('topics');
+    const store = tx.objectStore('topics')
 
+    //
     // Write the updated tpic to the store.
     //
     store.put(topic).onsuccess = () => {
-      console.log('Store:', store.name, 'update topic:', topic);
+      console.log('Store:', store.name, 'update topic:', topic)
 
-      resolve();
-    };
-  });
-};
+      resolve()
+    }
+  })
+}
 
 /**
  * The function reads the topic from the store.
@@ -191,18 +191,18 @@ export const topicUpdateTx = (tx: IDBTransaction, topic: Topic) => {
 export const topicGet = (file: string) => {
 
   return new Promise<Topic>((resolve, reject) => {
-    const store = db.transaction(['topics'], 'readonly').objectStore('topics');
+    const store = db.transaction(['topics'], 'readonly').objectStore('topics')
 
-    const request = store.get(file);
+    const request = store.get(file)
     request.onsuccess = (e) => {
 
-      const topic: Topic = request.result;
-      console.log('Store:', store.name, 'get topic:', topic);
+      const topic: Topic = request.result
+      console.log('Store:', store.name, 'get topic:', topic)
 
-      resolve(topic);
-    };
-  });
-};
+      resolve(topic)
+    }
+  })
+}
 
 /**
  * The function gets all topics from the store. It returns a promise with an
@@ -211,12 +211,12 @@ export const topicGet = (file: string) => {
 export const topicGetAll = () => {
 
   return new Promise<Array<Topic>>((resolve, reject) => {
-    const store = db.transaction(['topics'], 'readonly').objectStore('topics');
+    const store = db.transaction(['topics'], 'readonly').objectStore('topics')
 
-    const request = store.getAll();
+    const request = store.getAll()
 
     request.onsuccess = (e) => {
-      resolve(request.result);
-    };
-  });
-};
+      resolve(request.result)
+    }
+  })
+}
