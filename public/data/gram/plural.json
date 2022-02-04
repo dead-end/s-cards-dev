@@ -1,5 +1,6 @@
 [
   {
+    "id": "gram-plural#01",
     "quest": [
       "die Tomate",
       "die Tomaten"
@@ -10,6 +11,7 @@
     ]
   },
   {
+    "id": "gram-plural#02",
     "quest": [
       "das Bonbon",
       "die Bonbons"
@@ -20,6 +22,7 @@
     ]
   },
   {
+    "id": "gram-plural#03",
     "quest": [
       "das Getränk",
       "die Getränke"
@@ -31,6 +34,7 @@
     ]
   },
   {
+    "id": "gram-plural#04",
     "quest": [
       "die Birne",
       "die Birnen"
@@ -41,6 +45,7 @@
     ]
   },
   {
+    "id": "gram-plural#05",
     "quest": [
       "das Würstchen",
       "die Würstchen"
@@ -51,6 +56,7 @@
     ]
   },
   {
+    "id": "gram-plural#06",
     "quest": [
       "die Frucht",
       "die Früchte"
@@ -61,6 +67,7 @@
     ]
   },
   {
+    "id": "gram-plural#07",
     "quest": [
       "die Zitrone",
       "die Zitronen"
@@ -71,6 +78,7 @@
     ]
   },
   {
+    "id": "gram-plural#08",
     "quest": [
       "der Salat",
       "die Salate"
@@ -81,6 +89,7 @@
     ]
   },
   {
+    "id": "gram-plural#09",
     "quest": [
       "die Banane",
       "die Bananen"
@@ -91,6 +100,7 @@
     ]
   },
   {
+    "id": "gram-plural#10",
     "quest": [
       "das Produkt",
       "die Produkte"
@@ -101,6 +111,7 @@
     ]
   },
   {
+    "id": "gram-plural#11",
     "quest": [
       "der Kuchen",
       "die Kuchen"
@@ -111,6 +122,7 @@
     ]
   },
   {
+    "id": "gram-plural#12",
     "quest": [
       "das Brötchen",
       "die Brötchen"
@@ -121,6 +133,7 @@
     ]
   },
   {
+    "id": "gram-plural#13",
     "quest": [
       "die Ananas",
       "die Ananassen :o)"
@@ -131,6 +144,7 @@
     ]
   },
   {
+    "id": "gram-plural#14",
     "quest": [
       "die Lehrerin",
       "die Lehrerinnen"
@@ -141,6 +155,7 @@
     ]
   },
   {
+    "id": "gram-plural#15",
     "quest": [
       "das Ei",
       "die Eier"
@@ -151,6 +166,7 @@
     ]
   },
   {
+    "id": "gram-plural#16",
     "quest": [
       "das Meer",
       "die Meere"
@@ -161,6 +177,7 @@
     ]
   },
   {
+    "id": "gram-plural#17",
     "quest": [
       "der Platz",
       "die Plätze"
@@ -171,6 +188,7 @@
     ]
   },
   {
+    "id": "gram-plural#18",
     "quest": [
       "das Gericht / die Speise",
       "die Gerichte / die Speisen"
@@ -181,6 +199,7 @@
     ]
   },
   {
+    "id": "gram-plural#19",
     "quest": [
       "die Marmelade",
       "die Marmeladen"
@@ -191,6 +210,7 @@
     ]
   },
   {
+    "id": "gram-plural#20",
     "quest": [
       "der Apfel",
       "die Äpfel"
@@ -202,6 +222,7 @@
     ]
   },
   {
+    "id": "gram-plural#21",
     "quest": [
       "die Kirche",
       "die Kirchen"
@@ -212,6 +233,7 @@
     ]
   },
   {
+    "id": "gram-plural#22",
     "quest": [
       "die Unterschrift",
       "die Unterschriften"
@@ -222,6 +244,7 @@
     ]
   },
   {
+    "id": "gram-plural#23",
     "quest": [
       "die Nazionalität",
       "die Nazionalitäten"
@@ -232,6 +255,7 @@
     ]
   },
   {
+    "id": "gram-plural#24",
     "quest": [
       "das Kloster",
       "die Klöster"
@@ -242,6 +266,7 @@
     ]
   },
   {
+    "id": "gram-plural#25",
     "quest": [
       "der Sekretär",
       "die Sekretäre"
@@ -252,6 +277,7 @@
     ]
   },
   {
+    "id": "gram-plural#26",
     "quest": [
       "der Rubel",
       "die Rubel"
@@ -262,6 +288,7 @@
     ]
   },
   {
+    "id": "gram-plural#27",
     "quest": [
       "der Käufer",
       "die Käufer"
@@ -272,6 +299,7 @@
     ]
   },
   {
+    "id": "gram-plural#28",
     "quest": [
       "der Lehrer",
       "die Lehrer"
@@ -283,6 +311,7 @@
     ]
   },
   {
+    "id": "gram-plural#29",
     "quest": [
       "die Gurke",
       "die Gurken"
@@ -294,6 +323,7 @@
     ]
   },
   {
+    "id": "gram-plural#30",
     "quest": [
       "der Markt",
       "die Märkte"

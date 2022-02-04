@@ -1,5 +1,6 @@
 [
     {
+        "id": "misc#1",
         "quest": [
             "Guten Tag!"
         ],
@@ -8,6 +9,7 @@
         ]
     },
     {
+        "id": "misc#2",
         "quest": [
             "Guten Abend!"
         ],
@@ -16,8 +18,9 @@
         ]
     },
     {
+        "id": "misc#3",
         "quest": [
-            "Guten Appetit"
+            "Guten Appetit!"
         ],
         "answer": [
             "Приятного аппетита"
