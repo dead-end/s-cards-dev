@@ -1,5 +1,6 @@
 [
   {
+    "id": "chap2-ck1#01",
     "quest": [
       "wir"
     ],
@@ -8,6 +9,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#02",
     "quest": [
       "aus"
     ],
@@ -16,6 +18,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#03",
     "quest": [
       "Machen Sie sich bekannt!"
     ],
@@ -24,6 +27,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#04",
     "quest": [
       "bitte"
     ],
@@ -32,6 +36,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#05",
     "quest": [
       "wie"
     ],
@@ -40,6 +45,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#06",
     "quest": [
       "Wie heißen Sie?"
     ],
@@ -48,6 +54,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#07",
     "quest": [
       "Ich heiße Volker."
     ],
@@ -56,6 +63,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#08",
     "quest": [
       "sehr"
     ],
@@ -64,6 +72,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#09",
     "quest": [
       "angenehm"
     ],
@@ -72,6 +81,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#10",
     "quest": [
       "Wie heißt du?"
     ],
@@ -80,6 +90,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#11",
     "quest": [
       "Machen wir uns bekannt!"
     ],
@@ -88,6 +99,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#12",
     "quest": [
       "Wie geht es Ihnen?",
       "~zwei Antworten~"
@@ -98,6 +110,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#13",
     "quest": [
       "Danke!"
     ],
@@ -106,6 +119,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#14",
     "quest": [
       "Mir geht es gut."
     ],
@@ -114,6 +128,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#15",
     "quest": [
       "alles"
     ],
@@ -122,6 +137,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#16",
     "quest": [
       "gut"
     ],
@@ -130,6 +146,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#17",
     "quest": [
       "Alles in Ordnung!",
       "~nicht naheliegende Antwort~"
@@ -139,6 +156,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#18",
     "quest": [
       "Wie geht es dir?",
       "~zwei Antworten~"
@@ -149,6 +167,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#19",
     "quest": [
       "hier: es geht"
     ],
@@ -157,6 +176,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#20",
     "quest": [
       "normal"
     ],
@@ -165,6 +185,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#21",
     "quest": [
       "Wie gehts?"
     ],
@@ -173,6 +194,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#22",
     "quest": [
       "nicht"
     ],
@@ -181,6 +203,7 @@
     ]
   },
   {
+    "id": "chap2-ck1#23",
     "quest": [
       "nicht besonders"
     ],
