@@ -1,5 +1,3 @@
-// TODO: TS OK => remove TODO
-
 /**
  * The function returns a formated date value or an empty string if the date is
  * not defined.
@@ -9,16 +7,16 @@ export const fmtDate = (d: Date) => {
   // Handle empty dates.
   //
   if (!d) {
-    return '';
+    return ''
   }
 
-  const day = d.getDate() > 9 ? d.getDate() : '0' + d.getDate();
+  const day = d.getDate() > 9 ? d.getDate() : '0' + d.getDate()
   const m = d.getMonth() + 1
-  const month = m > 9 ? m : '0' + m;
-  const hour = d.getHours() > 9 ? d.getHours() : '0' + d.getHours();
-  const minute = d.getMinutes() > 9 ? d.getMinutes() : '0' + d.getMinutes();
+  const month = m > 9 ? m : '0' + m
+  const hour = d.getHours() > 9 ? d.getHours() : '0' + d.getHours()
+  const minute = d.getMinutes() > 9 ? d.getMinutes() : '0' + d.getMinutes()
 
-  return `${day}.${month}.${d.getFullYear()} ${hour}:${minute}`;
+  return `${day}.${month}.${d.getFullYear()} ${hour}:${minute}`
 }
 
 /**
@@ -26,8 +24,8 @@ export const fmtDate = (d: Date) => {
  * property named 'prop'. The function returns a map of the objects and the
  * key is the property.
  */
-export const arrToMap = (arr: Array<Object>, prop: string) => {
-  const map = new Map();
+export const arrToMap = <T>(arr: Array<T>, prop: string) => {
+  const map = new Map()
 
   arr.forEach((elem) => {
 
@@ -35,10 +33,16 @@ export const arrToMap = (arr: Array<Object>, prop: string) => {
       throw new Error(`Object has no property: ${prop}`)
     }
 
-    map.set(elem[prop], elem);
-  });
-  return map;
-};
+    const key = elem[prop]
+
+    if (map.has(key)) {
+      throw new Error(`Duplicate key: ${prop}`)
+    }
+
+    map.set(key, elem)
+  })
+  return map
+}
 
 /**
  * The function checks if two arrays of strings are equal.
@@ -47,10 +51,10 @@ export const arrIsEqual = (arr1: string[], arr2: string[]) => {
   //
   // Ensure that both exist.
   //
-  const a1 = arr1 ? arr1 : [];
-  const a2 = arr2 ? arr2 : [];
+  const a1 = arr1 ? arr1 : []
+  const a2 = arr2 ? arr2 : []
 
-  return a1.toString() === a2.toString();
+  return a1.toString() === a2.toString()
 }
 
 /**
@@ -61,11 +65,11 @@ export const arrAll = (arr: Array<number>, val: number) => {
 
   for (let i in arr) {
     if (arr[i] !== val) {
-      return false;
+      return false
     }
   }
-  return true;
-};
+  return true
+}
 
 /**
  * The function is called with an array of integers. Each can have a max value.
@@ -73,14 +77,14 @@ export const arrAll = (arr: Array<number>, val: number) => {
  * all entries have the max value.
  */
 export const arrPercentage = (arr: Array<number>, max: number) => {
-  let sum = 0;
+  let sum = 0
 
   for (let i = 0; i < arr.length; i++) {
-    sum += arr[i];
+    sum += arr[i]
   }
 
-  return percentage(sum, arr.length * max);
-};
+  return percentage(sum, arr.length * max)
+}
 
 /**
  * The function returns a percentage for a fraction of a total value.
@@ -90,18 +94,18 @@ export const percentage = (num: number, total: number) => {
   // Prevent NaN
   //
   if (!total) {
-    return 0;
+    return 0
   }
-  const result = (num * 100) / total;
-  return Math.round(result);
-};
+  const result = (num * 100) / total
+  return Math.round(result)
+}
 
 /**
  * The function returns a random number between min and max. Both are included
  * and it is assumed that both parameters are integers.
  */
 const getRandomIntInclusive = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
 /**
@@ -113,21 +117,21 @@ export const shuffleArr = (arr: Array<any>) => {
     //
     // Get a random index of the array
     //
-    let j = getRandomIntInclusive(0, arr.length - 1);
+    let j = getRandomIntInclusive(0, arr.length - 1)
 
     //
     // Ensure that there is something to do
     //
     if (i === j) {
-      continue;
+      continue
     }
 
     //
     // Swap i and j
     //
-    let tmp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = tmp;
+    let tmp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = tmp
   }
 }
 
@@ -136,9 +140,9 @@ export const shuffleArr = (arr: Array<any>) => {
  * after 'repeat' calls.
  */
 export const createRepeatToggle = (repeat: number, first: string, second: string) => {
-  let count = 0;
+  let count = 0
 
   return () => {
-    return (count++ % (2 * repeat) < repeat) ? first : second;
+    return (count++ % (2 * repeat) < repeat) ? first : second
   }
-};
+}
