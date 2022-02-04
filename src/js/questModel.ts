@@ -1,26 +1,24 @@
-// BELOW OK----
-
-import type { Topic } from './topicModel';
-import { db } from './db';
-import { percentage } from './utils';
-import { storeDeleteIndex } from './store';
+import type { Topic } from './topicModel'
+import { db } from './db'
+import { percentage, arrToMap } from './utils'
+import { storeAdd, storePut, storeDel, storeDeleteIndex } from './store'
 
 /**
  * The interface defines a question persisted in the database. The id is auto 
  * generated, by the database.
  */
 export interface Question {
-  id: number,
+  id: string,
   file: string,
   quest: string[],
   answer: string[],
-  total: number;
-  failed: number;
+  total: number
+  failed: number
   //
   // The ratio can be computed in the componente, but we need it for selections.
   //
-  ratio: number;
-  progress: number;
+  ratio: number
+  progress: number
 }
 
 /**
@@ -28,12 +26,30 @@ export interface Question {
  * input is not a question. It is the data from the json. The added properties
  * are missing.
  */
-export const questInit = (quest: Question, file: string) => {
-  quest.file = file;
-  quest.total = 0;
-  quest.failed = 0;
-  quest.ratio = 0.0;
-  quest.progress = 0;
+const questInit = (quest: Question, file: string) => {
+  quest.file = file
+  quest.total = 0
+  quest.failed = 0
+  quest.ratio = 0.0
+  quest.progress = 0
+}
+
+/**
+ * The function copies parts from the store, that are not provided in the json.
+ */
+const questCopyPart = (from: Question, to: Question) => {
+
+  //
+  // Ensure that the questions are ok.
+  //
+  if (from.id !== to.id) {
+    throw Error(`Unable to copy question parts: ${from.id} - ${to.id}`)
+  }
+  to.file = from.file
+  to.total = from.total
+  to.failed = from.failed
+  to.ratio = from.ratio
+  to.progress = from.progress
 }
 
 /**
@@ -41,14 +57,14 @@ export const questInit = (quest: Question, file: string) => {
  * correct answers for each question. It returns an array with integers. 
  */
 export const questGetStatistics = (quests: Question[]) => {
-  const statistic = [0, 0, 0, 0];
+  const statistic = [0, 0, 0, 0]
 
   quests.forEach((a) => {
-    statistic[a.progress]++;
-  });
+    statistic[a.progress]++
+  })
 
-  return statistic;
-};
+  return statistic
+}
 
 /**
  * The function is called with a question and a boolean value indicating if the
@@ -57,15 +73,15 @@ export const questGetStatistics = (quests: Question[]) => {
 export const questOnAnswer = (quest: Question, isCorrect: boolean) => {
 
   if (isCorrect) {
-    quest.progress++;
+    quest.progress++
   } else {
-    quest.progress = 0;
-    quest.failed++;
+    quest.progress = 0
+    quest.failed++
   }
 
-  quest.total++;
-  quest.ratio = percentage(quest.failed, quest.total);
-};
+  quest.total++
+  quest.ratio = percentage(quest.failed, quest.total)
+}
 
 /**
  * The function removes all questions from a given file from the store. It 
@@ -78,8 +94,8 @@ export const questRemoveFile = (tx: IDBTransaction, file: string) => {
     'questions',
     'file',
     file
-  );
-};
+  )
+}
 
 /**
  * The function is called with a question, which should be persisted. It 
@@ -91,14 +107,14 @@ export const questPersist = (quest: Question) => {
 
     const store = db
       .transaction(['questions'], 'readwrite')
-      .objectStore('questions');
+      .objectStore('questions')
 
     store.put(quest).onsuccess = (e) => {
-      console.log('Store:', store.name, ' update:', quest);
-      resolve();
-    };
-  });
-};
+      console.log('Store:', store.name, ' update:', quest)
+      resolve()
+    }
+  })
+}
 
 /**
  * The function gets all questions for a topic from the store. It returns a 
@@ -109,10 +125,10 @@ export const questGetAll = (topic: Topic) => {
 
   const store = db
     .transaction(['questions'], 'readonly')
-    .objectStore('questions');
+    .objectStore('questions')
 
-  return questGetAllTx(store, topic);
-};
+  return questGetAllTx(store, topic)
+}
 
 /**
  * The function gets all questions for a topic from the store. It returns a 
@@ -123,13 +139,13 @@ const questGetAllTx = (store: IDBObjectStore, topic: Topic) => {
 
   return new Promise<Question[]>((resolve, reject) => {
 
-    const request = store.index('file').getAll(topic.file);
+    const request = store.index('file').getAll(topic.file)
 
     request.onsuccess = (e) => {
-      resolve(request.result);
-    };
-  });
-};
+      resolve(request.result)
+    }
+  })
+}
 
 /**
  * The function collects the 'progress' property from questions that are from a
@@ -141,41 +157,41 @@ export const questGetStats = (file: string) => {
 
   return new Promise<number[]>((resolve, reject) => {
 
-    const result: number[] = [];
+    const result: number[] = []
     //
     // We are only interested in questions from a given file.
     //
-    const range = IDBKeyRange.only(file);
+    const range = IDBKeyRange.only(file)
 
     const store = db
       .transaction(['questions'], 'readwrite')
-      .objectStore('questions');
+      .objectStore('questions')
 
-    const request = store.index('file').openCursor(range);
+    const request = store.index('file').openCursor(range)
 
     request.onsuccess = (e) => {
       //
       // The result coontains the cursor.
       //
-      const cursor = request.result;
+      const cursor = request.result
       if (cursor) {
         //
         // The cursor value is our question.
         //
-        const quest: Question = cursor.value;
-        result.push(quest.progress);
-        cursor.continue();
+        const quest: Question = cursor.value
+        result.push(quest.progress)
+        cursor.continue()
       }
       //
       // The cursor has finished.
       //
       else {
-        console.log('Store:', store.name, 'progress values:', result);
-        resolve(result);
+        console.log('Store:', store.name, 'progress values:', result)
+        resolve(result)
       }
-    };
-  });
-};
+    }
+  })
+}
 
 /**
  * The function sets all 'current' properties from questions from a given file
@@ -185,43 +201,43 @@ export const questSetProgress = (file: string, value: number) => {
   //
   // We are only interested in questions from a given file.
   //
-  const range = IDBKeyRange.only(file);
+  const range = IDBKeyRange.only(file)
 
   const store = db
     .transaction(['questions'], 'readwrite')
-    .objectStore('questions');
+    .objectStore('questions')
 
-  const request = store.index('file').openCursor(range);
+  const request = store.index('file').openCursor(range)
 
   request.onsuccess = (e) => {
     //
     // The result coontains the cursor.
     //
-    const cursor = request.result;
+    const cursor = request.result
     if (cursor) {
       //
       // The cursor value is our question.
       //
-      const quest: Question = cursor.value;
+      const quest: Question = cursor.value
       //
       // Ensure that we need to update the value in the store.
       //
       if (quest.progress !== value) {
-        quest.progress = value;
-        store.put(quest);
-        console.log('Store:', store.name, ' update:', quest.id);
+        quest.progress = value
+        store.put(quest)
+        console.log('Store:', store.name, ' update:', quest.id)
       }
 
-      cursor.continue();
+      cursor.continue()
     }
     //
     // The cursor has finished.
     //
     else {
-      console.log('Store:', store.name, 'set progress done:', value);
+      console.log('Store:', store.name, 'set progress done:', value)
     }
-  };
-};
+  }
+}
 
 /**
  * The functions is called with an array of questions (from tags). The progress
@@ -231,20 +247,20 @@ export const questSetProgressArr = async (quests: Question[], value: number) => 
 
   const store = db
     .transaction(['questions'], 'readwrite')
-    .objectStore('questions');
+    .objectStore('questions')
 
   const promises: Promise<void>[] = quests.map(quest => {
-    quest.progress = value;
+    quest.progress = value
 
     return new Promise<void>((resolve, reject) => {
       store.put(quest).onsuccess = (e) => {
-        resolve();
-      };
-    });
-  });
+        resolve()
+      }
+    })
+  })
 
-  await Promise.all(promises);
-};
+  await Promise.all(promises)
+}
 
 /**
  * The function is called with an array of topics. It reads all questions from 
@@ -257,9 +273,9 @@ export const questGetTag = async (topics: Topic[], max: number) => {
   //
   const store = db
     .transaction(['questions'], 'readonly')
-    .objectStore('questions');
+    .objectStore('questions')
 
-  let promises: Promise<Question[]>[] = [];
+  let promises: Promise<Question[]>[] = []
   //
   // Get a promise for the questions for each topic.
   //
@@ -275,16 +291,54 @@ export const questGetTag = async (topics: Topic[], max: number) => {
     // Each promise returns an array of questions and we have to concatinate 
     // them all.
     //
-    let all: Question[] = [].concat(...arrOfArr);
+    let all: Question[] = [].concat(...arrOfArr)
     //
     // Sort the array with the highest ratio first.
     //
     all.sort((a: Question, b: Question) => {
-      return b.ratio - a.ratio;
-    });
+      return b.ratio - a.ratio
+    })
     //
     // Return an array with up to max members.
     //
-    return all.splice(0, max);
-  });
+    return all.splice(0, max)
+  })
+}
+
+/**
+ * The function syncs the questions from a json file with the corresponding 
+ * questions in the store.
+ */
+export const questSync = (tx: IDBTransaction, file: string, json: Question[]) => {
+
+  const store = tx.objectStore('questions')
+
+  const request = store.index('file').getAll(file)
+
+  request.onsuccess = (e) => {
+
+    const jMap = arrToMap<Question>(json, 'id')
+    const sMap = arrToMap<Question>(request.result, 'id')
+
+    //
+    // Remove the unnecessary questions.
+    //
+    sMap.forEach(quest => {
+      if (!jMap.has(quest.id)) {
+        storeDel(store, quest.id)
+      }
+    })
+
+    jMap.forEach(quest => {
+
+      if (sMap.has(quest.id)) {
+        questCopyPart(sMap.get(quest.id), quest)
+        storePut(store, quest)
+
+      } else {
+        questInit(quest, file)
+        storeAdd(store, quest)
+      }
+    })
+  }
 }
