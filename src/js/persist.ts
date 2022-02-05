@@ -28,8 +28,14 @@ export const loadQuestions = async (file: string) => {
     return
   }
 
-  // TODO: error handling
+  //
+  // Get the json file for the questions. If the result is 'undefined' then the
+  // request fails.
+  //
   const json = await fetchJson(file)
+  if (!json) {
+    return
+  }
 
   //
   // At this point we know that we have to update the questions for the topic.
