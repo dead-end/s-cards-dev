@@ -21,7 +21,7 @@
         <span class="h6">Id: {question.id}</span>
         <span class="hide-sm">{question.file}</span>
       </div>
-      <QuestProgress quest={question} />
+      <QuestProgress {question} />
     </div>
 
     <div class="card {repeatToggle()}">
