@@ -1,5 +1,4 @@
-// TODO: remove catch from Promise and use try / catch on calling the functions.
-import { errorStore } from '../stores/errorStore';
+import { errorStore } from '../stores/errorStore'
 
 /**
  * The function fetches an url with json data and returns a Promise for that
@@ -13,12 +12,12 @@ export const fetchJson = (url: string) => {
       // Ensure that the request is ok.
       //
       if (!response.ok) {
-        throw Error(`Unable to get JSON: ${url} - ${response.statusText}`);
+        throw Error(`Unable to get JSON: ${url} - ${response.statusText}`)
       }
 
-      return response.json();
-    }).catch((e) => errorStore.addError('fetchJson: ' + e));
-};
+      return response.json()
+    }).catch((e) => errorStore.addError(`fetchJson: ${e}`))
+}
 
 /**
  * The function sends a HEAD request to the server and returns a hash value, in
@@ -36,15 +35,15 @@ export const fetchHash = (url: string) => {
       // Ensure that the request is ok.
       //
       if (!response.ok) {
-        throw Error(`Unable to get hash for: ${url} - ${response.statusText}`);
+        throw Error(`Unable to get hash for: ${url} - ${response.statusText}`)
       }
 
       //
       // Get the hash value from the response.
       //
-      const hash = response.headers.get('Content-Length');
-      console.log('url: ', url, 'header:', hash);
+      const hash = response.headers.get('Content-Length')
+      console.log('url: ', url, 'header:', hash)
 
-      return hash;
-    }).catch((e) => errorStore.addError('fetchHash: ' + e));
-};
+      return hash
+    }).catch((e) => errorStore.addError(`fetchHash: ${e}`))
+}
