@@ -25,9 +25,9 @@
         q: srcValue,
         source: srcLang,
         target: dstLang,
-        format: 'text',
+        format: 'text'
       }),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' }
     })
       .then((res) => {
         if (!res.ok) {
@@ -75,7 +75,7 @@
    * The function selets the back view.
    */
   const onBack = () => {
-    viewStore.setView('ViewTopicInfo');
+    viewStore.setView('ViewTopicList');
   };
 </script>
 
