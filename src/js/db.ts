@@ -19,7 +19,7 @@ const nullToOne = (event: IDBVersionChangeEvent) => {
   //
   // Create topics store
   //
-  const storeTopics = db.createObjectStore('topics', {
+  db.createObjectStore('topics', {
     keyPath: 'file',
   })
 

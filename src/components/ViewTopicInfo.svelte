@@ -8,11 +8,7 @@
   import Markdown from '../js/Markdown';
   import type { Topic } from '../js/topicModel';
   import type { Question } from '../js/questModel';
-  import {
-    questGetAll,
-    questSetProgress,
-    questGetStats,
-  } from '../js/questModel';
+  import { questGetAll, questSetProgress } from '../js/questModel';
 
   export let topic: Topic;
   export let questions: Question[] | void = null;
@@ -82,7 +78,7 @@
   const onStart = () => {
     viewStore.setView('ViewQuestAnswer', {
       topics: [topic],
-      questions: questions,
+      questions: questions
     });
   };
 

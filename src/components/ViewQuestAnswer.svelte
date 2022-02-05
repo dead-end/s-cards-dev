@@ -3,19 +3,16 @@
   import { viewStore } from '../stores/viewStore';
   import QuestStatistic from './QuestStatistic.svelte';
   import { shuffleArr } from '../js/utils';
-  import Markdown from '../js/Markdown';
   import {
     questPersist,
     questOnAnswer,
-    questGetStatistics,
+    questGetStatistics
   } from '../js/questModel';
 
   import type { Topic } from '../js/topicModel';
   import type { Question } from '../js/questModel';
   import QuestAnswer from './QuestAnswer.svelte';
   import { topicUpdate } from '../js/topicModel';
-
-  const md = new Markdown();
 
   export let tag: string | void = null;
 
