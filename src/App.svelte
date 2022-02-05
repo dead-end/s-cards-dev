@@ -16,6 +16,8 @@
   import ViewTagQuests from './components/ViewTagQuests.svelte';
   import ViewQuestAnswer from './components/ViewQuestAnswer.svelte';
 
+  import ViewTranslate from './components/ViewTranslate.svelte';
+
   onMount(() => {
     try {
       pwaSerivceWorkerRegister();
@@ -44,6 +46,9 @@
       },
       ViewQuestAnswer: {
         component: ViewQuestAnswer,
+      },
+      ViewTranslate: {
+        component: ViewTranslate,
       },
     };
     //

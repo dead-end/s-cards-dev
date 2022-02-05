@@ -64,16 +64,19 @@
     </select>
   </div>
 
-  {#if filter}
-    <div class="buttons">
+  <div class="buttons">
+    {#if filter}
       <button
         class="button"
         on:click={() =>
           viewStore.setView('ViewTagInfo', { tag: filter, topics: filtered })}
         >Show</button
       >
-    </div>
-  {/if}
+    {/if}
+    <button class="button" on:click={() => viewStore.setView('ViewTranslate')}
+      >Translate</button
+    >
+  </div>
 {/if}
 
 <div class="grid grid-4">
