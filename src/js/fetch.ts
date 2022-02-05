@@ -3,6 +3,8 @@ import { errorStore } from '../stores/errorStore'
 /**
  * The function fetches an url with json data and returns a Promise for that
  * json data.
+ * 
+ * If the function call fails the it returns 'undefined'
  */
 export const fetchJson = (url: string) => {
   return fetch(url)
@@ -16,7 +18,7 @@ export const fetchJson = (url: string) => {
       }
 
       return response.json()
-    }).catch((e) => errorStore.addError(`fetchJson: ${e}`))
+    }).catch((e) => errorStore.addError(`fetchJson - url: ${url} error: ${e}`))
 }
 
 /**
@@ -26,6 +28,8 @@ export const fetchJson = (url: string) => {
  * 
  * The lastmodified or etag cannot be used. They seam to change on every commit
  * to the repository.
+ * 
+ * If the function call fails the it returns 'undefined'
  */
 export const fetchHash = (url: string) => {
   return fetch(url, { method: 'HEAD' })
@@ -45,5 +49,5 @@ export const fetchHash = (url: string) => {
       console.log('url: ', url, 'header:', hash)
 
       return hash
-    }).catch((e) => errorStore.addError(`fetchHash: ${e}`))
+    }).catch((e) => errorStore.addError(`fetchHash - url: ${url} error: ${e}`))
 }
