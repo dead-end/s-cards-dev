@@ -80,7 +80,10 @@
    * Callback function for the start button.
    */
   const onStart = () => {
-    viewStore.setView('ViewQuestAnswer', { topic: topic });
+    viewStore.setView('ViewQuestAnswer', {
+      topics: [topic],
+      questions: questions,
+    });
   };
 
   /**

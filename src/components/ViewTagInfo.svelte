@@ -31,6 +31,14 @@
     viewStore.setView('ViewTopicList');
   };
 
+  const onStart = () => {
+    viewStore.setView('ViewQuestAnswer', {
+      tag: tag,
+      topics: topics,
+      questions: questions,
+    });
+  };
+
   const onSelect = (e: Event) => {
     //
     // Ensure that we have questions.
@@ -105,5 +113,6 @@
   <div class="buttons">
     <button class="button" on:click={onBack}>Back</button>
     <button class="button" on:click={onListing}>Listing</button>
+    <button class="button" on:click={onStart}>Start</button>
   </div>
 </div>
