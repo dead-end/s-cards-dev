@@ -5,7 +5,6 @@
   import { shuffleArr } from '../js/utils';
   import Markdown from '../js/Markdown';
   import {
-    questGetAll,
     questPersist,
     questOnAnswer,
     questGetStatistics,
@@ -16,35 +15,37 @@
   import QuestAnswer from './QuestAnswer.svelte';
   import { topicUpdate } from '../js/topicModel';
 
-  export let topic: Topic;
-
   const md = new Markdown();
+
+  export let tag: string | void = null;
+
+  export let topics: Topic[];
+  let topic: Topic;
+
+  export let questions: Question[];
+  let question: Question;
 
   let statistic: number[];
 
   let hideAnswer = true;
 
-  let quests: Question[];
-
   let unlearned: Question[];
-
-  let quest: Question;
 
   const handleAnswer = (isCorrect?: boolean) => {
     //
     // On skip, we do not update the statistik and go to the next.
     //
     if (typeof isCorrect === 'undefined') {
-      unlearned.push(quest);
+      unlearned.push(question);
       next();
       return;
     }
 
-    questOnAnswer(quest, isCorrect);
+    questOnAnswer(question, isCorrect);
 
-    questPersist(quest).then(() => {
-      if (quest.progress < 3) {
-        unlearned.push(quest);
+    questPersist(question).then(() => {
+      if (question.progress < 3) {
+        unlearned.push(question);
       }
 
       if (unlearned.length === 0) {
@@ -55,42 +56,52 @@
     });
   };
 
+  /**
+   * The function setup the view for the next question.
+   */
   const next = () => {
-    quest = unlearned.shift();
-    console.log('next', quest);
-    statistic = questGetStatistics(quests);
+    question = unlearned.shift();
+    topic = topics.find((t) => t.file === question.file);
+    statistic = questGetStatistics(questions);
     hideAnswer = true;
+    console.log('next', question);
   };
 
   /**
    * Callback function for the mount event.
    */
   onMount(() => {
-    questGetAll(topic).then((arr) => {
-      quests = arr;
-      unlearned = quests.filter((q) => q.progress < 3);
-      shuffleArr(unlearned);
-      next();
-    });
+    unlearned = questions.filter((q) => q.progress < 3);
+    shuffleArr(unlearned);
+    next();
   });
 
   /**
    * Callback function for the stop button.
    */
   const onStop = () => {
-    topic.lastLearned = new Date();
-    topicUpdate(topic);
-    viewStore.setView('ViewTopicList', { id: topic.file });
+    if (topic) {
+      topic.lastLearned = new Date();
+      topicUpdate(topic);
+      viewStore.setView('ViewTopicList', { id: topic.file });
+    } else {
+      viewStore.setView('ViewTopicList');
+    }
   };
 </script>
 
-{#if quest}
+{#if question}
   <div class="card card-shadow content">
-    <h4>{topic.title}</h4>
+    {#if tag}
+      <h4>Tag: {tag}</h4>
+      <h6>{topic.title}</h6>
+    {:else}
+      <h4>{topic.title}</h4>
+    {/if}
 
     <QuestStatistic {statistic} />
 
-    <QuestAnswer {topic} {quest} {hideAnswer} />
+    <QuestAnswer {topic} {question} {hideAnswer} />
 
     <!-- Buttons related to questions and answers -->
     <div class="buttons">
