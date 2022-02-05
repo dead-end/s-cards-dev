@@ -224,8 +224,7 @@ export const questSetProgress = (file: string, value: number) => {
       //
       if (quest.progress !== value) {
         quest.progress = value
-        store.put(quest)
-        console.log('Store:', store.name, ' update:', quest.id)
+        storePut(store, quest)
       }
 
       cursor.continue()
@@ -319,7 +318,6 @@ export const questSync = (tx: IDBTransaction, file: string, json: Question[]) =>
 
     const jMap = arrToMap<Question>(json, 'id')
     const sMap = arrToMap<Question>(request.result, 'id')
-
     //
     // Remove the unnecessary questions.
     //
