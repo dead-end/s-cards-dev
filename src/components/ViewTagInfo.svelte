@@ -92,7 +92,7 @@
     </div>
   </div>
 
-  <div>
+  <div class="block">
     <label for="sf-set">Number of correct answers</label>
     <select id="sf-set" bind:value={correct} on:change={onSelect}>
       <option value="-1">-- Select --</option>

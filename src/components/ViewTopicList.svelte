@@ -62,16 +62,18 @@
         <option value={tag}>{tag}</option>
       {/each}
     </select>
+  </div>
 
-    {#if filter}
+  {#if filter}
+    <div class="buttons">
       <button
         class="button"
         on:click={() =>
           viewStore.setView('ViewTagInfo', { tag: filter, topics: filtered })}
         >Show</button
       >
-    {/if}
-  </div>
+    </div>
+  {/if}
 {/if}
 
 <div class="grid grid-4">
