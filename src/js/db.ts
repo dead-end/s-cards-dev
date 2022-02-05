@@ -1,16 +1,14 @@
-export let db: IDBDatabase;
+export let db: IDBDatabase
 
-import { errorStore } from '../stores/errorStore';
+import { errorStore } from '../stores/errorStore'
 
 /**
  * Simple error callback function.
- *
- * @param {*} event
  */
 // TODO: define type
 const onError = (event: Event) => {
-  errorStore.addError(event.type);
-};
+  errorStore.addError(event.type)
+}
 
 /**
  * The function implements an update for the indexeddb from version 0 to 
@@ -23,27 +21,27 @@ const nullToOne = (event: IDBVersionChangeEvent) => {
   //
   const storeTopics = db.createObjectStore('topics', {
     keyPath: 'file',
-  });
+  })
 
   //
   // Create questions store
   //
   const storeQuest = db.createObjectStore('questions', {
     keyPath: 'id', autoIncrement: true
-  });
-  storeQuest.createIndex('file', 'file', { unique: false });
+  })
+  storeQuest.createIndex('file', 'file', { unique: false })
 
   //
   // Create config store
   //
   const storeConfig = db.createObjectStore('config', {
     keyPath: 'key',
-  });
+  })
 
   storeConfig.transaction.oncomplete = () => {
-    console.log('Upgrade completed!');
-  };
-};
+    console.log('Upgrade completed!')
+  }
+}
 
 /**
  * The function iniitalizes the indexed db.
@@ -57,7 +55,7 @@ export const dbInit = () => {
     //
     // Open db request for version 1.
     //
-    const request = indexedDB.open('s-card', 1);
+    const request = indexedDB.open('s-card', 1)
 
     //
     // Callback function for creating or upgrading the db.
@@ -66,30 +64,30 @@ export const dbInit = () => {
       //
       // Set the database.
       //
-      db = request.result;
+      db = request.result
 
       if (event.oldVersion < 1) {
-        nullToOne(event);
+        nullToOne(event)
       }
     }
 
     //
     // Error handling callback function for the opening request.
     //
-    request.onerror = onError;
+    request.onerror = onError
 
     request.onsuccess = (event: Event) => {
       //
       // Set the database.
       //
-      db = request.result;
+      db = request.result
 
       //
       // Centeralized error handling callback function.
       //
-      db.onerror = onError;
-      console.log('db init success!');
-      resolve();
-    };
-  });
-};
+      db.onerror = onError
+      console.log('db init success!')
+      resolve()
+    }
+  })
+}
