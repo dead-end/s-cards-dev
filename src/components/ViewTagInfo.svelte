@@ -20,7 +20,7 @@
     viewStore.setView('ViewTagQuests', {
       tag: tag,
       topics: topics,
-      questions: questions,
+      questions: questions
     });
   };
 
@@ -35,7 +35,7 @@
     viewStore.setView('ViewQuestAnswer', {
       tag: tag,
       topics: topics,
-      questions: questions,
+      questions: questions
     });
   };
 
@@ -90,8 +90,8 @@
 <div class="card card-shadow content">
   <div class="grid grid-4">
     <div class="is-text-left">
-      Tag: {tag}
-
+      <h4>Tag: {tag}</h4>
+      <p>Files incluging the tag:</p>
       <ul>
         {#each topics as topic}
           <li>{topic.title}</li>
