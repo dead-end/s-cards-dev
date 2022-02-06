@@ -1,12 +1,20 @@
 import { errorStore } from '../stores/errorStore'
 
+//
+// Moved the data to a special repository.
+//
+// TODO: Wrong place
+const URL = 'https://raw.githubusercontent.com/dead-end/cards-russian/master/'
+
 /**
  * The function fetches an url with json data and returns a Promise for that
  * json data.
  * 
  * If the function call fails the it returns 'undefined'
  */
-export const fetchJson = (url: string) => {
+export const fetchJson = (file: string) => {
+  const url = URL + file
+
   return fetch(url)
     .then((response) => {
 
@@ -31,7 +39,9 @@ export const fetchJson = (url: string) => {
  * 
  * If the function call fails the it returns 'undefined'
  */
-export const fetchHash = (url: string) => {
+export const fetchHash = (file: string) => {
+  const url = URL + file
+
   return fetch(url, { method: 'HEAD' })
     .then((response) => {
 
