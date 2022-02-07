@@ -194,51 +194,6 @@ export const questGetStats = (file: string) => {
 }
 
 /**
- * The function sets all 'current' properties from questions from a given file
- * to a given value.
- */
-export const questSetProgress = (file: string, value: number) => {
-  //
-  // We are only interested in questions from a given file.
-  //
-  const range = IDBKeyRange.only(file)
-
-  const store = db
-    .transaction(['questions'], 'readwrite')
-    .objectStore('questions')
-
-  const request = store.index('file').openCursor(range)
-
-  request.onsuccess = (e) => {
-    //
-    // The result coontains the cursor.
-    //
-    const cursor = request.result
-    if (cursor) {
-      //
-      // The cursor value is our question.
-      //
-      const quest: Question = cursor.value
-      //
-      // Ensure that we need to update the value in the store.
-      //
-      if (quest.progress !== value) {
-        quest.progress = value
-        storePut(store, quest)
-      }
-
-      cursor.continue()
-    }
-    //
-    // The cursor has finished.
-    //
-    else {
-      console.log('Store:', store.name, 'set progress done:', value)
-    }
-  }
-}
-
-/**
  * The functions is called with an array of questions (from tags). The progress
  * of each question is set to a given number (0-2).
  */

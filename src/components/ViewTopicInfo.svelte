@@ -8,7 +8,7 @@
   import Markdown from '../js/Markdown';
   import type { Topic } from '../js/topicModel';
   import type { Question } from '../js/questModel';
-  import { questGetAll, questSetProgress } from '../js/questModel';
+  import { questGetAll, questSetProgressArr } from '../js/questModel';
 
   export let topic: Topic;
   export let questions: Question[] | void = null;
@@ -87,10 +87,15 @@
    */
   const onSelect = (e: Event) => {
     const target = e.target as HTMLSelectElement;
+
+    if (!questions) {
+      return;
+    }
+
     //
     // Set the number of correct answers.
     //
-    questSetProgress(topic.file, target.selectedIndex - 1);
+    questSetProgressArr(questions, target.selectedIndex - 1);
 
     //
     // Set the index to 0 to restore the orignal state.
