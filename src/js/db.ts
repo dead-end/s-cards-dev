@@ -19,6 +19,7 @@ const nullToOne = (event: IDBVersionChangeEvent) => {
   //
   // Create topics store
   //
+  // TODO: not used
   db.createObjectStore('topics', {
     keyPath: 'file',
   })
@@ -36,6 +37,13 @@ const nullToOne = (event: IDBVersionChangeEvent) => {
   //
   const storeConfig = db.createObjectStore('config', {
     keyPath: 'key',
+  })
+
+  //
+  // Create config store
+  //
+  const storeHash = db.createObjectStore('hash', {
+    keyPath: 'file',
   })
 
   storeConfig.transaction.oncomplete = () => {
