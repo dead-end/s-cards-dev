@@ -2,6 +2,8 @@ export let db: IDBDatabase
 
 import { errorStore } from '../stores/errorStore'
 
+const DB_VERSION = 2
+
 /**
  * Simple error callback function.
  */
@@ -14,40 +16,48 @@ const onError = (event: Event) => {
  * The function implements an update for the indexeddb from version 0 to 
  * version 1.
  */
-const nullToOne = (event: IDBVersionChangeEvent) => {
+const initAndUpdate = (event: IDBVersionChangeEvent) => {
 
   //
   // Create topics store
   //
-  // TODO: not used
-  db.createObjectStore('topics', {
-    keyPath: 'file',
-  })
+  if (!db.objectStoreNames.contains('topics')) {
+    db.createObjectStore('topics', {
+      keyPath: 'file',
+    })
+  }
 
   //
   // Create questions store
   //
-  const storeQuest = db.createObjectStore('questions', {
-    keyPath: 'id', autoIncrement: true
-  })
-  storeQuest.createIndex('file', 'file', { unique: false })
+  if (!db.objectStoreNames.contains('questions')) {
+    const storeQuest = db.createObjectStore('questions', {
+      keyPath: 'id', autoIncrement: true
+    })
+
+    if (!storeQuest.indexNames.contains('file')) {
+      storeQuest.createIndex('file', 'file', { unique: false })
+    }
+  }
 
   //
   // Create config store
   //
-  const storeConfig = db.createObjectStore('config', {
-    keyPath: 'key',
-  })
+  if (!db.objectStoreNames.contains('hash')) {
+    const storeHash = db.createObjectStore('hash', {
+      keyPath: 'file',
+    })
+
+    storeHash.transaction.oncomplete = () => {
+      console.log('Upgrade completed!')
+    }
+  }
 
   //
   // Create config store
   //
-  const storeHash = db.createObjectStore('hash', {
-    keyPath: 'file',
-  })
-
-  storeConfig.transaction.oncomplete = () => {
-    console.log('Upgrade completed!')
+  if (db.objectStoreNames.contains('config')) {
+    db.deleteObjectStore('config')
   }
 }
 
@@ -63,7 +73,7 @@ export const dbInit = () => {
     //
     // Open db request for version 1.
     //
-    const request = indexedDB.open('s-card', 1)
+    const request = indexedDB.open('s-card', DB_VERSION)
 
     //
     // Callback function for creating or upgrading the db.
@@ -74,8 +84,8 @@ export const dbInit = () => {
       //
       db = request.result
 
-      if (event.oldVersion < 1) {
-        nullToOne(event)
+      if (event.oldVersion < DB_VERSION) {
+        initAndUpdate(event)
       }
     }
 
