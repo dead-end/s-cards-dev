@@ -1,11 +1,24 @@
 <script lang="ts">
   import { fmtDate } from '../js/utils';
   import type { Topic } from '../js/topicModel';
+  import { onMount } from 'svelte';
+  import { hashGet, Hash } from '../js/hash';
 
   export let topic: Topic;
   export let status = 0;
   export let size = 0;
   export let details = true;
+
+  let hash: Hash;
+
+  /**
+   * Read the hash for the topic.
+   */
+  onMount(async () => {
+    if (details) {
+      hash = await hashGet(topic.file);
+    }
+  });
 </script>
 
 <h4>{topic.title}</h4>
@@ -27,14 +40,16 @@
       <td>Status</td>
       <td>{status}%</td>
     </tr>
-    <tr>
-      <td>Last loaded</td>
-      <td>{fmtDate(topic.lastLoaded)}</td>
-    </tr>
-    <tr>
-      <td>Hash</td>
-      <td>{topic.hash ? topic.hash : ''}</td>
-    </tr>
+    {#if hash}
+      <tr>
+        <td>Last loaded</td>
+        <td>{fmtDate(hash.lastLoaded)}</td>
+      </tr>
+      <tr>
+        <td>Hash</td>
+        <td>{hash.value ? hash.value : ''}</td>
+      </tr>
+    {/if}
   {/if}
 </table>
 {#if topic.desc}
