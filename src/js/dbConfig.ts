@@ -1,5 +1,6 @@
 import { db } from './db'
 
+// TODO: not used
 /**
  * The config collection contains key value pairs.
  */
@@ -11,6 +12,7 @@ export interface Config<T> {
 /**
  * The function reads a Config from the store, which may not exist.
  */
+// TODO: not used
 export const dbcGetConfig = <T>(key: string) => {
 
   return new Promise<void | Config<T>>((resolve, reject) => {
@@ -40,6 +42,7 @@ export const dbcGetConfig = <T>(key: string) => {
 /**
  * The function persists a Config in the store.
  */
+// TODO: not used
 export const dbcSetConfig = <T>(config: Config<T>) => {
 
   const store = db.transaction(['config'], 'readwrite').objectStore('config')
