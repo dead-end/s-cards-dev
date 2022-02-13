@@ -12,6 +12,7 @@ const URL = 'https://raw.githubusercontent.com/dead-end/cards-russian/master/'
  * 
  * If the function call fails the it returns 'undefined'
  */
+// TODO: not used
 export const fetchJson = (file: string) => {
   const url = URL + file
 
@@ -39,6 +40,7 @@ export const fetchJson = (file: string) => {
  * 
  * If the function call fails the it returns 'undefined'
  */
+// TODO: not used
 export const fetchHash = (file: string) => {
   const url = URL + file
 
