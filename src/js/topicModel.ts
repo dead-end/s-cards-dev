@@ -1,4 +1,5 @@
 import { db } from './db'
+import { hashDelTx } from './hash'
 import { questRemoveFile } from './questModel'
 import { storePut } from './store'
 import { arrToMap, arrIsEqual } from './utils'
@@ -28,18 +29,9 @@ export interface Topic {
   //
   details?: string[],
   //
-  // The date when the file was loaded the last time.
-  //
-  lastLoaded?: Date,
-  //
   // The date when the user learned the last time.
   //
   lastLearned?: Date,
-  //
-  // A string value to identifiy if the file changes. Currently this is the
-  // size.
-  //
-  hash?: string
 }
 
 /**
@@ -53,16 +45,10 @@ const topicNeedUpdate = (json: Topic, store: Topic) => {
     return true
   }
   //
-  // Preserve last loaded, last learned and hash.
+  // Preserve last learned.
   //
-  if (store.lastLoaded) {
-    json.lastLoaded = store.lastLoaded
-  }
   if (store.lastLearned) {
     json.lastLearned = store.lastLearned
-  }
-  if (store.hash) {
-    json.hash = store.hash
   }
   //
   // Compare the topic values that came from the topics file.
@@ -110,7 +96,7 @@ export const topicsGetTags = (topics: Topic[]) => {
  */
 // TODO: Wrong place!! If file was removed, then the Question and process stores have to be also removed.
 export const topicSync = (json: Array<Topic>) => {
-  const tx = db.transaction(['topics', 'questions'], 'readwrite')
+  const tx = db.transaction(['topics', 'questions', 'hash'], 'readwrite')
   const store = tx.objectStore('topics')
 
   const request = store.getAll()
@@ -137,6 +123,7 @@ export const topicSync = (json: Array<Topic>) => {
           // Remove the questions for the file.
           //
           questRemoveFile(tx, storeKey)
+          hashDelTx(tx, storeKey)
         }
       }
     }
