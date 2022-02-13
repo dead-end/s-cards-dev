@@ -1,7 +1,7 @@
 import { db } from './db'
 import { hashDelTx } from './hash'
 import { questRemoveFile } from './questModel'
-import { storePut } from './store'
+import { storePut, storeDel } from './store'
 import { arrToMap, arrIsEqual } from './utils'
 
 /**
@@ -90,6 +90,45 @@ export const topicsGetTags = (topics: Topic[]) => {
 }
 
 /**
+ * The function gets all topics from the store. It returns a promise with an
+ * array of topics.
+ */
+export const topicGetAll = () => {
+
+  return new Promise<Array<Topic>>((resolve, reject) => {
+    const store = db.transaction(['topics'], 'readonly').objectStore('topics')
+
+    const request = store.getAll()
+
+    request.onsuccess = (e) => {
+      console.log('Store:', store.name, 'topicGetAll:')
+      resolve(request.result)
+    }
+
+    request.onerror = (e) => {
+      console.log('Store:', store.name, 'topicGetAll error:', e)
+      reject()
+    }
+  })
+}
+
+/**
+ * The function writes the updated topic to the store.
+ */
+export const topicUpdate = (topic: Topic) => {
+  const store = db.transaction(['topics'], 'readwrite').objectStore('topics')
+  storePut(store, topic)
+}
+
+/**
+ * The function deletes a topic object in the store.
+ */
+export const topicDelTx = (tx: IDBTransaction, file: string) => {
+  const store = tx.objectStore('topics')
+  storeDel(store, file)
+}
+
+/**
  * The function is called with a json array that contains the topics. It
  * deletes all topics from the store, that are not contained in the json and
  * updates the rest.
@@ -97,9 +136,9 @@ export const topicsGetTags = (topics: Topic[]) => {
 // TODO: Wrong place!! If file was removed, then the Question and process stores have to be also removed.
 export const topicSync = (json: Array<Topic>) => {
   const tx = db.transaction(['topics', 'questions', 'hash'], 'readwrite')
-  const store = tx.objectStore('topics')
+  const storeTopic = tx.objectStore('topics')
 
-  const request = store.getAll()
+  const request = storeTopic.getAll()
 
   request.onsuccess = (e) => {
     //
@@ -117,14 +156,9 @@ export const topicSync = (json: Array<Topic>) => {
     for (let storeKey of storeMap.keys()) {
 
       if (!jsonKeys.includes(storeKey)) {
-        store.delete(storeKey).onsuccess = () => {
-          console.log('Store:', store.name, 'deleted:', storeKey)
-          //
-          // Remove the questions for the file.
-          //
-          questRemoveFile(tx, storeKey)
-          hashDelTx(tx, storeKey)
-        }
+        topicDelTx(tx, storeKey)
+        hashDelTx(tx, storeKey)
+        questRemoveFile(tx, storeKey)
       }
     }
 
@@ -137,73 +171,8 @@ export const topicSync = (json: Array<Topic>) => {
       // update the store. 
       //
       if (topicNeedUpdate(jsonItem, storeMap.get(jsonItem.file))) {
-        storePut(store, jsonItem)
+        storePut(storeTopic, jsonItem)
       }
     })
   }
-}
-
-/**
- * The function writes the updated topic to the store.
- */
-export const topicUpdate = (topic: Topic) => {
-
-  const tx = db.transaction(['topics'], 'readwrite')
-
-  return topicUpdateTx(tx, topic)
-}
-
-/**
- * The function writes the updated topic to the store.
- */
-export const topicUpdateTx = (tx: IDBTransaction, topic: Topic) => {
-
-  return new Promise<void>((resolve, reject) => {
-    const store = tx.objectStore('topics')
-
-    //
-    // Write the updated tpic to the store.
-    //
-    store.put(topic).onsuccess = () => {
-      console.log('Store:', store.name, 'update topic:', topic)
-
-      resolve()
-    }
-  })
-}
-
-/**
- * The function reads the topic from the store.
- */
-export const topicGet = (file: string) => {
-
-  return new Promise<Topic>((resolve, reject) => {
-    const store = db.transaction(['topics'], 'readonly').objectStore('topics')
-
-    const request = store.get(file)
-    request.onsuccess = (e) => {
-
-      const topic: Topic = request.result
-      console.log('Store:', store.name, 'get topic:', topic)
-
-      resolve(topic)
-    }
-  })
-}
-
-/**
- * The function gets all topics from the store. It returns a promise with an
- * array of topics.
- */
-export const topicGetAll = () => {
-
-  return new Promise<Array<Topic>>((resolve, reject) => {
-    const store = db.transaction(['topics'], 'readonly').objectStore('topics')
-
-    const request = store.getAll()
-
-    request.onsuccess = (e) => {
-      resolve(request.result)
-    }
-  })
 }
