@@ -17,7 +17,7 @@ const onError = (event: Event) => {
  * version 1.
  */
 const initAndUpdate = (event: IDBVersionChangeEvent) => {
-  errorStore.addError("before topics")
+
   //
   // Create topics store
   //
@@ -26,7 +26,7 @@ const initAndUpdate = (event: IDBVersionChangeEvent) => {
       keyPath: 'file',
     })
   }
-  errorStore.addError("before quest")
+
   //
   // Create questions store
   //
@@ -39,7 +39,7 @@ const initAndUpdate = (event: IDBVersionChangeEvent) => {
       storeQuest.createIndex('file', 'file', { unique: false })
     }
   }
-  errorStore.addError("before hash")
+
   //
   // Create config store
   //
@@ -52,14 +52,13 @@ const initAndUpdate = (event: IDBVersionChangeEvent) => {
       console.log('Upgrade completed!')
     }
   }
-  errorStore.addError("before delete")
+
   //
   // Create config store
   //
   if (db.objectStoreNames.contains('config')) {
     db.deleteObjectStore('config')
   }
-  errorStore.addError("initAndUpdate")
 }
 
 /**
