@@ -48,7 +48,13 @@ const githubGetJson2 = async (file: string) => {
     const url = githubUrl + file
     const response = await fetch(url, {
         headers: headers
+    }).catch(e => {
+        errorStore.addError(`githubGetJson - url: ${url} error: ${e}`)
     })
+
+    if (!response) {
+        return
+    }
 
     if (response.status === 304) {
         console.log('File is up to date:', file)
