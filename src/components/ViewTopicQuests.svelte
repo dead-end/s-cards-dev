@@ -11,6 +11,8 @@
 
   let questions: Question[] = [];
 
+  let details: string = '0';
+
   /**
    * On mounting the component the questions for the topic is loaded.
    */
@@ -31,7 +33,16 @@
 <div class="card card-shadow content">
   <h4>{topic.title}</h4>
 
-  <QuestArrShow {questions} />
+  <div class="block">
+    <label for="details-select">Details</label>
+    <select id="details-select" bind:value={details}>
+      <option value="0">Simple</option>
+      <option value="1">Progress</option>
+      <option value="2">ID's</option>
+    </select>
+  </div>
+
+  <QuestArrShow {questions} details={parseInt(details)} />
 
   <div class="buttons">
     <button class="button" on:click={() => onClick(topic)}>Back</button>

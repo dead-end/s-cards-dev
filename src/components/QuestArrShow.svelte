@@ -5,6 +5,7 @@
   import type { Question } from '../js/questModel';
 
   export let questions: Question[];
+  export let details: number;
 
   const md = new Markdown();
 
@@ -18,10 +19,14 @@
   {#each questions as question}
     <div class="is-flex-spread grid-full">
       <div>
-        <span class="h6">Id: {question.id}</span>
-        <span class="hide-sm">{question.file}</span>
+        {#if details > 1}
+          <span class="h6">Id: {question.id}</span>
+          <span class="hide-sm">{question.file}</span>
+        {/if}
       </div>
-      <QuestProgress {question} />
+      {#if details > 0}
+        <QuestProgress {question} />
+      {/if}
     </div>
 
     <div class="card {repeatToggle()}">
