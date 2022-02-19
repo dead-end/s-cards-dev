@@ -4,7 +4,7 @@
   export let question: Question;
 </script>
 
-<span class="h6">
+<div class="h6">
   Progress: <span class="is-text-success">{question.progress}</span> /
   <span class="is-text-success">3</span>
 
@@ -12,4 +12,4 @@
     Total: <span class="is-text-success">{question.total}</span> Wrong:
     <span class="is-text-danger">{question.ratio}%</span>
   </span>
-</span>
+</div>

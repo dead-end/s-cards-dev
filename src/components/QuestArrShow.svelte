@@ -17,17 +17,17 @@
 
 <div class="grid grid-2">
   {#each questions as question}
-    <div class="is-flex-spread grid-full">
-      <div>
-        {#if details > 1}
-          <span class="h6">Id: {question.id}</span>
-          <span class="hide-sm">{question.file}</span>
-        {/if}
-      </div>
-      {#if details > 0}
+    {#if details > 0}
+      <div class="is-flex-spread grid-full">
+        <div>
+          {#if details > 1}
+            <span class="h6">Id: {question.id}</span>
+            <span class="hide-sm">{question.file}</span>
+          {/if}
+        </div>
         <QuestProgress {question} />
-      {/if}
-    </div>
+      </div>
+    {/if}
 
     <div class="card {repeatToggle()}">
       <div class="content">
