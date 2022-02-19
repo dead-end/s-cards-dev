@@ -35,6 +35,29 @@ export const hashGet = (file: string) => {
 }
 
 /**
+ * The function returns a list of all hashes as a promise.
+ */
+export const hashGetAll = () => {
+
+    return new Promise<Hash[]>((resolve, reject) => {
+        const store = db.transaction(['hash'], 'readonly').objectStore('hash')
+
+        const request = store.getAll()
+
+        request.onsuccess = (e) => {
+            const hashes: Hash[] = request.result
+            console.log('Store:', store.name, 'get all:', hashes.length)
+            resolve(hashes)
+        }
+
+        request.onerror = (e) => {
+            console.log('Store:', store.name, 'get all error:', e)
+            reject()
+        }
+    })
+}
+
+/**
  * The function puts a Hash object in the store.
  */
 export const hashPut = (hash: Hash) => {

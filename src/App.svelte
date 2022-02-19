@@ -15,8 +15,8 @@
   import ViewTagInfo from './components/ViewTagInfo.svelte';
   import ViewTagQuests from './components/ViewTagQuests.svelte';
   import ViewQuestAnswer from './components/ViewQuestAnswer.svelte';
-
   import ViewTranslate from './components/ViewTranslate.svelte';
+  import ViewHashes from './components/ViewHashes.svelte';
 
   onMount(() => {
     try {
@@ -30,26 +30,29 @@
     //
     viewStore.views = {
       ViewTopicList: {
-        component: ViewTopicList,
+        component: ViewTopicList
       },
       ViewTopicInfo: {
-        component: ViewTopicInfo,
+        component: ViewTopicInfo
       },
       ViewTopicQuests: {
-        component: ViewTopicQuests,
+        component: ViewTopicQuests
       },
       ViewTagInfo: {
-        component: ViewTagInfo,
+        component: ViewTagInfo
       },
       ViewTagQuests: {
-        component: ViewTagQuests,
+        component: ViewTagQuests
       },
       ViewQuestAnswer: {
-        component: ViewQuestAnswer,
+        component: ViewQuestAnswer
       },
       ViewTranslate: {
-        component: ViewTranslate,
+        component: ViewTranslate
       },
+      ViewHashes: {
+        component: ViewHashes
+      }
     };
     //
     // Set the view if the initialization of the app finished.

@@ -76,6 +76,9 @@
     <button class="button" on:click={() => viewStore.setView('ViewTranslate')}
       >Translate</button
     >
+    <button class="button" on:click={() => viewStore.setView('ViewHashes')}
+      >Hashes</button
+    >
   </div>
 {/if}
 
