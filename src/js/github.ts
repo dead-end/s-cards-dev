@@ -153,8 +153,11 @@ export const githubGetJson = async (file: string) => {
     // Get etag if present
     //
     let hash = await hashGet(file)
-    if (hash.value && githubCheckEtag(url, hash.value)) {
-        return
+    if (hash.value) {
+        const etagCheck = await githubCheckEtag(url, hash.value)
+        if (etagCheck) {
+            return
+        }
     }
 
     const json = await githubGetJsonContent(url)
