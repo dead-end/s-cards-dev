@@ -79,6 +79,9 @@
     <button class="button" on:click={() => viewStore.setView('ViewHashes')}
       >Hashes</button
     >
+    <button class="button" on:click={() => viewStore.setView('ViewAdmin')}
+      >Admin</button
+    >
   </div>
 {/if}
 
