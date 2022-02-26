@@ -2,7 +2,7 @@ export let db: IDBDatabase
 
 import { errorStore } from '../stores/errorStore'
 
-const DB_VERSION = 2
+const DB_VERSION = 4
 
 /**
  * Simple error callback function.
@@ -51,6 +51,12 @@ const initAndUpdate = (event: IDBVersionChangeEvent) => {
     storeHash.transaction.oncomplete = () => {
       console.log('Upgrade completed!')
     }
+  }
+
+  if (!db.objectStoreNames.contains('admin')) {
+    const storeHash = db.createObjectStore('admin', {
+      keyPath: 'config',
+    })
   }
 
   //
