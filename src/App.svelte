@@ -17,6 +17,7 @@
   import ViewQuestAnswer from './components/ViewQuestAnswer.svelte';
   import ViewTranslate from './components/ViewTranslate.svelte';
   import ViewHashes from './components/ViewHashes.svelte';
+  import ViewAdmin from './components/ViewAdmin.svelte';
 
   onMount(() => {
     try {
@@ -52,6 +53,9 @@
       },
       ViewHashes: {
         component: ViewHashes
+      },
+      ViewAdmin: {
+        component: ViewAdmin
       }
     };
     //
