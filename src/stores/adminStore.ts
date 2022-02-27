@@ -11,6 +11,8 @@ const langUrlDefault = 'https://api.github.com/repos/dead-end/cards-russian/cont
 export interface Admin {
     config: string,
     langUrl: string,
+    backupUrl: string,
+    file: string,
     token: string,
 }
 
@@ -33,11 +35,11 @@ const adminGet = () => {
                 admin = {
                     config: 'admin',
                     langUrl: langUrlDefault,
+                    backupUrl: '',
+                    file: '',
                     token: ''
                 }
             }
-
-            console.log('Store:', store.name, 'langUrl:', admin.langUrl)
 
             resolve(admin)
         }
