@@ -2,9 +2,13 @@
   import { viewStore } from '../stores/viewStore';
   import { onMount } from 'svelte';
   import { Admin, adminStore } from '../stores/adminStore';
+  import { questGetBackup, questSetRestore } from '../js/questModel';
+  import { githubRestore, githubBackup } from '../js/github';
+  import AdminShow from './AdminShow.svelte';
 
   let admin: Admin;
   let update: boolean = false;
+  let status: string = '';
 
   const handleSubmit = (e) => {
     if (admin.langUrl) {
@@ -20,16 +24,39 @@
   const onBack = () => {
     viewStore.setView('ViewTopicList');
   };
+
+  const onBackup = async () => {
+    const backup = await questGetBackup();
+    githubBackup(backup);
+    status = 'Backup done!';
+  };
+
+  const onRestore = async () => {
+    const json = await githubRestore();
+    if (json) {
+      questSetRestore(json);
+      status = 'Restore done!';
+    }
+  };
 </script>
 
 <h4>Configuration</h4>
+{#if status}
+  <div class="block is-text-success">{status}</div>
+{/if}
 
 {#if admin}
   {#if update}
     <form on:submit|preventDefault={handleSubmit}>
       <div class="block">
-        <label for="langUrl">Github URL language</label>
+        <label for="langUrl">Github URL Language</label>
         <input id="langUrl" type="url" bind:value={admin.langUrl} />
+
+        <label for="backupUrl">Github URL Backup</label>
+        <input id="backupUrl" type="url" bind:value={admin.backupUrl} />
+
+        <label for="file">Github File</label>
+        <input id="file" type="text" bind:value={admin.file} />
 
         <label for="token">Token</label>
         <input id="token" type="password" bind:value={admin.token} />
@@ -43,23 +70,14 @@
     </form>
   {:else}
     <div class="block">
-      <table>
-        <tr>
-          <td>Github URL</td>
-          <td>{admin.langUrl}</td>
-        </tr>
-        <tr>
-          <td>Token</td>
-          <td>
-            {#if admin.token}
-              {admin.token.substring(0, 3)}...
-            {/if}
-          </td>
-        </tr>
-      </table>
+      <AdminShow {admin} />
       <div class="buttons">
         <button class="button" on:click={() => (update = true)}>Update</button>
         <button class="button" on:click={onBack}>Back</button>
+        {#if admin.file && admin.backupUrl && admin.token}
+          <button class="button" on:click={onBackup}>Backup</button>
+          <button class="button" on:click={onRestore}>Restore</button>
+        {/if}
       </div>
     </div>
   {/if}
