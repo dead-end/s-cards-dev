@@ -295,3 +295,93 @@ export const questSync = (tx: IDBTransaction, file: string, json: Question[]) =>
     })
   }
 }
+
+/**
+ * The function reads a question from the store.
+ */
+export const questGet = (store: IDBObjectStore, id: string) => {
+
+  return new Promise<Question>((resolve, reject) => {
+
+    const request = store.get(id)
+
+    request.onsuccess = (e) => {
+      resolve(request.result)
+    }
+
+    request.onerror = (e) => {
+      console.log('Store:', store.name, 'questGet:', e)
+      reject()
+    }
+  })
+}
+
+/**
+ * The function creates an array with backup data from the store.
+ */
+export const questGetBackup = () => {
+
+  return new Promise<any>((resolve, reject) => {
+
+    const result = []
+
+    const store = db
+      .transaction(['questions'], 'readonly')
+      .objectStore('questions')
+
+    const request = store.openCursor()
+
+    request.onsuccess = (e) => {
+
+      const cursor = request.result
+      if (cursor) {
+
+        const quest: Question = cursor.value
+        result.push([
+          quest.id,
+          quest.failed,
+          quest.total
+        ])
+        cursor.continue()
+      }
+
+      else {
+        console.log('Store:', store.name, 'questGetBackup finished:', result.length)
+        resolve(result)
+      }
+    }
+
+    request.onerror = (e) => {
+      console.log('Store:', store.name, 'questGetBackup:', e)
+      reject()
+    }
+  })
+}
+
+/**
+ * The function writes the restore data to the store. This is done only if the 
+ * restored total value is greater than the total value from the store. This
+ * prevents the function from overwriting the store with stale backup data.
+ */
+export const questSetRestore = (restore: any[]) => {
+
+  const store = db
+    .transaction(['questions'], 'readwrite')
+    .objectStore('questions')
+
+  restore.forEach(a => {
+    const [id, failed, total] = [...a]
+
+    questGet(store, id).then(quest => {
+
+      if (quest && quest.total < total) {
+
+        quest.failed = failed
+        quest.total = total
+        quest.ratio = percentage(failed, total)
+
+        storePut(store, quest)
+      }
+    })
+  })
+}
