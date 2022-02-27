@@ -11,11 +11,11 @@
   </tr>
   <tr>
     <td>Github URL Backup</td>
-    <td>{admin.backupUrl}</td>
+    <td>{admin.backupUrl ? admin.backupUrl : ''}</td>
   </tr>
   <tr>
     <td>Github File</td>
-    <td>{admin.file}</td>
+    <td>{admin.file ? admin.file : ''}</td>
   </tr>
   <tr>
     <td>Token</td>
