@@ -7,7 +7,7 @@ const DB_VERSION = 4
 /**
  * Simple error callback function.
  */
-// TODO: define type
+// TODO: define type!
 const onError = (event: Event) => {
   errorStore.addError(event.type)
 }
