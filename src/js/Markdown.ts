@@ -1,3 +1,5 @@
+import { errorStore } from '../stores/errorStore';
+
 /*******************************************************************************
  * The class defines the mapping of a char (example: *) to a tag (example: <b>).
  * To produce valid html it has to return <b> and </b> pairwise. The check
@@ -19,7 +21,9 @@ class Mapping {
 
   check() {
     if (this.count % 2) {
-      throw new Error(`Unbalanced tag: ${this.md} count: ${this.count}`)
+      const msg = `Unbalanced tag: ${this.md} count: ${this.count}`
+      errorStore.addError(msg)
+      throw new Error(msg)
     }
 
     this.count = 0
@@ -66,7 +70,9 @@ export default class Markdown {
 
   tag(chr: string) {
     if (!this.map.hasOwnProperty(chr)) {
-      throw new Error('Unknown element: ' + chr)
+      const msg = 'Unknown element: ' + chr
+      errorStore.addError(msg)
+      throw new Error(msg)
     }
 
     return this.map[chr].getTag()
