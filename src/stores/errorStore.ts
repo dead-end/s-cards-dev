@@ -17,12 +17,24 @@ const createErrorStore = () => {
      * Add a new error to the error array.
      */
     addError: (error: string) => {
-      console.log('Added error:', error)
 
       update(errors => {
         errors.push(error)
         return errors
       })
+    },
+
+    /**
+     * Add an error for the UI and then throw it.
+     */
+    throwError(error: string) {
+
+      update(errors => {
+        errors.push(error)
+        return errors
+      })
+
+      throw Error(error)
     },
 
     /**
