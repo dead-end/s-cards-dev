@@ -1,3 +1,5 @@
+import { errorStore } from "../stores/errorStore"
+
 /**
  * The function returns a formated date value or an empty string if the date is
  * not defined.
@@ -30,13 +32,13 @@ export const arrToMap = <T>(arr: Array<T>, prop: string) => {
   arr.forEach((elem) => {
 
     if (!elem.hasOwnProperty(prop)) {
-      throw new Error(`Object has no property: ${prop}`)
+      errorStore.throwError(`Object has no property: ${prop}`)
     }
 
     const key = elem[prop]
 
     if (map.has(key)) {
-      throw new Error(`Duplicate key: ${prop}`)
+      errorStore.throwError(`Duplicate key: ${prop}`)
     }
 
     map.set(key, elem)
