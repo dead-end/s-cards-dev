@@ -72,8 +72,8 @@
     <div class="block">
       <AdminShow {admin} />
       <div class="buttons">
-        <button class="button" on:click={() => (update = true)}>Update</button>
         <button class="button" on:click={onBack}>Back</button>
+        <button class="button" on:click={() => (update = true)}>Update</button>
         {#if admin.file && admin.backupUrl && admin.token}
           <button class="button" on:click={onBackup}>Backup</button>
           <button class="button" on:click={onRestore}>Restore</button>
