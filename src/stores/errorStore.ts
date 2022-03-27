@@ -30,9 +30,7 @@ const createErrorStore = () => {
     throwError(error: string) {
 
       update(errors => {
-
         errors.push(error)
-        console.log('throwError: ' + errors)
         return errors
       })
 
