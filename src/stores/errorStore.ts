@@ -30,7 +30,9 @@ const createErrorStore = () => {
     throwError(error: string) {
 
       update(errors => {
+
         errors.push(error)
+        console.log('throwError: ' + errors)
         return errors
       })
 
@@ -41,6 +43,7 @@ const createErrorStore = () => {
      * Reset the store with an empty array.
      */
     resetErrors: () => {
+      console.log('reset')
       set([])
     },
   }

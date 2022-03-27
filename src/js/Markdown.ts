@@ -19,11 +19,9 @@ class Mapping {
     return ++this.count % 2 ? `<${this.tag}>` : `</${this.tag}>`
   }
 
-  check() {
+  check(lines: string) {
     if (this.count % 2) {
-      const msg = `Unbalanced tag: ${this.md} count: ${this.count}`
-      errorStore.addError(msg)
-      throw new Error(msg)
+      errorStore.addError(`Unbalanced tag: ${this.md} count: ${this.count} data: ${lines}`)
     }
 
     this.count = 0
@@ -70,17 +68,15 @@ export default class Markdown {
 
   tag(chr: string) {
     if (!this.map.hasOwnProperty(chr)) {
-      const msg = 'Unknown element: ' + chr
-      errorStore.addError(msg)
-      throw new Error(msg)
+      errorStore.throwError(`Unknown element: ${chr}`)
     }
 
     return this.map[chr].getTag()
   }
 
-  _check() {
+  _check(lines: string[]) {
     for (let m in this.map) {
-      this.map[m].check()
+      this.map[m].check(lines)
     }
   }
 
@@ -137,7 +133,7 @@ export default class Markdown {
     //
     // ensure that all is balanced
     //
-    this._check()
+    this._check(lines)
 
     return result
   }
