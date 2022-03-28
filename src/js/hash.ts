@@ -84,5 +84,13 @@ export const hashPut = (hash: Hash) => {
  */
 export const hashDelTx = (tx: IDBTransaction, file: string) => {
     const store = tx.objectStore('hash')
-    storeDel(store, file)
+    return storeDel(store, file)
+}
+
+/**
+ * The function deletes a Hash object in the store.
+ */
+export const hashDel = (file: string) => {
+    const store = db.transaction(['hash'], 'readwrite').objectStore('hash')
+    return storeDel(store, file)
 }
