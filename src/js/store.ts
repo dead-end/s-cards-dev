@@ -1,3 +1,5 @@
+import { errorStore } from "../stores/errorStore"
+
 /**
  * The function is called with a transaction for a store, that has an index
  * with a given name. It deletes all elements from the store that have an index
@@ -39,46 +41,61 @@ export const storeDeleteIndex = (tx: IDBTransaction, storeName: string, idxName:
 }
 
 /**
- * Simple wrapper that deletes an object by its id.
+ * Simple wrapper that deletes an object by its id and returns a promise.
  */
 export const storeDel = (store: IDBObjectStore, id: IDBValidKey) => {
-  const request = store.delete(id)
 
-  request.onsuccess = (e) => {
-    console.log('Store:', store.name, 'delete:', id)
-  }
+  return new Promise<void>((resolve, reject) => {
+    const request = store.delete(id)
 
-  request.onerror = (e) => {
-    console.log('Store:', store.name, 'delete:', id, 'error', e)
-  }
+    request.onsuccess = (e) => {
+      console.log('Store:', store.name, 'delete:', id)
+      resolve()
+    }
+
+    request.onerror = (e) => {
+      errorStore.addError(`Store: ${store.name} delete: ${id} error: ${e}`)
+      reject()
+    }
+  })
 }
 
 /**
- * Simple wrapper that inserts an object.
+ * Simple wrapper that inserts an object and returns a promise.
  */
 export const storeAdd = (store: IDBObjectStore, obj: any) => {
-  const request = store.add(obj)
 
-  request.onsuccess = (e) => {
-    console.log('Store:', store.name, 'add:', obj)
-  }
+  return new Promise<void>((resolve, reject) => {
+    const request = store.add(obj)
 
-  request.onerror = (e) => {
-    console.log('Store:', store.name, 'add:', obj, 'error', e)
-  }
+    request.onsuccess = (e) => {
+      console.log('Store:', store.name, 'add:', obj)
+      resolve()
+    }
+
+    request.onerror = (e) => {
+      errorStore.addError(`Store: ${store.name} add: ${obj} error: ${e}`)
+      reject()
+    }
+  })
 }
 
 /**
- * Simple wrapper that updates an object.
+ * Simple wrapper that updates an object and returns a promise.
  */
 export const storePut = (store: IDBObjectStore, obj: any) => {
-  const request = store.put(obj)
 
-  request.onsuccess = (e) => {
-    console.log('Store:', store.name, 'put:', obj)
-  }
+  return new Promise<void>((resolve, reject) => {
+    const request = store.put(obj)
 
-  request.onerror = (e) => {
-    console.log('Store:', store.name, 'put:', obj, 'error', e)
-  }
+    request.onsuccess = (e) => {
+      console.log('Store:', store.name, 'put:', obj)
+      resolve()
+    }
+
+    request.onerror = (e) => {
+      errorStore.addError(`Store: ${store.name} put: ${obj} error: ${e}`)
+      reject()
+    }
+  })
 }
