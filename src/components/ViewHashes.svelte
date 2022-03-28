@@ -1,7 +1,7 @@
 <script lang="ts">
   import { viewStore } from '../stores/viewStore';
   import { onMount } from 'svelte';
-  import { Hash, hashGetAll } from '../js/hash';
+  import { Hash, hashGetAll, hashDel } from '../js/hash';
   import { fmtDate } from '../js/utils';
 
   let hashes: Hash[] = [];
@@ -14,13 +14,22 @@
     hashes = hashes;
   };
 
+  const doLoad = async () => {
+    hashes = await hashGetAll();
+    doFilter();
+  };
+
+  const doDelete = async (file: string) => {
+    await hashDel(file);
+    doLoad();
+  };
+
   const onBack = () => {
     viewStore.setView('ViewTopicList');
   };
 
-  onMount(async () => {
-    hashes = await hashGetAll();
-    doFilter();
+  onMount(() => {
+    doLoad();
   });
 </script>
 
@@ -37,12 +46,18 @@
     <th>File</th>
     <th>Hash</th>
     <th>Last Loaded</th>
+    <th />
   </tr>
   {#each hashes as hash}
     <tr>
       <td>{hash.file}</td>
       <td>{hash.value}</td>
       <td>{fmtDate(hash.lastLoaded)}</td>
+      <td
+        ><button class="button" on:click={() => doDelete(hash.file)}
+          >Delete</button
+        ></td
+      >
     </tr>
   {/each}
 </table>
