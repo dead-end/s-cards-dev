@@ -44,6 +44,30 @@ const githubGetHeader = (admin: Admin | void) => {
 }
 
 /**
+ * Create an object with the backup url and the necessary headers.
+ */
+const githubGetBackupUrl = () => {
+    const admin = get(adminStore)
+
+    return {
+        backupUrl: admin.backupUrl + admin.file + '.json',
+        headers: githubGetHeader(admin)
+    }
+}
+
+/**
+ * Create an object with the file url and the necessary headers.
+ */
+const githubGetFileUrl = (file: string) => {
+    const admin = get(adminStore)
+
+    return {
+        fileUrl: admin.langUrl + file,
+        headers: githubGetHeader(admin)
+    }
+}
+
+/**
  * The function return the sha value for a file. Example:
  * 
  * etag: W/"92cf13a1ecb655679f232302e0535d4ea689fb7f"
@@ -115,21 +139,20 @@ const githubGetJsonContent = async (url: string, headers: any) => {
  * The function gets a json file from github.
  */
 export const githubGetJson = async (file: string) => {
-    const admin = get(adminStore)
-    const url = admin.langUrl + file
-    const headers = githubGetHeader(admin)
+
+    const { fileUrl, headers } = githubGetFileUrl(file)
     //
     // Get etag if present
     //
     let hash = await hashGet(file)
     if (hash.value) {
-        const etagCheck = await githubCheckEtag(url, headers, hash.value)
+        const etagCheck = await githubCheckEtag(fileUrl, headers, hash.value)
         if (etagCheck) {
             return
         }
     }
 
-    const json = await githubGetJsonContent(url, headers)
+    const json = await githubGetJsonContent(fileUrl, headers)
     if (!json) {
         return
     }
@@ -160,11 +183,8 @@ export const githubGetJson = async (file: string) => {
  */
 export const githubBackup = async (json: any) => {
 
-    const admin = get(adminStore)
-    const url = admin.backupUrl + admin.file + '.json'
-    const headers = githubGetHeader(admin)
-
-    const sha = await githubGetEtag(url, headers)
+    const { backupUrl, headers } = githubGetBackupUrl()
+    const sha = await githubGetEtag(backupUrl, headers)
     console.log('sha', sha)
 
     const data = {
@@ -177,8 +197,8 @@ export const githubBackup = async (json: any) => {
         }),
     }
 
-    const response = await fetch(url, data).catch(e => {
-        errorStore.addError(`githubBackup - url: ${url} error: ${e}`)
+    const response = await fetch(backupUrl, data).catch(e => {
+        errorStore.addError(`githubBackup - url: ${backupUrl} error: ${e}`)
     })
 
     if (!response) {
@@ -186,7 +206,7 @@ export const githubBackup = async (json: any) => {
     }
 
     if (!response.ok) {
-        errorStore.addError(`githubBackup - url: ${url} error: ${response.statusText}`)
+        errorStore.addError(`githubBackup - url: ${backupUrl} error: ${response.statusText}`)
         return
     }
 }
@@ -199,78 +219,12 @@ export const githubBackup = async (json: any) => {
  */
 export const githubRestore = async () => {
 
-    const admin = get(adminStore)
-    const url = admin.backupUrl + admin.file + '.json'
-    const headers = githubGetHeader(admin)
+    const { backupUrl, headers } = githubGetBackupUrl()
 
-    const json = await githubGetJsonContent(url, headers)
+    const json = await githubGetJsonContent(backupUrl, headers)
     if (!json) {
         return
     }
 
     return githubParseJson(json.content)
-}
-
-// ----------------------------------------------------------------------------
-
-/**
- * The function gets a json file from github.
- * 
- * ERROR the fetch api adds a Pragma header, which is not allowed due to cors.
- */
-// TODO: does not work
-const githubGetJson2 = async (file: string) => {
-    const headers = githubGetHeader()
-
-    //
-    // Get etag if present
-    //
-    let hash = await hashGet(file)
-    if (hash.value) {
-        headers['If-None-Match'] = '"' + hash.value + '"'
-    }
-
-    const url = get(adminStore).langUrl + file
-    const response = await fetch(url, {
-        headers: headers
-    }).catch(e => {
-        errorStore.addError(`githubGetJson - url: ${url} error: ${e}`)
-    })
-
-    if (!response) {
-        return
-    }
-
-    if (response.status === 304) {
-        console.log('File is up to date:', file)
-        return
-    }
-
-    if (!response.ok) {
-        errorStore.addError(`githubGetJson - url: ${url} error: ${response.statusText}`)
-        return
-    }
-
-    //
-    // Get the json data
-    //
-    const json = await response.json()
-
-    let result: any
-    try {
-        result = JSON.parse(b64_to_utf8(json.content))
-    } catch (e) {
-        errorStore.addError(`githubGetJson - url: ${url} unable to parse data: ${e}`)
-        return
-    }
-
-    //
-    // Update the hash in the store
-    //
-    hash.value = json.sha
-    hash.lastLoaded = new Date()
-    await hashPut(hash)
-
-    console.log('githubGetJson', result)
-    return result
 }
