@@ -88,7 +88,7 @@
 </script>
 
 <div class="card card-shadow content">
-  <div class="grid grid-4">
+  <div>
     <div class="is-text-left">
       <h4>Tag: {tag}</h4>
       <p>Files incluging the tag:</p>

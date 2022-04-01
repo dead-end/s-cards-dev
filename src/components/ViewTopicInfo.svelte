@@ -107,12 +107,12 @@
 </script>
 
 <div class="card card-shadow content">
-  <div class="grid grid-4">
+  <div>
     <div class="is-text-left">
       <TopicInfo {topic} {status} {size} />
     </div>
 
-    <div>
+    <div class="block">
       <label for="sf-set">Number of correct answers</label>
       <select id="sf-set" on:change={onSelect}>
         <option value="">-- Select --</option>
@@ -124,7 +124,7 @@
     </div>
 
     {#if topic.details}
-      <div>
+      <div class="block">
         <h5>Details</h5>
         <div class="card content is-info">
           <p>{@html md.toHtml(topic.details)}</p>
