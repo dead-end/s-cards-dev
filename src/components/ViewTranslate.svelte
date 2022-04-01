@@ -88,10 +88,10 @@
 <textarea id="dst" readonly value={dstValue} />
 
 <div class="buttons">
+  <button class="button" on:click={() => onBack()}>Back</button>
   <button class="button" on:click={() => onTranslate()}>Translate</button>
   <button class="button" on:click={() => onReset()}>Reset</button>
   <button class="button" on:click={() => onSwitch()}>Switch</button>
-  <button class="button" on:click={() => onBack()}>Back</button>
 </div>
 
 <p>
