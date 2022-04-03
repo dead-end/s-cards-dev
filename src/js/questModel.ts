@@ -1,6 +1,6 @@
 import type { Topic } from './topicModel'
 import { db } from './db'
-import { percentage, arrToMap } from './utils'
+import { percentage, arrToMap, shuffleArr } from './utils'
 import { storeAdd, storePut, storeDel, storeDeleteIndex } from './store'
 
 /**
@@ -246,6 +246,12 @@ export const questGetTag = async (topics: Topic[], max: number) => {
     // them all.
     //
     let all: Question[] = [].concat(...arrOfArr)
+    //
+    // First we shuffle the array and the we sort it. The sorting effects only
+    // questions with different ratios. The shuffling then effects questions 
+    // with the same ratio.
+    //
+    shuffleArr(all)
     //
     // Sort the array with the highest ratio first.
     //
