@@ -10,23 +10,37 @@
   //
   export let id: string | void = null;
 
-  let topics: Array<Topic> = [];
-
-  let filtered: Array<Topic> = [];
+  let topicsRaw: Array<Topic> = [];
+  let topicsView: Array<Topic> = [];
 
   let tags: String[];
 
   let filter: string;
+  let sort: string;
 
   /**
-   * Filter the topics with a tag.
+   * Sort and filter
    */
-  const doFilter = () => {
+  const doSortFilter = () => {
+    let tmp: Array<Topic>;
+
     if (!filter) {
-      filtered = topics;
+      tmp = topicsRaw;
     } else {
-      filtered = topics.filter((t) => t.tags.includes(filter));
+      tmp = topicsRaw.filter((t) => t.tags.includes(filter));
     }
+
+    console.log('sort', sort);
+    if (sort && sort === 'time') {
+      console.log('sorting');
+      tmp.sort((a, b) => {
+        const aTime = a.lastLearned ? a.lastLearned.getTime() : 0;
+        const bTime = b.lastLearned ? b.lastLearned.getTime() : 0;
+        return bTime - aTime;
+      });
+    }
+
+    topicsView = tmp;
   };
 
   /**
@@ -34,9 +48,9 @@
    */
   onMount(() => {
     topicGetAll().then((t) => {
-      topics = t;
-      filtered = t;
-      tags = topicsGetTags(topics);
+      topicsRaw = t;
+      topicsView = t;
+      tags = topicsGetTags(topicsRaw);
     });
   });
 
@@ -55,8 +69,16 @@
 
 {#if tags}
   <div class="block">
+    <label for="sort-select">Sort</label>
+    <select id="sort-select" bind:value={sort} on:change={doSortFilter}>
+      <option value="">-- Select --</option>
+      <option value="time">Last learned</option>
+    </select>
+  </div>
+
+  <div class="block">
     <label for="tag-select">Tag Filter</label>
-    <select id="tag-select" bind:value={filter} on:change={doFilter}>
+    <select id="tag-select" bind:value={filter} on:change={doSortFilter}>
       <option value="">-- Select --</option>
       {#each tags as tag}
         <option value={tag}>{tag}</option>
@@ -69,7 +91,7 @@
       <button
         class="button"
         on:click={() =>
-          viewStore.setView('ViewTagInfo', { tag: filter, topics: filtered })}
+          viewStore.setView('ViewTagInfo', { tag: filter, topics: topicsView })}
         >Show</button
       >
     {/if}
@@ -86,7 +108,7 @@
 {/if}
 
 <div class="grid grid-4">
-  {#each filtered as topic}
+  {#each topicsView as topic}
     <TopicCard {topic} />
   {/each}
 </div>
