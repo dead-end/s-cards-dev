@@ -384,17 +384,18 @@ select[disabled],
 }
 
 /******************************************************************************
- * Definition of a button group. On Safari the flex gap does not work, so I 
- * added an inner margin.
+ * Definition of a container with children that are floating. It is used for
+ * button groups.
+ * On Safari the flex gap does not work, so I added an inner margin.
  *****************************************************************************/
 
-.buttons {
+.is-floating {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
 }
 
-.buttons > button,
-.buttons > .button {
+.is-floating > * {
   margin-right: var(--margin-y-sm);
   /*
    * Each button has a bottom margin, which is used after line wrapping or as 
@@ -403,8 +404,7 @@ select[disabled],
   margin-bottom: var(--margin-y);
 }
 
-.buttons > button:last-child,
-.buttons > .button:last-child {
+.is-floating > *:last-child {
   margin-right: 0;
 }
 
@@ -413,7 +413,6 @@ select[disabled],
  *****************************************************************************/
 
 p,
-label,
 table,
 .block,
 .grid-2,
