@@ -100,7 +100,7 @@
     </div>
   </div>
 
-  <div class="block">
+  <div class="is-floating">
     <label for="sf-set">Number of correct answers</label>
     <select id="sf-set" bind:value={correct} on:change={onSelect}>
       <option value="-1">-- Select --</option>

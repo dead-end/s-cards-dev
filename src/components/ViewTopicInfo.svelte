@@ -86,11 +86,13 @@
    * Callback function for the select box.
    */
   const onSelect = (e: Event) => {
-    const target = e.target as HTMLSelectElement;
-
+    //
+    // Ensure that we have questions.
+    //
     if (!questions) {
       return;
     }
+    const target = e.target as HTMLSelectElement;
 
     //
     // Set the number of correct answers.
@@ -112,7 +114,7 @@
       <TopicInfo {topic} {status} {size} />
     </div>
 
-    <div class="block">
+    <div class="is-floating">
       <label for="sf-set">Number of correct answers</label>
       <select id="sf-set" on:change={onSelect}>
         <option value="">-- Select --</option>
