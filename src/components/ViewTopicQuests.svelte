@@ -44,7 +44,7 @@
 
   <QuestArrShow {questions} details={parseInt(details)} />
 
-  <div class="buttons">
+  <div class="is-floating">
     <button class="button" on:click={() => onClick(topic)}>Back</button>
   </div>
 </div>

@@ -15,7 +15,7 @@
 
 <div class="card card-shadow content" id={topic.file}>
   <TopicInfo {topic} details={false} />
-  <div class="buttons">
+  <div class="is-floating">
     <button class="button" on:click={() => onClick(topic)}>Show</button>
   </div>
 </div>

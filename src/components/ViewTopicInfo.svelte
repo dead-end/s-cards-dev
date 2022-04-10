@@ -133,7 +133,7 @@
     {/if}
   </div>
 
-  <div class="buttons">
+  <div class="is-floating">
     <button class="button" on:click={onBack}>Back</button>
     <button class="button" on:click={onListing}>Listing</button>
     <button class="button" disabled={startDisabled} on:click={onStart}

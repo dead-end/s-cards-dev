@@ -62,6 +62,6 @@
   {/each}
 </table>
 
-<div class="buttons">
+<div class="is-floating">
   <button class="button" on:click={() => onBack()}>Back</button>
 </div>

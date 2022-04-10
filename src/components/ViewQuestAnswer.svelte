@@ -101,7 +101,7 @@
     <QuestAnswer {topic} {question} {hideAnswer} />
 
     <!-- Buttons related to questions and answers -->
-    <div class="buttons">
+    <div class="is-floating">
       <button
         class="button"
         hidden={!hideAnswer}

@@ -87,7 +87,7 @@
 <label for="dst">{dstLabel}</label>
 <textarea id="dst" readonly value={dstValue} />
 
-<div class="buttons">
+<div class="is-floating">
   <button class="button" on:click={() => onBack()}>Back</button>
   <button class="button" on:click={() => onTranslate()}>Translate</button>
   <button class="button" on:click={() => onReset()}>Reset</button>

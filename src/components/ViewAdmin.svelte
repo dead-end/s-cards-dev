@@ -62,7 +62,7 @@
         <input id="token" type="password" bind:value={admin.token} />
       </div>
 
-      <div class="buttons">
+      <div class="is-floating">
         <button class="button">Save</button>
         <button class="button" on:click={() => (update = false)}>Cancel</button>
         <button class="button" on:click={onBack}>Back</button>

@@ -16,7 +16,7 @@
       <li>{error}</li>
     {/each}
   </ul>
-  <div class="buttons">
+  <div class="is-floating">
     <button class="button" on:click={onOk}>Ok</button>
   </div>
 </div>
