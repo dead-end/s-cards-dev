@@ -68,15 +68,13 @@
 </script>
 
 {#if tags}
-  <div class="block">
-    <label for="sort-select">Sort</label>
+  <div class="is-floating">
+    <label class="is-valign-center" for="sort-select">Sort</label>
     <select id="sort-select" bind:value={sort} on:change={doSortFilter}>
       <option value="">-- Select --</option>
       <option value="time">Last learned</option>
     </select>
-  </div>
 
-  <div class="block">
     <label for="tag-select">Tag Filter</label>
     <select id="tag-select" bind:value={filter} on:change={doSortFilter}>
       <option value="">-- Select --</option>
@@ -84,9 +82,7 @@
         <option value={tag}>{tag}</option>
       {/each}
     </select>
-  </div>
 
-  <div class="buttons">
     {#if filter}
       <button
         class="button"
