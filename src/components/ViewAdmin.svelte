@@ -71,7 +71,7 @@
   {:else}
     <div class="block">
       <AdminShow {admin} />
-      <div class="buttons">
+      <div class="is-floating">
         <button class="button" on:click={onBack}>Back</button>
         <button class="button" on:click={() => (update = true)}>Update</button>
         {#if admin.file && admin.backupUrl && admin.token}
