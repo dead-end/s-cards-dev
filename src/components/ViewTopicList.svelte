@@ -10,8 +10,8 @@
   //
   export let id: string | void = null;
 
-  let topicsRaw: Array<Topic> = [];
-  let topicsView: Array<Topic> = [];
+  let topicsRaw: Topic[] = [];
+  let topicsView: Topic[] = [];
 
   let tags: String[];
 
@@ -22,10 +22,10 @@
    * Sort and filter
    */
   const doSortFilter = () => {
-    let tmp: Array<Topic>;
+    let tmp: Topic[];
 
     if (!filter) {
-      tmp = topicsRaw;
+      tmp = [...topicsRaw];
     } else {
       tmp = topicsRaw.filter((t) => t.tags.includes(filter));
     }
