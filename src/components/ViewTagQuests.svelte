@@ -8,11 +8,7 @@
   export let topics: Topic[];
   export let questions: Question[] = [];
 
-  let details: string = '0';
-  /**
-   *
-   */
-  const onClick = () => {
+  const onBack = () => {
     viewStore.setView('ViewTagInfo', {
       tag: tag,
       topics: topics,
@@ -24,18 +20,9 @@
 <div class="card card-shadow content">
   <h4>Tag: {tag}</h4>
 
-  <div class="block">
-    <label for="details-select">Details</label>
-    <select id="details-select" bind:value={details}>
-      <option value="0">Simple</option>
-      <option value="1">Progress</option>
-      <option value="2">ID's</option>
-    </select>
-  </div>
-
-  <QuestArrShow {questions} details={parseInt(details)} />
+  <QuestArrShow {questions} />
 
   <div class="is-floating">
-    <button class="button" on:click={() => onClick()}>Back</button>
+    <button class="button" on:click={() => onBack()}>Back</button>
   </div>
 </div>
