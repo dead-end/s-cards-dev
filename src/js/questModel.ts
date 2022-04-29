@@ -221,7 +221,7 @@ export const questSetProgressArr = async (quests: Question[], value: number) => 
  * the topics, sorts them by the ration and returns a Promise for an array with
  * max elements with the highest ratios.
  */
-export const questGetTag = async (topics: Topic[], max: number, fraction: number) => {
+export const questGetTag = async (topics: Topic[], numQuests: number, fraction: number) => {
   //
   // We use one transaction / store for all topics
   //
@@ -259,11 +259,18 @@ export const questGetTag = async (topics: Topic[], max: number, fraction: number
       return b.ratio - a.ratio
     })
     //
-    // We want to ignore the questions with the lowest ratio.
+    // If we want all, then we get all.
+    //
+    if (numQuests <= 0) {
+      return all
+    }
+    //
+    // We select the part of the questions with the highest ratio. We shuffle
+    // this part and return the requested number of questions.
     //
     const part = Math.round(all.length * fraction)
-    console.log('max:', max, 'part:', part, 'fraction:', fraction);
-    if (part > max) {
+    console.log('max:', numQuests, 'part:', part, 'fraction:', fraction);
+    if (part > numQuests) {
       all = all.splice(0, part)
       shuffleArr(all)
     }
@@ -271,7 +278,7 @@ export const questGetTag = async (topics: Topic[], max: number, fraction: number
     //
     // Return an array with up to max members.
     //
-    return all.splice(0, max)
+    return all.splice(0, numQuests)
   })
 }
 

@@ -2,7 +2,6 @@
   import type { Question } from '../js/questModel';
   import type { Topic } from '../js/topicModel';
   import { viewStore } from '../stores/viewStore';
-  import { onMount } from 'svelte';
   import { questGetTag, questSetProgressArr } from '../js/questModel';
   import { loadQuestions } from '../js/persist';
   import { errorStore } from '../stores/errorStore';
@@ -10,6 +9,10 @@
   export let tag: string;
   export let topics: Topic[];
   export let questions: Question[] | void = null;
+
+  let loadQuests = '30';
+  let fraction = 0.6;
+  let loaded = false;
 
   let correct: -1;
 
@@ -61,30 +64,15 @@
   /**
    * Callback function for the mount event.
    */
-  onMount(async () => {
+  const onLoad = async () => {
     try {
-      //
-      // Loading the questions for a tag can be expensive, so we do it only if
-      // it is necessary.
-      //
-      if (!questions) {
-        //
-        // We load the questions for each file async.
-        //
-        const promises: Promise<void>[] = [];
-        topics.forEach((t) => {
-          promises.push(loadQuestions(t.file));
-        });
-
-        await Promise.all(promises);
-
-        console.log('Loading questions for topics');
-        questions = await questGetTag(topics, 30, 0.66);
-      }
+      const max = loadQuests === 'all' ? -1 : 30;
+      questions = await questGetTag(topics, max, fraction);
+      loaded = true;
     } catch (error) {
       errorStore.addError('ViewTagInfo: ' + error.message);
     }
-  });
+  };
 </script>
 
 <div class="card card-shadow content">
@@ -100,19 +88,45 @@
     </div>
   </div>
 
-  <div class="is-floating">
-    <label for="sf-set">Number of correct answers</label>
-    <select id="sf-set" bind:value={correct} on:change={onSelect}>
-      <option value="-1">-- Select --</option>
-      <option value="0">Set 0</option>
-      <option value="1">Set 1</option>
-      <option value="2">Set 2</option>
-    </select>
-  </div>
+  {#if !loaded}
+    <div class="is-floating">
+      <label for="load-quests">Load Questions</label>
+      <select id="load-quests" bind:value={loadQuests}>
+        <option value="30">30</option>
+        <option value="all">All</option>
+      </select>
+    </div>
+
+    <div class="is-floating">
+      <label for="relevant">Fraction</label>
+      <input
+        id="relevant"
+        type="number"
+        min="0.2"
+        max="1"
+        step="0.2"
+        bind:value={fraction}
+      />
+    </div>
+  {:else}
+    <div class="is-floating">
+      <label for="sf-set">Number of correct answers</label>
+      <select id="sf-set" bind:value={correct} on:change={onSelect}>
+        <option value="-1">-- Select --</option>
+        <option value="0">Set 0</option>
+        <option value="1">Set 1</option>
+        <option value="2">Set 2</option>
+      </select>
+    </div>
+  {/if}
 
   <div class="is-floating">
     <button class="button" on:click={onBack}>Back</button>
-    <button class="button" on:click={onListing}>Listing</button>
-    <button class="button" on:click={onStart}>Start</button>
+    {#if loaded}
+      <button class="button" on:click={onListing}>Listing</button>
+      <button class="button" on:click={onStart}>Start</button>
+    {:else}
+      <button class="button" on:click={onLoad}>Load</button>
+    {/if}
   </div>
 </div>
