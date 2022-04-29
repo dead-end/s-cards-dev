@@ -79,7 +79,7 @@
         await Promise.all(promises);
 
         console.log('Loading questions for topics');
-        questions = await questGetTag(topics, 30);
+        questions = await questGetTag(topics, 30, 0.66);
       }
     } catch (error) {
       errorStore.addError('ViewTagInfo: ' + error.message);
