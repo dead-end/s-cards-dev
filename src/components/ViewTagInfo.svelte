@@ -3,7 +3,6 @@
   import type { Topic } from '../js/topicModel';
   import { viewStore } from '../stores/viewStore';
   import { questGetTag, questSetProgressArr } from '../js/questModel';
-  import { loadQuestions } from '../js/persist';
   import { errorStore } from '../stores/errorStore';
 
   export let tag: string;
