@@ -33,7 +33,7 @@
   });
 </script>
 
-<div class="block">
+<div class="is-floating">
   <label for="sort-select">Tag Filter</label>
   <select id="sort-select" bind:value={filter} on:change={doFilter}>
     <option value="file">By Name</option>
