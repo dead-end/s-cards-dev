@@ -1,7 +1,8 @@
 <script lang="ts">
   import { viewStore } from '../stores/viewStore';
   import { onMount } from 'svelte';
-  import { Admin, adminStore } from '../stores/adminStore';
+  import { adminStore } from '../stores/adminStore';
+  import type { Admin } from '../stores/adminStore';
   import { questGetBackup, questSetRestore } from '../js/questModel';
   import { githubRestore, githubBackup } from '../js/github';
   import AdminShow from './AdminShow.svelte';

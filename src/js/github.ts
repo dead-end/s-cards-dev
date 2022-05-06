@@ -1,6 +1,7 @@
 import { errorStore } from '../stores/errorStore'
-import { hashGet, hashPut, Hash } from './hash'
-import { adminStore, Admin } from '../stores/adminStore'
+import { hashGet, hashPut } from './hash'
+import { adminStore } from '../stores/adminStore'
+import type { Admin } from '../stores/adminStore'
 import { get } from 'svelte/store'
 
 /**

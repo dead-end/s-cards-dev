@@ -1,7 +1,8 @@
 <script lang="ts">
   import { viewStore } from '../stores/viewStore';
   import { onMount } from 'svelte';
-  import { Hash, hashGetAll, hashDel } from '../js/hash';
+  import { hashGetAll, hashDel } from '../js/hash';
+  import type { Hash } from '../js/hash';
   import { fmtDate } from '../js/utils';
 
   let hashes: Hash[] = [];

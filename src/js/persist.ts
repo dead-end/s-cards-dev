@@ -1,5 +1,6 @@
 // TODO: rename file
-import { Topic, topicSync } from './topicModel'
+import { topicSync } from './topicModel'
+import type { Topic } from './topicModel'
 import { questSync } from './questModel'
 import { db, dbInit } from './db'
 import { githubGetJson } from './github'

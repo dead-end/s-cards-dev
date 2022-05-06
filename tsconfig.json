@@ -6,6 +6,9 @@
 
   "compilerOptions": {
     /* Basic Options */                       
-    "target": "es2021",          
+    "target": "es2021",
+    "importsNotUsedAsValues": "error",
+		"isolatedModules": true,
+		"preserveValueImports": true      
   }
 }

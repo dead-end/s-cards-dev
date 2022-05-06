@@ -2,7 +2,8 @@
   import { fmtDate } from '../js/utils';
   import type { Topic } from '../js/topicModel';
   import { onMount } from 'svelte';
-  import { hashGet, Hash } from '../js/hash';
+  import { hashGet } from '../js/hash';
+  import type { Hash } from '../js/hash';
 
   export let topic: Topic;
   export let status = 0;
