@@ -1,8 +1,7 @@
 import { errorStore } from '../stores/errorStore'
 import { hashGet, hashPut } from './hash'
-import { adminStore } from '../stores/adminStore'
-import type { Admin } from '../stores/adminStore'
-import { get } from 'svelte/store'
+import { adminGet } from './admin'
+import type { Admin } from './admin'
 
 /**
  * See: https://developer.mozilla.org/en-US/docs/Glossary/Base64
@@ -47,8 +46,8 @@ const githubGetHeader = (admin: Admin | void) => {
 /**
  * Create an object with the backup url and the necessary headers.
  */
-const githubGetBackupUrl = () => {
-    const admin = get(adminStore)
+const githubGetBackupUrl = async () => {
+    const admin = await adminGet()
 
     return {
         backupUrl: admin.backupUrl + admin.file + '.json',
@@ -59,8 +58,8 @@ const githubGetBackupUrl = () => {
 /**
  * Create an object with the file url and the necessary headers.
  */
-const githubGetFileUrl = (file: string) => {
-    const admin = get(adminStore)
+const githubGetFileUrl = async (file: string) => {
+    const admin = await adminGet()
 
     return {
         fileUrl: admin.langUrl + file,
@@ -141,7 +140,7 @@ const githubGetJsonContent = async (url: string, headers: any) => {
  */
 export const githubGetJson = async (file: string) => {
 
-    const { fileUrl, headers } = githubGetFileUrl(file)
+    const { fileUrl, headers } = await githubGetFileUrl(file)
     //
     // Get etag if present
     //
@@ -184,7 +183,7 @@ export const githubGetJson = async (file: string) => {
  */
 export const githubBackup = async (json: any) => {
 
-    const { backupUrl, headers } = githubGetBackupUrl()
+    const { backupUrl, headers } = await githubGetBackupUrl()
     const sha = await githubGetEtag(backupUrl, headers)
     console.log('sha', sha)
 
@@ -220,7 +219,7 @@ export const githubBackup = async (json: any) => {
  */
 export const githubRestore = async () => {
 
-    const { backupUrl, headers } = githubGetBackupUrl()
+    const { backupUrl, headers } = await githubGetBackupUrl()
 
     const json = await githubGetJsonContent(backupUrl, headers)
     if (!json) {

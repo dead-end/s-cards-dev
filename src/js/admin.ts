@@ -1,6 +1,5 @@
-import { writable } from 'svelte/store'
-import { db } from '../js/db'
-import { storePut } from '../js/store'
+import { db } from './db'
+import { storePut } from './store'
 
 const langUrlDefault = 'https://api.github.com/repos/dead-end/cards-russian/contents/'
 
@@ -19,7 +18,7 @@ export interface Admin {
 /**
  * The function reads the admin object from the indexeddb.
  */
-const adminGet = () => {
+export const adminGet = () => {
 
     return new Promise<Admin>((resolve, reject) => {
 
@@ -40,7 +39,6 @@ const adminGet = () => {
                     token: ''
                 }
             }
-
             resolve(admin)
         }
     })
@@ -49,38 +47,7 @@ const adminGet = () => {
 /**
  * The function writes the admin configuration to the indexeddb.
  */
-const adminPut = (admin: Admin) => {
+export const adminPut = (admin: Admin) => {
     const store = db.transaction(['admin'], 'readwrite').objectStore('admin')
     storePut(store, admin)
 }
-
-/**
- * Create the svelte store for the admin configurations.
- */
-const createAdminStore = () => {
-    //
-    // Initialize the store with an empty object.
-    //
-    const { subscribe, set, update } = writable<Admin>()
-
-    return {
-        subscribe,
-
-        /**
-         * The method updates the configuration.
-         */
-        setAdmin: (admin: Admin) => {
-            adminPut(admin)
-            set(admin)
-        },
-
-        /**
-         * The initialization has to wait until we are sure that the db exists.
-         */
-        initAdmin: async () => {
-            return adminGet().then(a => set(a))
-        }
-    }
-}
-
-export const adminStore = createAdminStore()

@@ -1,10 +1,7 @@
 // TODO: rename file
-import { topicSync } from './topicModel'
-import type { Topic } from './topicModel'
 import { questSync } from './questModel'
 import { db, dbInit } from './db'
 import { githubGetJson } from './github'
-import { adminStore } from '../stores/adminStore'
 
 /**
  * Load the questions from the store
@@ -26,11 +23,4 @@ export const initApp = async () => {
   // Ensure that the database is initialized before we go on.
   //
   await dbInit()
-
-  await adminStore.initAdmin()
-
-  const json = await githubGetJson('data/topics.json')
-  if (json) {
-    topicSync(json as Array<Topic>)
-  }
 }
