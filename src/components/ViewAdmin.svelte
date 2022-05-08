@@ -6,6 +6,7 @@
   import { questGetBackup, questSetRestore } from '../js/questModel';
   import { githubRestore, githubBackup } from '../js/github';
   import AdminShow from './AdminShow.svelte';
+  import Popup from './Popup.svelte';
 
   let admin: Admin;
   let update: boolean = false;
@@ -38,6 +39,44 @@
       questSetRestore(json);
       status = 'Restore done!';
     }
+  };
+
+  enum PopupType {
+    Backup,
+    Restore
+  }
+
+  let title: string;
+  let msg: string;
+  let showPopup = false;
+  let callback: () => void;
+
+  const doShowPopup = (type: PopupType) => {
+    switch (type) {
+      case PopupType.Backup:
+        title = 'Information';
+        msg = 'Do you realy want to create a backup?';
+        callback = onBackup;
+        break;
+      case PopupType.Restore:
+        title = 'Warning';
+        msg = 'Do you realy want to restore the backup?';
+        callback = onRestore;
+        break;
+      default:
+        console.log('Unkown type', type);
+        break;
+    }
+
+    showPopup = true;
+  };
+
+  const handlePopup = (event: CustomEvent) => {
+    showPopup = false;
+    if (event.detail !== 'ok') {
+      return;
+    }
+    callback();
   };
 </script>
 
@@ -76,10 +115,16 @@
         <button class="button" on:click={onBack}>Back</button>
         <button class="button" on:click={() => (update = true)}>Update</button>
         {#if admin.file && admin.backupUrl && admin.token}
-          <button class="button" on:click={onBackup}>Backup</button>
-          <button class="button" on:click={onRestore}>Restore</button>
+          <button class="button" on:click={() => doShowPopup(PopupType.Backup)}
+            >Backup</button
+          >
+          <button class="button" on:click={() => doShowPopup(PopupType.Restore)}
+            >Restore</button
+          >
         {/if}
       </div>
     </div>
   {/if}
 {/if}
+
+<Popup {title} {msg} on:popup={handlePopup} doShow={showPopup} />
