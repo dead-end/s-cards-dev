@@ -1,8 +1,8 @@
 <script lang="ts">
   import { viewStore } from '../stores/viewStore';
   import { onMount } from 'svelte';
-  import { adminStore } from '../stores/adminStore';
-  import type { Admin } from '../stores/adminStore';
+  import { adminGet, adminPut } from '../js/admin';
+  import type { Admin } from '../js/admin';
   import { questGetBackup, questSetRestore } from '../js/questModel';
   import { githubRestore, githubBackup } from '../js/github';
   import AdminShow from './AdminShow.svelte';
@@ -14,13 +14,13 @@
 
   const handleSubmit = (e) => {
     if (admin.langUrl) {
-      adminStore.setAdmin(admin);
+      adminPut(admin);
     }
     update = false;
   };
 
   onMount(async () => {
-    admin = $adminStore;
+    admin = await adminGet();
   });
 
   const onBack = () => {
