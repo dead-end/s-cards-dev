@@ -4,7 +4,6 @@
   import { viewStore } from './stores/viewStore';
   import { errorStore } from './stores/errorStore';
 
-  import { initApp } from './js/persist';
   import { pwaSerivceWorkerRegister } from './js/pwa';
 
   import ErrorShow from './components/ErrorShow.svelte';
@@ -58,12 +57,8 @@
         component: ViewAdmin
       }
     };
-    //
-    // Set the view if the initialization of the app finished.
-    //
-    initApp().then(() => {
-      viewStore.setView('ViewTopicList');
-    });
+
+    viewStore.setView('ViewTopicList');
   });
 </script>
 
