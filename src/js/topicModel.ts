@@ -67,7 +67,7 @@ const topicNeedUpdate = (json: Topic, store: Topic) => {
 /**
  * The function returns a sorted array of unique tags.
  */
-export const topicsGetTags = (topics: Topic[]) => {
+export const topicGetTags = (topics: Topic[]) => {
 
   const tags: string[] = []
   //
