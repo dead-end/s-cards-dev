@@ -2,6 +2,7 @@ import type { Topic } from './topicModel'
 import { dbPromise } from './db'
 import { percentage, arrToMap, shuffleArr } from './utils'
 import { storeAdd, storePut, storeDel, storeDeleteIndex } from './store'
+import { githubGetJson } from './github'
 
 /**
  * The interface defines a question persisted in the database. The id is auto 
@@ -407,4 +408,16 @@ export const questSetRestore = async (restore: any[]) => {
       }
     })
   })
+}
+
+/**
+ * Load the questions from the store
+ */
+export const questLoad = async (file: string) => {
+
+  const json = await githubGetJson(file)
+  if (json) {
+    const tx = (await dbPromise).transaction(['questions'], 'readwrite')
+    questSync(tx, file, json)
+  }
 }

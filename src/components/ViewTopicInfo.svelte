@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { loadQuestions } from '../js/persist';
   import { arrPercentage, arrAll } from '../js/utils';
   import { viewStore } from '../stores/viewStore';
   import { errorStore } from '../stores/errorStore';
@@ -8,7 +7,11 @@
   import Markdown from '../js/Markdown';
   import type { Topic } from '../js/topicModel';
   import type { Question } from '../js/questModel';
-  import { questGetAll, questSetProgressArr } from '../js/questModel';
+  import {
+    questLoad,
+    questGetAll,
+    questSetProgressArr
+  } from '../js/questModel';
 
   export let topic: Topic;
   export let questions: Question[] | void = null;
@@ -46,7 +49,7 @@
     try {
       if (!questions) {
         // TODO: topic.lastLoaded is set inside the function.
-        await loadQuestions(topic.file);
+        await questLoad(topic.file);
 
         console.log('Loading questions for topics');
         questions = await questGetAll(topic);
