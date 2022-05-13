@@ -1,5 +1,3 @@
-export let db: IDBDatabase
-
 import { errorStore } from '../stores/errorStore'
 
 const DB_VERSION = 4
@@ -16,7 +14,7 @@ const onError = (event: Event) => {
  * The function implements an update for the indexeddb from version 0 to 
  * version 1.
  */
-const initAndUpdate = (event: IDBVersionChangeEvent) => {
+const initAndUpdate = (db: IDBDatabase, event: IDBVersionChangeEvent) => {
 
   //
   // Create topics store
@@ -75,7 +73,7 @@ export const dbInit = () => {
   // The function returns a promise to be able to wait for the db to be
   // initialized, before we go on.
   //
-  return new Promise<void>((resolve, reject) => {
+  return new Promise<IDBDatabase>((resolve, reject) => {
     //
     // Open db request for version 1.
     //
@@ -88,30 +86,37 @@ export const dbInit = () => {
       //
       // Set the database.
       //
-      db = request.result
+      const db = request.result
 
       if (event.oldVersion < DB_VERSION) {
-        initAndUpdate(event)
+        initAndUpdate(db, event)
       }
+
+      resolve(db)
     }
 
     //
     // Error handling callback function for the opening request.
     //
-    request.onerror = onError
+    request.onerror = (event: Event) => {
+      errorStore.addError(event.type)
+      reject()
+    }
 
     request.onsuccess = (event: Event) => {
       //
       // Set the database.
       //
-      db = request.result
+      const db = request.result
 
       //
       // Centeralized error handling callback function.
       //
       db.onerror = onError
       console.log('db init success!')
-      resolve()
+      resolve(db)
     }
   })
 }
+
+export let dbPromise = dbInit()
