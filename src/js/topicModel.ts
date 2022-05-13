@@ -3,6 +3,7 @@ import { hashDelTx } from './hash'
 import { questRemoveFile } from './questModel'
 import { storePut, storeDel } from './store'
 import { arrToMap, arrIsEqual } from './utils'
+import { githubGetJson } from './github'
 
 /**
  * The interface defines a topic persisted in the database.
@@ -133,8 +134,7 @@ export const topicDelTx = (tx: IDBTransaction, file: string) => {
  * deletes all topics from the store, that are not contained in the json and
  * updates the rest.
  */
-// TODO: Wrong place!! If file was removed, then the Question and process stores have to be also removed.
-export const topicSync = async (json: Array<Topic>) => {
+const topicSync = async (json: Array<Topic>) => {
   const tx = (await dbPromise).transaction(['topics', 'questions', 'hash'], 'readwrite')
   const storeTopic = tx.objectStore('topics')
 
@@ -176,3 +176,16 @@ export const topicSync = async (json: Array<Topic>) => {
     })
   }
 }
+
+/**
+ * Load the topic and sync the result with the db.
+ */
+const topicSetup = async () => {
+
+  const json = await githubGetJson('data/topics.json')
+  if (json) {
+    topicSync(json as Array<Topic>)
+  }
+}
+
+topicSetup()
