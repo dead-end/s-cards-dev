@@ -1,4 +1,4 @@
-import { db } from './db'
+import { dbPromise } from './db'
 import { storeDel } from './store'
 
 /**
@@ -16,8 +16,8 @@ export interface Hash {
  */
 export const hashGet = (file: string) => {
 
-    return new Promise<Hash>((resolve, reject) => {
-        const store = db.transaction(['hash'], 'readonly').objectStore('hash')
+    return new Promise<Hash>(async (resolve, reject) => {
+        const store = (await dbPromise).transaction(['hash'], 'readonly').objectStore('hash')
 
         const request = store.get(file)
 
@@ -39,8 +39,8 @@ export const hashGet = (file: string) => {
  */
 export const hashGetAll = () => {
 
-    return new Promise<Hash[]>((resolve, reject) => {
-        const store = db.transaction(['hash'], 'readonly').objectStore('hash')
+    return new Promise<Hash[]>(async (resolve, reject) => {
+        const store = (await dbPromise).transaction(['hash'], 'readonly').objectStore('hash')
 
         const request = store.getAll()
 
@@ -62,8 +62,8 @@ export const hashGetAll = () => {
  */
 export const hashPut = (hash: Hash) => {
 
-    return new Promise<void>((resolve, reject) => {
-        const store = db.transaction(['hash'], 'readwrite').objectStore('hash')
+    return new Promise<void>(async (resolve, reject) => {
+        const store = (await dbPromise).transaction(['hash'], 'readwrite').objectStore('hash')
 
         const request = store.put(hash)
 
@@ -90,7 +90,7 @@ export const hashDelTx = (tx: IDBTransaction, file: string) => {
 /**
  * The function deletes a Hash object in the store.
  */
-export const hashDel = (file: string) => {
-    const store = db.transaction(['hash'], 'readwrite').objectStore('hash')
+export const hashDel = async (file: string) => {
+    const store = (await dbPromise).transaction(['hash'], 'readwrite').objectStore('hash')
     return storeDel(store, file)
 }
