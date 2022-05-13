@@ -1,5 +1,5 @@
 import type { Topic } from './topicModel'
-import { db } from './db'
+import { dbPromise } from './db'
 import { percentage, arrToMap, shuffleArr } from './utils'
 import { storeAdd, storePut, storeDel, storeDeleteIndex } from './store'
 
@@ -103,9 +103,9 @@ export const questRemoveFile = (tx: IDBTransaction, file: string) => {
  */
 export const questPersist = (quest: Question) => {
 
-  return new Promise<void>((resolve, reject) => {
+  return new Promise<void>(async (resolve, reject) => {
 
-    const store = db
+    const store = (await dbPromise)
       .transaction(['questions'], 'readwrite')
       .objectStore('questions')
 
@@ -121,9 +121,9 @@ export const questPersist = (quest: Question) => {
  * promise with an array of questions. It is a wrapper, that gets a store and
  * calls the function below.
  */
-export const questGetAll = (topic: Topic) => {
+export const questGetAll = async (topic: Topic) => {
 
-  const store = db
+  const store = (await dbPromise)
     .transaction(['questions'], 'readonly')
     .objectStore('questions')
 
@@ -155,7 +155,7 @@ const questGetAllTx = (store: IDBObjectStore, topic: Topic) => {
 // done simpler with questGetAll().map()
 export const questGetStats = (file: string) => {
 
-  return new Promise<number[]>((resolve, reject) => {
+  return new Promise<number[]>(async (resolve, reject) => {
 
     const result: number[] = []
     //
@@ -163,7 +163,7 @@ export const questGetStats = (file: string) => {
     //
     const range = IDBKeyRange.only(file)
 
-    const store = db
+    const store = (await dbPromise)
       .transaction(['questions'], 'readwrite')
       .objectStore('questions')
 
@@ -199,7 +199,7 @@ export const questGetStats = (file: string) => {
  */
 export const questSetProgressArr = async (quests: Question[], value: number) => {
 
-  const store = db
+  const store = (await dbPromise)
     .transaction(['questions'], 'readwrite')
     .objectStore('questions')
 
@@ -225,7 +225,7 @@ export const questGetTag = async (topics: Topic[], numQuests: number, fraction: 
   //
   // We use one transaction / store for all topics
   //
-  const store = db
+  const store = (await dbPromise)
     .transaction(['questions'], 'readonly')
     .objectStore('questions')
 
@@ -344,11 +344,11 @@ export const questGet = (store: IDBObjectStore, id: string) => {
  */
 export const questGetBackup = () => {
 
-  return new Promise<any>((resolve, reject) => {
+  return new Promise<any>(async (resolve, reject) => {
 
     const result = []
 
-    const store = db
+    const store = (await dbPromise)
       .transaction(['questions'], 'readonly')
       .objectStore('questions')
 
@@ -386,9 +386,9 @@ export const questGetBackup = () => {
  * restored total value is greater than the total value from the store. This
  * prevents the function from overwriting the store with stale backup data.
  */
-export const questSetRestore = (restore: any[]) => {
+export const questSetRestore = async (restore: any[]) => {
 
-  const store = db
+  const store = (await dbPromise)
     .transaction(['questions'], 'readwrite')
     .objectStore('questions')
 

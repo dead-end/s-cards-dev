@@ -1,4 +1,4 @@
-import { db } from './db'
+import { dbPromise } from './db'
 import { hashDelTx } from './hash'
 import { questRemoveFile } from './questModel'
 import { storePut, storeDel } from './store'
@@ -95,8 +95,8 @@ export const topicsGetTags = (topics: Topic[]) => {
  */
 export const topicGetAll = () => {
 
-  return new Promise<Array<Topic>>((resolve, reject) => {
-    const store = db.transaction(['topics'], 'readonly').objectStore('topics')
+  return new Promise<Array<Topic>>(async (resolve, reject) => {
+    const store = (await dbPromise).transaction(['topics'], 'readonly').objectStore('topics')
 
     const request = store.getAll()
 
@@ -115,8 +115,8 @@ export const topicGetAll = () => {
 /**
  * The function writes the updated topic to the store.
  */
-export const topicUpdate = (topic: Topic) => {
-  const store = db.transaction(['topics'], 'readwrite').objectStore('topics')
+export const topicUpdate = async (topic: Topic) => {
+  const store = (await dbPromise).transaction(['topics'], 'readwrite').objectStore('topics')
   storePut(store, topic)
 }
 
@@ -134,8 +134,8 @@ export const topicDelTx = (tx: IDBTransaction, file: string) => {
  * updates the rest.
  */
 // TODO: Wrong place!! If file was removed, then the Question and process stores have to be also removed.
-export const topicSync = (json: Array<Topic>) => {
-  const tx = db.transaction(['topics', 'questions', 'hash'], 'readwrite')
+export const topicSync = async (json: Array<Topic>) => {
+  const tx = (await dbPromise).transaction(['topics', 'questions', 'hash'], 'readwrite')
   const storeTopic = tx.objectStore('topics')
 
   const request = storeTopic.getAll()

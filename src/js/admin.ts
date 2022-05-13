@@ -1,4 +1,4 @@
-import { db } from './db'
+import { dbPromise } from './db'
 import { storePut } from './store'
 
 const langUrlDefault = 'https://api.github.com/repos/dead-end/cards-russian/contents/'
@@ -20,9 +20,9 @@ export interface Admin {
  */
 export const adminGet = () => {
 
-    return new Promise<Admin>((resolve, reject) => {
+    return new Promise<Admin>(async (resolve, reject) => {
 
-        const store = db
+        const store = (await dbPromise)
             .transaction(['admin'], 'readonly')
             .objectStore('admin')
 
@@ -47,7 +47,7 @@ export const adminGet = () => {
 /**
  * The function writes the admin configuration to the indexeddb.
  */
-export const adminPut = (admin: Admin) => {
-    const store = db.transaction(['admin'], 'readwrite').objectStore('admin')
+export const adminPut = async (admin: Admin) => {
+    const store = (await dbPromise).transaction(['admin'], 'readwrite').objectStore('admin')
     storePut(store, admin)
 }
