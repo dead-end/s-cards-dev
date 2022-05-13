@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, afterUpdate } from 'svelte';
-  import { topicGetAll, topicsGetTags } from '../js/topicModel';
+  import { topicGetAll, topicGetTags } from '../js/topicModel';
   import TopicCard from './TopicCard.svelte';
   import type { Topic } from '../js/topicModel';
   import { viewStore } from '../stores/viewStore';
@@ -50,7 +50,7 @@
     topicGetAll().then((t) => {
       topicsRaw = t;
       topicsView = t;
-      tags = topicsGetTags(topicsRaw);
+      tags = topicGetTags(topicsRaw);
     });
   });
 
