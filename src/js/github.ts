@@ -20,7 +20,7 @@ const b64_to_utf8 = (str: string) => {
 /**
  * The function parses json data from github.
  */
-const githubParseJson = (content: any) => {
+const githubParseJson = (content: string) => {
     try {
         return JSON.parse(b64_to_utf8(content))
     } catch (e) {
