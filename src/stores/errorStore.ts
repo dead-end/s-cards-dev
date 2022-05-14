@@ -8,7 +8,7 @@ const createErrorStore = () => {
   //
   // Initialize the store with an empty array.
   //
-  const { subscribe, set, update } = writable([])
+  const { subscribe, set, update } = writable([] as string[])
 
   return {
     subscribe,
