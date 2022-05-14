@@ -14,7 +14,7 @@ const onError = (event: Event) => {
  * The function implements an update for the indexeddb from version 0 to 
  * version 1.
  */
-const initAndUpdate = (db: IDBDatabase, event: IDBVersionChangeEvent) => {
+const initAndUpdate = (db: IDBDatabase) => {
 
   //
   // Create topics store
@@ -52,7 +52,7 @@ const initAndUpdate = (db: IDBDatabase, event: IDBVersionChangeEvent) => {
   }
 
   if (!db.objectStoreNames.contains('admin')) {
-    const storeHash = db.createObjectStore('admin', {
+    db.createObjectStore('admin', {
       keyPath: 'config',
     })
   }
@@ -89,7 +89,7 @@ export const dbInit = () => {
       const db = request.result
 
       if (event.oldVersion < DB_VERSION) {
-        initAndUpdate(db, event)
+        initAndUpdate(db)
       }
 
       resolve(db)
@@ -103,7 +103,7 @@ export const dbInit = () => {
       reject()
     }
 
-    request.onsuccess = (event: Event) => {
+    request.onsuccess = () => {
       //
       // Set the database.
       //
@@ -119,4 +119,4 @@ export const dbInit = () => {
   })
 }
 
-export let dbPromise = dbInit()
+export const dbPromise = dbInit()
