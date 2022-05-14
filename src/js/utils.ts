@@ -31,7 +31,7 @@ export const arrToMap = <T>(arr: Array<T>, prop: string) => {
 
   arr.forEach((elem) => {
 
-    if (!elem.hasOwnProperty(prop)) {
+    if (!(prop in elem)) {
       errorStore.throwError(`Object has no property: ${prop}`)
     }
 
@@ -113,7 +113,7 @@ const getRandomIntInclusive = (min: number, max: number) => {
 /**
  * The function shuffles an array in place.
  */
-export const shuffleArr = (arr: Array<any>) => {
+export const shuffleArr = (arr: Array<object>) => {
 
   for (let i = 0; i < arr.length; i++) {
     //

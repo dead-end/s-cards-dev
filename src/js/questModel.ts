@@ -251,7 +251,7 @@ export const questGetTag = async (topics: Topic[], numQuests: number, fraction: 
     // Each promise returns an array of questions and we have to concatinate 
     // them all.
     //
-    let all: Question[] = [].concat(...arrOfArr)
+    let all: Question[] = ([] as Question[]).concat(...arrOfArr)
     //
     // First we shuffle the array and the we sort it. The sorting effects only
     // questions with different ratios. The shuffling then effects questions 
