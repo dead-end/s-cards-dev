@@ -7,7 +7,7 @@ import { errorStore } from "../stores/errorStore"
  */
 export const storeDeleteIndex = (tx: IDBTransaction, storeName: string, idxName: string, idxValue: string) => {
 
-  return new Promise<void>((resolve, reject) => {
+  return new Promise<void>((resolve) => {
 
     //
     // Get the store from the transaction.
@@ -22,7 +22,7 @@ export const storeDeleteIndex = (tx: IDBTransaction, storeName: string, idxName:
     //
     // Get an array with the keys of the matching objects,
     //
-    request.onsuccess = (e) => {
+    request.onsuccess = () => {
       const keys = request.result
 
       //
@@ -48,7 +48,7 @@ export const storeDel = (store: IDBObjectStore, id: IDBValidKey) => {
   return new Promise<void>((resolve, reject) => {
     const request = store.delete(id)
 
-    request.onsuccess = (e) => {
+    request.onsuccess = () => {
       console.log('Store:', store.name, 'delete:', id)
       resolve()
     }
@@ -68,7 +68,7 @@ export const storeAdd = (store: IDBObjectStore, obj: any) => {
   return new Promise<void>((resolve, reject) => {
     const request = store.add(obj)
 
-    request.onsuccess = (e) => {
+    request.onsuccess = () => {
       console.log('Store:', store.name, 'add:', obj)
       resolve()
     }
@@ -88,7 +88,7 @@ export const storePut = (store: IDBObjectStore, obj: any) => {
   return new Promise<void>((resolve, reject) => {
     const request = store.put(obj)
 
-    request.onsuccess = (e) => {
+    request.onsuccess = () => {
       console.log('Store:', store.name, 'put:', obj)
       resolve()
     }
