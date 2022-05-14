@@ -20,7 +20,7 @@ export interface Admin {
  */
 export const adminGet = () => {
 
-    return new Promise<Admin>(async (resolve) => {
+    return new Promise<Admin>((resolve) => {
 
         dbPromise.then(db => {
             const store = db
