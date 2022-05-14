@@ -23,7 +23,7 @@ export const hashGet = (file: string) => {
 
             const request = store.get(file)
 
-            request.onsuccess = (e) => {
+            request.onsuccess = () => {
                 const hash: Hash = request.result ? request.result : { file: file }
                 console.log('Store:', store.name, 'get:', hash)
                 resolve(hash)
@@ -50,7 +50,7 @@ export const hashGetAll = () => {
 
             const request = store.getAll()
 
-            request.onsuccess = (e) => {
+            request.onsuccess = () => {
                 const hashes: Hash[] = request.result
                 console.log('Store:', store.name, 'get all:', hashes.length)
                 resolve(hashes)
@@ -77,7 +77,7 @@ export const hashPut = (hash: Hash) => {
 
             const request = store.put(hash)
 
-            request.onsuccess = (e) => {
+            request.onsuccess = () => {
                 console.log('Store:', store.name, 'put:', hash)
                 resolve()
             }
