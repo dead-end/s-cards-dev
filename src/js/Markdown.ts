@@ -81,10 +81,8 @@ export default class Markdown {
   }
 
   _substitute(line: string) {
-    const me = this
-
-    return line.replaceAll(this.regex, function (elem) {
-      return me.tag(elem)
+    return line.replaceAll(this.regex, (elem) => {
+      return this.tag(elem)
     })
   }
 
