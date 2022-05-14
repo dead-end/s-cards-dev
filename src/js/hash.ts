@@ -16,21 +16,24 @@ export interface Hash {
  */
 export const hashGet = (file: string) => {
 
-    return new Promise<Hash>(async (resolve, reject) => {
-        const store = (await dbPromise).transaction(['hash'], 'readonly').objectStore('hash')
+    return new Promise<Hash>((resolve, reject) => {
+        dbPromise.then(db => {
+            const store = db.transaction(['hash'], 'readonly')
+                .objectStore('hash')
 
-        const request = store.get(file)
+            const request = store.get(file)
 
-        request.onsuccess = (e) => {
-            const hash: Hash = request.result ? request.result : { file: file }
-            console.log('Store:', store.name, 'get:', hash)
-            resolve(hash)
-        }
+            request.onsuccess = (e) => {
+                const hash: Hash = request.result ? request.result : { file: file }
+                console.log('Store:', store.name, 'get:', hash)
+                resolve(hash)
+            }
 
-        request.onerror = (e) => {
-            console.log('Store:', store.name, 'get:', file, 'error', e)
-            reject()
-        }
+            request.onerror = (e) => {
+                console.log('Store:', store.name, 'get:', file, 'error', e)
+                reject()
+            }
+        })
     })
 }
 
@@ -39,21 +42,25 @@ export const hashGet = (file: string) => {
  */
 export const hashGetAll = () => {
 
-    return new Promise<Hash[]>(async (resolve, reject) => {
-        const store = (await dbPromise).transaction(['hash'], 'readonly').objectStore('hash')
+    return new Promise<Hash[]>((resolve, reject) => {
+        dbPromise.then(db => {
 
-        const request = store.getAll()
+            const store = db.transaction(['hash'], 'readonly')
+                .objectStore('hash')
 
-        request.onsuccess = (e) => {
-            const hashes: Hash[] = request.result
-            console.log('Store:', store.name, 'get all:', hashes.length)
-            resolve(hashes)
-        }
+            const request = store.getAll()
 
-        request.onerror = (e) => {
-            console.log('Store:', store.name, 'get all error:', e)
-            reject()
-        }
+            request.onsuccess = (e) => {
+                const hashes: Hash[] = request.result
+                console.log('Store:', store.name, 'get all:', hashes.length)
+                resolve(hashes)
+            }
+
+            request.onerror = (e) => {
+                console.log('Store:', store.name, 'get all error:', e)
+                reject()
+            }
+        })
     })
 }
 
@@ -62,20 +69,24 @@ export const hashGetAll = () => {
  */
 export const hashPut = (hash: Hash) => {
 
-    return new Promise<void>(async (resolve, reject) => {
-        const store = (await dbPromise).transaction(['hash'], 'readwrite').objectStore('hash')
+    return new Promise<void>((resolve, reject) => {
+        dbPromise.then(db => {
 
-        const request = store.put(hash)
+            const store = db.transaction(['hash'], 'readwrite')
+                .objectStore('hash')
 
-        request.onsuccess = (e) => {
-            console.log('Store:', store.name, 'put:', hash)
-            resolve()
-        }
+            const request = store.put(hash)
 
-        request.onerror = (e) => {
-            console.log('Store:', store.name, 'put:', hash, 'error', e)
-            reject()
-        }
+            request.onsuccess = (e) => {
+                console.log('Store:', store.name, 'put:', hash)
+                resolve()
+            }
+
+            request.onerror = (e) => {
+                console.log('Store:', store.name, 'put:', hash, 'error', e)
+                reject()
+            }
+        })
     })
 }
 
