@@ -19,7 +19,7 @@ class Mapping {
     return ++this.count % 2 ? `<${this.tag}>` : `</${this.tag}>`
   }
 
-  check(lines: string) {
+  check(lines: string[]) {
     if (this.count % 2) {
       errorStore.addError(`Unbalanced tag: ${this.md} count: ${this.count} data: ${lines}`)
     }
@@ -41,7 +41,7 @@ class Mapping {
  ******************************************************************************/
 
 export default class Markdown {
-  map = {}
+  map: Record<string, Mapping> = {}
   regex: RegExp
 
   constructor() {
@@ -59,7 +59,7 @@ export default class Markdown {
 
   _pattern() {
     let result = ''
-    for (let m in this.map) {
+    for (const m in this.map) {
       result += m
     }
 
@@ -67,7 +67,7 @@ export default class Markdown {
   }
 
   tag(chr: string) {
-    if (!this.map.hasOwnProperty(chr)) {
+    if (!(chr in this.map)) {
       errorStore.throwError(`Unknown element: ${chr}`)
     }
 
@@ -75,7 +75,7 @@ export default class Markdown {
   }
 
   _check(lines: string[]) {
-    for (let m in this.map) {
+    for (const m in this.map) {
       this.map[m].check(lines)
     }
   }
@@ -102,7 +102,7 @@ export default class Markdown {
 
     let result = ''
 
-    for (let line of lines) {
+    for (const line of lines) {
       if (line.startsWith('- ')) {
         if (!inside) {
           result += '<ul>'
