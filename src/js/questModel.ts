@@ -104,16 +104,18 @@ export const questRemoveFile = (tx: IDBTransaction, file: string) => {
  */
 export const questPersist = (quest: Question) => {
 
-  return new Promise<void>(async (resolve, reject) => {
+  return new Promise<void>((resolve) => {
 
-    const store = (await dbPromise)
-      .transaction(['questions'], 'readwrite')
-      .objectStore('questions')
+    dbPromise.then(db => {
+      const store = db
+        .transaction(['questions'], 'readwrite')
+        .objectStore('questions')
 
-    store.put(quest).onsuccess = (e) => {
-      console.log('Store:', store.name, ' update:', quest)
-      resolve()
-    }
+      store.put(quest).onsuccess = () => {
+        console.log('Store:', store.name, ' update:', quest)
+        resolve()
+      }
+    })
   })
 }
 
@@ -138,11 +140,11 @@ export const questGetAll = async (topic: Topic) => {
 
 const questGetAllTx = (store: IDBObjectStore, topic: Topic) => {
 
-  return new Promise<Question[]>((resolve, reject) => {
+  return new Promise<Question[]>((resolve) => {
 
     const request = store.index('file').getAll(topic.file)
 
-    request.onsuccess = (e) => {
+    request.onsuccess = () => {
       resolve(request.result)
     }
   })
@@ -156,7 +158,7 @@ const questGetAllTx = (store: IDBObjectStore, topic: Topic) => {
 // done simpler with questGetAll().map()
 export const questGetStats = (file: string) => {
 
-  return new Promise<number[]>(async (resolve, reject) => {
+  return new Promise<number[]>((resolve) => {
 
     const result: number[] = []
     //
@@ -164,33 +166,36 @@ export const questGetStats = (file: string) => {
     //
     const range = IDBKeyRange.only(file)
 
-    const store = (await dbPromise)
-      .transaction(['questions'], 'readwrite')
-      .objectStore('questions')
+    dbPromise.then(db => {
 
-    const request = store.index('file').openCursor(range)
+      const store = db
+        .transaction(['questions'], 'readwrite')
+        .objectStore('questions')
 
-    request.onsuccess = (e) => {
-      //
-      // The result coontains the cursor.
-      //
-      const cursor = request.result
-      if (cursor) {
+      const request = store.index('file').openCursor(range)
+
+      request.onsuccess = () => {
         //
-        // The cursor value is our question.
+        // The result coontains the cursor.
         //
-        const quest: Question = cursor.value
-        result.push(quest.progress)
-        cursor.continue()
+        const cursor = request.result
+        if (cursor) {
+          //
+          // The cursor value is our question.
+          //
+          const quest: Question = cursor.value
+          result.push(quest.progress)
+          cursor.continue()
+        }
+        //
+        // The cursor has finished.
+        //
+        else {
+          console.log('Store:', store.name, 'progress values:', result)
+          resolve(result)
+        }
       }
-      //
-      // The cursor has finished.
-      //
-      else {
-        console.log('Store:', store.name, 'progress values:', result)
-        resolve(result)
-      }
-    }
+    })
   })
 }
 
@@ -207,8 +212,8 @@ export const questSetProgressArr = async (quests: Question[], value: number) => 
   const promises: Promise<void>[] = quests.map(quest => {
     quest.progress = value
 
-    return new Promise<void>((resolve, reject) => {
-      store.put(quest).onsuccess = (e) => {
+    return new Promise<void>((resolve) => {
+      store.put(quest).onsuccess = () => {
         resolve()
       }
     })
@@ -230,7 +235,7 @@ export const questGetTag = async (topics: Topic[], numQuests: number, fraction: 
     .transaction(['questions'], 'readonly')
     .objectStore('questions')
 
-  let promises: Promise<Question[]>[] = []
+  const promises: Promise<Question[]>[] = []
   //
   // Get a promise for the questions for each topic.
   //
@@ -293,7 +298,7 @@ export const questSync = (tx: IDBTransaction, file: string, json: Question[]) =>
 
   const request = store.index('file').getAll(file)
 
-  request.onsuccess = (e) => {
+  request.onsuccess = () => {
 
     const jMap = arrToMap<Question>(json, 'id')
     const sMap = arrToMap<Question>(request.result, 'id')
@@ -329,7 +334,7 @@ export const questGet = (store: IDBObjectStore, id: string) => {
 
     const request = store.get(id)
 
-    request.onsuccess = (e) => {
+    request.onsuccess = () => {
       resolve(request.result)
     }
 
@@ -345,40 +350,43 @@ export const questGet = (store: IDBObjectStore, id: string) => {
  */
 export const questGetBackup = () => {
 
-  return new Promise<any>(async (resolve, reject) => {
+  return new Promise<any>((resolve, reject) => {
 
     const result = []
 
-    const store = (await dbPromise)
-      .transaction(['questions'], 'readonly')
-      .objectStore('questions')
+    dbPromise.then(db => {
 
-    const request = store.openCursor()
+      const store = db
+        .transaction(['questions'], 'readonly')
+        .objectStore('questions')
 
-    request.onsuccess = (e) => {
+      const request = store.openCursor()
 
-      const cursor = request.result
-      if (cursor) {
+      request.onsuccess = () => {
 
-        const quest: Question = cursor.value
-        result.push([
-          quest.id,
-          quest.failed,
-          quest.total
-        ])
-        cursor.continue()
+        const cursor = request.result
+        if (cursor) {
+
+          const quest: Question = cursor.value
+          result.push([
+            quest.id,
+            quest.failed,
+            quest.total
+          ])
+          cursor.continue()
+        }
+
+        else {
+          console.log('Store:', store.name, 'questGetBackup finished:', result.length)
+          resolve(result)
+        }
       }
 
-      else {
-        console.log('Store:', store.name, 'questGetBackup finished:', result.length)
-        resolve(result)
+      request.onerror = (e) => {
+        console.log('Store:', store.name, 'questGetBackup:', e)
+        reject()
       }
-    }
-
-    request.onerror = (e) => {
-      console.log('Store:', store.name, 'questGetBackup:', e)
-      reject()
-    }
+    })
   })
 }
 
