@@ -20,27 +20,29 @@ export interface Admin {
  */
 export const adminGet = () => {
 
-    return new Promise<Admin>(async (resolve, reject) => {
+    return new Promise<Admin>(async (resolve) => {
 
-        const store = (await dbPromise)
-            .transaction(['admin'], 'readonly')
-            .objectStore('admin')
+        dbPromise.then(db => {
+            const store = db
+                .transaction(['admin'], 'readonly')
+                .objectStore('admin')
 
-        const request = store.get('admin')
-        request.onsuccess = (e) => {
+            const request = store.get('admin')
+            request.onsuccess = () => {
 
-            let admin: Admin = request.result
-            if (!admin) {
-                admin = {
-                    config: 'admin',
-                    langUrl: langUrlDefault,
-                    backupUrl: '',
-                    file: '',
-                    token: ''
+                let admin: Admin = request.result
+                if (!admin) {
+                    admin = {
+                        config: 'admin',
+                        langUrl: langUrlDefault,
+                        backupUrl: '',
+                        file: '',
+                        token: ''
+                    }
                 }
+                resolve(admin)
             }
-            resolve(admin)
-        }
+        })
     })
 }
 
@@ -48,6 +50,8 @@ export const adminGet = () => {
  * The function writes the admin configuration to the indexeddb.
  */
 export const adminPut = async (admin: Admin) => {
-    const store = (await dbPromise).transaction(['admin'], 'readwrite').objectStore('admin')
+    const store = (await dbPromise)
+        .transaction(['admin'], 'readwrite')
+        .objectStore('admin')
     storePut(store, admin)
 }
