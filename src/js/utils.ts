@@ -49,7 +49,7 @@ export const arrToMap = <T>(arr: Array<T>, prop: string) => {
 /**
  * The function checks if two arrays of strings are equal.
  */
-export const arrIsEqual = (arr1: string[], arr2: string[]) => {
+export const arrIsEqual = (arr1: string[] | void, arr2: string[] | void) => {
   //
   // Ensure that both exist.
   //
@@ -65,7 +65,7 @@ export const arrIsEqual = (arr1: string[], arr2: string[]) => {
  */
 export const arrAll = (arr: Array<number>, val: number) => {
 
-  for (let i in arr) {
+  for (const i in arr) {
     if (arr[i] !== val) {
       return false
     }
@@ -119,7 +119,7 @@ export const shuffleArr = (arr: Array<any>) => {
     //
     // Get a random index of the array
     //
-    let j = getRandomIntInclusive(0, arr.length - 1)
+    const j = getRandomIntInclusive(0, arr.length - 1)
 
     //
     // Ensure that there is something to do
@@ -131,7 +131,7 @@ export const shuffleArr = (arr: Array<any>) => {
     //
     // Swap i and j
     //
-    let tmp = arr[i]
+    const tmp = arr[i]
     arr[i] = arr[j]
     arr[j] = tmp
   }

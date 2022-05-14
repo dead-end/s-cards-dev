@@ -96,20 +96,23 @@ export const topicGetTags = (topics: Topic[]) => {
  */
 export const topicGetAll = () => {
 
-  return new Promise<Array<Topic>>(async (resolve, reject) => {
-    const store = (await dbPromise).transaction(['topics'], 'readonly').objectStore('topics')
+  return new Promise<Array<Topic>>((resolve, reject) => {
 
-    const request = store.getAll()
+    dbPromise.then(db => {
+      const store = db.transaction(['topics'], 'readonly').objectStore('topics')
 
-    request.onsuccess = (e) => {
-      console.log('Store:', store.name, 'topicGetAll:')
-      resolve(request.result)
-    }
+      const request = store.getAll()
 
-    request.onerror = (e) => {
-      console.log('Store:', store.name, 'topicGetAll error:', e)
-      reject()
-    }
+      request.onsuccess = () => {
+        console.log('Store:', store.name, 'topicGetAll:')
+        resolve(request.result)
+      }
+
+      request.onerror = (e) => {
+        console.log('Store:', store.name, 'topicGetAll error:', e)
+        reject()
+      }
+    })
   })
 }
 
@@ -140,7 +143,7 @@ const topicSync = async (json: Array<Topic>) => {
 
   const request = storeTopic.getAll()
 
-  request.onsuccess = (e) => {
+  request.onsuccess = () => {
     //
     // Create a map with the topics and the file as the key.
     //
@@ -153,7 +156,7 @@ const topicSync = async (json: Array<Topic>) => {
     //
     // Delete the topics from the store that are not in the json array.
     //
-    for (let storeKey of storeMap.keys()) {
+    for (const storeKey of storeMap.keys()) {
 
       if (!jsonKeys.includes(storeKey)) {
         topicDelTx(tx, storeKey)
