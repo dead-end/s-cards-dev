@@ -11,7 +11,7 @@
   //
   // Id to scroll the view to.
   //
-  export let id: string | void = null;
+  export let id: string | void;
 
   let topicsRaw: Topic[] = [];
   let topicsView: Topic[] = [];
