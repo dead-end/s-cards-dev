@@ -1,9 +1,7 @@
 <script lang="ts">
-  import { arrPercentage, arrAll } from '../js/utils';
-  import { viewStore } from '../stores/viewStore';
-  import { errorStore } from '../stores/errorStore';
   import { onMount } from 'svelte';
-  import TopicInfo from './TopicInfo.svelte';
+
+  import { arrPercentage, arrAll } from '../js/utils';
   import Markdown from '../js/Markdown';
   import type { Topic } from '../js/topicModel';
   import type { Question } from '../js/questModel';
@@ -12,6 +10,11 @@
     questGetAll,
     questSetProgressArr
   } from '../js/questModel';
+
+  import { viewStore } from '../stores/viewStore';
+  import { errorStore } from '../stores/errorStore';
+
+  import TopicInfo from '../components/TopicInfo.svelte';
 
   export let topic: Topic;
   export let questions: Question[] | void = null;

@@ -1,18 +1,21 @@
 <script lang="ts">
-  import { viewStore } from '../stores/viewStore';
   import { onMount } from 'svelte';
+
   import { adminGet, adminPut } from '../js/admin';
   import type { Admin } from '../js/admin';
   import { questGetBackup, questSetRestore } from '../js/questModel';
   import { githubRestore, githubBackup } from '../js/github';
-  import AdminShow from './AdminShow.svelte';
-  import Popup from './Popup.svelte';
+
+  import { viewStore } from '../stores/viewStore';
+
+  import AdminShow from '../components/AdminShow.svelte';
+  import Popup from '../components/Popup.svelte';
 
   let admin: Admin;
   let update: boolean = false;
   let status: string = '';
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     if (admin.langUrl) {
       adminPut(admin);
     }

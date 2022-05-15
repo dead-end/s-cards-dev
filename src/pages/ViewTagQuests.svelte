@@ -1,8 +1,10 @@
 <script lang="ts">
-  import { viewStore } from '../stores/viewStore';
-  import QuestArrShow from './QuestArrShow.svelte';
   import type { Topic } from '../js/topicModel';
   import type { Question } from '../js/questModel';
+
+  import { viewStore } from '../stores/viewStore';
+
+  import QuestArrShow from '../components/QuestArrShow.svelte';
 
   export let tag: string;
   export let topics: Topic[];

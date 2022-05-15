@@ -1,9 +1,12 @@
 <script lang="ts">
   import { onMount, afterUpdate } from 'svelte';
+
   import { topicGetAll, topicGetTags } from '../js/topicModel';
-  import TopicCard from './TopicCard.svelte';
   import type { Topic } from '../js/topicModel';
+
   import { viewStore } from '../stores/viewStore';
+
+  import TopicCard from '../components/TopicCard.svelte';
 
   //
   // Id to scroll the view to.

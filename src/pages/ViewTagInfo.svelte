@@ -1,8 +1,9 @@
 <script lang="ts">
   import type { Question } from '../js/questModel';
   import type { Topic } from '../js/topicModel';
-  import { viewStore } from '../stores/viewStore';
   import { questGetTag, questSetProgressArr } from '../js/questModel';
+
+  import { viewStore } from '../stores/viewStore';
   import { errorStore } from '../stores/errorStore';
 
   export let tag: string;

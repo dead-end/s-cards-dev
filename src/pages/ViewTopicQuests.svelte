@@ -1,11 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import QuestArrShow from './QuestArrShow.svelte';
-  import { viewStore } from '../stores/viewStore';
-  import { questGetAll } from '../js/questModel';
 
+  import { questGetAll } from '../js/questModel';
   import type { Topic } from '../js/topicModel';
   import type { Question } from '../js/questModel';
+
+  import { viewStore } from '../stores/viewStore';
+
+  import QuestArrShow from '../components/QuestArrShow.svelte';
 
   export let topic: Topic;
 

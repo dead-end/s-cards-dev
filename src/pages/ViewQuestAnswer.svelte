@@ -1,7 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { viewStore } from '../stores/viewStore';
-  import QuestStatistic from './QuestStatistic.svelte';
+
+  import type { Topic } from '../js/topicModel';
+  import type { Question } from '../js/questModel';
+  import { topicUpdate } from '../js/topicModel';
   import { shuffleArr } from '../js/utils';
   import {
     questPersist,
@@ -9,10 +11,10 @@
     questGetStatistics
   } from '../js/questModel';
 
-  import type { Topic } from '../js/topicModel';
-  import type { Question } from '../js/questModel';
-  import QuestAnswer from './QuestAnswer.svelte';
-  import { topicUpdate } from '../js/topicModel';
+  import { viewStore } from '../stores/viewStore';
+
+  import QuestStatistic from '../components/QuestStatistic.svelte';
+  import QuestAnswer from '../components/QuestAnswer.svelte';
 
   export let tag: string | void = null;
 

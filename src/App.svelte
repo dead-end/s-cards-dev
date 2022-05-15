@@ -8,15 +8,15 @@
 
   import ErrorShow from './components/ErrorShow.svelte';
 
-  import ViewTopicList from './components/ViewTopicList.svelte';
-  import ViewTopicInfo from './components/ViewTopicInfo.svelte';
-  import ViewTopicQuests from './components/ViewTopicQuests.svelte';
-  import ViewTagInfo from './components/ViewTagInfo.svelte';
-  import ViewTagQuests from './components/ViewTagQuests.svelte';
-  import ViewQuestAnswer from './components/ViewQuestAnswer.svelte';
-  import ViewTranslate from './components/ViewTranslate.svelte';
-  import ViewHashes from './components/ViewHashes.svelte';
-  import ViewAdmin from './components/ViewAdmin.svelte';
+  import ViewTopicList from './pages/ViewTopicList.svelte';
+  import ViewTopicInfo from './pages/ViewTopicInfo.svelte';
+  import ViewTopicQuests from './pages/ViewTopicQuests.svelte';
+  import ViewTagInfo from './pages/ViewTagInfo.svelte';
+  import ViewTagQuests from './pages/ViewTagQuests.svelte';
+  import ViewQuestAnswer from './pages/ViewQuestAnswer.svelte';
+  import ViewTranslate from './pages/ViewTranslate.svelte';
+  import ViewHashes from './pages/ViewHashes.svelte';
+  import ViewAdmin from './pages/ViewAdmin.svelte';
 
   onMount(() => {
     try {
