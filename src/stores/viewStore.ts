@@ -11,7 +11,7 @@ export interface View {
   //
   // The properties used by the view, which are optional.
   //
-  props?: Object
+  props?: object
 }
 
 /**
@@ -21,14 +21,14 @@ const createViewStore = () => {
   //
   // Initialize the store with an empty object.
   //
-  const { subscribe, set, update } = writable<View>({ component: '' })
+  const { subscribe, set } = writable<View>({ component: '' })
 
   return {
-    views: {},
+    views: {} as Record<string, View>,
 
     subscribe,
 
-    setView: (id: string, props?: Object) => {
+    setView: (id: string, props?: object) => {
       const view = viewStore.views[id]
       view.props = props
       set(view)
