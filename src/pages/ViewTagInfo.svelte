@@ -8,7 +8,7 @@
 
   export let tag: string;
   export let topics: Topic[];
-  export let questions: Question[] | void = null;
+  export let questions: Question[] | void;
 
   let loadQuests = '30';
   let fraction = 0.6;

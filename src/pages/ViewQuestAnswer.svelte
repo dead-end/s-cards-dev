@@ -16,7 +16,7 @@
   import QuestStatistic from '../components/QuestStatistic.svelte';
   import QuestAnswer from '../components/QuestAnswer.svelte';
 
-  export let tag: string | void = null;
+  export let tag: string | void;
 
   export let topics: Topic[];
   let topic: Topic;
