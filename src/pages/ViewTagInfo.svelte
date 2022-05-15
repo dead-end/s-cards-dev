@@ -2,6 +2,7 @@
   import type { Question } from '../js/questModel';
   import type { Topic } from '../js/topicModel';
   import { questGetTag, questSetProgressArr } from '../js/questModel';
+  import { getErrorMessage } from '../js/utils';
 
   import { viewStore } from '../stores/viewStore';
   import { errorStore } from '../stores/errorStore';
@@ -70,7 +71,7 @@
       questions = await questGetTag(topics, max, fraction);
       loaded = true;
     } catch (error) {
-      errorStore.addError('ViewTagInfo: ' + error.message);
+      errorStore.addError('ViewTagInfo: ' + getErrorMessage(error));
     }
   };
 </script>

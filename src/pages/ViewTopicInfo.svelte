@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import { arrPercentage, arrAll } from '../js/utils';
+  import { arrPercentage, arrAll, getErrorMessage } from '../js/utils';
   import Markdown from '../js/Markdown';
   import type { Topic } from '../js/topicModel';
   import type { Question } from '../js/questModel';
@@ -60,7 +60,7 @@
         updateStatus();
       }
     } catch (error) {
-      errorStore.addError('ViewTopicInfo: ' + error.message);
+      errorStore.addError('ViewTopicInfo: ' + getErrorMessage(error));
     }
   });
 

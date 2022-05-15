@@ -148,3 +148,11 @@ export const createRepeatToggle = (repeat: number, first: string, second: string
     return (count++ % (2 * repeat) < repeat) ? first : second
   }
 }
+
+/**
+ * This function is used in catch clauses, because everything can be thrown.
+ */
+export function getErrorMessage(error: unknown) {
+  if (error instanceof Error) return error.message
+  return String(error)
+}
