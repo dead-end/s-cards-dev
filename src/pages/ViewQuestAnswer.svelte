@@ -59,8 +59,22 @@
    * The function setup the view for the next question.
    */
   const next = () => {
+    // TODO not best solution
+    const q = unlearned.shift();
+    if (!q) {
+      return;
+    }
+    question = q;
+
+    const t = topics.find((t) => t.file === question.file);
+    if (!t) {
+      return;
+    }
+    topic = t;
+    /*
     question = unlearned.shift();
     topic = topics.find((t) => t.file === question.file);
+    */
     statistic = questGetStatistics(questions);
     hideAnswer = true;
     console.log('next', question);
