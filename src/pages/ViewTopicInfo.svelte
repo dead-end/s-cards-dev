@@ -17,7 +17,7 @@
   import TopicInfo from '../components/TopicInfo.svelte';
 
   export let topic: Topic;
-  export let questions: Question[] | void = null;
+  export let questions: Question[] | void;
 
   const md = new Markdown();
 
