@@ -7,7 +7,7 @@ import { storeDel } from './store'
 export interface Hash {
     file: string,
     value?: string,
-    lastLoaded?: Date
+    lastLoaded: Date
 }
 
 /**

@@ -13,7 +13,16 @@
 
   const doFilter = () => {
     console.log('sort', filter);
-    hashes.sort((b, a) => +(a[filter] > b[filter]) || -(a[filter] < b[filter]));
+
+    if (filter === 'file') {
+      hashes.sort((b, a) => +(a.file > b.file) || -(a.file < b.file));
+    } else {
+      hashes.sort(
+        (b, a) =>
+          +(a.lastLoaded > b.lastLoaded) || -(a.lastLoaded < b.lastLoaded)
+      );
+    }
+
     hashes = hashes;
   };
 
