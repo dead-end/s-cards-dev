@@ -350,9 +350,9 @@ export const questGet = (store: IDBObjectStore, id: string) => {
  */
 export const questGetBackup = () => {
 
-  return new Promise<((string | number)[])[]>((resolve, reject) => {
+  return new Promise<[string, number, number][]>((resolve, reject) => {
 
-    const result: ((string | number)[])[] = []
+    const result: [string, number, number][] = []
 
     dbPromise.then(db => {
 
@@ -395,7 +395,7 @@ export const questGetBackup = () => {
  * restored total value is greater than the total value from the store. This
  * prevents the function from overwriting the store with stale backup data.
  */
-export const questSetRestore = async (restore: ((string | number)[])[]) => {
+export const questSetRestore = async (restore: [string, number, number][]) => {
 
   const store = (await dbPromise)
     .transaction(['questions'], 'readwrite')
@@ -404,12 +404,12 @@ export const questSetRestore = async (restore: ((string | number)[])[]) => {
   restore.forEach(a => {
     const [id, failed, total] = [...a]
 
-    questGet(store, id as string).then(quest => {
+    questGet(store, id).then(quest => {
 
       if (quest && quest.total < total) {
 
-        quest.failed = failed as number
-        quest.total = total as number
+        quest.failed = failed
+        quest.total = total
         quest.ratio = percentage(quest.failed, quest.total)
 
         storePut(store, quest)
