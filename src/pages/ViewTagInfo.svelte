@@ -74,6 +74,14 @@
       errorStore.addError('ViewTagInfo: ' + getErrorMessage(error));
     }
   };
+
+  const onChange = () => {
+    if (fraction < 0.2) {
+      fraction = 0.2;
+    } else if (fraction > 1) {
+      fraction = 1;
+    }
+  };
 </script>
 
 <div class="card card-shadow content">
@@ -107,6 +115,7 @@
         max="1"
         step="0.2"
         bind:value={fraction}
+        on:input={onChange}
       />
     </div>
   {:else}
