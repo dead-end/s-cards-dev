@@ -313,8 +313,9 @@ export const questSync = (tx: IDBTransaction, file: string, json: Question[]) =>
 
     jMap.forEach(quest => {
 
-      if (sMap.has(quest.id)) {
-        questCopyPart(sMap.get(quest.id), quest)
+      const sQuest = sMap.get(quest.id);
+      if (sQuest) {
+        questCopyPart(sQuest, quest)
         storePut(store, quest)
 
       } else {

@@ -38,7 +38,7 @@ export interface Topic {
 /**
  * The function compares two topics, one from the json and one from the store.
  */
-const topicNeedUpdate = (json: Topic, store: Topic) => {
+const topicNeedUpdate = (json: Topic, store: Topic | void) => {
   //
   // If the topic is not in the store, we have to persist it.
   //
