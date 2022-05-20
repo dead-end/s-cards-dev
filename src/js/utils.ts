@@ -22,31 +22,6 @@ export const fmtDate = (d: Date | void) => {
 }
 
 /**
- * The function is called with an array of objects. Each object should have
- * property named 'prop'. The function returns a map of the objects and the
- * key is the property.
- */
-export const arrToMap = <T>(arr: Array<T>, prop: string) => {
-  const map = new Map()
-
-  arr.forEach((elem) => {
-
-    if (!(prop in elem)) {
-      errorStore.throwError(`Object has no property: ${prop}`)
-    }
-
-    const key = elem[prop]
-
-    if (map.has(key)) {
-      errorStore.throwError(`Duplicate key: ${prop}`)
-    }
-
-    map.set(key, elem)
-  })
-  return map
-}
-
-/**
  * The function checks if two arrays of strings are equal.
  */
 export const arrIsEqual = (arr1: string[] | void, arr2: string[] | void) => {
