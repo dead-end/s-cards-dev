@@ -1,6 +1,6 @@
 import type { Topic } from './topicModel'
 import { dbPromise } from './db'
-import { percentage, arrToMap, shuffleArr } from './utils'
+import { percentage, shuffleArr } from './utils'
 import { storeAdd, storePut, storeDel, storeDeleteIndex } from './store'
 import { githubGetJson } from './github'
 
@@ -300,8 +300,9 @@ export const questSync = (tx: IDBTransaction, file: string, json: Question[]) =>
 
   request.onsuccess = () => {
 
-    const jMap = arrToMap<Question>(json, 'id')
-    const sMap = arrToMap<Question>(request.result, 'id')
+    const jMap = questArrToMap(json)
+    const sMap = questArrToMap(request.result)
+
     //
     // Remove the unnecessary questions.
     //
@@ -429,4 +430,16 @@ export const questLoad = async (file: string) => {
     const tx = (await dbPromise).transaction(['questions'], 'readwrite')
     questSync(tx, file, json)
   }
+}
+
+/**
+ * Question array to map.
+ */
+export const questArrToMap = (arr: Array<Question>) => {
+  const map = new Map<string, Question>()
+
+  arr.forEach((quest) => {
+    map.set(quest.id, quest)
+  })
+  return map
 }

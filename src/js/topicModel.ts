@@ -2,7 +2,7 @@ import { dbPromise } from './db'
 import { hashDelTx } from './hash'
 import { questRemoveFile } from './questModel'
 import { storePut, storeDel } from './store'
-import { arrToMap, arrIsEqual } from './utils'
+import { arrIsEqual } from './utils'
 import { githubGetJson } from './github'
 
 /**
@@ -147,7 +147,7 @@ const topicSync = async (json: Array<Topic>) => {
     //
     // Create a map with the topics and the file as the key.
     //
-    const storeMap = arrToMap<Topic>(request.result, 'file')
+    const storeMap = topicArrToMap(request.result)
     //
     // Get an array with the files from the json array. The file is the key for
     // the topics in the store and has to be unique.
@@ -178,6 +178,18 @@ const topicSync = async (json: Array<Topic>) => {
       }
     })
   }
+}
+
+/**
+ * Topic array to map.
+ */
+export const topicArrToMap = (arr: Array<Topic>) => {
+  const map = new Map<string, Topic>()
+
+  arr.forEach((topic) => {
+    map.set(topic.file, topic)
+  })
+  return map
 }
 
 /**
