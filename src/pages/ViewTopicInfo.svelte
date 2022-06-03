@@ -91,7 +91,7 @@
   /**
    * Callback function for the select box.
    */
-  const onSelect = (e: Event) => {
+  const onSelect = async (e: Event) => {
     //
     // Ensure that we have questions.
     //
@@ -103,7 +103,7 @@
     //
     // Set the number of correct answers.
     //
-    questSetProgressArr(questions, target.selectedIndex - 1);
+    await questSetProgressArr(questions, target.selectedIndex - 1);
 
     //
     // Set the index to 0 to restore the orignal state.
