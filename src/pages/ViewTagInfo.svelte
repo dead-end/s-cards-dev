@@ -12,7 +12,7 @@
   export let questions: Question[] | void;
 
   let loadQuests = '30';
-  let fraction = 0.6;
+  let fraction = 0.8;
   let loaded = false;
 
   let correct: -1;
