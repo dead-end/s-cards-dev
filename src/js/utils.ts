@@ -131,3 +131,16 @@ export function getErrorMessage(error: unknown) {
   if (error instanceof Error) return error.message
   return String(error)
 }
+
+/**
+ * The function ensures that the value is between min and max.
+ */
+export function ensureMinMax(value: number, min: number, max: number) {
+  if (value < min) {
+    return min
+  }
+  if (value > max) {
+    return max
+  }
+  return value
+}
