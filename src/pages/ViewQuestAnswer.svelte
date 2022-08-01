@@ -93,12 +93,12 @@
    * Callback function for the stop button.
    */
   const onStop = () => {
-    if (topic) {
+    if (tag) {
+      viewStore.setView('ViewTopicList');
+    } else {
       topic.lastLearned = new Date();
       topicUpdate(topic);
       viewStore.setView('ViewTopicList', { id: topic.file });
-    } else {
-      viewStore.setView('ViewTopicList');
     }
   };
 </script>
