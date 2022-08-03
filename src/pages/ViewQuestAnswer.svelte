@@ -92,12 +92,12 @@
   /**
    * Callback function for the stop button.
    */
-  const onStop = () => {
+  const onStop = async () => {
     if (tag) {
       viewStore.setView('ViewTopicList');
     } else {
       topic.lastLearned = new Date();
-      topicUpdate(topic);
+      await topicUpdate(topic);
       viewStore.setView('ViewTopicList', { id: topic.file });
     }
   };
