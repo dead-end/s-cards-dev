@@ -4,8 +4,6 @@
   import { viewStore } from './stores/viewStore';
   import { errorStore } from './stores/errorStore';
 
-  import { pwaSerivceWorkerRegister } from './js/pwa';
-
   import ErrorShow from './components/ErrorShow.svelte';
 
   import ViewTopicList from './pages/ViewTopicList.svelte';
@@ -19,12 +17,6 @@
   import ViewAdmin from './pages/ViewAdmin.svelte';
 
   onMount(() => {
-    try {
-      pwaSerivceWorkerRegister();
-    } catch (error) {
-      errorStore.addError('App onMount(): ' + error);
-    }
-
     //
     // Register the views
     //
