@@ -209,6 +209,10 @@ th:last-child {
   .hide-lg {
     display: none;
   }
+
+  .input {
+    width: 30rem;
+  }
 }
 
 /* medium: md */
@@ -229,6 +233,10 @@ th:last-child {
   .hide-lg {
     display: none;
   }
+
+  .input {
+    width: 25rem;
+  }
 }
 
 /* small: sl */
@@ -245,6 +253,10 @@ th:last-child {
   .hide-md,
   .hide-lg {
     display: none;
+  }
+
+  .input {
+    width: 100%;
   }
 }
 

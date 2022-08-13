@@ -82,10 +82,10 @@
 <h4>Translate</h4>
 
 <label for="src">{srcLabel}</label>
-<textarea id="src" bind:value={srcValue} />
+<textarea id="src" bind:value={srcValue} class="input" />
 
 <label for="dst">{dstLabel}</label>
-<textarea id="dst" readonly value={dstValue} />
+<textarea id="dst" readonly value={dstValue} class="input" />
 
 <div class="is-floating">
   <button class="button" on:click={() => onBack()}>Back</button>

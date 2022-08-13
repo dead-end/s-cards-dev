@@ -93,21 +93,31 @@
     <form on:submit|preventDefault={handleSubmit}>
       <div class="block">
         <label for="langUrl">Github URL Language</label>
-        <input id="langUrl" type="url" bind:value={admin.langUrl} size="45" />
+        <input
+          id="langUrl"
+          type="url"
+          bind:value={admin.langUrl}
+          class="input"
+        />
 
         <label for="backupUrl">Github URL Backup</label>
         <input
           id="backupUrl"
           type="url"
           bind:value={admin.backupUrl}
-          size="45"
+          class="input"
         />
 
         <label for="file">Github File</label>
-        <input id="file" type="text" bind:value={admin.file} size="45" />
+        <input id="file" type="text" bind:value={admin.file} class="input" />
 
         <label for="token">Token</label>
-        <input id="token" type="password" bind:value={admin.token} size="45" />
+        <input
+          id="token"
+          type="password"
+          bind:value={admin.token}
+          class="input"
+        />
       </div>
 
       <div class="is-floating">
