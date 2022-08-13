@@ -56,7 +56,7 @@ ghpages.publish(
   'public',
   {
     branch: 'main',
-    repo: 'https://github.com/dead-end/s-cards.git',
+    repo: 'https://github.com/dead-end/s-cards.git'
   },
   () => {
     console.log('Deploy Complete!');
@@ -71,3 +71,9 @@ npm run build
 
 npm run deploy
 ```
+
+## Configuration
+
+Backup: `https://api.github.com/repos/dead-end/backup/contents/`
+
+File: `ipad`
