@@ -7,7 +7,7 @@
 
   export let questions: Question[];
 
-  let details: string = '0';
+  let details: boolean = false;
   let sorted: Question[] = [];
   let sortBy: String = '';
 
@@ -45,12 +45,8 @@
 </script>
 
 <div class="is-floating">
-  <label for="details-select">Details</label>
-  <select id="details-select" bind:value={details}>
-    <option value="0">Simple</option>
-    <option value="1">Progress</option>
-    <option value="2">ID's</option>
-  </select>
+  <label for="details-checkbox">Details</label>
+  <input type="checkbox" id="details-checkbox" bind:checked={details} />
 
   <label for="quest-sort">Tag Filter</label>
   <select id="quest-sort" bind:value={sortBy} on:change={doSort}>
@@ -62,13 +58,11 @@
 
 <div class="grid grid-2">
   {#each sorted as question}
-    {#if details === '1' || details === '2'}
+    {#if details}
       <div class="is-flex-spread grid-full">
         <div>
-          {#if details === '2'}
-            <span class="h6">Id: {question.id}</span>
-            <span class="hide-sm">{question.file}</span>
-          {/if}
+          <span class="h6">Id: {question.id}</span>
+          <span class="hide-sm">{question.file}</span>
         </div>
         <QuestProgress {question} />
       </div>
