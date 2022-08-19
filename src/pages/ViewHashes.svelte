@@ -4,6 +4,8 @@
   import { hashGetAll, hashDel } from '../js/hash';
   import type { Hash } from '../js/hash';
   import { fmtDate } from '../js/utils';
+  import { questLoadAll } from '../js/questModel';
+  import { topicGetAll } from '../js/topicModel';
 
   import { viewStore } from '../stores/viewStore';
 
@@ -40,6 +42,13 @@
     viewStore.setView('ViewTopicList');
   };
 
+  const onLoadAll = async () => {
+    const topics = await topicGetAll();
+    const files = topics.map((t) => t.file);
+    await questLoadAll(files);
+    doLoad();
+  };
+
   onMount(() => {
     doLoad();
   });
@@ -51,6 +60,8 @@
     <option value="file">By Name</option>
     <option value="lastLoaded">By Date</option>
   </select>
+
+  <button class="button" on:click={onLoadAll}>Load All</button>
 </div>
 
 <table>
