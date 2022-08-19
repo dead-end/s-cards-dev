@@ -433,6 +433,19 @@ export const questLoad = async (file: string) => {
 }
 
 /**
+ * Load all questions from the store. The function returns a promise, which is 
+ * resulved, when the hash table is updated. At this time the sync may not 
+ * finished.
+ */
+export const questLoadAll = async (files: string[]) => {
+  const result: Promise<void>[] = []
+  files.forEach(file => {
+    result.push(questLoad(file))
+  })
+  return Promise.all(result);
+}
+
+/**
  * Question array to map.
  */
 export const questArrToMap = (arr: Array<Question>) => {
