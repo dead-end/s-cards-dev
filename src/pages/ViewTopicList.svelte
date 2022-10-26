@@ -50,11 +50,16 @@
    * On mount, get all the topics from the store.
    */
   onMount(() => {
-    topicGetAll().then((t) => {
-      topicsRaw = t;
-      topicsView = t;
-      tags = topicGetTags(topicsRaw);
-    });
+    topicGetAll()
+      .then((t) => {
+        t.sort((a, b) => +(a.title > b.title) || -(a.title < b.title));
+        return t;
+      })
+      .then((t) => {
+        topicsRaw = t;
+        topicsView = t;
+        tags = topicGetTags(topicsRaw);
+      });
   });
 
   /**
