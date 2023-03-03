@@ -12,7 +12,7 @@
   export let questions: Question[] | void;
 
   let loadQuests = '30';
-  let fraction = 0.5;
+  let fraction = '0.5';
   let loaded = false;
 
   let correct: -1;
@@ -68,15 +68,11 @@
   const onLoad = async () => {
     try {
       const max = loadQuests === 'all' ? -1 : 30;
-      questions = await questGetTag(topics, max, fraction);
+      questions = await questGetTag(topics, max, parseFloat(fraction));
       loaded = true;
     } catch (error) {
       errorStore.addError('ViewTagInfo: ' + getErrorMessage(error));
     }
-  };
-
-  const onChange = () => {
-    fraction = ensureMinMax(fraction, 0.2, 1);
   };
 </script>
 
@@ -103,16 +99,14 @@
     </div>
 
     <div class="is-floating">
-      <label for="relevant">Fraction</label>
-      <input
-        id="relevant"
-        type="number"
-        min="0.2"
-        max="1"
-        step="0.2"
-        bind:value={fraction}
-        on:input={onChange}
-      />
+      <label for="relevant">Used fraction (sorted by ratio)</label>
+      <select id="relevant" bind:value={fraction}>
+        <option value="0.4">40 %</option>
+        <option value="0.5">50 %</option>
+        <option value="0.6">60 %</option>
+        <option value="0.7">70 %</option>
+        <option value="0.8">80 %</option>
+      </select>
     </div>
   {:else}
     <div class="is-floating">
