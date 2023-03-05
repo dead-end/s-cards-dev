@@ -15,6 +15,7 @@
   import ViewTranslate from './pages/ViewTranslate.svelte';
   import ViewHashes from './pages/ViewHashes.svelte';
   import ViewAdmin from './pages/ViewAdmin.svelte';
+  import ViewSearch from './pages/ViewSearch.svelte';
 
   onMount(() => {
     //
@@ -47,6 +48,9 @@
       },
       ViewAdmin: {
         component: ViewAdmin
+      },
+      ViewSearch: {
+        component: ViewSearch
       }
     };
 

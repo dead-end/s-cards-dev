@@ -108,6 +108,9 @@
     <button class="button" on:click={() => viewStore.setView('ViewAdmin')}
       >Admin</button
     >
+    <button class="button" on:click={() => viewStore.setView('ViewSearch')}
+      >Search</button
+    >
   </div>
 {/if}
 

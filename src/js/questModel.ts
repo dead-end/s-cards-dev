@@ -456,3 +456,66 @@ export const questArrToMap = (arr: Array<Question>) => {
   })
   return map
 }
+
+/**
+ * The function searches a string inside an array of strings.
+ */
+const arrSearch = (arr: string[], searchStr: string) => {
+  console.log('search', searchStr, 'arrary', arr)
+  for (const str of arr) {
+    if (str.toLowerCase().includes(searchStr)) {
+      return true
+    }
+  }
+
+  return false;
+}
+
+/**
+ * The function searches the local storage for the string.
+ */
+export const questSearch = (searchOrig: string, max: number) => {
+  const searchStr = searchOrig.toLowerCase();
+
+  return new Promise<[Array<Question>, number, number]>((resolve, reject) => {
+
+    const questions: Array<Question> = []
+    let total: number = 0
+    let found: number = 0
+
+    dbPromise.then(db => {
+
+      const store = db
+        .transaction(['questions'], 'readonly')
+        .objectStore('questions')
+
+      const request = store.openCursor()
+
+      request.onsuccess = () => {
+
+        const cursor = request.result
+        if (cursor) {
+          const quest: Question = cursor.value
+          if (arrSearch(quest.quest, searchStr) || arrSearch(quest.answer, searchStr)) {
+
+            if (questions.length < max) {
+              questions.push(quest)
+            }
+            found++
+          }
+          total++
+          cursor.continue()
+        }
+        else {
+          console.log('Store:', store.name, 'questSearch finished:', questions.length)
+          resolve([questions, total, found])
+        }
+      }
+
+      request.onerror = (e) => {
+        console.log('Store:', store.name, 'questSearch:', e)
+        reject()
+      }
+    })
+  })
+}
