@@ -135,4 +135,12 @@ export default class Markdown {
 
     return result
   }
+
+  /****************************************************************************
+   * The function removes the formatting for searching.
+   ***************************************************************************/
+
+  static remove(str:String) {
+    return str.replace(/[_*~]/g, '')
+  }
 }

@@ -3,6 +3,7 @@ import { dbPromise } from './db'
 import { percentage, shuffleArr } from './utils'
 import { storeAdd, storePut, storeDel, storeDeleteIndex } from './store'
 import { githubGetJson } from './github'
+import Markdown from './Markdown'
 
 /**
  * The interface defines a question persisted in the database. The id is auto 
@@ -460,10 +461,9 @@ export const questArrToMap = (arr: Array<Question>) => {
 /**
  * The function searches a string inside an array of strings.
  */
-const arrSearch = (arr: string[], searchStr: string) => {
-  console.log('search', searchStr, 'arrary', arr)
-  for (const str of arr) {
-    if (str.toLowerCase().includes(searchStr)) {
+const arrSearchLower = (arr: string[], searchStr: string) => {
+  for (let str of arr) {
+    if (Markdown.remove(str).toLowerCase().includes(searchStr)) {
       return true
     }
   }
@@ -496,7 +496,7 @@ export const questSearch = (searchOrig: string, max: number) => {
         const cursor = request.result
         if (cursor) {
           const quest: Question = cursor.value
-          if (arrSearch(quest.quest, searchStr) || arrSearch(quest.answer, searchStr)) {
+          if (arrSearchLower(quest.quest, searchStr) || arrSearchLower(quest.answer, searchStr)) {
 
             if (questions.length < max) {
               questions.push(quest)
