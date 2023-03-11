@@ -3,7 +3,7 @@
   import Markdown from '../js/Markdown';
   import { createRepeatToggle } from '../js/utils';
   import type { Question } from '../js/questModel';
-  import { onMount } from 'svelte';
+  import { afterUpdate } from 'svelte';
 
   export let questions: Question[];
 
@@ -13,8 +13,8 @@
 
   const md = new Markdown();
 
-  onMount(() => {
-    console.log('questions', questions);
+  afterUpdate(() => {
+    console.log('afterUpdate questions:', questions);
     sorted = questions;
   });
 
