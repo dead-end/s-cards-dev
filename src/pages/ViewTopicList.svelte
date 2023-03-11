@@ -7,6 +7,10 @@
   import { viewStore } from '../stores/viewStore';
 
   import TopicCard from '../components/TopicCard.svelte';
+  import SearchIcon from '../components/icon/SearchIcon.svelte';
+  import ConfigIcon from '../components/icon/ConfigIcon.svelte';
+  import HashIcon from '../components/icon/HashIcon.svelte';
+  import TranslateIcon from '../components/icon/TranslateIcon.svelte';
 
   //
   // Id to scroll the view to.
@@ -99,18 +103,10 @@
         >Show</button
       >
     {/if}
-    <button class="button" on:click={() => viewStore.setView('ViewTranslate')}
-      >Translate</button
-    >
-    <button class="button" on:click={() => viewStore.setView('ViewHashes')}
-      >Hashes</button
-    >
-    <button class="button" on:click={() => viewStore.setView('ViewAdmin')}
-      >Admin</button
-    >
-    <button class="button" on:click={() => viewStore.setView('ViewSearch')}
-      >Search</button
-    >
+    <TranslateIcon onClick={() => viewStore.setView('ViewTranslate')} />
+    <HashIcon onClick={() => viewStore.setView('ViewHashes')} />
+    <ConfigIcon onClick={() => viewStore.setView('ViewAdmin')} />
+    <SearchIcon onClick={() => viewStore.setView('ViewSearch')} />
   </div>
 {/if}
 
