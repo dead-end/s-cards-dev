@@ -558,3 +558,14 @@ ul li:before {
     max-width: 90%;
   }
 }
+
+.icon {
+  width: 1.7em;
+  height: 1.7em;
+  color: var(--color-text);
+}
+
+.reset-button {
+  padding: 0;
+  border: none;
+}

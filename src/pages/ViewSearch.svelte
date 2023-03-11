@@ -3,8 +3,9 @@
   import QuestArrShow from '../components/QuestArrShow.svelte';
   import type { Question } from '../js/questModel';
   import { questSearch } from '../js/questModel';
+  import SearchIcon from '../components/icon/SearchIcon.svelte';
 
-  const max = 2;
+  const max = 30;
 
   let searchStr = '';
   let questions: Question[] = [];
@@ -13,7 +14,7 @@
   let found = 0;
 
   const handleSubmit = async () => {
-    console.log('Searching', searchStr);
+    console.log('Searching:', searchStr);
 
     const str = searchStr.trim();
 
@@ -26,6 +27,8 @@
       message = '';
     }
 
+    questions = [];
+
     [questions, total, found] = await questSearch(str, max);
 
     if (questions.length === 0) {
@@ -33,17 +36,6 @@
     } else if (questions.length < found) {
       message = 'More than: ' + max + ' questions found';
     }
-  };
-
-  // TODO
-  const onClick = () => {
-    console.log('click');
-  };
-
-  // TODO
-  const onClear = () => {
-    searchStr = '';
-    questions = [];
   };
 
   const onBack = () => {
@@ -54,16 +46,16 @@
 <h4>Search</h4>
 
 <form on:submit|preventDefault={handleSubmit}>
-  <div class="block">
+  <div class="">
     <label for="searchStr">Search String</label>
-    <input id="searchStr" bind:value={searchStr} class="input" />
+    <div class="is-floating">
+      <input id="searchStr" bind:value={searchStr} class="input" />
+      <SearchIcon onClick={handleSubmit} />
+    </div>
+
     {#if message}
       <div class="is-text-danger">{message}</div>
     {/if}
-  </div>
-
-  <div class="is-floating">
-    <button class="button" type="submit">Search</button>
   </div>
 </form>
 
