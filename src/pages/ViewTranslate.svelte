@@ -80,13 +80,13 @@
 </script>
 
 <h4>Translate</h4>
+<div class="block">
+  <label for="src">{srcLabel}</label>
+  <textarea id="src" bind:value={srcValue} class="input" />
 
-<label for="src">{srcLabel}</label>
-<textarea id="src" bind:value={srcValue} class="input" />
-
-<label for="dst">{dstLabel}</label>
-<textarea id="dst" readonly value={dstValue} class="input" />
-
+  <label for="dst">{dstLabel}</label>
+  <textarea id="dst" readonly value={dstValue} class="input" />
+</div>
 <div class="is-floating">
   <button class="button" on:click={() => onBack()}>Back</button>
   <button class="button" on:click={() => onTranslate()}>Translate</button>
