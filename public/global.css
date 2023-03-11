@@ -562,7 +562,6 @@ ul li:before {
 .icon {
   width: 1.7em;
   height: 1.7em;
-  color: var(--color-text);
 }
 
 .reset-button {
