@@ -144,3 +144,14 @@ export function ensureMinMax(value: number, min: number, max: number) {
   }
   return value
 }
+
+/**
+ * The function ensures that a given string ends with an other given string.
+ */
+export const ensureEnd = (str: string, end:string) => {
+  if (!str.endsWith(end)) {
+      return str + end
+  }
+
+  return str
+}

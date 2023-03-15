@@ -1,5 +1,6 @@
 import { dbPromise } from './db'
 import { storePut } from './store'
+import { ensureEnd } from './utils'
 
 const langUrlDefault = 'https://api.github.com/repos/dead-end/cards-russian/contents/'
 
@@ -58,16 +59,8 @@ export const adminPut = async (admin: Admin) => {
         .transaction(['admin'], 'readwrite')
         .objectStore('admin')
 
-        admin.langUrl = ensureEndSlash(admin.langUrl)
-        admin.linkUrl = ensureEndSlash(admin.linkUrl)
+        admin.langUrl = ensureEnd(admin.langUrl, '/')
+        admin.linkUrl = ensureEnd(admin.linkUrl, '/')
 
     storePut(store, admin)
-}
-
-const ensureEndSlash = (str: string) => {
-    if (!str.endsWith('/')) {
-        return str + '/'
-    }
-
-    return str
 }
