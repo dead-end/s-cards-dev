@@ -3,6 +3,8 @@ import { storePut } from './store'
 
 const langUrlDefault = 'https://api.github.com/repos/dead-end/cards-russian/contents/'
 
+const linkUrlDefault = 'https://github.com/dead-end/cards-russian/blob/master/'
+
 /**
  * The admin configuration. The config property is the key for the store. The 
  * value is 'admin'.
@@ -10,6 +12,7 @@ const langUrlDefault = 'https://api.github.com/repos/dead-end/cards-russian/cont
 export interface Admin {
     config: string,
     langUrl: string,
+    linkUrl: string,
     backupUrl: string,
     file: string,
     token: string,
@@ -35,6 +38,7 @@ export const adminGet = () => {
                     admin = {
                         config: 'admin',
                         langUrl: langUrlDefault,
+                        linkUrl: linkUrlDefault,
                         backupUrl: '',
                         file: '',
                         token: ''
@@ -53,5 +57,17 @@ export const adminPut = async (admin: Admin) => {
     const store = (await dbPromise)
         .transaction(['admin'], 'readwrite')
         .objectStore('admin')
+
+        admin.langUrl = ensureEndSlash(admin.langUrl)
+        admin.linkUrl = ensureEndSlash(admin.linkUrl)
+
     storePut(store, admin)
+}
+
+const ensureEndSlash = (str: string) => {
+    if (!str.endsWith('/')) {
+        return str + '/'
+    }
+
+    return str
 }

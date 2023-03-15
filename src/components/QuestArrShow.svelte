@@ -3,7 +3,9 @@
   import Markdown from '../js/Markdown';
   import { createRepeatToggle } from '../js/utils';
   import type { Question } from '../js/questModel';
-  import { afterUpdate } from 'svelte';
+  import { onMount, afterUpdate } from 'svelte';
+  import { adminGet } from '../js/admin';
+  import type { Admin } from '../js/admin';
 
   export let questions: Question[];
 
@@ -11,7 +13,13 @@
   let sorted: Question[] = [];
   let sortBy: String = '';
 
+  let admin: Admin;
+
   const md = new Markdown();
+
+  onMount(async () => {
+    admin = await adminGet();
+  });
 
   afterUpdate(() => {
     console.log('afterUpdate questions:', questions);
@@ -62,7 +70,11 @@
       <div class="is-flex-spread grid-full">
         <div>
           <span class="h6">Id: {question.id}</span>
-          <span class="hide-sm">{question.file}</span>
+          <span class="hide-sm">
+            <a href={admin.linkUrl + question.file} target="_blank"
+              >{question.file}</a
+            >
+          </span>
         </div>
         <QuestProgress {question} />
       </div>

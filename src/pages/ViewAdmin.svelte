@@ -100,6 +100,14 @@
           class="input"
         />
 
+        <label for="linkUrl">Github Link URL</label>
+        <input
+          id="linkUrl"
+          type="url"
+          bind:value={admin.linkUrl}
+          class="input"
+        />
+
         <label for="backupUrl">Github URL Backup</label>
         <input
           id="backupUrl"

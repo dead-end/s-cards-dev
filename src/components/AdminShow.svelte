@@ -10,6 +10,10 @@
     <td>{admin.langUrl}</td>
   </tr>
   <tr>
+    <td>Github Link URL</td>
+    <td>{admin.linkUrl}</td>
+  </tr>
+  <tr>
     <td>Github URL Backup</td>
     <td>{admin.backupUrl ? admin.backupUrl : ''}</td>
   </tr>
