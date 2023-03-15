@@ -564,6 +564,10 @@ ul li:before {
   height: 1.7em;
 }
 
+.icon:hover {
+  transform: scale(1.1);
+}
+
 .reset-button {
   padding: 0;
   border: none;
