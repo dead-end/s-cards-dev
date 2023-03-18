@@ -1,5 +1,3 @@
-import { errorStore } from "../stores/errorStore"
-
 /**
  * The function returns a formated date value or an empty string if the date is
  * not defined.
