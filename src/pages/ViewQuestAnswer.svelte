@@ -30,17 +30,23 @@
 
   let unlearned: Question[];
 
-  const handleAnswer = (isCorrect?: boolean) => {
+  enum Result {
+    Correct,
+    Wrong,
+    Skip
+  }
+
+  const handleAnswer = (result: Result) => {
     //
     // On skip, we do not update the statistik and go to the next.
     //
-    if (typeof isCorrect === 'undefined') {
+    if (result === Result.Skip) {
       unlearned.push(question);
       next();
       return;
     }
 
-    questOnAnswer(question, isCorrect);
+    questOnAnswer(question, result === Result.Correct);
 
     questPersist(question).then(() => {
       if (question.progress < 3) {
@@ -71,10 +77,7 @@
       return;
     }
     topic = t;
-    /*
-    question = unlearned.shift();
-    topic = topics.find((t) => t.file === question.file);
-    */
+
     statistic = questGetStatistics(questions);
     hideAnswer = true;
     console.log('next', question);
@@ -126,17 +129,17 @@
       <button
         class="button is-success"
         hidden={hideAnswer}
-        on:click={() => handleAnswer(true)}>Correct</button
+        on:click={() => handleAnswer(Result.Correct)}>Correct</button
       >
       <button
         class="button is-danger"
         hidden={hideAnswer}
-        on:click={() => handleAnswer(false)}>Wrong</button
+        on:click={() => handleAnswer(Result.Wrong)}>Wrong</button
       >
       <button
         class="button is-warning"
         hidden={hideAnswer}
-        on:click={() => handleAnswer()}>Skip</button
+        on:click={() => handleAnswer(Result.Skip)}>Skip</button
       >
       <button class="button" on:click={onStop}>Stop</button>
     </div>
