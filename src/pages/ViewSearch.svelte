@@ -34,7 +34,7 @@
     if (questions.length === 0) {
       message = 'Nothing found!';
     } else if (questions.length < found) {
-      message = 'More than: ' + max + ' questions found';
+      message = `More than: ${max} questions found! (Total: ${found})`;
     }
   };
 
