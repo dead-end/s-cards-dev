@@ -72,11 +72,9 @@
           <span class="h6">Id: {question.id}</span>
 
           <span class="hide-sm">
-            {#if admin.linkUrl}
-              <a href={admin.linkUrl + question.file} target="_blank"
-                >{question.file}</a
-              >
-            {:else}{question.file}{/if}
+            <a href={admin.linkUrl + question.file} target="_blank"
+              >{question.file}</a
+            >
           </span>
         </div>
         <QuestProgress {question} />
