@@ -18,14 +18,21 @@ const b64_to_utf8 = (str: string) => {
 }
 
 /**
- * The function parses json data from github.
+ * The function decodes json data from github.
  */
-const githubParseJson = (content: string) => {
+const decodeJson = (content: string) => {
     try {
         return JSON.parse(b64_to_utf8(content))
     } catch (e) {
-        errorStore.addError(`githubParseContent - unable to parse json content: ${e}`)
+        errorStore.addError(`decodeJson - unable decode json content: ${e}`)
     }
+}
+
+/**
+ * The function encodes json data for github.
+ */
+const encodeJson = (json: any) => {
+    return utf8_to_b64(JSON.stringify(json))
 }
 
 /**
@@ -157,7 +164,7 @@ export const githubGetJson = async (file: string) => {
         return
     }
 
-    const content = githubParseJson(json.content)
+    const content = decodeJson(json.content)
     if (!content) {
         return
     }
@@ -174,6 +181,16 @@ export const githubGetJson = async (file: string) => {
 }
 
 /**
+ * The following properties are required for a PUT request to create or update
+ * a file. If the file exists the sha of the file is required.
+ */
+interface GithubPutBody {
+    content: string,
+    message: string,
+    sha?: string,
+}
+
+/**
  * The function commits the json file to github. First we need the sha hash, 
  * which comes from the etag. This is required for the commit if the file 
  * exists. 
@@ -187,14 +204,19 @@ export const githubBackup = async (json: any) => {
     const sha = await githubGetEtag(backupUrl, headers)
     console.log('sha', sha)
 
+    const body: GithubPutBody = {
+        content: encodeJson(json),
+        message: 'backup'
+    }
+
+    if (sha) {
+        body.sha = sha
+    }
+
     const data = {
         method: 'PUT',
         headers: headers,
-        body: JSON.stringify({
-            sha: sha,
-            content: utf8_to_b64(JSON.stringify(json)),
-            message: 'backup'
-        }),
+        body: JSON.stringify(body),
     }
 
     const response = await fetch(backupUrl, data).catch(e => {
@@ -226,5 +248,5 @@ export const githubRestore = async () => {
         return
     }
 
-    return githubParseJson(json.content)
+    return decodeJson(json.content)
 }
