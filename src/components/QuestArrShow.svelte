@@ -70,10 +70,13 @@
       <div class="is-flex-spread grid-full">
         <div>
           <span class="h6">Id: {question.id}</span>
+
           <span class="hide-sm">
-            <a href={admin.linkUrl + question.file} target="_blank"
-              >{question.file}</a
-            >
+            {#if admin.linkUrl}
+              <a href={admin.linkUrl + question.file} target="_blank"
+                >{question.file}</a
+              >
+            {:else}{question.file}{/if}
           </span>
         </div>
         <QuestProgress {question} />
