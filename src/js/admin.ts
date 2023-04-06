@@ -60,7 +60,11 @@ export const adminPut = async (admin: Admin) => {
         .objectStore('admin')
 
         admin.langUrl = ensureEnd(admin.langUrl, '/')
-        admin.linkUrl = ensureEnd(admin.linkUrl, '/')
+        if (!admin.linkUrl) {
+            admin.linkUrl = langUrlDefault
+        } else {
+            admin.linkUrl = ensureEnd(admin.linkUrl, '/')
+        }
 
     storePut(store, admin)
 }
