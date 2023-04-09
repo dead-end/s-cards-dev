@@ -97,7 +97,7 @@
    */
   const onStop = async () => {
     if (tag) {
-      viewStore.setView('ViewTopicList');
+      viewStore.setView('ViewTopicList', { id: '' });
     } else {
       topic.lastLearned = new Date();
       await topicUpdate(topic);

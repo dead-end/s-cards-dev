@@ -58,7 +58,7 @@
 
     await topicSetup();
 
-    viewStore.setView('ViewTopicList');
+    viewStore.setView('ViewTopicList', { id: '' });
   });
 </script>
 

@@ -27,7 +27,7 @@
   });
 
   const onBack = () => {
-    viewStore.setView('ViewTopicList');
+    viewStore.setView('ViewTopicList', { id: '' });
   };
 
   const onBackup = async () => {

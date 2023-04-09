@@ -75,7 +75,7 @@
    * The function selets the back view.
    */
   const onBack = () => {
-    viewStore.setView('ViewTopicList');
+    viewStore.setView('ViewTopicList', { id: '' });
   };
 </script>
 

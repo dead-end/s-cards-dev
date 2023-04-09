@@ -32,7 +32,7 @@
    * The callback functoin to go back.
    */
   const onBack = () => {
-    viewStore.setView('ViewTopicList');
+    viewStore.setView('ViewTopicList', { id: '' });
   };
 
   const onStart = () => {

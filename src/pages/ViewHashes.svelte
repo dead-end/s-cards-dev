@@ -39,7 +39,7 @@
   };
 
   const onBack = () => {
-    viewStore.setView('ViewTopicList');
+    viewStore.setView('ViewTopicList', { id: '' });
   };
 
   const onLoadAll = async () => {
