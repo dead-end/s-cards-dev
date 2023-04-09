@@ -110,13 +110,33 @@ export const storeGet = <T>(store: IDBObjectStore, id: string) => {
     const request = store.get(id)
 
     request.onsuccess = () => {
-      const result: T = request.result
-      console.log('Store:', store.name, 'get:', result)
-      resolve(result)
+      console.log('Store:', store.name, 'id:', id, 'get:', request.result)
+      resolve(request.result)
     }
 
     request.onerror = (e) => {
-      console.log('Store:', store.name, 'id:', id, e)
+      console.log('Store:', store.name, 'id:', id, 'get error:', e)
+      reject()
+    }
+  })
+}
+
+/**
+ * Simple wrapper that gets all object from a store.
+ */
+export const storeGetAll = <T>(store: IDBObjectStore) => {
+
+  return new Promise<Array<T>>((resolve, reject) => {
+
+    const request = store.getAll()
+
+    request.onsuccess = () => {
+      console.log('Store:', store.name, 'getAll num:', request.result.length)
+      resolve(request.result)
+    }
+
+    request.onerror = (e) => {
+      console.log('Store:', store.name, 'getAll error:', e)
       reject()
     }
   })
