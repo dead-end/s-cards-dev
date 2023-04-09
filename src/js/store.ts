@@ -115,7 +115,7 @@ export const storeGet = <T>(store: IDBObjectStore, id: string) => {
     }
 
     request.onerror = (e) => {
-      console.log('Store:', store.name, 'id:', id, 'get error:', e)
+      errorStore.addError(`Store: ${store.name} id: ${id} storeGet error: ${e}`)
       reject()
     }
   })
@@ -136,7 +136,7 @@ export const storeGetAll = <T>(store: IDBObjectStore) => {
     }
 
     request.onerror = (e) => {
-      console.log('Store:', store.name, 'getAll error:', e)
+      errorStore.addError(`Store: ${store.name} storeGetAll error: ${e}`)
       reject()
     }
   })
