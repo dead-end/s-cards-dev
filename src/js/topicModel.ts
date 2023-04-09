@@ -1,7 +1,7 @@
 import { dbPromise } from './db'
 import { hashDelTx } from './hash'
 import { questRemoveFile } from './questModel'
-import { storePut, storeDel } from './store'
+import { storePut, storeDel, storeGetAll } from './store'
 import { arrIsEqual } from './utils'
 import { githubGetJson } from './github'
 
@@ -94,26 +94,13 @@ export const topicGetTags = (topics: Topic[]) => {
  * The function gets all topics from the store. It returns a promise with an
  * array of topics.
  */
-export const topicGetAll = () => {
+export const topicGetAll = async () => {
 
-  return new Promise<Array<Topic>>((resolve, reject) => {
+  const store = (await dbPromise)
+    .transaction(['topics'], 'readonly')
+    .objectStore('topics')
 
-    dbPromise.then(db => {
-      const store = db.transaction(['topics'], 'readonly').objectStore('topics')
-
-      const request = store.getAll()
-
-      request.onsuccess = () => {
-        console.log('Store:', store.name, 'topicGetAll:')
-        resolve(request.result)
-      }
-
-      request.onerror = (e) => {
-        console.log('Store:', store.name, 'topicGetAll error:', e)
-        reject()
-      }
-    })
-  })
+  return storeGetAll<Topic>(store)
 }
 
 /**

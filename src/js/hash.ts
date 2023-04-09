@@ -1,12 +1,12 @@
 import { dbPromise } from './db'
-import { storeDel } from './store'
+import { storeDel, storeGet, storeGetAll, storePut } from './store'
 
 /**
  * The interface for the hash object that is persisted in the store.
  */
 export interface Hash {
     file: string,
-    value?: string,
+    value: string,
     lastLoaded: Date
 }
 
@@ -14,80 +14,48 @@ export interface Hash {
  * The function gets a Hash object from the store, for a given file. If the 
  * store does not contains a Hash object, a new is created.
  */
-export const hashGet = (file: string) => {
+export const hashGet = async (file: string) => {
 
-    return new Promise<Hash>((resolve, reject) => {
-        dbPromise.then(db => {
-            const store = db.transaction(['hash'], 'readonly')
-                .objectStore('hash')
+    const store = (await dbPromise)
+        .transaction(['hash'], 'readonly')
+        .objectStore('hash')
 
-            const request = store.get(file)
-
-            request.onsuccess = () => {
-                const hash: Hash = request.result ? request.result : { file: file }
-                console.log('Store:', store.name, 'get:', hash)
-                resolve(hash)
-            }
-
-            request.onerror = (e) => {
-                console.log('Store:', store.name, 'get:', file, 'error', e)
-                reject()
-            }
-        })
-    })
+    return storeGet<Hash>(store, file)
 }
 
 /**
  * The function returns a list of all hashes as a promise.
  */
-export const hashGetAll = () => {
+export const hashGetAll = async () => {
 
-    return new Promise<Hash[]>((resolve, reject) => {
-        dbPromise.then(db => {
+    const store = (await dbPromise)
+        .transaction(['hash'], 'readonly')
+        .objectStore('hash')
 
-            const store = db.transaction(['hash'], 'readonly')
-                .objectStore('hash')
-
-            const request = store.getAll()
-
-            request.onsuccess = () => {
-                const hashes: Hash[] = request.result
-                console.log('Store:', store.name, 'get all:', hashes.length)
-                resolve(hashes)
-            }
-
-            request.onerror = (e) => {
-                console.log('Store:', store.name, 'get all error:', e)
-                reject()
-            }
-        })
-    })
+    return storeGetAll<Hash>(store)
 }
 
 /**
  * The function puts a Hash object in the store.
  */
-export const hashPut = (hash: Hash) => {
+export const hashPut = async (hash: Hash) => {
 
-    return new Promise<void>((resolve, reject) => {
-        dbPromise.then(db => {
+    const store = (await dbPromise)
+        .transaction(['hash'], 'readwrite')
+        .objectStore('hash')
 
-            const store = db.transaction(['hash'], 'readwrite')
-                .objectStore('hash')
+    return storePut(store, hash)
+}
 
-            const request = store.put(hash)
+/**
+ * The function deletes a Hash object in the store.
+ */
+export const hashDel = async (file: string) => {
+    const store = (await dbPromise)
+        .transaction(['hash'], 'readwrite')
+        .objectStore('hash')
 
-            request.onsuccess = () => {
-                console.log('Store:', store.name, 'put:', hash)
-                resolve()
-            }
-
-            request.onerror = (e) => {
-                console.log('Store:', store.name, 'put:', hash, 'error', e)
-                reject()
-            }
-        })
-    })
+    return storeDel(store, file)
 }
 
 /**
@@ -95,13 +63,5 @@ export const hashPut = (hash: Hash) => {
  */
 export const hashDelTx = (tx: IDBTransaction, file: string) => {
     const store = tx.objectStore('hash')
-    return storeDel(store, file)
-}
-
-/**
- * The function deletes a Hash object in the store.
- */
-export const hashDel = async (file: string) => {
-    const store = (await dbPromise).transaction(['hash'], 'readwrite').objectStore('hash')
     return storeDel(store, file)
 }

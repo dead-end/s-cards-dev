@@ -10,7 +10,7 @@
   export let size = 0;
   export let details = true;
 
-  let hash: Hash;
+  let hash: Hash | void;
 
   /**
    * Read the hash for the topic.
@@ -48,7 +48,7 @@
       </tr>
       <tr>
         <td>Hash</td>
-        <td>{hash.value ? hash.value : ''}</td>
+        <td>{hash.value}</td>
       </tr>
     {/if}
   {/if}
