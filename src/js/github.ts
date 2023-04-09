@@ -152,7 +152,7 @@ export const githubGetJson = async (file: string) => {
     // Get etag if present
     //
     let hash = await hashGet(file)
-    if (hash.value) {
+    if (hash && hash.value) {
         const etagCheck = await githubCheckEtag(fileUrl, headers, hash.value)
         if (etagCheck) {
             return
@@ -172,9 +172,11 @@ export const githubGetJson = async (file: string) => {
     //
     // Update the hash in the store
     //
-    hash.value = json.sha
-    hash.lastLoaded = new Date()
-    await hashPut(hash)
+    await hashPut({
+        file: file,
+        value: json.sha,
+        lastLoaded: new Date()
+    })
 
     console.log('githubGetJson', content)
     return content
