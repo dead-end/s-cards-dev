@@ -125,7 +125,8 @@ export const topicDelTx = (tx: IDBTransaction, file: string) => {
  * updates the rest.
  */
 const topicSync = async (json: Array<Topic>) => {
-  const tx = (await dbPromise).transaction(['topics', 'questions', 'hash'], 'readwrite')
+  const tx = (await dbPromise)
+    .transaction(['topics', 'questions', 'hash'], 'readwrite')
   const storeTopic = tx.objectStore('topics')
 
   const request = storeTopic.getAll()
@@ -182,12 +183,10 @@ export const topicArrToMap = (arr: Array<Topic>) => {
 /**
  * Load the topic and sync the result with the db.
  */
-const topicSetup = async () => {
+export const topicSetup = async () => {
 
   const json = await githubGetJson('data/topics.json')
   if (json) {
-    topicSync(json as Array<Topic>)
+    await topicSync(json as Array<Topic>)
   }
 }
-
-topicSetup()

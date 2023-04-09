@@ -17,7 +17,9 @@
   import ViewAdmin from './pages/ViewAdmin.svelte';
   import ViewSearch from './pages/ViewSearch.svelte';
 
-  onMount(() => {
+  import { topicSetup } from './js/topicModel';
+
+  onMount(async () => {
     //
     // Register the views
     //
@@ -53,6 +55,8 @@
         component: ViewSearch
       }
     };
+
+    await topicSetup();
 
     viewStore.setView('ViewTopicList');
   });
