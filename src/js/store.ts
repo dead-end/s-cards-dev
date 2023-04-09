@@ -99,3 +99,25 @@ export const storePut = (store: IDBObjectStore, obj: any) => {
     }
   })
 }
+
+/**
+ * Simple wrapper that gets an object from a store by id.
+ */
+export const storeGet = <T>(store: IDBObjectStore, id: string) => {
+
+  return new Promise<T>((resolve, reject) => {
+
+    const request = store.get(id)
+
+    request.onsuccess = () => {
+      const result: T = request.result
+      console.log('Store:', store.name, 'get:', result)
+      resolve(result)
+    }
+
+    request.onerror = (e) => {
+      console.log('Store:', store.name, 'id:', id, e)
+      reject()
+    }
+  })
+}

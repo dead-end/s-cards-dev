@@ -1,7 +1,7 @@
 import type { Topic } from './topicModel'
 import { dbPromise } from './db'
 import { percentage, shuffleArr } from './utils'
-import { storeAdd, storePut, storeDel, storeDeleteIndex } from './store'
+import { storeAdd, storePut, storeDel, storeDeleteIndex, storeGet } from './store'
 import { githubGetJson } from './github'
 import Markdown from './Markdown'
 
@@ -329,26 +329,6 @@ export const questSync = (tx: IDBTransaction, file: string, json: Question[]) =>
 }
 
 /**
- * The function reads a question from the store.
- */
-export const questGet = (store: IDBObjectStore, id: string) => {
-
-  return new Promise<Question>((resolve, reject) => {
-
-    const request = store.get(id)
-
-    request.onsuccess = () => {
-      resolve(request.result)
-    }
-
-    request.onerror = (e) => {
-      console.log('Store:', store.name, 'questGet:', e)
-      reject()
-    }
-  })
-}
-
-/**
  * The function creates an array with backup data from the store.
  */
 export const questGetBackup = () => {
@@ -407,7 +387,7 @@ export const questSetRestore = async (restore: [string, number, number][]) => {
   restore.forEach(a => {
     const [id, failed, total] = [...a]
 
-    questGet(store, id).then(quest => {
+    storeGet<Question>(store, id).then(quest => {
 
       if (quest && quest.total < total) {
 
