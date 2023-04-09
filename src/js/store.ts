@@ -105,7 +105,7 @@ export const storePut = (store: IDBObjectStore, obj: any) => {
  */
 export const storeGet = <T>(store: IDBObjectStore, id: string) => {
 
-  return new Promise<T>((resolve, reject) => {
+  return new Promise<T | void>((resolve, reject) => {
 
     const request = store.get(id)
 
