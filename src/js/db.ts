@@ -92,7 +92,7 @@ export const dbInit = () => {
         initAndUpdate(db)
       }
 
-      resolve(db)
+      console.log('db upgrade success!')
     }
 
     //
