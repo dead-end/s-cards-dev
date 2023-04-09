@@ -103,21 +103,13 @@ export const questRemoveFile = (tx: IDBTransaction, file: string) => {
  * The function is called with a question, which should be persisted. It 
  * returns a Promise.
  */
-export const questPersist = (quest: Question) => {
+export const questPersist = async (quest: Question) => {
 
-  return new Promise<void>((resolve) => {
+  const store = (await dbPromise)
+    .transaction(['questions'], 'readwrite')
+    .objectStore('questions')
 
-    dbPromise.then(db => {
-      const store = db
-        .transaction(['questions'], 'readwrite')
-        .objectStore('questions')
-
-      store.put(quest).onsuccess = () => {
-        console.log('Store:', store.name, ' update:', quest)
-        resolve()
-      }
-    })
-  })
+  return storePut(store, quest)
 }
 
 /**
@@ -212,12 +204,7 @@ export const questSetProgressArr = async (quests: Question[], value: number) => 
 
   const promises: Promise<void>[] = quests.map(quest => {
     quest.progress = value
-
-    return new Promise<void>((resolve) => {
-      store.put(quest).onsuccess = () => {
-        resolve()
-      }
-    })
+    return storePut(store, quest)
   })
 
   await Promise.all(promises)
