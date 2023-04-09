@@ -7,7 +7,7 @@ import { errorStore } from "../stores/errorStore"
  */
 export const storeDeleteIndex = (tx: IDBTransaction, storeName: string, idxName: string, idxValue: string) => {
 
-  return new Promise<void>((resolve) => {
+  return new Promise<void>((resolve, reject) => {
 
     //
     // Get the store from the transaction.
@@ -36,6 +36,11 @@ export const storeDeleteIndex = (tx: IDBTransaction, storeName: string, idxName:
       // Resolve after all elements are deleted.
       //
       resolve()
+    }
+
+    request.onerror = (e) => {
+      errorStore.addError(`Store: ${store.name} delete index error: ${e}`)
+      reject()
     }
   })
 }
