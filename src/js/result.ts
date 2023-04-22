@@ -2,7 +2,7 @@
  * The possible states of a result.
  */
 enum ResultStatus {
-    'OK', 'ERROR'
+    'OK', 'ERROR', 'UNDEF'
 }
 
 /**
@@ -20,7 +20,7 @@ enum ResultStatus {
  * return result.setOk(10)
  */
 export default class Result<V> {
-    private status?: ResultStatus;
+    private status = ResultStatus.UNDEF;
     private message?: string;
     private value?: V;
 
@@ -28,7 +28,9 @@ export default class Result<V> {
      * The function checks if the status OK.
      */
     public isOk() {
-        this.check()
+        if (this.status === ResultStatus.UNDEF) {
+            throw new Error('Status not set!')
+        }
         return this.status === ResultStatus.OK
     }
 
@@ -36,7 +38,9 @@ export default class Result<V> {
      * The function checks if the status is ERROR
      */
     public hasError() {
-        this.check()
+        if (this.status === ResultStatus.UNDEF) {
+            throw new Error('Status not set!')
+        }
         return this.status === ResultStatus.ERROR
     }
 
@@ -45,7 +49,12 @@ export default class Result<V> {
      * ERROR.
      */
     public getMessage() {
-        this.check()
+        if (this.status !== ResultStatus.ERROR) {
+            throw new Error('Status is not ERROR!')
+        }
+        if (!this.message) {
+            throw new Error('Status is ERROR but no message is set!')
+        }
         return this.message
     }
 
@@ -54,7 +63,9 @@ export default class Result<V> {
      * the value is set.
      */
     public getValue() {
-        this.check()
+        if (this.status !== ResultStatus.OK) {
+            throw new Error('Status is not OK!')
+        }
         if (typeof this.value === 'undefined' || this.value === null) {
             throw new Error('Value not set!')
         }
@@ -66,7 +77,9 @@ export default class Result<V> {
      * OK.
      */
     public getValueVoid() {
-        this.check()
+        if (this.status !== ResultStatus.OK) {
+            throw new Error('Status is not OK!')
+        }
         return this.value
     }
 
@@ -75,7 +88,9 @@ export default class Result<V> {
      * status is OK.
      */
     public hasValue() {
-        this.check()
+        if (this.status !== ResultStatus.OK) {
+            throw new Error('Status is not OK!')
+        }
         return typeof this.value !== 'undefined' && this.value !== null
     }
 
@@ -96,29 +111,6 @@ export default class Result<V> {
         this.status = ResultStatus.ERROR
         this.message = message
         return this
-    }
-
-    /**
-     * The function enrures that the object has a valid state.
-     */
-    private check() {
-        if (typeof this.status === 'undefined') {
-            throw new Error('Status not set!')
-        }
-
-        if (this.status === ResultStatus.ERROR) {
-            if (!this.message) {
-                throw new Error('Status is ERROR but no message is set!')
-            }
-
-            if (this.value) {
-                throw new Error('Status is ERROR but value is set!')
-            }
-        }
-
-        if (this.status === ResultStatus.OK && this.message) {
-            throw new Error('Status is OK but message is set!')
-        }
     }
 }
 
