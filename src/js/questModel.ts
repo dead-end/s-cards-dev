@@ -2,18 +2,26 @@ import type { Topic } from './topicModel'
 import { dbPromise } from './db'
 import { percentage, shuffleArr } from './utils'
 import { storeAdd, storePut, storeDel, storeDeleteIndex, storeGet } from './store'
-import { githubGetJson } from './github'
+import { repoGetJsonCache } from './repo'
 import Markdown from './Markdown'
+import { errorStore } from '../stores/errorStore'
+import type { BackupEntry } from './interfaces'
+
+/**
+ * The interface defines the questions from the json document.
+ */
+export interface QuestionJson {
+  id: string,
+  quest: string[],
+  answer: string[],
+}
 
 /**
  * The interface defines a question persisted in the database. The id is auto 
  * generated, by the database.
  */
-export interface Question {
-  id: string,
+export interface Question extends QuestionJson {
   file: string,
-  quest: string[],
-  answer: string[],
   total: number
   failed: number
   //
@@ -320,9 +328,9 @@ export const questSync = (tx: IDBTransaction, file: string, json: Question[]) =>
  */
 export const questGetBackup = () => {
 
-  return new Promise<[string, number, number][]>((resolve, reject) => {
+  return new Promise<BackupEntry[]>((resolve, reject) => {
 
-    const result: [string, number, number][] = []
+    const result: BackupEntry[] = []
 
     dbPromise.then(db => {
 
@@ -393,10 +401,18 @@ export const questSetRestore = async (restore: [string, number, number][]) => {
  */
 export const questLoad = async (file: string) => {
 
-  const json = await githubGetJson(file)
-  if (json) {
+  const result = await repoGetJsonCache<Question[]>(file)
+  if (result.hasError()) {
+    errorStore.addError(`Unable to get file: ${file} - ${result.getMessage()}`)
+    return
+  }
+  //
+  // The value is void if the db and the file is in sync (hash).
+  //
+  const value = result.getValue()
+  if (value) {
     const tx = (await dbPromise).transaction(['questions'], 'readwrite')
-    questSync(tx, file, json)
+    questSync(tx, file, value)
   }
 }
 
