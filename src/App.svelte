@@ -16,6 +16,7 @@
   import ViewHashes from './pages/ViewHashes.svelte';
   import ViewAdmin from './pages/ViewAdmin.svelte';
   import ViewSearch from './pages/ViewSearch.svelte';
+  import ViewQuestEdit from './pages/ViewQuestEdit.svelte';
 
   import { topicSetup } from './js/topicModel';
 
@@ -53,6 +54,9 @@
       },
       ViewSearch: {
         component: ViewSearch
+      },
+      ViewQuestEdit: {
+        component: ViewQuestEdit
       }
     };
 
