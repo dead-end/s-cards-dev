@@ -1,7 +1,5 @@
-import { errorStore } from '../stores/errorStore'
-import { hashGet, hashPut } from './hash'
-import { adminGet } from './admin'
-import type { Admin } from './admin'
+import type { ContentHash } from './interfaces'
+import Result from './result'
 
 /**
  * See: https://developer.mozilla.org/en-US/docs/Glossary/Base64
@@ -18,171 +16,6 @@ const b64_to_utf8 = (str: string) => {
 }
 
 /**
- * The function decodes json data from github.
- */
-const decodeJson = (content: string) => {
-    try {
-        return JSON.parse(b64_to_utf8(content))
-    } catch (e) {
-        errorStore.addError(`decodeJson - unable decode json content: ${e}`)
-    }
-}
-
-/**
- * The function encodes json data for github.
- */
-const encodeJson = (json: any) => {
-    return utf8_to_b64(JSON.stringify(json))
-}
-
-/**
- * Adding a token to the headers if present.
- */
-const githubGetHeader = (admin: Admin | void) => {
-    const result: any = {
-        Accept: 'application/vnd.github.v3+json'
-    }
-
-    if (admin && admin.token) {
-        result.authorization = `token ${admin.token}`
-    }
-
-    return result
-}
-
-/**
- * Create an object with the backup url and the necessary headers.
- */
-const githubGetBackupUrl = async () => {
-    const admin = await adminGet()
-
-    return {
-        backupUrl: admin.backupUrl + admin.file + '.json',
-        headers: githubGetHeader(admin)
-    }
-}
-
-/**
- * Create an object with the file url and the necessary headers.
- */
-const githubGetFileUrl = async (file: string) => {
-    const admin = await adminGet()
-
-    return {
-        fileUrl: admin.langUrl + file,
-        headers: githubGetHeader(admin)
-    }
-}
-
-/**
- * The function return the sha value for a file. Example:
- * 
- * etag: W/"92cf13a1ecb655679f232302e0535d4ea689fb7f"
- * sha:     92cf13a1ecb655679f232302e0535d4ea689fb7f
- */
-const githubGetEtag = async (url: string, headers: any) => {
-
-    const response = await fetch(url, { method: 'HEAD', headers: headers }).catch(e => {
-        errorStore.addError(`githubGetEtag - url: ${url} error: ${e}`)
-    })
-
-    if (!response || response.status === 404) {
-        return
-    }
-
-    if (!response.ok) {
-        errorStore.addError(`githubGetEtag - url: ${url} error: ${response.statusText}`)
-        return
-    }
-
-    const etag = response.headers.get('ETag')
-    if (!etag) {
-        return
-    }
-
-    const start = etag.startsWith('W/') ? 3 : 1
-    return etag.substring(start, etag.length - 1)
-}
-
-/**
- * The function does a head request and checks a etag possible header with a 
- * given value.
- */
-const githubCheckEtag = async (url: string, headers: any, hash: string) => {
-
-    const etag = await githubGetEtag(url, headers)
-    if (!etag) {
-        return false
-    }
-
-    const result = etag === hash
-    console.log('url :', url, 'ETag', etag, 'hash', hash, 'matches', result)
-
-    return result
-}
-
-/**
- * The function does a get request to a github url and returns the json.
- */
-const githubGetJsonContent = async (url: string, headers: any) => {
-
-    const response = await fetch(url, headers).catch(e => {
-        errorStore.addError(`githubGetJsonContent - url: ${url} error: ${e}`)
-    })
-
-    if (!response) {
-        return
-    }
-
-    if (!response.ok) {
-        errorStore.addError(`githubGetJsonContent - url: ${url} error: ${response.statusText}`)
-        return
-    }
-
-    return response.json()
-}
-
-/**
- * The function gets a json file from github.
- */
-export const githubGetJson = async (file: string) => {
-
-    const { fileUrl, headers } = await githubGetFileUrl(file)
-    //
-    // Get etag if present
-    //
-    let hash = await hashGet(file)
-    if (hash && hash.value) {
-        const etagCheck = await githubCheckEtag(fileUrl, headers, hash.value)
-        if (etagCheck) {
-            return
-        }
-    }
-
-    const json = await githubGetJsonContent(fileUrl, headers)
-    if (!json) {
-        return
-    }
-
-    const content = decodeJson(json.content)
-    if (!content) {
-        return
-    }
-
-    //
-    // Update the hash in the store
-    //
-    await hashPut({
-        file: file,
-        value: json.sha,
-        lastLoaded: new Date()
-    })
-
-    console.log('githubGetJson', content)
-    return content
-}
-
-/**
  * The following properties are required for a PUT request to create or update
  * a file. If the file exists the sha of the file is required.
  */
@@ -193,62 +26,120 @@ interface GithubPutBody {
 }
 
 /**
- * The function commits the json file to github. First we need the sha hash, 
- * which comes from the etag. This is required for the commit if the file 
- * exists. 
- * 
- * It requires a token, the backupUrl and the file. It is assumed that this is 
- * check in the frontend.
+ * The function writes a string to a githup file. If the file exists, then a 
+ * hash is required. A token for an authentication is also required,
  */
-export const githubBackup = async (json: any) => {
+export const githubWriteContent = async (url: string, content: string, hash: string | void, comment: string, token: string) => {
+    const result = new Result<void>()
 
-    const { backupUrl, headers } = await githubGetBackupUrl()
-    const sha = await githubGetEtag(backupUrl, headers)
-    console.log('sha', sha)
+    try {
+        const body: GithubPutBody = {
+            content: utf8_to_b64(content),
+            message: comment,
+        }
 
-    const body: GithubPutBody = {
-        content: encodeJson(json),
-        message: 'backup'
+        if (hash) {
+            body.sha = hash
+        }
+
+        const data = {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/vnd.github.v3+json',
+                authorization: `token ${token}`
+            },
+            body: JSON.stringify(body),
+        }
+
+        const response = await fetch(url, data)
+        if (!response.ok) {
+            return result.setError(`githubWriteContent - Url: ${url} Error: ${response.statusText}`);
+        }
+
+    } catch (e) {
+        return result.setError(`githubWriteContent - Url: ${url} Error: ${e}`);
     }
 
-    if (sha) {
-        body.sha = sha
-    }
+    return result.setOk()
+}
 
-    const data = {
-        method: 'PUT',
-        headers: headers,
-        body: JSON.stringify(body),
-    }
+/**
+ * The function reads a file from github. A token can be given optionally.
+ */
+export const githubReadContent = async (url: string, token: string) => {
+    const result = new Result<ContentHash>()
 
-    const response = await fetch(backupUrl, data).catch(e => {
-        errorStore.addError(`githubBackup - url: ${backupUrl} error: ${e}`)
-    })
+    try {
+        const headers: any = {
+            Accept: 'application/vnd.github.v3+json'
+        }
 
-    if (!response) {
-        return
-    }
+        if (token) {
+            headers.authorization = `token ${token}`
+        }
 
-    if (!response.ok) {
-        errorStore.addError(`githubBackup - url: ${backupUrl} error: ${response.statusText}`)
-        return
+        const response = await fetch(url, headers)
+        if (!response.ok) {
+            return result.setError(`githubReadContent - Url: ${url} Read error: ${response.statusText}`)
+        }
+
+        const githubJson = await response.json()
+        const content = b64_to_utf8(githubJson.content)
+        // console.log('githubReadContent', content)
+
+        return result.setOk({
+            content: content,
+            hash: githubJson.sha
+        })
+
+    } catch (e) {
+        return result.setError(`githubReadContent - Url: ${url} Error: ${e}`)
     }
 }
 
 /**
- * The function loads the restore file. 
+ * The function return the sha value for a file. Example:
  * 
- * It requires a token, the backupUrl and the file. It is assumed that this is 
- * check in the frontend.
+ * etag: W/"92cf13a1ecb655679f232302e0535d4ea689fb7f"
+ * sha:     92cf13a1ecb655679f232302e0535d4ea689fb7f
  */
-export const githubRestore = async () => {
+export const githubGetHash = async (url: string, token: string) => {
+    const result = new Result<string | void>()
 
-    const { backupUrl, headers } = await githubGetBackupUrl()
+    try {
+        const headers: any = {
+            Accept: 'application/vnd.github.v3+json'
+        }
 
-    const json = await githubGetJsonContent(backupUrl, headers)
-    if (!json) {
-        return
+        if (token) {
+            headers.authorization = `token ${token}`
+        }
+
+        const response = await fetch(url, { method: 'HEAD', headers: headers })
+        //
+        // File not found => no hash
+        //
+        if (response.status === 404) {
+            return result.setOk()
+        }
+
+        if (!response.ok) {
+            return result.setError(`githubGetHash - Url: ${url} Error: ${response.statusText}`)
+        }
+
+        const etag = response.headers.get('ETag')
+        if (!etag) {
+            console.log('githubGetHash - no ETag found', url)
+            return result.setOk()
+        }
+
+        const start = etag.startsWith('W/') ? 3 : 1
+        const hash = etag.substring(start, etag.length - 1)
+
+        console.log('githubGetHash:', hash)
+        return result.setOk(hash)
+
+    } catch (e) {
+        return result.setError(`githubGetHash - Url: ${url} Error: ${e}`)
     }
-
-    return decodeJson(json.content)
 }
