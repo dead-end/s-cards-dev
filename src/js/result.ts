@@ -22,7 +22,11 @@ enum ResultStatus {
 export default class Result<V> {
     private status = ResultStatus.UNDEF;
     private message?: string;
-    private value?: V;
+    //
+    // The wrapper is used to ensure that we can check if the value is set and 
+    // return the value as V, even if the value is undefined.
+    //
+    private wrapper?: { value: V };
 
     /**
      * The function checks if the status OK.
@@ -66,41 +70,19 @@ export default class Result<V> {
         if (this.status !== ResultStatus.OK) {
             throw new Error('Status is not OK!')
         }
-        if (typeof this.value === 'undefined' || this.value === null) {
+        if (!this.wrapper) {
             throw new Error('Value not set!')
         }
-        return this.value
-    }
-
-    /**
-     * The function returns an optional value. This requires that the status is
-     * OK.
-     */
-    public getValueVoid() {
-        if (this.status !== ResultStatus.OK) {
-            throw new Error('Status is not OK!')
-        }
-        return this.value
-    }
-
-    /**
-     * The function checks if the result has a value. This requires that the 
-     * status is OK.
-     */
-    public hasValue() {
-        if (this.status !== ResultStatus.OK) {
-            throw new Error('Status is not OK!')
-        }
-        return typeof this.value !== 'undefined' && this.value !== null
+        return this.wrapper.value
     }
 
     /**
      * The function sets an optional result value and the status and retuns the
      * object.
      */
-    public setOk(value?: V) {
+    public setOk(value: V) {
         this.status = ResultStatus.OK
-        this.value = value
+        this.wrapper = { value }
         return this
     }
 
