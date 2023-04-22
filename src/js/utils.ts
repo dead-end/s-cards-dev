@@ -146,10 +146,33 @@ export function ensureMinMax(value: number, min: number, max: number) {
 /**
  * The function ensures that a given string ends with an other given string.
  */
-export const ensureEnd = (str: string, end:string) => {
+export const ensureEnd = (str: string, end: string) => {
   if (!str.endsWith(end)) {
-      return str + end
+    return str + end
   }
 
   return str
 }
+
+/**
+ * The function converts a string to an array of strings, delimited by a
+ * newline. (It is called before saving, so the right place for trim()).
+ */
+export const stringToArray = (str: String) => {
+  const result: string[] = [];
+  str.split('\n').forEach((elem) => {
+    elem = elem.trim();
+    if (elem) {
+      result.push(elem);
+    }
+  });
+  return result;
+};
+
+/**
+ * The function converts an array of strings to a string, delimited by a 
+ * newline.
+ */
+export const arrayToString = (arr: string[]) => {
+  return arr.join('\n');
+};
