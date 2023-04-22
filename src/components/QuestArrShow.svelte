@@ -1,11 +1,13 @@
 <script lang="ts">
+  import type { Question } from '../js/questModel';
+  import type { Admin } from '../js/admin';
   import QuestProgress from './QuestProgress.svelte';
   import Markdown from '../js/Markdown';
-  import { createRepeatToggle } from '../js/utils';
-  import type { Question } from '../js/questModel';
+  import EditIcon from './icon/EditIcon.svelte';
   import { onMount, afterUpdate } from 'svelte';
   import { adminGet } from '../js/admin';
-  import type { Admin } from '../js/admin';
+  import { createRepeatToggle } from '../js/utils';
+  import { viewStore } from '../stores/viewStore';
 
   export let questions: Question[];
 
@@ -76,6 +78,10 @@
               >{question.file}</a
             >
           </span>
+          <EditIcon
+            onClick={() =>
+              viewStore.setView('ViewQuestEdit', { question: question })}
+          />
         </div>
         <QuestProgress {question} />
       </div>
