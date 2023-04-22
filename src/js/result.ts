@@ -1,0 +1,124 @@
+/**
+ * The possible states of a result.
+ */
+enum ResultStatus {
+    'OK', 'ERROR'
+}
+
+/**
+ * The class implements a result of a function call. A result can be either an
+ * error with an error message or an ok status with an optional return value.
+ * 
+ * The optional return value has a type, which requires generics. A function 
+ * call can have multiple places where a result is returned. The generic type
+ * should be the same on all places. Sample code:
+ * 
+ * const result = new Result<number>()
+ *   ...
+ * return result.setError('Not ok!')
+ *   ...
+ * return result.setOk(10)
+ */
+export default class Result<V> {
+    private status?: ResultStatus;
+    private message?: string;
+    private value?: V;
+
+    /**
+     * The function checks if the status OK.
+     */
+    public isOk() {
+        this.check()
+        return this.status === ResultStatus.OK
+    }
+
+    /**
+     * The function checks if the status is ERROR
+     */
+    public hasError() {
+        this.check()
+        return this.status === ResultStatus.ERROR
+    }
+
+    /**
+     * The function returns the error message. This reqires that the status is
+     * ERROR.
+     */
+    public getMessage() {
+        this.check()
+        return this.message
+    }
+
+    /**
+     * The function returns the value. This requires that the status is OK and
+     * the value is set.
+     */
+    public getValue() {
+        this.check()
+        if (typeof this.value === 'undefined' || this.value === null) {
+            throw new Error('Value not set!')
+        }
+        return this.value
+    }
+
+    /**
+     * The function returns an optional value. This requires that the status is
+     * OK.
+     */
+    public getValueVoid() {
+        this.check()
+        return this.value
+    }
+
+    /**
+     * The function checks if the result has a value. This requires that the 
+     * status is OK.
+     */
+    public hasValue() {
+        this.check()
+        return typeof this.value !== 'undefined' && this.value !== null
+    }
+
+    /**
+     * The function sets an optional result value and the status and retuns the
+     * object.
+     */
+    public setOk(value?: V) {
+        this.status = ResultStatus.OK
+        this.value = value
+        return this
+    }
+
+    /**
+     * The function sets an error message and the status and returns the object.
+     */
+    public setError<V>(message: string) {
+        this.status = ResultStatus.ERROR
+        this.message = message
+        return this
+    }
+
+    /**
+     * The function enrures that the object has a valid state.
+     */
+    private check() {
+        if (typeof this.status === 'undefined') {
+            throw new Error('Status not set!')
+        }
+
+        if (this.status === ResultStatus.ERROR) {
+            if (!this.message) {
+                throw new Error('Status is ERROR but no message is set!')
+            }
+
+            if (this.value) {
+                throw new Error('Status is ERROR but value is set!')
+            }
+        }
+
+        if (this.status === ResultStatus.OK && this.message) {
+            throw new Error('Status is OK but message is set!')
+        }
+    }
+}
+
