@@ -3,7 +3,8 @@ import { hashDelTx } from './hash'
 import { questRemoveFile } from './questModel'
 import { storePut, storeDel, storeGetAll } from './store'
 import { arrIsEqual } from './utils'
-import { githubGetJson } from './github'
+import { repoGetJsonCache } from './repo'
+import { errorStore } from '../stores/errorStore'
 
 /**
  * The interface defines a topic persisted in the database.
@@ -185,8 +186,18 @@ export const topicArrToMap = (arr: Array<Topic>) => {
  */
 export const topicSetup = async () => {
 
-  const json = await githubGetJson('data/topics.json')
-  if (json) {
-    await topicSync(json as Array<Topic>)
+  const result = await repoGetJsonCache<Array<Topic>>('data/topics.json')
+  if (result.hasError()) {
+    errorStore.addError(`Unable to load topics - ${result.getMessage()}`)
+    return
+  }
+
+  //
+  // If the result value is undefined, then the db is in sync with the remote 
+  // json file.
+  //
+  const value = result.getValue()
+  if (value) {
+    await topicSync(value)
   }
 }
