@@ -1,15 +1,13 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-
-  import { adminGet, adminPut } from '../js/admin';
   import type { Admin } from '../js/admin';
-  import { questGetBackup, questSetRestore } from '../js/questModel';
-  import { githubRestore, githubBackup } from '../js/github';
-
-  import { viewStore } from '../stores/viewStore';
-
   import AdminShow from '../components/AdminShow.svelte';
   import Popup from '../components/Popup.svelte';
+  import { onMount } from 'svelte';
+  import { adminGet, adminPut } from '../js/admin';
+  import { questGetBackup, questSetRestore } from '../js/questModel';
+  import { repoReadBackup, repoWriteBackup } from '../js/repo';
+  import { viewStore } from '../stores/viewStore';
+  import { errorStore } from '../stores/errorStore';
 
   let admin: Admin;
   let update: boolean = false;
@@ -31,15 +29,27 @@
   };
 
   const onBackup = async () => {
-    const backup = await questGetBackup();
-    githubBackup(backup);
-    status = 'Backup done!';
+    try {
+      const backup = await questGetBackup();
+      const result = await repoWriteBackup(backup);
+      if (result.hasError()) {
+        errorStore.addError(`Unable to write backup - ${result.getMessage()}`);
+        status = 'Backup FAILED!';
+      } else {
+        status = 'Backup done!';
+      }
+    } catch (e) {
+      errorStore.addError(`Error on backup - ${e}`);
+    }
   };
 
   const onRestore = async () => {
-    const json = await githubRestore();
-    if (json) {
-      questSetRestore(json);
+    const result = await repoReadBackup();
+    if (result.hasError()) {
+      errorStore.addError(result.getMessage());
+      status = 'Restore FAILED!';
+    } else {
+      questSetRestore(result.getValue());
       status = 'Restore done!';
     }
   };
