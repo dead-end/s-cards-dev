@@ -115,7 +115,7 @@ export const storeGet = <T>(store: IDBObjectStore, id: string) => {
     const request = store.get(id)
 
     request.onsuccess = () => {
-      console.log('Store:', store.name, 'id:', id, 'get:', request.result)
+      console.log('Store:', store.name, 'id:', id, 'get:', request.result ? request.result : 'NOT-FOUND')
       resolve(request.result)
     }
 
