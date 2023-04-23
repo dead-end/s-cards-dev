@@ -384,14 +384,21 @@ export const questSetRestore = async (restore: [string, number, number][]) => {
 
     storeGet<Question>(store, id).then(quest => {
 
-      if (quest && quest.total < total) {
-
-        quest.failed = failed
-        quest.total = total
-        quest.ratio = percentage(quest.failed, quest.total)
-
-        storePut(store, quest)
+      if (!quest) {
+        console.log('question to restore not found in db', id)
+        return
       }
+
+      if (quest.total >= total) {
+        console.log(`question: ${id} total db: ${quest.total} total backup: ${total} => ignore`)
+        return
+      }
+
+      quest.failed = failed
+      quest.total = total
+      quest.ratio = percentage(quest.failed, quest.total)
+
+      storePut(store, quest)
     })
   })
 }
