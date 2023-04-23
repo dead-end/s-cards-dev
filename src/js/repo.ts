@@ -11,7 +11,8 @@ export const repoReadBackup = async () => {
     const result = new Result<BackupEntry[]>()
     try {
         const admin = await adminGet()
-        const readResult = await githubReadContent(admin.backupUrl, admin.token)
+        const url = admin.backupUrl + admin.file
+        const readResult = await githubReadContent(url, admin.token)
         if (readResult.hasError()) {
             return result.setError(`repoReadBackup - unable to read data: ${readResult.getMessage()}`)
         }
@@ -37,8 +38,9 @@ export const repoWriteBackup = async (json: BackupEntry[]) => {
     const hashResult = await githubGetHash(admin.backupUrl, admin.token)
     const comment = 'backup'
     const content = JSON.stringify(json)
+    const url = admin.backupUrl + admin.file
 
-    return githubWriteContent(admin.backupUrl, content, hashResult.getValue(), comment, admin.token)
+    return githubWriteContent(url, content, hashResult.getValue(), comment, admin.token)
 }
 
 /**
