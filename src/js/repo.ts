@@ -1,7 +1,7 @@
 import type { BackupEntry, JsonHash } from './interfaces'
 import Result from './result'
 import { adminGet } from './admin'
-import { hashGet, hashPut } from './hash'
+import { hashGet, hashPut, hashDel } from './hash'
 import { githubReadContent, githubWriteContent, githubGetHash } from './github'
 
 /**
@@ -42,18 +42,27 @@ export const repoWriteBackup = async (json: BackupEntry[]) => {
 }
 
 /**
- * The function writes a string to github.
+ * The function writes a json file to github.
  */
-export const repoWriteContent = async (file: string, content: string, hash: string, comment: string) => {
+export const repoWriteJson = async (file: string, json: any, hash: string | void, comment: string) => {
+    const result = new Result<void>()
 
     const admin = await adminGet()
     if (!admin.token) {
-        return new Result<void>().setError(`repoWriteContent - file: ${file} Token required`)
+        return result.setError(`repoWriteContent - file: ${file} Token required`)
     }
 
     const url = admin.langUrl + file
+    const content = JSON.stringify(json, null, 2);
 
-    return githubWriteContent(url, content, hash, comment, admin.token)
+    const writeResult = await githubWriteContent(url, content, hash, comment, admin.token)
+    if (writeResult.hasError()) {
+        return result.setError(`repoWriteJson - unable to write: ${writeResult.getMessage()}`)
+    }
+
+    await hashDel(file);
+
+    return result.setOk()
 }
 
 /**
