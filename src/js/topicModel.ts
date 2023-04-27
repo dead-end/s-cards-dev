@@ -1,7 +1,7 @@
 import { dbPromise } from './db'
 import { hashDelTx } from './hash'
 import { questRemoveFile } from './questModel'
-import { storePut, storeDel, storeGetAll } from './store'
+import { storeGet, storePut, storeDel, storeGetAll } from './store'
 import { arrIsEqual } from './utils'
 import { repoGetJsonCache } from './repo'
 import { errorStore } from '../stores/errorStore'
@@ -89,6 +89,18 @@ export const topicGetTags = (topics: Topic[]) => {
   })
 
   return tags.sort()
+}
+
+/**
+ * The function returns the topics from the store.
+ */
+export const topicGet = async (file: string) => {
+
+  const store = (await dbPromise)
+    .transaction(['topics'], 'readonly')
+    .objectStore('topics')
+
+  return storeGet<Topic>(store, file)
 }
 
 /**
