@@ -3,6 +3,7 @@ import Result from './result'
 import { adminGet } from './admin'
 import { hashGet, hashPut, hashDel } from './hash'
 import { githubReadContent, githubWriteContent, githubGetHash } from './github'
+import { questLoad } from '../js/questModel';
 
 /**
  * The function reads the restore json from github.
@@ -63,6 +64,7 @@ export const repoWriteJson = async (file: string, json: any, hash: string | void
     }
 
     await hashDel(file);
+    await questLoad(file)
 
     return result.setOk()
 }
