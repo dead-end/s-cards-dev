@@ -58,7 +58,7 @@
   <label for="details-checkbox">Details</label>
   <input type="checkbox" id="details-checkbox" bind:checked={details} />
 
-  <label for="quest-sort">Tag Filter</label>
+  <label for="quest-sort">Sort</label>
   <select id="quest-sort" bind:value={sortBy} on:change={doSort}>
     <option value="">-- Select --</option>
     <option value="total">Total</option>
