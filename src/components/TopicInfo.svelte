@@ -25,12 +25,16 @@
 <h4>{topic.title}</h4>
 <table>
   <tr>
-    <td>Last learned</td>
-    <td>{fmtDate(topic.lastLearned)}</td>
+    <td>File</td>
+    <td>{topic.file}</td>
   </tr>
   <tr>
     <td>Tags</td>
     <td>{topic.tags.join(', ')}</td>
+  </tr>
+  <tr>
+    <td>Last learned</td>
+    <td>{fmtDate(topic.lastLearned)}</td>
   </tr>
   {#if details}
     <tr>
