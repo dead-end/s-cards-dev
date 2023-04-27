@@ -5,6 +5,7 @@
   import { viewStore } from '../stores/viewStore';
   import { repoGetJson, repoWriteJson } from '../js/repo';
   import { errorStore } from '../stores/errorStore';
+  import { topicGet } from '../js/topicModel';
 
   const md = new Markdown();
 
@@ -53,7 +54,8 @@
       return;
     }
 
-    viewStore.setView('ViewTopicList', { id: '' });
+    const topic = await topicGet(question.file);
+    viewStore.setView('ViewTopicQuests', { topic: topic });
   };
 
   /**
