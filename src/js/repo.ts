@@ -64,9 +64,6 @@ export const repoWriteJson = async (file: string, json: any, hash: string | void
     }
 
     await hashDel(file);
-    // TODO: not correct !!! what if we want to update topic list?
-    await questLoad(file)
-
     return result.setOk()
 }
 

@@ -6,6 +6,7 @@
   import { repoGetJson, repoWriteJson } from '../js/repo';
   import { errorStore } from '../stores/errorStore';
   import { topicGet } from '../js/topicModel';
+  import { questLoad } from '../js/questModel';
 
   const md = new Markdown();
 
@@ -54,6 +55,7 @@
       return;
     }
 
+    await questLoad(question.file);
     const topic = await topicGet(question.file);
     viewStore.setView('ViewTopicQuests', { topic: topic });
   };
@@ -69,7 +71,7 @@
 <div class="card card-shadow content">
   <form on:submit|preventDefault={handleSubmit}>
     <div class="block">
-      <div class="h5">Question: {question.id}</div>
+      <h5>Question: {question.id}</h5>
       <div class="grid grid-2">
         <textarea rows="10" id="quest" bind:value={questStr} class="input" />
         <div class="card content is-primary">
