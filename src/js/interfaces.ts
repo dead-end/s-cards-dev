@@ -22,3 +22,15 @@ export interface ContentHash {
     content: string,
     hash: string
 }
+
+/**
+ * The interface for the admin configuration.
+ */
+export interface Admin {
+    config: string,
+    langUrl: string,
+    linkUrl: string,
+    backupUrl: string,
+    file: string,
+    token: string,
+}

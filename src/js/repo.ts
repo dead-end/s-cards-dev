@@ -1,9 +1,8 @@
 import type { BackupEntry, JsonHash } from './interfaces'
 import Result from './result'
-import { adminGet } from './admin'
 import { hashGet, hashPut, hashDel } from './hash'
 import { githubReadContent, githubWriteContent, githubGetHash } from './github'
-import { questLoad } from '../js/questModel';
+import { adminStore } from '../stores/adminStore';
 
 /**
  * The function reads the restore json from github.
@@ -11,7 +10,7 @@ import { questLoad } from '../js/questModel';
 export const repoReadBackup = async () => {
     const result = new Result<BackupEntry[]>()
     try {
-        const admin = await adminGet()
+        const admin = adminStore.get()
         const url = admin.backupUrl + admin.file
         const readResult = await githubReadContent(url, admin.token)
         if (readResult.hasError()) {
@@ -31,7 +30,7 @@ export const repoReadBackup = async () => {
  */
 export const repoWriteBackup = async (json: BackupEntry[]) => {
 
-    const admin = await adminGet()
+    const admin = adminStore.get()
     if (!admin.token) {
         return new Result<void>().setError(`repoWriteBackup - file: ${admin.backupUrl} Token required`)
     }
@@ -50,7 +49,7 @@ export const repoWriteBackup = async (json: BackupEntry[]) => {
 export const repoWriteJson = async (file: string, json: any, hash: string | void, comment: string) => {
     const result = new Result<void>()
 
-    const admin = await adminGet()
+    const admin = adminStore.get()
     if (!admin.token) {
         return result.setError(`repoWriteContent - file: ${file} Token required`)
     }
@@ -73,7 +72,7 @@ export const repoWriteJson = async (file: string, json: any, hash: string | void
 export const repoGetJson = async <T>(file: string) => {
     const result = new Result<JsonHash<T>>()
     try {
-        const admin = await adminGet()
+        const admin = adminStore.get()
         const url = admin.langUrl + file
 
         const readResult = await githubReadContent(url, admin.token)
@@ -98,7 +97,7 @@ export const repoGetJson = async <T>(file: string) => {
 export const repoGetJsonCache = async <T>(file: string) => {
     const result = new Result<T | void>()
     try {
-        const admin = await adminGet()
+        const admin = adminStore.get()
         const url = admin.langUrl + file
 
         //

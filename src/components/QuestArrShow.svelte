@@ -1,13 +1,12 @@
 <script lang="ts">
   import type { Question } from '../js/questModel';
-  import type { Admin } from '../js/admin';
   import QuestProgress from './QuestProgress.svelte';
   import Markdown from '../js/Markdown';
   import EditIcon from './icon/EditIcon.svelte';
-  import { onMount, afterUpdate } from 'svelte';
-  import { adminGet } from '../js/admin';
+  import { afterUpdate } from 'svelte';
   import { createRepeatToggle } from '../js/utils';
   import { viewStore } from '../stores/viewStore';
+  import { adminStore } from '../stores/adminStore';
 
   export let questions: Question[];
 
@@ -15,13 +14,7 @@
   let sorted: Question[] = [];
   let sortBy: String = '';
 
-  let admin: Admin;
-
   const md = new Markdown();
-
-  onMount(async () => {
-    admin = await adminGet();
-  });
 
   afterUpdate(() => {
     console.log('afterUpdate questions:', questions);
@@ -74,7 +67,7 @@
           <span class="h6">Id: {question.id}</span>
 
           <span class="hide-sm">
-            <a href={admin.linkUrl + question.file} target="_blank"
+            <a href={$adminStore.linkUrl + question.file} target="_blank"
               >{question.file}</a
             >
           </span>

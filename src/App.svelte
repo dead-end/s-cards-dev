@@ -3,6 +3,7 @@
 
   import { viewStore } from './stores/viewStore';
   import { errorStore } from './stores/errorStore';
+  import { adminStore } from './stores/adminStore';
 
   import ErrorShow from './components/ErrorShow.svelte';
 
@@ -60,6 +61,7 @@
       }
     };
 
+    await adminStore.init();
     await topicSetup();
 
     viewStore.setView('ViewTopicList', { id: '' });

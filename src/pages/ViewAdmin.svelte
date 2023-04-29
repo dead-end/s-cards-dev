@@ -1,28 +1,26 @@
 <script lang="ts">
-  import type { Admin } from '../js/admin';
+  import type { Admin } from '../js/interfaces';
   import AdminShow from '../components/AdminShow.svelte';
   import Popup from '../components/Popup.svelte';
-  import { onMount } from 'svelte';
-  import { adminGet, adminPut } from '../js/admin';
   import { questGetBackup, questSetRestore } from '../js/questModel';
   import { repoReadBackup, repoWriteBackup } from '../js/repo';
   import { viewStore } from '../stores/viewStore';
   import { errorStore } from '../stores/errorStore';
+  import { adminStore } from '../stores/adminStore';
 
-  let admin: Admin;
+  let admin: Admin = adminStore.get();
   let update: boolean = false;
   let status: string = '';
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (admin.langUrl) {
-      adminPut(admin);
+      const result = await adminStore.put(admin);
+      if (result.hasError()) {
+        errorStore.addError(`Error on save - ${result.getMessage()}`);
+      }
     }
     update = false;
   };
-
-  onMount(async () => {
-    admin = await adminGet();
-  });
 
   const onBack = () => {
     viewStore.setView('ViewTopicList', { id: '' });
