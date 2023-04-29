@@ -11,6 +11,7 @@
   const md = new Markdown();
 
   export let question: Question;
+  export let goBackFct: () => void;
 
   let questHtml = '';
   let answerHtml = '';
@@ -57,14 +58,8 @@
 
     await questLoad(question.file);
     const topic = await topicGet(question.file);
-    viewStore.setView('ViewTopicQuests', { topic: topic });
-  };
 
-  /**
-   * Back to topic list
-   */
-  const onBack = () => {
-    viewStore.setView('ViewTopicList', { id: '' });
+    goBackFct();
   };
 </script>
 
@@ -92,7 +87,7 @@
     </div>
 
     <div class="is-floating">
-      <button class="button" on:click={onBack}>Cancel</button>
+      <button class="button" on:click={goBackFct}>Back</button>
       <button class="button">Save</button>
     </div>
   </form>

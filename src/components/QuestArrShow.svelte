@@ -9,8 +9,9 @@
   import { adminStore } from '../stores/adminStore';
 
   export let questions: Question[];
+  export let goBackFct: (() => void) | undefined = undefined;
+  export let details: boolean = false;
 
-  let details: boolean = false;
   let sorted: Question[] = [];
   let sortBy: String = '';
 
@@ -71,10 +72,15 @@
               >{question.file}</a
             >
           </span>
-          <EditIcon
-            onClick={() =>
-              viewStore.setView('ViewQuestEdit', { question: question })}
-          />
+          {#if goBackFct}
+            <EditIcon
+              onClick={() =>
+                viewStore.setView('ViewQuestEdit', {
+                  question: question,
+                  goBackFct: goBackFct
+                })}
+            />
+          {/if}
         </div>
         <QuestProgress {question} />
       </div>
