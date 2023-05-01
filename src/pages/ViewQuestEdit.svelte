@@ -56,7 +56,7 @@
     }
 
     await questLoad(question.file);
-    const topic = await topicGet(question.file);
+    await topicGet(question.file);
 
     goBackFct();
   };
