@@ -2,7 +2,6 @@
   import type { Question, QuestionJson } from '../js/questModel';
   import Markdown from '../js/Markdown';
   import { arrayToString, stringToArray } from '../js/utils';
-  import { viewStore } from '../stores/viewStore';
   import { repoGetJson, repoWriteJson } from '../js/repo';
   import { errorStore } from '../stores/errorStore';
   import { topicGet } from '../js/topicModel';
