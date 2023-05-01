@@ -120,7 +120,10 @@ export const topicGetAll = async () => {
  * The function writes the updated topic to the store.
  */
 export const topicUpdate = async (topic: Topic) => {
-  const store = (await dbPromise).transaction(['topics'], 'readwrite').objectStore('topics')
+  const store = (await dbPromise)
+    .transaction(['topics'], 'readwrite')
+    .objectStore('topics')
+
   storePut(store, topic)
 }
 
@@ -140,8 +143,8 @@ export const topicDelTx = (tx: IDBTransaction, file: string) => {
 const topicSync = async (json: Array<Topic>) => {
   const tx = (await dbPromise)
     .transaction(['topics', 'questions', 'hash'], 'readwrite')
-  const storeTopic = tx.objectStore('topics')
 
+  const storeTopic = tx.objectStore('topics')
   const request = storeTopic.getAll()
 
   request.onsuccess = () => {

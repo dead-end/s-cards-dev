@@ -418,7 +418,9 @@ export const questLoad = async (file: string) => {
   //
   const value = result.getValue()
   if (value) {
-    const tx = (await dbPromise).transaction(['questions'], 'readwrite')
+    const tx = (await dbPromise)
+      .transaction(['questions'], 'readwrite')
+
     questSync(tx, file, value)
   }
 }
