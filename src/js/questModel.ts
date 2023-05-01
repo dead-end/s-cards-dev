@@ -3,7 +3,7 @@ import { dbPromise } from './db'
 import { percentage, shuffleArr } from './utils'
 import { storeAdd, storePut, storeDel, storeDeleteIndex, storeGet } from './store'
 import { repoGetJsonCache } from './repo'
-import Markdown from './Markdown'
+import { mdRemove } from './Markdown'
 import { errorStore } from '../stores/errorStore'
 import type { BackupEntry } from './interfaces'
 
@@ -455,7 +455,7 @@ export const questArrToMap = (arr: Array<Question>) => {
  */
 const arrSearchLower = (arr: string[], searchStr: string) => {
   for (let str of arr) {
-    if (Markdown.remove(str).toLowerCase().includes(searchStr)) {
+    if (mdRemove(str).toLowerCase().includes(searchStr)) {
       return true
     }
   }

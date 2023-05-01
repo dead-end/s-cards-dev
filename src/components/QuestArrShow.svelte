@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Question } from '../js/questModel';
   import QuestProgress from './QuestProgress.svelte';
-  import Markdown from '../js/Markdown';
+  import { mdToHtml } from '../js/Markdown';
   import EditIcon from './icon/EditIcon.svelte';
   import { afterUpdate } from 'svelte';
   import { createRepeatToggle } from '../js/utils';
@@ -14,8 +14,6 @@
 
   let sorted: Question[] = [];
   let sortBy: String = '';
-
-  const md = new Markdown();
 
   afterUpdate(() => {
     console.log('afterUpdate questions:', questions);
@@ -88,12 +86,12 @@
 
     <div class="card {repeatToggle()}">
       <div class="content">
-        <p>{@html md.toHtml(question.quest)}</p>
+        <p>{@html mdToHtml(question.quest)}</p>
       </div>
     </div>
     <div class="card {repeatToggle()}">
       <div class="content">
-        <p>{@html md.toHtml(question.answer)}</p>
+        <p>{@html mdToHtml(question.answer)}</p>
       </div>
     </div>
   {/each}

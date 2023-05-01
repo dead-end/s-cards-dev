@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
 
   import { arrPercentage, arrAll, getErrorMessage } from '../js/utils';
-  import Markdown from '../js/Markdown';
+  import { mdToHtml } from '../js/Markdown';
   import type { Topic } from '../js/topicModel';
   import type { Question } from '../js/questModel';
   import {
@@ -18,8 +18,6 @@
 
   export let topic: Topic;
   export let questions: Question[] | void;
-
-  const md = new Markdown();
 
   //
   // Properties for the view.
@@ -135,7 +133,7 @@
       <div class="block">
         <h5>Details</h5>
         <div class="card content is-info">
-          <p>{@html md.toHtml(topic.details)}</p>
+          <p>{@html mdToHtml(topic.details)}</p>
         </div>
       </div>
     {/if}

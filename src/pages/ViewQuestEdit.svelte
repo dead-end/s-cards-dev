@@ -1,13 +1,11 @@
 <script lang="ts">
   import type { Question, QuestionJson } from '../js/questModel';
-  import Markdown from '../js/Markdown';
+  import { mdToHtml } from '../js/Markdown';
   import { arrayToString, stringToArray } from '../js/utils';
   import { repoGetJson, repoWriteJson } from '../js/repo';
   import { errorStore } from '../stores/errorStore';
   import { topicGet } from '../js/topicModel';
   import { questLoad } from '../js/questModel';
-
-  const md = new Markdown();
 
   export let question: Question;
   export let goBackFct: () => void;
@@ -18,8 +16,8 @@
   let questStr = arrayToString(question.quest);
   let answerStr = arrayToString(question.answer);
 
-  $: questHtml = md.toHtml(stringToArray(questStr));
-  $: answerHtml = md.toHtml(stringToArray(answerStr));
+  $: questHtml = mdToHtml(stringToArray(questStr));
+  $: answerHtml = mdToHtml(stringToArray(answerStr));
 
   let comment = `Update question: '${question.id}' in: '${question.file}'`;
 
