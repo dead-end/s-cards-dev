@@ -2,12 +2,44 @@ import type { Admin } from '../js/interfaces'
 import { get, writable } from 'svelte/store'
 import { dbPromise } from '../js/db'
 import { storePut } from '../js/store'
-import { ensureEnd } from '../js/utils'
+import { ensureEnd, ensureStartEnd } from '../js/utils'
 import Result from '../js/result'
 
 const langUrlDefault = 'https://api.github.com/repos/dead-end/cards-russian/contents/'
 
 const linkUrlDefault = 'https://github.com/dead-end/cards-russian/blob/master/'
+
+/**
+ * Simple validation.
+ */
+const validate = (admin: Admin) => {
+  let msg
+
+  msg = ensureStartEnd(admin.langUrl, 'https://api.github.com/repos/', '/contents/')
+  if (msg) {
+    return `Langage url - ${msg}`
+  }
+
+  msg = ensureStartEnd(admin.linkUrl, 'https://github.com/', '/blob/master/')
+  if (msg) {
+    return `Link url - ${msg}`
+  }
+
+  if (admin.backupUrl) {
+    msg = ensureStartEnd(admin.backupUrl, 'https://api.github.com/repos/', '/contents/')
+    if (msg) {
+      return `Backup url - ${msg}`
+    }
+
+    if (!admin.file) {
+      return 'Backup url without file.'
+    }
+
+    if (!admin.token) {
+      return 'Backup url without token.'
+    }
+  }
+}
 
 /**
  * The function reads the admin object from the indexeddb.
@@ -90,6 +122,12 @@ const createAdminStore = () => {
     put: async (admin: Admin) => {
       const result = new Result<void>()
       try {
+
+        const msg = validate(admin)
+        if (msg) {
+          return result.setError(msg)
+        }
+
         await adminPut(admin)
         store.set(admin)
         return result.setOk()

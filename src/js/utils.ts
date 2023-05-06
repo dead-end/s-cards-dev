@@ -176,3 +176,18 @@ export const stringToArray = (str: String) => {
 export const arrayToString = (arr: string[]) => {
   return arr.join('\n');
 };
+
+/**
+ * Function to validate a string.
+ */
+export const ensureStartEnd = (str: string, start: string, end: string) => {
+  if (!str) {
+    return 'String not set!'
+  }
+  if (str.startsWith(start)) {
+    return 'String does not start with: ' + start
+  }
+  if (str.endsWith(end)) {
+    return 'String does not end with: ' + end
+  }
+}

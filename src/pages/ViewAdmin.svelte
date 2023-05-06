@@ -8,7 +8,10 @@
   import { errorStore } from '../stores/errorStore';
   import { adminStore } from '../stores/adminStore';
 
-  let admin: Admin = adminStore.get();
+  //
+  // The object is a reference
+  //
+  let admin: Admin = { ...adminStore.get() };
   let update: boolean = false;
   let status: string = '';
 
@@ -16,6 +19,10 @@
     if (admin.langUrl) {
       const result = await adminStore.put(admin);
       if (result.hasError()) {
+        //
+        // Reset the value on an error
+        //
+        admin = { ...adminStore.get() };
         errorStore.addError(`Error on save - ${result.getMessage()}`);
       }
     }
