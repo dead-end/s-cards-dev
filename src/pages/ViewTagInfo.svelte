@@ -2,7 +2,7 @@
   import type { Question } from '../js/questModel';
   import type { Topic } from '../js/topicModel';
   import { questGetTag, questSetProgressArr } from '../js/questModel';
-  import { getErrorMessage, ensureMinMax } from '../js/utils';
+  import { getErrorMessage } from '../js/utils';
 
   import { viewStore } from '../stores/viewStore';
   import { errorStore } from '../stores/errorStore';
