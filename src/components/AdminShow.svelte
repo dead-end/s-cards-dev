@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Admin } from '../js/admin';
+  import type { Admin } from '../js/interfaces';
 
   export let admin: Admin;
 </script>
