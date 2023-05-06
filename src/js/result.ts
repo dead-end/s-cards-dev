@@ -89,7 +89,7 @@ export default class Result<V> {
     /**
      * The function sets an error message and the status and returns the object.
      */
-    public setError<V>(message: string) {
+    public setError(message: string) {
         this.status = ResultStatus.ERROR
         this.message = message
         return this
