@@ -184,10 +184,10 @@ export const ensureStartEnd = (str: string, start: string, end: string) => {
   if (!str) {
     return 'String not set!'
   }
-  if (str.startsWith(start)) {
+  if (!str.startsWith(start)) {
     return 'String does not start with: ' + start
   }
-  if (str.endsWith(end)) {
+  if (!str.endsWith(end)) {
     return 'String does not end with: ' + end
   }
 }

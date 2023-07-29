@@ -111,7 +111,7 @@ export const repoGetJsonCache = async <T>(file: string) => {
                 return result.setError(`repoGetJsonCache - file: ${file} - ${hashResult.getMessage()}`)
             }
             if (hashResult.getValue() && hashResult.getValue() === hashDb.value) {
-                console.log('repoGetJsonCache - cache ok', file)
+                console.log('repoGetJsonCache - cache ok', file, 'hash:', hashDb.value)
                 return result.setOk()
             }
         }
@@ -132,7 +132,7 @@ export const repoGetJsonCache = async <T>(file: string) => {
             lastLoaded: new Date()
         })
 
-        console.log('repoGetJsonCache', file, json)
+        console.log('repoGetJsonCache', file, json, 'hash:', readResult.getValue().hash)
         return result.setOk(json)
 
     } catch (e) { // JSON.parse
