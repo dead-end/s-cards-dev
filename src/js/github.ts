@@ -53,7 +53,7 @@ export const githubWriteContent = async (url: string, content: string, hash: str
 
         const response = await fetch(url, data)
         if (!response.ok) {
-            return result.setError(`githubWriteContent - Url: ${url} Error: ${getErrorFromResponse(response)}`);
+            return result.setError(`githubWriteContent - Url: ${url} Error: ${await getErrorFromResponse(response)}`);
         }
 
     } catch (e) {
@@ -80,7 +80,7 @@ export const githubReadContent = async (url: string, token: string) => {
 
         const response = await fetch(url, headers)
         if (!response.ok) {
-            return result.setError(`githubReadContent - Url: ${url} Read error: ${getErrorFromResponse(response)}`)
+            return result.setError(`githubReadContent - Url: ${url} Read error: ${await getErrorFromResponse(response)}`)
         }
 
         const githubJson = await response.json()
@@ -124,7 +124,7 @@ export const githubGetHash = async (url: string, token: string) => {
         }
 
         if (!response.ok) {
-            return result.setError(`githubGetHash - Url: ${url} Error: ${getErrorFromResponse(response)}`)
+            return result.setError(`githubGetHash - Url: ${url} Error: ${await getErrorFromResponse(response)}`)
         }
 
         const etag = response.headers.get('ETag')
@@ -151,6 +151,5 @@ const getErrorFromResponse = async (response: Response) => {
     if (response.statusText) {
         return response.statusText
     }
-
-    return await response.text()
+    return response.text()
 }
