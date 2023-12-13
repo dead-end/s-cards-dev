@@ -77,3 +77,7 @@ npm run deploy
 Backup: `https://api.github.com/repos/dead-end/backup/contents/`
 
 File: `ipad`
+
+## Icons
+
+https://heroicons.com/

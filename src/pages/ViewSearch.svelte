@@ -2,6 +2,7 @@
   import type { Question } from '../js/questModel';
   import QuestArrShow from '../components/QuestArrShow.svelte';
   import SearchIcon from '../components/icon/SearchIcon.svelte';
+  import XMarkIcon from '../components/icon/XMarkIcon.svelte';
   import { viewStore } from '../stores/viewStore';
   import { onMount } from 'svelte';
   import { questSearch } from '../js/questModel';
@@ -49,6 +50,13 @@
   };
 
   /**
+   * Delete search string.
+   */
+  const doReset = () => {
+    searchStr = '';
+  };
+
+  /**
    * Call the submit function on mount.
    */
   onMount(() => {
@@ -84,6 +92,10 @@
     <div class="is-floating">
       <input id="searchStr" bind:value={searchStr} class="input" />
       <SearchIcon onClick={doSearch} />
+
+      {#if searchStr}
+        <XMarkIcon onClick={doReset} />
+      {/if}
     </div>
 
     {#if message}
