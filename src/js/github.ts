@@ -53,7 +53,7 @@ export const githubWriteContent = async (url: string, content: string, hash: str
 
         const response = await fetch(url, data)
         if (!response.ok) {
-            return result.setError(`githubWriteContent - Url: ${url} Error: ${response.statusText}`);
+            return result.setError(`githubWriteContent - Url: ${url} Error: ${getErrorFromResponse(response)}`);
         }
 
     } catch (e) {
@@ -80,7 +80,7 @@ export const githubReadContent = async (url: string, token: string) => {
 
         const response = await fetch(url, headers)
         if (!response.ok) {
-            return result.setError(`githubReadContent - Url: ${url} Read error: ${response.statusText}`)
+            return result.setError(`githubReadContent - Url: ${url} Read error: ${getErrorFromResponse(response)}`)
         }
 
         const githubJson = await response.json()
@@ -124,7 +124,7 @@ export const githubGetHash = async (url: string, token: string) => {
         }
 
         if (!response.ok) {
-            return result.setError(`githubGetHash - Url: ${url} Error: ${response.statusText}`)
+            return result.setError(`githubGetHash - Url: ${url} Error: ${getErrorFromResponse(response)}`)
         }
 
         const etag = response.headers.get('ETag')
@@ -142,4 +142,15 @@ export const githubGetHash = async (url: string, token: string) => {
     } catch (e) {
         return result.setError(`githubGetHash - Url: ${url} Error: ${e}`)
     }
+}
+
+/**
+ * The function returns a message from a response of a request that returns an error.
+ */
+const getErrorFromResponse = async (response: Response) => {
+    if (response.statusText) {
+        return response.statusText
+    }
+
+    return await response.text()
 }
