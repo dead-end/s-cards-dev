@@ -35,10 +35,10 @@ export const repoWriteBackup = async (json: BackupEntry[]) => {
         return new Result<void>().setError(`repoWriteBackup - file: ${admin.backupUrl} Token required`)
     }
 
-    const hashResult = await githubGetHash(admin.backupUrl, admin.token)
+    const url = admin.backupUrl + admin.file
+    const hashResult = await githubGetHash(url, admin.token)
     const comment = 'backup'
     const content = JSON.stringify(json)
-    const url = admin.backupUrl + admin.file
 
     return githubWriteContent(url, content, hashResult.getValue(), comment, admin.token)
 }
