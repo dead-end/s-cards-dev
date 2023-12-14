@@ -15,6 +15,7 @@
 
   const max = 30;
 
+  let searchRef: HTMLInputElement;
   let questions: Question[] = [];
   let message = '';
   let total = 0;
@@ -54,6 +55,7 @@
    */
   const doReset = () => {
     searchStr = '';
+    searchRef.focus();
   };
 
   /**
@@ -64,6 +66,7 @@
     // Ignore search without error message if no search string is present.
     //
     if (!searchStr) {
+      searchRef.focus();
       return;
     }
     doSearch();
@@ -90,7 +93,12 @@
   <div class="">
     <label for="searchStr">Search String</label>
     <div class="is-floating">
-      <input id="searchStr" bind:value={searchStr} class="input" />
+      <input
+        id="searchStr"
+        bind:value={searchStr}
+        bind:this={searchRef}
+        class="input"
+      />
       <SearchIcon onClick={doSearch} />
 
       {#if searchStr}
