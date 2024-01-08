@@ -263,7 +263,7 @@ export const questGetTag = async (topics: Topic[], numQuests: number, fraction: 
     //
     // If we want all, then we get all.
     //
-    if (numQuests <= 0) {
+    if (numQuests <= 0 || all.length <= numQuests) {
       return all
     }
     //

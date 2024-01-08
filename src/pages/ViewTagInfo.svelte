@@ -67,7 +67,7 @@
    */
   const onLoad = async () => {
     try {
-      const max = loadQuests === 'all' ? -1 : 30;
+      const max = loadQuests === 'all' ? -1 : Number(loadQuests);
       questions = await questGetTag(topics, max, parseFloat(fraction));
       loaded = true;
     } catch (error) {
@@ -94,6 +94,12 @@
       <label for="load-quests">Load Questions</label>
       <select id="load-quests" bind:value={loadQuests}>
         <option value="30">30</option>
+        <option value="35">35</option>
+        <option value="40">40</option>
+        <option value="45">45</option>
+        <option value="50">50</option>
+        <option value="55">55</option>
+        <option value="60">60</option>
         <option value="all">All</option>
       </select>
     </div>
